@@ -1,10 +1,15 @@
+import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-
+import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
+import { MeetSomebodyPage } from '../pages/meet-somebody/meet-somebody';
+import { ContactsListPage } from '../pages/contacts-list/contacts-list';
+import { SettingsPage } from '../pages/settings/settings';
+import { LoginPage } from '../pages/login/login';
+import { UserProfilePage } from '../pages/user-profile/user-profile';
+import { MyProfilePage } from '../pages/my-profile/my-profile';
+import { ChatroomPage } from '../pages/chatroom/chatroom';
+
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -12,18 +17,28 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
-    ListPage
+    MeetSomebodyPage,
+    ContactsListPage,
+    SettingsPage,
+    LoginPage,
+    UserProfilePage,
+    MyProfilePage,
+    ChatroomPage
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
-    ListPage
+    MeetSomebodyPage,
+    ContactsListPage,
+    SettingsPage,
+    LoginPage,
+    UserProfilePage,
+    MyProfilePage,
+    ChatroomPage
   ],
   providers: [
     StatusBar,

@@ -8,7 +8,6 @@ import { ContactsListPage } from '../pages/contacts-list/contacts-list';
 import { UserProfilePage } from '../pages/user-profile/user-profile';
 import { LoginPage } from '../pages/login/login';
 
-
 import { MeetSomebodyPage } from '../pages/meet-somebody/meet-somebody';
 
 

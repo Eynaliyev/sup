@@ -10,7 +10,6 @@ import { UserProfilePage } from '../pages/user-profile/user-profile';
 import { MyProfilePage } from '../pages/my-profile/my-profile';
 import { ChatroomPage } from '../pages/chatroom/chatroom';
 
-
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 

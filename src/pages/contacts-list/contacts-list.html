@@ -8,52 +8,17 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding id="page2">
+<ion-content  no-bounce padding id="page2">
   <ion-list id="contactsList-list3">
     <ion-item-divider color="light" id="contactsList-list-item-divider3">
-      Item
+      Sup Contacts
     </ion-item-divider>
-    <ion-item color="none" (click)="goToUserProfile()" id="contactsList-list-item16">
+    <ion-item *ngFor="let user of users" color="none" (click)="goToUserProfile(user)" id="contactsList-list-item-${{user.id}}">
       <ion-avatar item-left>
-        <img />
+        <img [src]="user.profilePhoto">
       </ion-avatar>
       <h2>
-        Frien number 1
-      </h2>
-    </ion-item>
-    <ion-item color="none" (click)="goToUserProfile()" id="contactsList-list-item19">
-      <ion-avatar item-left>
-        <img />
-      </ion-avatar>
-      <h2>
-        Frien number 1
-      </h2>
-    </ion-item>
-    <ion-item-divider color="light" id="contactsList-list-item-divider1">
-      Item
-    </ion-item-divider>
-    <ion-item color="none" (click)="goToUserProfile()" id="contactsList-list-item20">
-      <ion-avatar item-left>
-        <img />
-      </ion-avatar>
-      <h2>
-        Frien number 1
-      </h2>
-    </ion-item>
-    <ion-item color="none" (click)="goToUserProfile()" id="contactsList-list-item21">
-      <ion-avatar item-left>
-        <img />
-      </ion-avatar>
-      <h2>
-        Frien number 1
-      </h2>
-    </ion-item>
-    <ion-item color="none" (click)="goToUserProfile()" id="contactsList-list-item22">
-      <ion-avatar item-left>
-        <img />
-      </ion-avatar>
-      <h2>
-        Frien number 1
+        {{user.firstName + " " + user.lastName}}
       </h2>
     </ion-item>
   </ion-list>

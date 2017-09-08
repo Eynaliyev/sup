@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 
 @Component({
   selector: 'page-user-profile',
@@ -7,7 +7,12 @@ import { NavController } from 'ionic-angular';
 })
 export class UserProfilePage {
 
-  constructor(public navCtrl: NavController) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams) {
+      console.log(this.navParams.data);
+      let id = this.navParams.data.get('id');
+      let name = this.navParams.data.get('name');
   }
-  
+
 }

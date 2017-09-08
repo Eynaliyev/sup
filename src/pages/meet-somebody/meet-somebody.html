@@ -8,26 +8,31 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding id="page1">
+<ion-content no-bounce padding id="page1">
   <ion-list id="meetSomebody-list5">
     <ion-item id="meetSomebody-list-item-container1">
       <div id="meetSomebody-markdown2" class="show-list-numbers-and-dots">
         <p style="margin-top:0px;color:#000000;">
           Seaching for rooms speaking:
           <strong>
-            English, French
+            {{languages}}
           </strong>
         </p>
       </div>
     </ion-item>
-    <ion-item id="meetSomebody-select2">
-      <ion-label>
-        Select
-      </ion-label>
-      <ion-select name=""></ion-select>
+    <ion-item>
+      <ion-label>Languages I speak</ion-label>
+      <ion-select [(ngModel)]="languages" multiple="true">
+        <ion-option value="English">English</ion-option>
+        <ion-option value="Spanish">Spanish</ion-option>
+        <ion-option value="German">German</ion-option>
+        <ion-option value="French">French</ion-option>
+        <ion-option value="Italian">Italian</ion-option>
+        <ion-option value="Mandarin">Mandarin</ion-option>
+      </ion-select>
     </ion-item>
   </ion-list>
-  <button id="meetSomebody-button4" ion-button color="positive" block>Let's meet somebody!</button>
+  <button id="meetSomebody-button4" (click)="presentLoadingText()" ion-button color="positive" block>Let's meet somebody!</button>
   <ion-list id="meetSomebody-list6">
     <ion-item id="meetSomebody-list-item-container2">
       <div id="meetSomebody-markdown4" class="show-list-numbers-and-dots">

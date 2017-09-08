@@ -1,6 +1,6 @@
 {
   "name": "sup",
-  "app_id": "",
+  "app_id": "a6de38e4",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}

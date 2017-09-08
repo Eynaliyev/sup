@@ -9,5 +9,6 @@ export class MyProfilePage {
 
   constructor(public navCtrl: NavController) {
   }
-  
+  private languages;
+
 }

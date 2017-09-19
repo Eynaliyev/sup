@@ -6,6 +6,7 @@ import { UserProfilePage } from '../user-profile/user-profile';
 import { User } from '../../models/user.model';
 
 import { UserService } from '../../services/user.service';
+import { USERS } from '../../services/mock-users';
 
 @Component({
   selector: 'page-contacts-list',
@@ -19,6 +20,7 @@ export class ContactsListPage {
   }
 
   ionViewWillEnter() {
+    this.users = USERS;
 
   }
 

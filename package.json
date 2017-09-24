@@ -1,8 +1,8 @@
 {
-    "name": "sup",
+    "name": "MyPeeps",
     "version": "0.0.1",
-    "author": "Ionic Framework",
-    "homepage": "http://ionicframework.com/",
+    "author": "Rustam Eynaliyev",
+    "homepage": "http://eynaliyev.com/",
     "private": true,
     "scripts": {
         "clean": "ionic-app-scripts clean",

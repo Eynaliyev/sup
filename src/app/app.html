@@ -8,7 +8,7 @@
   </ion-header>
   <ion-content id="side-menu21">
     <ion-list id="menu-list8">
-      <ion-item color="positive" id="menu-list-item32"  (click)="goToMyProfile()">
+      <ion-item color="assertive" id="menu-list-item32"  (click)="goToMyProfile()">
         <ion-avatar item-left>
           <img />
         </ion-avatar>
@@ -17,18 +17,23 @@
         </h2>
       </ion-item>
     </ion-list>
-    <button id="menu-button5" ion-button color="balanced" (click)="goToMeetSomebody()" menuClose block>Let's meet somebody!</button>
     <ion-list id="menu-list1">
+      <ion-item color="secondary" menuClose="" (click)="goToMeetSomebody()" id="menu-list-item2">
+        Let's meet somebody!
+      </ion-item>
       <ion-item color="none" menuClose="" (click)="goToMyProfile()" id="menu-list-item2">
         Edit Profile
       </ion-item>
       <ion-item color="none" menuClose="" (click)="goToContactsList()" id="menu-list-item3">
-        Contacts List
+        My peeps
+      </ion-item>
+      <ion-item color="none" menuClose="" (click)="goToFAQ()" id="menu-list-item3">
+        FAQ
       </ion-item>
       <ion-item color="none" menuClose="" (click)="goToMyProfile()" id="menu-list-item33">
         Settings
       </ion-item>
-      <ion-item color="assertive" id="menu-list-item34" (click)="goToLogin()">
+      <ion-item color="danger" id="menu-list-item34" (click)="goToLogin()">
         Logout
       </ion-item>
     </ion-list>

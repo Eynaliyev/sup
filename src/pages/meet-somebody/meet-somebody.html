@@ -1,36 +1,31 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>
-      Meet Somebody
-    </ion-title>
+    <ion-navbar color="primary">
+      <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+      </button>   
+    <ion-title>Searching for a room</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="viewFilter()">
+        <ion-icon name="settings"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
-<ion-content no-bounce padding id="page1">
-  <ion-list id="meetSomebody-list5">
-    <ion-item id="meetSomebody-list-item-container1">
-      <div id="meetSomebody-markdown2" class="show-list-numbers-and-dots">
-        <p style="margin-top:0px;color:#000000;">
-          Seaching for rooms speaking:
-          <strong>
-            {{languages}}
-          </strong>
-        </p>
-      </div>
-    </ion-item>
-    <ion-item>
-      <ion-label>Languages I speak</ion-label>
-      <ion-select [(ngModel)]="languages" multiple="true">
-        <ion-option value="English">English</ion-option>
-        <ion-option value="Spanish">Spanish</ion-option>
-        <ion-option value="German">German</ion-option>
-        <ion-option value="French">French</ion-option>
-        <ion-option value="Italian">Italian</ion-option>
-        <ion-option value="Mandarin">Mandarin</ion-option>
-      </ion-select>
-    </ion-item>
-  </ion-list>
-  <button id="meetSomebody-button4" (click)="findRandomChat()" ion-button color="positive" block>Let's meet somebody!</button>
+<ion-content>
+  <!--<div class="background">  </div>-->
+  <div class="logo" text-center>
+    <h2 ion-text color="primary">Searching for an empty spot...</h2>
+    <br>
+    <h2 ion-text color="primary">Please Wait...</h2>
+    <br>
+    <h1>{{numberInFront}}</h1>
+    <br>
+    <h2 ion-text color="primary">people in front of you in line</h2>
+    <br>
+    <h1>{{numberBehind}}</h1>
+    <br>
+    <h2 ion-text color="primary">people behind you.</h2>
+    <button ion-button block color="favorite" (click)="viewVIP()">Skip the line</button>
+  </div>
+
 </ion-content>

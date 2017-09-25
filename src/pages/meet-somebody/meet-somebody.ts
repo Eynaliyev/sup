@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, LoadingController, App } from 'ionic-angular';
 import {UserProfilePage} from '../user-profile/user-profile';
 import {FilterPage} from '../filter/filter';
-import {WaitlistPage} from '../waitlist/waitlist';
+import {VIPPage} from '../vip/vip';
 @Component({
   selector: 'page-meet-somebody',
   templateUrl: 'meet-somebody.html'
@@ -15,27 +15,20 @@ export class MeetSomebodyPage {
     public loadingCtrl: LoadingController,
     public app: App) {
   }
-  findRandomChat(){
-    //search for chatroom
-    // while searching open waitlist modal
-    this.openWaitlist();
-    // this.roomService.findRoom()
-    // .then(room => {
-    //   this.room = room;
-    //   this.closeWaitlist();
-    // })
-    //when found a room close the modal
+
+  private numberInFront: number = 5;
+  private numberBehind: number = 15;
+
+  viewVIP(){
+    this.navCtrl.push(VIPPage);
   }
   // view user
   viewUser(id) {
     this.app.getRootNav().push(UserProfilePage, {id: id});
   }
   // view notifications
-  viewSettings() {
+  viewFilter() {
     this.app.getRootNav().push(FilterPage);
-  }
-  openWaitlist() {
-    this.app.getRootNav().push(WaitlistPage);
   }
   closeWaitlist(){
     this.app.getRootNav().pop();

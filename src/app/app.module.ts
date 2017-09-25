@@ -13,13 +13,13 @@ import { LoginPage } from '../pages/login/login';
 import { UserProfilePage } from '../pages/user-profile/user-profile';
 import { MyProfilePage } from '../pages/my-profile/my-profile';
 import { ChatroomPage } from '../pages/chatroom/chatroom';
-import {WaitlistPage} from '../pages/waitlist/waitlist';
 import {VIPPage} from '../pages/vip/vip';
 import {PurchasePage} from '../pages/purchase/purchase';
 import { GalleryComponent } from '../components/gallery/gallery';
 import { ChatBubbleComponent } from '../components/chat-bubble/chat-bubble';
 import { ProfilePostsComponent } from '../components/profile-posts/profile-posts';
 import { ProfileTimelineComponent } from '../components/profile-timeline/profile-timeline';
+import {FilterPage} from '../pages/filter/filter';
 // providers
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -35,8 +35,8 @@ import {UserService} from '../services/user.service';
     UserProfilePage,
     MyProfilePage,
     ChatroomPage,
-    WaitlistPage,
     VIPPage,
+    FilterPage,
     PurchasePage,
     GalleryComponent,
     ChatBubbleComponent,
@@ -58,9 +58,9 @@ import {UserService} from '../services/user.service';
     UserProfilePage,
     MyProfilePage,
     ChatroomPage,
-    WaitlistPage,
     VIPPage,
-    PurchasePage
+    PurchasePage,
+    FilterPage
   ],
   providers: [
     StatusBar,

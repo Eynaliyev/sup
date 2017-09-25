@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController } from 'ionic-angular';
-
+import { NavController, LoadingController, App } from 'ionic-angular';
+import {UserProfilePage} from '../user-profile/user-profile';
+import {FilterPage} from '../filter/filter';
+import {WaitlistPage} from '../waitlist/waitlist';
 @Component({
   selector: 'page-meet-somebody',
   templateUrl: 'meet-somebody.html'
@@ -10,23 +12,32 @@ export class MeetSomebodyPage {
 
   constructor(
     public navCtrl: NavController,
-    public loadingCtrl: LoadingController) {
+    public loadingCtrl: LoadingController,
+    public app: App) {
   }
-
-  presentLoadingText() {
-    let loading = this.loadingCtrl.create({
-      spinner: 'hide',
-      content: 'Loading Please Wait...'
-    });
-
-    loading.present();
-
-    setTimeout(() => {
-      loading.dismiss();
-    }, 5000);
-
-    loading.onDidDismiss(() => {
-      console.log('Dismissed loading');
-    });
+  findRandomChat(){
+    //search for chatroom
+    // while searching open waitlist modal
+    this.openWaitlist();
+    // this.roomService.findRoom()
+    // .then(room => {
+    //   this.room = room;
+    //   this.closeWaitlist();
+    // })
+    //when found a room close the modal
+  }
+  // view user
+  viewUser(id) {
+    this.app.getRootNav().push(UserProfilePage, {id: id});
+  }
+  // view notifications
+  viewSettings() {
+    this.app.getRootNav().push(FilterPage);
+  }
+  openWaitlist() {
+    this.app.getRootNav().push(WaitlistPage);
+  }
+  closeWaitlist(){
+    this.app.getRootNav().pop();
   }
 }

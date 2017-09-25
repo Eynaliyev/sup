@@ -1,0 +1,42 @@
+<!--
+  Generated template for the ProfilePage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  
+    <ion-navbar color="primary">
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Searching for a room</ion-title>
+      <ion-buttons end>
+        <button ion-button (click)="viewSettings()">
+          <ion-icon name="settings"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content>
+    <!--<div class="background">  </div>-->
+    <div class="logo" text-center>
+      <h2 ion-text color="primary">Searching for an empty spot...</h2>
+      <br>
+      <h2 ion-text color="primary">Please Wait...</h2>
+      <br>
+      <h1>{{numberInFront}}</h1>
+      <br>
+      <h2 ion-text color="primary">people in front of you in line</h2>
+      <br>
+      <h1>{{numberBehind}}</h1>
+      <br>
+      <h2 ion-text color="primary">people behind you.</h2>
+      <button ion-button block color="favorite" (click)="viewVIP()">Skip the line</button>
+    </div>
+  
+  </ion-content>
+  

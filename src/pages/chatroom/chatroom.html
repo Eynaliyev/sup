@@ -1,11 +1,27 @@
-<ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>
-      Chatroom
-    </ion-title>
-  </ion-navbar>
-</ion-header>
-<ion-content no-bounce padding id="page8"></ion-content>
+<ion-content style="background: url('https://s-media-cache-ak0.pinimg.com/236x/b3/1c/ce/b31cceccea15b00977c77fa7018345f9.jpg');">
+  <ion-fab left top style="width: 100%;" >
+      <button ion-fab color="dark" style="border: 2px solid #683f99;" (click)="goBack()">
+          <ion-icon name="md-arrow-back"></ion-icon>
+      </button>
+          <ion-avatar item-left style="position: absolute;top: 0px;left: 65px;" >
+              <img style="padding: 2px;border-radius: 50%;border: 2px solid #f53d3d;width: 56px;" src="{{user.picture.large}}">
+          </ion-avatar>        
+      <span class="chatPage" >{{user.name.first}} {{user.name.last}}</span>
+      
+  </ion-fab>
+  <ion-list no-lines style="padding-top: 65px;">
+      <ion-item *ngFor="let msg of messages" style="background: url('https://s-media-cache-ak0.pinimg.com/236x/b3/1c/ce/b31cceccea15b00977c77fa7018345f9.jpg');">
+          <chat-bubble [message]="msg"></chat-bubble>
+      </ion-item>
+  </ion-list>
+</ion-content>
+<ion-footer>
+<ion-textarea placeholder="Enter a description" style="color:#262626;background:#ccc;padding:5px;padding-right:20%"></ion-textarea>
+      <button ion-button (click)="sendMessage()" style="position:absolute; right: 3%; padding:8px;top: 25%;border-radius: 50%;bottom: 15%; margin: 0;width:11%">
+          <ion-icon name="md-send"></ion-icon>
+      </button> 
+<!--         <ion-textarea [(ngModel)]="chatbox" rows="3" style="color:#262626;background:#ccc;padding:5px;padding-right:20%" type="email" placeholder="Type Message.."></ion-textarea>
+      <button ion-button (click)="sendMessage()" style="position:absolute; right: 3%; padding:8px;top: 15%;bottom: 15%; margin: 0;height:40%;width:12%">
+          <ion-icon name="md-send"></ion-icon>
+      </button> -->
+</ion-footer>

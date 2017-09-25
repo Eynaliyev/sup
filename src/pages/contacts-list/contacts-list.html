@@ -1,25 +1,21 @@
-<ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>
-      Contacts List
-    </ion-title>
-  </ion-navbar>
-</ion-header>
-<ion-content  no-bounce padding id="page2">
-  <ion-list id="contactsList-list3">
-    <ion-item-divider color="light" id="contactsList-list-item-divider3">
-      Sup Contacts
-    </ion-item-divider>
-    <ion-item *ngFor="let user of users" color="none" (click)="goToUserProfile(user)" id="contactsList-list-item-${{user.id}}">
-      <ion-avatar item-left>
-        <img [src]="user.profilePhoto">
-      </ion-avatar>
-      <h2>
-        {{user.firstName + " " + user.lastName}}
-      </h2>
-    </ion-item>
+<ion-content style="background: url('https://s-media-cache-ak0.pinimg.com/236x/b3/1c/ce/b31cceccea15b00977c77fa7018345f9.jpg');">
+  <ion-fab left top style="width: 100%;">
+      <button ion-fab color="dark" menuToggle style="border: 2px solid #683f99;">
+          <ion-icon name="md-menu"></ion-icon>
+      </button>
+  </ion-fab>
+      <span class="pageHeader">Messages</span>
+  <ion-list style="padding-top: 75px;">
+      <ion-item [ngClass]="animateClass" style="background-color: transparent;color: #cfcfcf !important;" *ngFor=" let user of users " (click)="openChat(user)">
+          <ion-thumbnail item-left>
+              <img style="padding: 2px;border-radius: 50%;border: 2px solid #f53d3d;" src="{{user.picture.large}}">
+          </ion-thumbnail>
+          <h2 style="text-transform: capitalize;">{{user.name.first}} {{user.name.last}}
+              <span style="text-transform: capitalize;">{{user.name.first}}<img *ngIf="user.gender == 'female'" style="max-width: 9px;margin-left: 5px;" src="http://www.clker.com/cliparts/r/M/L/o/R/i/green-dot.svg.med.png"></span></h2>
+          <p>Hello, how are you ? </p>
+      </ion-item>
   </ion-list>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

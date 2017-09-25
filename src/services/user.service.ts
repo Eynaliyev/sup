@@ -22,6 +22,9 @@ export class UserService {
 		private http: Http,
 		) { }
 
+		getRandomUsers(number) {
+			return this.http.get('https://randomuser.me/api/?results='+number).map(res => res.json()).map(resp => resp.results)
+		}
 // get a specific User
 /*
 	getUserById(id): Observable<User> {

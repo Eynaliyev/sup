@@ -1,0 +1,28 @@
+gallery {
+    .card-md {
+        margin: 10px 0px 0px 0px;
+        width: calc(100% - 20px);
+        border-radius: 0px;
+        font-size: 1.4rem;
+        background: #121416;
+        box-shadow: none;
+    }
+    .grid {
+        padding: 0px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+    }
+    .galleryBlock {
+        height: 130px;
+        position: absolute;
+        width: 100%;
+        bottom: 110px
+    }
+    .galleryImage {
+        height: 120px;
+        padding: 5px;
+        width: auto;
+        margin: 0 auto;
+    }
+}

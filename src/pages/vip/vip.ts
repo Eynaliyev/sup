@@ -32,6 +32,9 @@ export class VIPPage {
 
     //this.facebook.appInvite({applink, photoUrl});
   }
+  back(){
+    this.navCtrl.pop();
+  }
   viewPurchasePage(){
     this.navCtrl.push(PurchasePage);
   }

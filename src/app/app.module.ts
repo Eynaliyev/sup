@@ -20,6 +20,7 @@ import { ChatBubbleComponent } from '../components/chat-bubble/chat-bubble';
 import { ProfilePostsComponent } from '../components/profile-posts/profile-posts';
 import { ProfileTimelineComponent } from '../components/profile-timeline/profile-timeline';
 import {FilterPage} from '../pages/filter/filter';
+import {FaqPage} from '../pages/faq/faq';
 // providers
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -36,6 +37,7 @@ import {UserService} from '../services/user.service';
     MyProfilePage,
     ChatroomPage,
     VIPPage,
+    FaqPage,
     FilterPage,
     PurchasePage,
     GalleryComponent,
@@ -60,7 +62,8 @@ import {UserService} from '../services/user.service';
     ChatroomPage,
     VIPPage,
     PurchasePage,
-    FilterPage
+    FilterPage,
+    FaqPage
   ],
   providers: [
     StatusBar,

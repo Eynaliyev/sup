@@ -1,31 +1,25 @@
-<ion-header>
-    <ion-navbar color="primary">
-      <button ion-button menuToggle>
-          <ion-icon name="menu"></ion-icon>
-      </button>   
-    <ion-title>Searching for a room</ion-title>
-    <ion-buttons end>
-      <button ion-button (click)="viewFilter()">
-        <ion-icon name="settings"></ion-icon>
+<ion-content style="background: url('https://s-media-cache-ak0.pinimg.com/236x/b3/1c/ce/b31cceccea15b00977c77fa7018345f9.jpg');">
+  <ion-fab left top>
+      <button menuToggle ion-fab color="dark" style="border: 2px solid #683f99;">
+          <ion-icon name="md-menu"></ion-icon>
       </button>
-    </ion-buttons>
-  </ion-navbar>
-</ion-header>
-<ion-content>
-  <!--<div class="background">  </div>-->
-  <div class="logo" text-center>
-    <h2 ion-text color="primary">Searching for an empty spot...</h2>
-    <br>
-    <h2 ion-text color="primary">Please Wait...</h2>
-    <br>
-    <h1>{{numberInFront}}</h1>
-    <br>
-    <h2 ion-text color="primary">people in front of you in line</h2>
-    <br>
-    <h1>{{numberBehind}}</h1>
-    <br>
-    <h2 ion-text color="primary">people behind you.</h2>
-    <button ion-button block color="favorite" (click)="viewVIP()">Skip the line</button>
+  </ion-fab>
+  <ion-fab right top>
+      <button ion-fab color="dark" (click)="viewFilter()" style="border: 2px solid #683f99;">
+          <ion-icon name="md-settings"></ion-icon>
+      </button>
+  </ion-fab>
+  <span class="pageHeader">Searching...</span>
+  
+<!--<div class="background">  </div>-->
+  <div class="logo" text-center style="margin-top: 80px;">
+    <p ion-text class="light-text grande">Searching for an empty spot...</p>
+    <p ion-text color="gray" class="grande">Please Wait...</p>
+    <p ion-text color="gray" class="venti">{{numberInFront}}</p>
+    <p ion-text color="gray" class="grande">people in front of you in line</p>
+    <p ion-text color="gray" class="venti">{{numberBehind}}</p>
+    <p ion-text color="gray" class="grande">people behind you.</p>
+    <button ion-button color="royal" (click)="viewVIP()" block>Skip the line</button>
   </div>
 
 </ion-content>

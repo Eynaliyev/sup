@@ -22,9 +22,6 @@ export class FilterPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad FilterPage');
   }
-  closeFilter() {
-    this.navCtrl.pop();
-  }
   saveFilter() {
     this.navCtrl.pop();
   }

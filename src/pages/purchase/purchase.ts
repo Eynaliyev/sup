@@ -29,5 +29,7 @@ export class PurchasePage {
   buyVIP(){
   	console.log(this.selected);
   }
-
+  back() {
+    this.navCtrl.pop();
+  }
 }

@@ -1,16 +1,12 @@
 <ion-content no-bounce padding style="background: url('assets/img/background.jpg');">
-    <ion-fab left top>
-        <button ion-fab color="dark" (click)="closeFilter()" style="border: 2px solid #683f99;">
-            <ion-icon name="md-arrow-back"></ion-icon>
-        </button>
-    </ion-fab>
+    <back-button></back-button>
     <ion-fab right top>
         <button ion-fab color="dark" (click)="saveFilter()" style="border: 2px solid #683f99;">
             <ion-icon name="md-checkmark"></ion-icon>
         </button>
     </ion-fab>
   <span class="pageHeader">Filter</span>
-  <ion-list style="margin-top: 80px;">
+  <ion-list class="lower">
       <ion-item>
           <ion-label stacked>I'm here to</ion-label>
           <ion-select [(ngModel)]="option">

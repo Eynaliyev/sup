@@ -6,9 +6,7 @@
 -->  
 <ion-content no-bounce padding id="page3"  style="background: url('assets/img/background.jpg');">
   <ion-fab left top>
-    <button ion-fab color="dark" (click)="back()" style="border: 2px solid #683f99;">
-        <ion-icon name="md-arrow-back"></ion-icon>
-    </button>
+    <back-button></back-button>
 </ion-fab>
 <span class="pageHeader">VIP</span> 
 <div style="margin-top: 80px;">
@@ -17,7 +15,7 @@
   <p class="short light-text" text-center>2. watch an add and skip ahead 1 time</p>
     <button ion-button block margin-bottom color="royal" class="watch-ad" (click)="watchAd()">Watch Ad</button>
   <p class="short light-text" text-center>2. invite a friend - and you both become VIP for a week for FREE</p>
-    <button ion-button block color="royal" margin-bottom (click)="invite()">Invite a friend</button>
+    <button ion-button block margin-bottom (click)="invite()">Invite a friend</button>
   <p class="short light-text" text-center>3. - purchase VIP - starting from $0.99 a month</p>
   <button ion-button block color="favorite" (click)="viewPurchasePage()">Purchase VIP</button>
 

@@ -6,9 +6,11 @@ import { NavController } from 'ionic-angular';
   templateUrl: 'my-profile.html'
 })
 export class MyProfilePage {
-
+  private languages;
+  
   constructor(public navCtrl: NavController) {
   }
-  private languages;
-
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad MyProfilePage');
+  }
 }

@@ -5,7 +5,7 @@
       </button>
   </ion-fab>
       <span class="pageHeader">Messages</span>
-  <ion-list style="padding-top: 75px;">
+  <ion-list class="lower">
       <ion-item [ngClass]="animateClass" style="background-color: transparent;color: #cfcfcf !important;" *ngFor=" let user of users " (click)="openChat(user)">
           <ion-thumbnail item-left>
               <img style="padding: 2px;border-radius: 50%;border: 2px solid #f53d3d;" src="{{user.picture.large}}">

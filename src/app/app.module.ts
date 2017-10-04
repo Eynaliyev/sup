@@ -6,21 +6,21 @@ import { MyApp } from './app.component';
 import { HttpModule } from '@angular/http';
 
 // declarations
-import { MeetSomebodyPage } from '../pages/meet-somebody/meet-somebody';
-import { ContactsListPage } from '../pages/contacts-list/contacts-list';
-import { SettingsPage } from '../pages/settings/settings';
-import { LoginPage } from '../pages/login/login';
-import { UserProfilePage } from '../pages/user-profile/user-profile';
-import { MyProfilePage } from '../pages/my-profile/my-profile';
-import { ChatroomPage } from '../pages/chatroom/chatroom';
-import {VIPPage} from '../pages/vip/vip';
-import {PurchasePage} from '../pages/purchase/purchase';
+import { MeetSomebodyPage } from '../pages/pages';
+import { ContactsListPage } from '../pages/pages';
+import { SettingsPage } from '../pages/pages';
+import { LoginPage } from '../pages/pages';
+import { UserProfilePage } from '../pages/pages';
+import { MyProfilePage } from '../pages/pages';
+import { ChatroomPage } from '../pages/pages';
+import {VIPPage} from '../pages/pages';
+import {PurchasePage} from '../pages/pages';
 import { GalleryComponent } from '../components/gallery/gallery';
 import { ChatBubbleComponent } from '../components/chat-bubble/chat-bubble';
 import { ProfilePostsComponent } from '../components/profile-posts/profile-posts';
 import { ProfileTimelineComponent } from '../components/profile-timeline/profile-timeline';
-import {FilterPage} from '../pages/filter/filter';
-import {FaqPage} from '../pages/faq/faq';
+import {FilterPage} from '../pages/pages';
+import {FaqPage} from '../pages/pages';
 // providers
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';

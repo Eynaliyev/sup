@@ -20,7 +20,7 @@ export class VIPPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad VIP');
+    console.log('ionViewDidLoad VIPPage');
   }
   watchAd(){
     // https://ionicframework.com/docs/native/admob-free/

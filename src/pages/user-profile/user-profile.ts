@@ -99,7 +99,9 @@ export class UserProfilePage {
       setTimeout(function() {}, 800);
       this.animateClass = { 'zoom-in': true };
   }
-
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad UserProfilePage');
+  }
   changeImage(image) {
     this.image = image
   }

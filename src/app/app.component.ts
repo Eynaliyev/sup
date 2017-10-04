@@ -11,7 +11,7 @@ import { SettingsPage } from '../pages/settings/settings';
 import { MeetSomebodyPage } from '../pages/meet-somebody/meet-somebody';
 
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app.component.html'
 })
 export class MyApp {
   @ViewChild(Nav) navCtrl: Nav;
@@ -19,7 +19,13 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
   pages: any[];
   activePage: any;
-
+  myProfile = { 
+    title: 'Edit Profile', 
+    component: MyProfilePage, 
+    icon: 'ios-contacts-outline' 
+  };
+  
+  
   constructor(
     private statusBar: StatusBar, 
     private splashScreen: SplashScreen, 

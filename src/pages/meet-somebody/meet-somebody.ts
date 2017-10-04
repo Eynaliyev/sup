@@ -9,16 +9,16 @@ import {VIPPage} from '../vip/vip';
 })
 export class MeetSomebodyPage {
   private languages;
-
+  private numberInFront: number = 5;
+  private numberBehind: number = 15;
   constructor(
     public navCtrl: NavController,
     public loadingCtrl: LoadingController,
     public app: App) {
   }
-
-  private numberInFront: number = 5;
-  private numberBehind: number = 15;
-
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad MeetSomebodyPage');
+  }
   viewVIP(){
     this.navCtrl.push(VIPPage);
   }

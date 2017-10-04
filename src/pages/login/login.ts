@@ -10,7 +10,9 @@ export class LoginPage {
 
   constructor(public navCtrl: NavController) {
   }
-
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad LoginPage');
+  }
   goToMeetSomebody(params){
     if (!params) params = {};
     this.navCtrl.setRoot(MeetSomebodyPage);

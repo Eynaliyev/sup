@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 import { PurchasePage } from '../purchase/purchase';
 
 /**
@@ -15,8 +15,7 @@ import { PurchasePage } from '../purchase/purchase';
 })
 export class VIPPage {
   constructor(
-    public navCtrl: NavController, 
-    public navParams: NavParams, ) {
+    public navCtrl: NavController ) {
   }
 
   ionViewDidLoad() {

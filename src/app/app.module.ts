@@ -32,6 +32,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import {UserService} from '../services/services';
 import {ChatroomService} from '../services/services';
+import {MessageService} from '../services/services';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import {ChatroomService} from '../services/services';
     SplashScreen,
     UserService,
     ChatroomService,
+    MessageService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

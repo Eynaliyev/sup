@@ -14,6 +14,9 @@
             <chat-bubble [message]="msg"></chat-bubble>
         </ion-item>
     </ion-list>
+    <ion-infinite-scroll [position]="top" (ionInfinite)="doInfinite($event)">
+            <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 </ion-content>
 <ion-footer>
 <ion-textarea placeholder="Enter a description" style="color:#262626;background:#ccc;padding:5px;padding-right:20%"></ion-textarea>

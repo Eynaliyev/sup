@@ -5,7 +5,6 @@ import { UserProfilePage } from '../pages';
 import { ChatroomPage } from '../pages';
 
 import { UserService } from '../../services/user.service';
-import { USERS } from '../../services/mock-users';
 
 @Component({
   selector: 'page-contacts-list',
@@ -26,9 +25,8 @@ export class ContactsListPage {
   }
 
   ionViewWillEnter() {
-    this.users = USERS;
-
   }
+  
   ngAfterViewInit() {  
     return new Promise(resolve => {
         let env = this;

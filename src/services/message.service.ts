@@ -60,11 +60,11 @@ export class MessageService {
     getRandomUsers(number) {
         return this.http.get('https://randomuser.me/api/?results='+number).map(res => res.json()).map(resp => resp.results)
     }
-    
-    getMessages(chatroomId){
+    // TO DO: implement actual paginated message getter function
+    getMessages(chatroomId, start?, end?): Promise<Message[]> {
         return new Promise(resolve => {
             resolve(this.messages);
-        })
+        });
     }
 
 }

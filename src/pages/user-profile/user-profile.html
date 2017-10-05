@@ -1,9 +1,5 @@
 <ion-content [ngClass]="animateClass" [ngStyle]="{'background-image': 'url(' + backGround + ')'}" style="background-size: cover;position: relative;">
-  <ion-fab left top>
-      <button ion-fab color="dark" menuToggle style="border: 2px solid #683f99;">
-          <ion-icon name="md-menu"></ion-icon>
-      </button>
-  </ion-fab>
+  <menu-button></menu-button>
   <ion-fab *ngIf="pet == 'puppies'" style="left: 27%;" left bottom>
       <button ion-fab color="light" style="width: 76px;height: 76px;">
           <ion-icon style="font-size: 4rem;" name="md-close"></ion-icon>

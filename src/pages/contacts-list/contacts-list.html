@@ -1,9 +1,5 @@
 <ion-content style="background: url('https://s-media-cache-ak0.pinimg.com/236x/b3/1c/ce/b31cceccea15b00977c77fa7018345f9.jpg');">
-  <ion-fab left top style="width: 100%;">
-      <button ion-fab color="dark" menuToggle style="border: 2px solid #683f99;">
-          <ion-icon name="md-menu"></ion-icon>
-      </button>
-  </ion-fab>
+  <menu-button></menu-button>
       <span class="pageHeader">Messages</span>
   <ion-list class="lower">
       <ion-item [ngClass]="animateClass" style="background-color: transparent;color: #cfcfcf !important;" *ngFor=" let user of users " (click)="openChat(user)">

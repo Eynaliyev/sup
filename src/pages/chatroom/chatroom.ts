@@ -52,10 +52,6 @@ export class ChatroomPage {
     }]
       }
     
-      goBack(){
-        this.navCtrl.pop();
-      }
-    
       sendMessage(){
         
       }

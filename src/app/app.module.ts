@@ -24,6 +24,7 @@ import { ChatBubbleComponent } from '../components/components';
 import { ProfilePostsComponent } from '../components/components';
 import { ProfileTimelineComponent } from '../components/components';
 import { BackButtonComponent } from '../components/components';
+import { MenuButtonComponent } from '../components/components';
 
 // providers
 import { StatusBar } from '@ionic-native/status-bar';
@@ -48,7 +49,8 @@ import {UserService} from '../services/user.service';
     ChatBubbleComponent,
     ProfilePostsComponent,
     ProfileTimelineComponent,
-    BackButtonComponent
+    BackButtonComponent,
+    MenuButtonComponent
   ],
   imports: [
     BrowserModule,

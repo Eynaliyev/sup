@@ -9,7 +9,7 @@ import 'rxjs/add/observable/forkJoin';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-import { User} from '../models/user.model';
+import { User} from '../models/models';
 
 @Injectable()
 export class UserService {

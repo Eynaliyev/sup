@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { UserService } from '../../services/user.service';
+import { UserService } from '../../services/services';
+import { MessageService } from '../../services/services';
 import { User } from '../../models/user.model';
 import {Message} from '../../models/message.model';
 import { UserProfilePage } from '../pages';

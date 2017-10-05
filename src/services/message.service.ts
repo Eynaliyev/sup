@@ -8,9 +8,9 @@ import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/observable/forkJoin';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import {Message} from '../models/message.model';
+import {Message} from '../models/models';
 
-import { User} from '../models/user.model';
+import { User} from '../models/models';
 
 @Injectable()
 export class MessageService {

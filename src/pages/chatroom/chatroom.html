@@ -1,5 +1,4 @@
 <ion-content style="background: url('https://s-media-cache-ak0.pinimg.com/236x/b3/1c/ce/b31cceccea15b00977c77fa7018345f9.jpg');">
-  <ion-fab left top style="width: 100%;" >
     <back-button></back-button>
     <ion-scroll scrollX style="height:100px; margin-left: 70px;">
         <ion-row>
@@ -10,21 +9,18 @@
             </ion-col>            
         </ion-row>            
     </ion-scroll>
-   
-      <span class="chatPage" >Chatroom</span>
-  </ion-fab>
-  <ion-list no-lines style="padding-top: 65px;">
-      <ion-item *ngFor="let msg of messages" style="background: url('https://s-media-cache-ak0.pinimg.com/236x/b3/1c/ce/b31cceccea15b00977c77fa7018345f9.jpg');">
-          <chat-bubble [message]="msg"></chat-bubble>
-      </ion-item>
-  </ion-list>
+    <ion-list no-lines style="padding-top: 65px;">
+        <ion-item *ngFor="let msg of messages" style="background: url('https://s-media-cache-ak0.pinimg.com/236x/b3/1c/ce/b31cceccea15b00977c77fa7018345f9.jpg');">
+            <chat-bubble [message]="msg"></chat-bubble>
+        </ion-item>
+    </ion-list>
 </ion-content>
 <ion-footer>
 <ion-textarea placeholder="Enter a description" style="color:#262626;background:#ccc;padding:5px;padding-right:20%"></ion-textarea>
-      <button ion-button (click)="sendMessage()" style="position:absolute; right: 3%; padding:8px;top: 25%;border-radius: 50%;bottom: 15%; margin: 0;width:11%">
-          <ion-icon name="md-send"></ion-icon>
-      </button> 
-<!--         <ion-textarea [(ngModel)]="chatbox" rows="3" style="color:#262626;background:#ccc;padding:5px;padding-right:20%" type="email" placeholder="Type Message.."></ion-textarea>
+    <button ion-button (click)="sendMessage()" style="position:absolute; right: 3%; padding:8px;top: 25%;border-radius: 50%;bottom: 15%; margin: 0;width:11%">
+        <ion-icon name="md-send"></ion-icon>
+    </button> 
+<!--<ion-textarea [(ngModel)]="chatbox" rows="3" style="color:#262626;background:#ccc;padding:5px;padding-right:20%" type="email" placeholder="Type Message.."></ion-textarea>
       <button ion-button (click)="sendMessage()" style="position:absolute; right: 3%; padding:8px;top: 15%;bottom: 15%; margin: 0;height:40%;width:12%">
           <ion-icon name="md-send"></ion-icon>
       </button> -->

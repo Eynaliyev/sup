@@ -1,52 +1,27 @@
 <ion-content no-bounce padding id="page3"  style="background: url('https://s-media-cache-ak0.pinimg.com/236x/b3/1c/ce/b31cceccea15b00977c77fa7018345f9.jpg');">
   <menu-button></menu-button>
   <span class="pageHeader">Settings</span>
-  <form id="settings-form2" style="margin-top: 80px;">
-    <form id="settings-form4">
-      <ion-item id="settings-toggle3">
+  <form id="settings-form" style="margin-top: 80px;">
+    <ion-item id="settings-toggle3">
+      <ion-textarea>
+        
+      </ion-textarea>
+      <ion-input type="text" placeholder="Username >"></ion-input>
+    </ion-item>
+    <ion-item id="settings-toggle1">
         <ion-label>
-          Toggle
+          Notifications
         </ion-label>
-        <ion-toggle color="positive" checked="false"></ion-toggle>
-      </ion-item>
-      <ion-item id="settings-radio2">
-        <ion-label>
-          Radio
-        </ion-label>
-        <ion-radio></ion-radio>
-      </ion-item>
-      <ion-item id="settings-input4">
-        <ion-label>
-          Input
-        </ion-label>
-        <ion-input type="text" placeholder=""></ion-input>
-      </ion-item>
-    </form>
-    <ion-item id="settings-select1">
-      <ion-label>
-        Select
-      </ion-label>
-      <ion-select name=""></ion-select>
+        <ion-toggle color="royal" checked="true"></ion-toggle>
     </ion-item>
     <ion-item id="settings-toggle1">
       <ion-label>
-        Toggle
+        Direct Messages from non-contacts
       </ion-label>
-      <ion-toggle color="positive" checked="false"></ion-toggle>
+      <ion-toggle color="royal" checked="true"></ion-toggle>
     </ion-item>
   </form>
-  <form id="settings-form3">
-    <ion-item id="settings-checkbox1">
-      <ion-label>
-        Checkbox
-      </ion-label>
-      <ion-checkbox></ion-checkbox>
-    </ion-item>
-  </form>
-  <div style="margin-top: 21px;">
-    <button id="settings-button3" ion-button color="positive" block>
-      Tap me!
-    </button>
+  <div class="tall-spacer">
     <button color="danger" ion-button id="menu-list-item34" (click)="logout()" block>
       Logout
     </button>

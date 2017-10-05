@@ -61,7 +61,7 @@ export class ChatroomPage {
     }
     
     
-    doInfinite(infiniteScroll) {
+    doRefresh(infiniteScroll) {
     //Begin async operation
         this.ngAfterViewInit().then(()=>{
             infiniteScroll.complete();

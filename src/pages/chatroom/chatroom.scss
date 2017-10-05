@@ -2,7 +2,14 @@ page-chatroom {
     .scroll-content {
       background-color: color($colors, chat-bg);
     }
-  
+    ion-avatar{
+      img {
+        padding: 2px;
+        border-radius: 50%;
+        border: 2px solid #683f99;
+        width: 56px;
+      }
+    }
     ion-scroll[scrollX] {
       white-space: nowrap;
       .scroll-item {

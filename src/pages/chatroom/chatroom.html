@@ -1,30 +1,29 @@
-<ion-content style="background: url('https://s-media-cache-ak0.pinimg.com/236x/b3/1c/ce/b31cceccea15b00977c77fa7018345f9.jpg');">
+<ion-content>
     <back-button></back-button>
-    <ion-scroll scrollX style="height:100px; margin-left: 70px;">
-        <ion-row>
+    <ion-scroll scrollX style="height:100px;">
+        <ion-row style="margin-left: 70px;">
             <ion-col *ngFor="let user of users">
                 <ion-avatar item-left>
-                    <img style="padding: 2px;border-radius: 50%;border: 2px solid #f53d3d;width: 56px;" src="{{user.picture.large}}" (click)="goToUser(user)">
+                    <img src="{{user.picture.large}}" (click)="goToUser(user)">
                 </ion-avatar>     
             </ion-col>            
         </ion-row>            
     </ion-scroll>
     <ion-list no-lines style="padding-top: 65px;">
-        <ion-item *ngFor="let msg of messages" style="background: url('https://s-media-cache-ak0.pinimg.com/236x/b3/1c/ce/b31cceccea15b00977c77fa7018345f9.jpg');">
+        <ion-item *ngFor="let msg of messages">
             <chat-bubble [message]="msg"></chat-bubble>
         </ion-item>
     </ion-list>
-    <ion-infinite-scroll [position]="top" (ionInfinite)="doInfinite($event)">
-            <ion-infinite-scroll-content></ion-infinite-scroll-content>
-    </ion-infinite-scroll>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+        pullingText="Load more messages"
+        refreshingText="Loading...">
+        ></ion-refresher-content>
+    </ion-refresher>
 </ion-content>
 <ion-footer>
 <ion-textarea placeholder="Enter a description" style="color:#262626;background:#ccc;padding:5px;padding-right:20%"></ion-textarea>
     <button ion-button (click)="sendMessage()" style="position:absolute; right: 3%; padding:8px;top: 25%;border-radius: 50%;bottom: 15%; margin: 0;width:11%">
         <ion-icon name="md-send"></ion-icon>
     </button> 
-<!--<ion-textarea [(ngModel)]="chatbox" rows="3" style="color:#262626;background:#ccc;padding:5px;padding-right:20%" type="email" placeholder="Type Message.."></ion-textarea>
-      <button ion-button (click)="sendMessage()" style="position:absolute; right: 3%; padding:8px;top: 15%;bottom: 15%; margin: 0;height:40%;width:12%">
-          <ion-icon name="md-send"></ion-icon>
-      </button> -->
 </ion-footer>

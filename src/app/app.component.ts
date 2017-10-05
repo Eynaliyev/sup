@@ -26,11 +26,8 @@ export class MyApp {
   loader: any;
 
   myProfile = { 
-    title: 'Edit Profile', 
     component: MyProfilePage, 
-    icon: 'ios-contacts-outline' 
   };
-  
   
   constructor(
     private statusBar: StatusBar, 

@@ -1,59 +1,41 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { UserService } from '../../services/user.service';
+import { User } from '../../models/user.model';
+import {Message} from '../../models/message.model';
+import { UserProfilePage } from '../pages';
 
 @Component({
   selector: 'page-chatroom',
   templateUrl: 'chatroom.html'
 })
 export class ChatroomPage {
-	user: any;
-	messages: any;
+    users: User[] = [];    
+	messages: Message[] = [];
   constructor(
     public navCtrl: NavController, 
-    public navParams: NavParams) {
-    this.user = navParams.get('user');
-    
-      this.messages= [{
-        img: this.user.picture.large,
-        position: 'left',
-        content: 'Hello from the other side.',
-        senderName: 'Gregory',
-        time: '28-Jun-2016 21:53'
-    },{
-        img: 'assets/img/thumbnail-duckling-1.jpg',
-        position: 'right',
-        content: 'Hello from the other side.',
-        senderName: 'Gregory',
-        time: '28-Jun-2016 21:53'
-    },{
-        img: 'assets/img/thumbnail-duckling-1.jpg',
-        position: 'right',
-        content: 'Hello from the other side.Hello from the other side.Hello from the other side.Hello from the other side.Hello from the other side.',
-        senderName: 'Gregory',
-        time: '28-Jun-2016 21:53'
-    },{
-        img: this.user.picture.large,
-        position: 'left',
-        content: 'Hello from the other side.',
-        senderName: 'Gregory',
-        time: '28-Jun-2016 21:53'
-    },{
-        img: 'assets/img/thumbnail-duckling-1.jpg',
-        position: 'right',
-        content: 'Hello from the other side.Hello from the other side.Hello from the other side.Hello from the other side.Hello from the other side.',
-        senderName: 'Gregory',
-        time: '28-Jun-2016 21:53'
-    },{
-        img: this.user.picture.large,
-        position: 'left',
-        content: 'Hello from the other side.',
-        senderName: 'Gregory',
-        time: '28-Jun-2016 21:53'
-    }]
+    public navParams: NavParams,
+    private userService: UserService) {
+    // get chatroom id
+    // on page loaded - load message history - paginated
       }
+    ionViewDidLoad(){
+        let env = this;
+        this.userService.getRandomUsers(5).subscribe(function(res){
+            for (let i = 0; i < res.length; i++) {
+                setTimeout(function() {
+                    env.users.push(res[i]);
+                }, 100 * i);
+            }
+            console.log(env.users);
+        });        
+    }
+    goToUser(user){
+        this.navCtrl.push(UserProfilePage, user);
+    }
+
+    sendMessage(){
     
-      sendMessage(){
-        
-      }
+    }
   
 }

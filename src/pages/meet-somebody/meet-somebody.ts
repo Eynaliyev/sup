@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController, LoadingController, App } from 'ionic-angular';
-import {UserProfilePage} from '../user-profile/user-profile';
-import {FilterPage} from '../filter/filter';
-import {VIPPage} from '../vip/vip';
+import {UserProfilePage} from '../pages';
+import {FilterPage} from '../pages';
+import {VIPPage} from '../pages';
+import {ChatroomPage} from '../pages';
+
 @Component({
   selector: 'page-meet-somebody',
   templateUrl: 'meet-somebody.html'
@@ -18,6 +20,9 @@ export class MeetSomebodyPage {
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad MeetSomebodyPage');
+    setTimeout(() => {
+      this.goToChatroom()
+    },800)
   }
   viewVIP(){
     this.navCtrl.push(VIPPage);
@@ -32,5 +37,8 @@ export class MeetSomebodyPage {
   }
   closeWaitlist(){
     this.app.getRootNav().pop();
+  }
+  goToChatroom(){
+    this.navCtrl.push(ChatroomPage)
   }
 }

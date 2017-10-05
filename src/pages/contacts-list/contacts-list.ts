@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
-import { UserProfilePage } from '../user-profile/user-profile';
-import { ChatroomPage } from '../../pages/chatroom/chatroom';
-
-import { User } from '../../models/user.model';
+import { UserProfilePage } from '../pages';
+import { ChatroomPage } from '../pages';
 
 import { UserService } from '../../services/user.service';
 import { USERS } from '../../services/mock-users';
@@ -43,7 +41,7 @@ export class ContactsListPage {
         resolve(true);
       });
     });
-    }
+  }
 
 
   doInfinite(infiniteScroll) {

@@ -3,6 +3,16 @@ page-chatroom {
       background-color: color($colors, chat-bg);
     }
   
+    ion-scroll[scrollX] {
+      white-space: nowrap;
+      .scroll-item {
+      display: inline-block;
+      }
+    }
+    ion-col{
+      padding: 16px;
+      margin: 5px;
+    }
     img.profile-picture {
       width: 40px;
       height: 40px;

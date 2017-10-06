@@ -1,6 +1,5 @@
 export * from './chatroom/chatroom';
 export * from './contacts-list/contacts-list';
-export * from './faq/faq';
 export * from './filter/filter';
 export * from './login/login';
 export * from './meet-somebody/meet-somebody';

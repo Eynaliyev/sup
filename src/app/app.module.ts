@@ -17,7 +17,6 @@ import { UserProfilePage } from '../pages/pages';
 import { MyProfilePage } from '../pages/pages';
 import { ChatroomPage } from '../pages/pages';
 import {FilterPage} from '../pages/pages';
-import {FaqPage} from '../pages/pages';
 import {VIPPage} from '../pages/pages';
 import {PurchasePage} from '../pages/pages';
 import {WaitlistPage} from '../pages/pages';
@@ -47,7 +46,6 @@ import {MessageService} from '../services/services';
     MyProfilePage,
     ChatroomPage,
     VIPPage,
-    FaqPage,
     FilterPage,
     PurchasePage,
     WaitlistPage,
@@ -78,7 +76,6 @@ import {MessageService} from '../services/services';
     VIPPage,
     PurchasePage,
     FilterPage,
-    FaqPage,
     WaitlistPage
   ],
   providers: [

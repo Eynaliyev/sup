@@ -1,18 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
 import { Platform, MenuController, Nav  } from 'ionic-angular';
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
 import { Storage } from '@ionic/storage';
 import { LoadingController } from 'ionic-angular';
 
 import { MyProfilePage } from '../pages/pages';
 import { ContactsListPage } from '../pages/pages';
-import { UserProfilePage } from '../pages/pages';
-import { FaqPage } from '../pages/pages';
+import { VIPPage } from '../pages/pages';
 import { SettingsPage } from '../pages/pages';
 import { MeetSomebodyPage } from '../pages/pages';
 import { LoginPage } from '../pages/pages';
-
 
 @Component({
   templateUrl: 'app.component.html'
@@ -30,8 +26,6 @@ export class MyApp {
   };
   
   constructor(
-    private statusBar: StatusBar, 
-    private splashScreen: SplashScreen, 
     private platform: Platform, 
     private menu: MenuController,
     private loadingCtrl: LoadingController,
@@ -57,7 +51,6 @@ export class MyApp {
       { title: 'Meet people Nearby', component: MeetSomebodyPage, icon: 'ios-locate-outline' },
       { title: 'Edit Profile', component: MyProfilePage, icon: 'ios-contacts-outline' },
       { title: 'Contacts', component: ContactsListPage, icon: 'ios-chatboxes-outline' },
-      { title: 'FAQ', component: FaqPage, icon: 'ios-flash-outline' },
       { title: 'Settings', component: SettingsPage, icon: 'ios-settings-outline' }
     ];
   }
@@ -76,7 +69,9 @@ export class MyApp {
     });
     this.loader.present();
   }
-
+  viewVIP(){
+    this.navCtrl.push(VIPPage);
+  }
   checkActive(page){
     return page == this.activePage;
   }

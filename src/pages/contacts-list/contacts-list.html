@@ -4,7 +4,7 @@
   <ion-list class="lower">
       <ion-item [ngClass]="animateClass" style="background-color: transparent;color: #cfcfcf !important;" *ngFor=" let user of users " (click)="openChat(user)">
           <ion-thumbnail item-left>
-              <img style="padding: 2px;border-radius: 50%;border: 2px solid #f53d3d;" src="{{user.picture.large}}">
+              <img src="{{user.picture.large}}">
           </ion-thumbnail>
           <h2 style="text-transform: capitalize;">{{user.name.first}} {{user.name.last}}
               <span style="text-transform: capitalize;">{{user.name.first}}<img *ngIf="user.gender == 'female'" style="max-width: 9px;margin-left: 5px;" src="http://www.clker.com/cliparts/r/M/L/o/R/i/green-dot.svg.med.png"></span></h2>

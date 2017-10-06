@@ -1,5 +1,6 @@
 // imports
 import { NgModule, ErrorHandler } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
@@ -58,6 +59,7 @@ import {MessageService} from '../services/services';
   imports: [
     BrowserModule,
     HttpModule,
+    BrowserAnimationsModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot()
   ],

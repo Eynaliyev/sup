@@ -92,8 +92,10 @@ export class UserProfilePage {
     public navCtrl: NavController,
     public navParams: NavParams) {
       console.log(this.navParams.data);
+      /*
       let id = this.navParams.data.get('id');
       let name = this.navParams.data.get('name');
+      */
       this.backGround = 'assets/users/images/1/1.jpg';
       this.image = 'assets/users/images/1/1.jpg';
       setTimeout(function() {}, 800);

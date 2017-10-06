@@ -7,7 +7,7 @@ import { LoginPage } from '../login/login';
   templateUrl: 'settings.html'
 })
 export class SettingsPage {
-
+  languages: any[];
   constructor(public navCtrl: NavController) {
   }
   ionViewDidLoad() {

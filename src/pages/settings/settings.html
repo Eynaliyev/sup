@@ -2,10 +2,19 @@
   <menu-button></menu-button>
   <span class="pageHeader">Settings</span>
   <form id="settings-form" style="margin-top: 80px;">
+    <ion-item>
+      <ion-label>Languages I want to speak in: </ion-label>
+      <ion-select name="language-select" [(ngModel)]="languages" multiple="true">
+        <ion-option>English</ion-option>
+        <ion-option>French</ion-option>
+        <ion-option>Mandarin Chinese</ion-option>
+        <ion-option>German</ion-option>
+        <ion-option>Spanish</ion-option>
+        <ion-option>Russian</ion-option>
+        <ion-option>Turkish</ion-option>
+      </ion-select>
+    </ion-item>
     <ion-item id="settings-toggle3">
-      <ion-textarea>
-        
-      </ion-textarea>
       <ion-input type="text" placeholder="Username >"></ion-input>
     </ion-item>
     <ion-item id="settings-toggle1">
@@ -16,7 +25,7 @@
     </ion-item>
     <ion-item id="settings-toggle1">
       <ion-label>
-        Direct Messages from non-contacts
+          git remote set-url origin Direct Messages from non-contacts
       </ion-label>
       <ion-toggle color="royal" checked="true"></ion-toggle>
     </ion-item>

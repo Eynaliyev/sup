@@ -20,6 +20,7 @@ import {FilterPage} from '../pages/pages';
 import {FaqPage} from '../pages/pages';
 import {VIPPage} from '../pages/pages';
 import {PurchasePage} from '../pages/pages';
+import {WaitlistPage} from '../pages/pages';
 // components
 import { GalleryComponent } from '../components/components';
 import { ChatBubbleComponent } from '../components/components';
@@ -49,6 +50,7 @@ import {MessageService} from '../services/services';
     FaqPage,
     FilterPage,
     PurchasePage,
+    WaitlistPage,
     GalleryComponent,
     ChatBubbleComponent,
     ProfilePostsComponent,
@@ -76,7 +78,8 @@ import {MessageService} from '../services/services';
     VIPPage,
     PurchasePage,
     FilterPage,
-    FaqPage
+    FaqPage,
+    WaitlistPage
   ],
   providers: [
     StatusBar,

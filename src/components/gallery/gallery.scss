@@ -1,4 +1,10 @@
 gallery {
+    ion-scroll[scrollX] {
+        white-space: nowrap;
+        .scroll-item {
+            display: inline-block;
+        }
+    }
     .card-md {
         margin: 10px 0px 0px 0px;
         width: calc(100% - 20px);

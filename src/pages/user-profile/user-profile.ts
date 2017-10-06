@@ -83,8 +83,14 @@ export class UserProfilePage {
       { name: 'test', image: 'assets/users/images/1/3.jpg' },
       { name: 'test', image: 'assets/users/images/1/4.jpg' },
       { name: 'test', image: 'assets/users/images/1/3.jpg' },
+      { name: 'test', image: 'assets/users/images/1/4.jpg' },
+      { name: 'test', image: 'assets/users/images/1/1.jpg' },
+      { name: 'test', image: 'assets/users/images/1/2.jpg' },
+      { name: 'test', image: 'assets/users/images/1/3.jpg' },
+      { name: 'test', image: 'assets/users/images/1/4.jpg' },
+      { name: 'test', image: 'assets/users/images/1/3.jpg' },
       { name: 'test', image: 'assets/users/images/1/4.jpg' }
-
+      
   ];
   data = { puppies: 'assets/users/images/1/1.jpg', kittens: 'https://s-media-cache-ak0.pinimg.com/236x/b3/1c/ce/b31cceccea15b00977c77fa7018345f9.jpg', ducklings: 'assets/users/images/1/1.jpg', ducklings2: 'assets/users/images/1/1.jpg' }
   

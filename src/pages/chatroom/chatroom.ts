@@ -5,6 +5,7 @@ import { MessageService } from '../../services/services';
 import { User } from '../../models/user.model';
 import {Message} from '../../models/message.model';
 import { UserProfilePage } from '../pages';
+import { MeetSomebodyPage } from '../pages';
 
 @Component({
   selector: 'page-chatroom',
@@ -59,8 +60,9 @@ export class ChatroomPage {
           });
         });
     }
-    
-    
+    exit(){
+        this.navCtrl.setRoot(MeetSomebodyPage);
+    }
     doRefresh(infiniteScroll) {
     //Begin async operation
         this.ngAfterViewInit().then(()=>{

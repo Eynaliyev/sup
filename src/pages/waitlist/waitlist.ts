@@ -4,13 +4,12 @@ import {UserProfilePage} from '../pages';
 import {FilterPage} from '../pages';
 import {VIPPage} from '../pages';
 import {ChatroomPage} from '../pages';
-import {WaitlistPage} from '../pages';
 
 @Component({
-  selector: 'page-meet-somebody',
-  templateUrl: 'meet-somebody.html'
+  selector: 'page-waitlist',
+  templateUrl: 'waitlist.html'
 })
-export class MeetSomebodyPage {
+export class WaitlistPage {
   private languages;
   private numberInFront: number = 5;
   private numberBehind: number = 15;
@@ -22,7 +21,22 @@ export class MeetSomebodyPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad MeetSomebodyPage');
   }
-  goToWaitlist(){
-    this.navCtrl.push(WaitlistPage)
+  ionViewDidEnter(){
+    setTimeout(() => {
+      let view = this.navCtrl.getActive();
+      if(view.component.name === "WaitlistPage"){
+        this.goToChatroom();        
+      }
+    },1800);
+  }
+  viewVIP(){
+    this.navCtrl.push(VIPPage);
+  }
+  // view notifications
+  viewFilter() {
+    this.app.getRootNav().push(FilterPage);
+  }
+  goToChatroom(){
+    this.navCtrl.push(ChatroomPage)
   }
 }

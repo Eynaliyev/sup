@@ -9,3 +9,4 @@ export * from './purchase/purchase';
 export * from './settings/settings';
 export * from './user-profile/user-profile';
 export * from './vip/vip';
+export * from './waitlist/waitlist';

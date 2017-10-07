@@ -42,12 +42,12 @@
     }
 
     &.left {
-      background-color: color($colors, white);
+      background-color: color($colors, gray);
       float: left;
       margin-left: 55px;
 
       &:before {
-        background-color: color($colors, white);
+        background-color: color($colors, gray);
         left: 10px;
         -webkit-transform: rotate(70deg) skew(5deg);
       }

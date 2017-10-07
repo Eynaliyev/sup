@@ -126,7 +126,7 @@ ion-title{
   width: 100px;
   height: 100px;
   /** height is required as absolute value **/
-  background-color: #683f99;
+  background-color: color($colors, royal);
   border-radius: 100px;
   position:relative;
   animation: pulse 2000ms linear infinite;
@@ -151,7 +151,7 @@ ion-title{
   width: 100px;
   height: 100px;
   border-radius: 100px;
-  background-color: #683f99;
+  background-color: color($colors, royal);
 }
 
 .load:after {

@@ -27,7 +27,7 @@ export class MessageService {
                 content: 'Hello from the other side.',
                 date: new Date(),
                 id: 123,
-                senderId: 321,
+                senderId: 123,
                 roomId: 321013,
             },{
                 content: 'Hello from the other side.',
@@ -51,7 +51,7 @@ export class MessageService {
                 content: 'Hello from the other side.',
                 date: new Date(),
                 id: 123,
-                senderId: 321,
+                senderId: 123,
                 roomId: 321013,
             }]
 

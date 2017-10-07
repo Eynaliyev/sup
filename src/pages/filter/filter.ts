@@ -15,7 +15,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class FilterPage {
 	option = "friends";
-	withoption = "girl";
+  withoption = "girl";
+  languages: any[];
 	dualValue2= {lower : 18, upper: 30};
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 

@@ -7,28 +7,23 @@
     </ion-fab>
   <span class="pageHeader">Filter</span>
   <ion-list class="lower">
-      <ion-item>
-          <ion-label stacked>I'm here to</ion-label>
-          <ion-select [(ngModel)]="option">
-              <ion-option value="friends">Make new friends</ion-option>
-              <ion-option value="chat">Chat</ion-option>
-              <ion-option value="date">Date</ion-option>
-          </ion-select>
-      </ion-item>
-      <ion-item>
-          <ion-label stacked>With who?</ion-label>
-          <ion-select [(ngModel)]="withoption">
-              <ion-option value="guy">with a guy</ion-option>
-              <ion-option value="girl">with a girl</ion-option>
-          </ion-select>
-      </ion-item>
-      <ion-item>
-          <ion-label stacked>Age</ion-label>
-          <ion-label stacked>Show me people aged {{dualValue2.lower}} to {{dualValue2.upper}}</ion-label>
-  <ion-range (ionChange)="change(dualValue2)" dualKnobs="true" [(ngModel)]="dualValue2" min="18" max="80" step="1" mode="md"></ion-range>
-      </ion-item>
+    <ion-item>
+        <ion-label stacked>Languages I want to speak in: </ion-label>
+        <ion-select name="language-select" [(ngModel)]="languages" multiple="true">
+            <ion-option>English</ion-option>
+            <ion-option>French</ion-option>
+            <ion-option>Mandarin Chinese</ion-option>
+            <ion-option>German</ion-option>
+            <ion-option>Spanish</ion-option>
+            <ion-option>Russian</ion-option>
+            <ion-option>Turkish</ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-item *ngFor="let language of languages">
+        <ion-label>
+            {{language}}
+        </ion-label>
+    </ion-item>
   </ion-list>
-
-          
 </ion-content>
 

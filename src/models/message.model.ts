@@ -4,4 +4,5 @@ export class Message {
     id: number;
     senderId: number;
     roomId: number;
+    position?: string;
 }

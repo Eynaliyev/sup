@@ -15,6 +15,9 @@ export class ChatroomPage {
     users: User[] = [];    
     messages: Message[] = [];
     id: number;
+    currentUser = {
+        id: 123
+    }
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -51,14 +54,26 @@ export class ChatroomPage {
             let env = this;
             this.messageService.getMessages(this.id, 10)
             .then(res => {
-                for (let i = 0; i < res.length; i++) {
+                let newMessages = this.addPosition(res);
+                for (let i = 0; i < newMessages.length; i++) {
                     setTimeout(function() {
-                        env.messages.push(res[i]);
+                        env.messages.push(newMessages[i]);
                     }, 100 * i);
                 }
             resolve(true);
           });
         });
+    }
+    addPosition(messages: Message[]): Message[]{
+        let res = messages.slice()
+        for(var i = 0; i < messages.length; i++){
+            if(messages[i].senderId === this.currentUser.id){
+                messages[i].position = 'right';
+            } else {
+                messages[i].position = 'left';                
+            }
+        }
+        return messages;
     }
     exit(){
         this.navCtrl.setRoot(MeetSomebodyPage);

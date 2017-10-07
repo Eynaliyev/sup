@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http, Response} from '@angular/http';
+import { Headers, Http} from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 import { Observable } from 'rxjs/Observable';
@@ -15,16 +15,18 @@ import { User} from '../models/models';
 export class UserService {
 	//test url
 	private UsersUrl = 'app/Users'; // URL to internal web api
-  private usersByRoomUrl;
+	private usersByRoomUrl;
 	private userByIdUrl;
 
 	constructor(
 		private http: Http,
 		) { }
 
-		getRandomUsers(number) {
-			return this.http.get('https://randomuser.me/api/?results='+number).map(res => res.json()).map(resp => resp.results)
-		}
+	getRandomUsers(number) {
+		return this.http.get('https://randomuser.me/api/?results='+number)
+		.map(res => res.json())
+		.map(resp => resp.results)
+	}
 // get a specific User
 /*
 	getUserById(id): Observable<User> {
@@ -48,7 +50,6 @@ export class UserService {
 			return null;
 		})
 	}
-
 	private handleError(error: any): Promise<any> {
 		console.error('An error occurred', error); // for demo purposes only
 		return Promise.reject(error.message || error);

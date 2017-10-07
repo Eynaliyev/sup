@@ -1,3 +1,4 @@
+
 import { Injectable } from '@angular/core';
 import { Headers, Http, Response} from '@angular/http';
 
@@ -11,6 +12,7 @@ import 'rxjs/add/operator/catch';
 import {Message} from '../models/models';
 
 import { User} from '../models/models';
+import { UtilService } from '../shared/util.service';
 
 @Injectable()
 export class MessageService {
@@ -19,8 +21,12 @@ export class MessageService {
     private usersByRoomUrl;
     private userByIdUrl;
     private messages: Message[];
+    private currentUser = {
+        id: 123
+    }
 	constructor(
-		private http: Http,
+        private http: Http,
+        private utilService: UtilService
         ) 
         {
             this.messages = [{
@@ -56,14 +62,15 @@ export class MessageService {
             }]
 
         }
-
-    getRandomUsers(number) {
-        return this.http.get('https://randomuser.me/api/?results='+number).map(res => res.json()).map(resp => resp.results)
-    }
     // TO DO: implement actual paginated message getter function
     getMessages(chatroomId, start?, end?): Promise<Message[]> {
         return new Promise(resolve => {
-            resolve(this.messages);
+            // add position property
+            let res = this.utilService.addMessagePosition(this.messages, this.currentUser.id);
+            // add time passed since the mssage was sent 
+            res = this.utilService.addMessageTimeSince(res);
+            // To Do : add sender name based on participants ID, or nothing
+            resolve(res);
         });
     }
 

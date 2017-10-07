@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, LoadingController, App } from 'ionic-angular';
-import {UserProfilePage} from '../pages';
 import {FilterPage} from '../pages';
 import {VIPPage} from '../pages';
 import {ChatroomPage} from '../pages';
@@ -10,9 +9,6 @@ import {ChatroomPage} from '../pages';
   templateUrl: 'waitlist.html'
 })
 export class WaitlistPage {
-  private languages;
-  private numberInFront: number = 5;
-  private numberBehind: number = 15;
   constructor(
     public navCtrl: NavController,
     public loadingCtrl: LoadingController,

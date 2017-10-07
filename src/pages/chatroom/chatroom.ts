@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { UserService } from '../../services/services';
 import { MessageService } from '../../services/services';
 import { User } from '../../models/user.model';

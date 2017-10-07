@@ -1,38 +1,13 @@
 <div class="chatBubble" >
-  <img class="profile-pic {{message.position}}" src="{{message.img}}">
-  <div class="chat-bubble {{message.position}}">
-    <div class="message">{{message.content}}</div>
-    <div class="message-detail">
+    <div class="message-detail light-text {{message.position}}">
         <span><b>{{message.senderName}}</b> </span>
         <span>{{message.time}}</span>
     </div>
-  </div>
-</div>
-<!--
-<div *ngFor="let message of chat.messages" class="message-wrapper rlt">
-  <div *ngIf="message.type == 'received'">
-    <img class="profile-picture left" src="{{ chat.face }}"/>
-    <div class="chat-bubble left">
+    <img class="profile-picture {{message.position}}" default="assets/images/user.png" src="{{message.img}}">
+    <div class="chat-bubble {{message.position}}">
       <div class="message">
-        {{ message.text }}
-        <img src="{{ message.image }}" class="block" *ngIf="message.image" alt=""/>
-      </div>
-      <div class="message-detail">
-        <span class="message-time">{{ message.time }}</span>
+        <img src="{{ message.image }}" class="block" *ngIf="message.image" alt=""/>        
+        {{message.content}}
       </div>
     </div>
   </div>
-
-  <div *ngIf="message.type == 'sent'">
-    <img class="profile-picture right" src="assets/img/user/adam.jpg"/>
-    <div class="chat-bubble right">
-      <div class="message" ng-bind-html="message.text">
-        {{ message.text }}
-      </div>
-      <div class="message-detail">
-        <span class="message-time">{{ message.time }}</span>
-      </div>
-    </div>
-  </div>
-  <div class="cf"></div>
-</div>-->

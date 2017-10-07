@@ -20,6 +20,7 @@ import {FilterPage} from '../pages/pages';
 import {VIPPage} from '../pages/pages';
 import {PurchasePage} from '../pages/pages';
 import {WaitlistPage} from '../pages/pages';
+import {ParticipantsListModal} from '../pages/pages';
 // components
 import { GalleryComponent } from '../components/components';
 import { ChatBubbleComponent } from '../components/components';
@@ -34,7 +35,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import {UserService} from '../services/services';
 import {ChatroomService} from '../services/services';
 import {MessageService} from '../services/services';
-
+import {UtilService} from '../shared/util.service';
+import {DefaultImageDirective} from '../shared/default-image.directive';
 @NgModule({
   declarations: [
     MyApp,
@@ -54,7 +56,9 @@ import {MessageService} from '../services/services';
     ProfilePostsComponent,
     ProfileTimelineComponent,
     BackButtonComponent,
-    MenuButtonComponent
+    MenuButtonComponent,
+    ParticipantsListModal,
+    DefaultImageDirective
   ],
   imports: [
     BrowserModule,
@@ -76,6 +80,7 @@ import {MessageService} from '../services/services';
     VIPPage,
     PurchasePage,
     FilterPage,
+    ParticipantsListModal,
     WaitlistPage
   ],
   providers: [
@@ -84,6 +89,7 @@ import {MessageService} from '../services/services';
     UserService,
     ChatroomService,
     MessageService,
+    UtilService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

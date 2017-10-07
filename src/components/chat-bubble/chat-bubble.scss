@@ -22,6 +22,14 @@
   .message-detail {
     white-space: nowrap;
     font-size: 14px;
+    &.left {
+      float: left;
+      margin-left: 10px;
+    }
+    &.right {
+      float: right;
+      margin-right: 10px;
+    }
   }
 
   .chat-bubble {

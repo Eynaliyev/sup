@@ -4,5 +4,8 @@ export class Message {
     id: number;
     senderId: number;
     roomId: number;
+    //cosmetic properties added on front-end by the mapping function
     position?: string;
+    time?: string;
+    
 }

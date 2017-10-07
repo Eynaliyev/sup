@@ -22,7 +22,8 @@ export class ChatroomPage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     private userService: UserService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private modalCtrl: ModalController
 ) {
     // get chatroom id
     // on page loaded - load message history - paginated
@@ -53,8 +54,8 @@ export class ChatroomPage {
         return new Promise(resolve => {
             let env = this;
             this.messageService.getMessages(this.id, 10)
-            .then(res => {
-                let newMessages = this.addPosition(res);
+            .then(newMessages => {
+                console.log('newMessages: ', newMessages);
                 for (let i = 0; i < newMessages.length; i++) {
                     setTimeout(function() {
                         env.messages.push(newMessages[i]);
@@ -63,17 +64,6 @@ export class ChatroomPage {
             resolve(true);
           });
         });
-    }
-    addPosition(messages: Message[]): Message[]{
-        let res = messages.slice()
-        for(var i = 0; i < messages.length; i++){
-            if(messages[i].senderId === this.currentUser.id){
-                messages[i].position = 'right';
-            } else {
-                messages[i].position = 'left';                
-            }
-        }
-        return messages;
     }
     exit(){
         this.navCtrl.setRoot(MeetSomebodyPage);

@@ -69,7 +69,7 @@ export class ChatroomPage {
         this.navCtrl.setRoot(MeetSomebodyPage);
     }
     doRefresh(infiniteScroll) {
-    //Begin async operation
+        //Begin async operation
         this.ngAfterViewInit().then(()=>{
             infiniteScroll.complete();
         });

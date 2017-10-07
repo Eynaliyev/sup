@@ -1,4 +1,4 @@
-import { Component, trigger, state, style, transition, animate, keyframes, ElementRef } from '@angular/core';
+import { Component, trigger, state, style, transition, animate, keyframes } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 @Component({
@@ -73,7 +73,7 @@ import { NavController, NavParams } from 'ionic-angular';
   ]
 })
 export class UserProfilePage {
-  pet: string = "puppies";
+  tab: string = "vote";
   backGround: any;
   animateClass: any;
   image: any;
@@ -92,7 +92,7 @@ export class UserProfilePage {
       { name: 'test', image: 'assets/users/images/1/4.jpg' }
       
   ];
-  data = { puppies: 'assets/users/images/1/1.jpg', kittens: 'https://s-media-cache-ak0.pinimg.com/236x/b3/1c/ce/b31cceccea15b00977c77fa7018345f9.jpg', ducklings: 'assets/users/images/1/1.jpg', ducklings2: 'assets/users/images/1/1.jpg' }
+  data = { vote: 'assets/users/images/1/1.jpg', photos: 'https://s-media-cache-ak0.pinimg.com/236x/b3/1c/ce/b31cceccea15b00977c77fa7018345f9.jpg', about: 'assets/users/images/1/1.jpg', profile: 'assets/users/images/1/1.jpg' }
   
   constructor(
     public navCtrl: NavController,
@@ -114,13 +114,13 @@ export class UserProfilePage {
     this.image = image
   }
 
-  changepet(pet) {
-      this.backGround = this.data[pet]
+  changeTab(tab) {
+      this.backGround = this.data[tab]
   }
 
-  getHeight(pet){
+  getHeight(tab){
       var height = "";
-      if(pet == 'puppies')
+      if(tab == 'vote')
       height = "hidden";
       return height;
   }

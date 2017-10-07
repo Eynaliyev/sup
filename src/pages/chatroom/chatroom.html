@@ -1,7 +1,12 @@
 <ion-content>
     <menu-button></menu-button>
+    <ion-fab top center>
+        <button ion-fab (click)="presentParticipantsModal()" color="dark" class="menu-btn-border">
+            <ion-icon name="people"></ion-icon>            
+        </button>
+    </ion-fab>
     <ion-fab right top>
-        <button ion-fab (click)="exit()" color="dark" style="border: 2px solid #683f99;">
+        <button ion-fab (click)="exit()" color="dark" class="menu-btn-border">
             <ion-icon name="exit"></ion-icon>            
         </button>
     </ion-fab>

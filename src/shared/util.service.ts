@@ -60,22 +60,24 @@ export class UtilService {
     alert.present();
   }
   // adds right or left to the position property depending on whether the sender is the current User
-  addMessagePosition(messages: Message[], currentUserId): Message[]{
-    let res = messages.slice()
-    for(var i = 0; i < res.length; i++){
-        if(res[i].senderId === currentUserId){
+  addMessagePosition(messages: Message[], currentUserId): any[]{
+    let res = [];
+    for(var i = 0; i < messages.length; i++){
+        res.push(messages[i])
+        if(messages[i].senderId === currentUserId){
             res[i].position = 'right';
         } else {
-            res[i].position = 'left';                
+            res[i].position = 'left';
         }
     }
     return res;
   }
   // adds time passed since the message was sent string for message
-  addMessageTimeSince(messages: Message[]): Message[]{
-    let res = messages.slice()
-    for(var i = 0; i < res.length; i++){
-        res[i].time = this.timeSince(res[i].date);
+  addMessageTimeSince(messages: Message[]): any[]{
+    let res = [];
+    for(var i = 0; i < messages.length; i++){
+      res.push(messages[i])
+      res[i].time = this.timeSince(messages[i].date);
     }
     return res;
   }

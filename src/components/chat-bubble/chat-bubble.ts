@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 /*
   Generated class for the ChatBubble component.
@@ -12,4 +12,9 @@ import { Component, Input } from '@angular/core';
 })
 export class ChatBubbleComponent {
     @Input() message: any= {};
+    @Output() select = new EventEmitter<any>();
+
+    goToUser(id){
+      this.select.emit(id);
+    }
 }

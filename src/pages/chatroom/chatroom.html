@@ -2,26 +2,26 @@
     <menu-button></menu-button>
     <ion-fab top center>
         <button ion-fab (click)="presentParticipantsModal()" color="dark" class="menu-btn-border">
-            <ion-icon name="people"></ion-icon>            
+            <ion-icon name="people"></ion-icon>
         </button>
     </ion-fab>
     <ion-fab right top>
         <button ion-fab (click)="exit()" color="dark" class="menu-btn-border">
-            <ion-icon name="exit"></ion-icon>            
+            <ion-icon name="exit"></ion-icon>
         </button>
     </ion-fab>
     <ion-scroll scrollX style="height:100px;">
         <ion-row style="margin-left: 70px; margin-top: 21px;">
             <ion-col *ngFor="let user of users">
                 <ion-avatar item-left>
-                    <img src="{{user.picture.large}}" (click)="goToUser(user)">
-                </ion-avatar>     
-            </ion-col>            
-        </ion-row>            
+                    <img class="profile-picture" src="{{user.picture.large}}" (click)="goToUser(user.id)">
+                </ion-avatar>
+            </ion-col>
+        </ion-row>
     </ion-scroll>
     <ion-list no-lines style="padding-top: 21px;">
         <ion-item *ngFor="let msg of messages">
-            <chat-bubble [message]="msg"></chat-bubble>
+            <chat-bubble [message]="msg" (select)="goToUser($event)"></chat-bubble>
         </ion-item>
     </ion-list>
     <ion-refresher (ionRefresh)="doRefresh($event)">

@@ -35,7 +35,7 @@
   .chat-bubble {
     border-radius: 5px;
     display: inline-block;
-    padding: 10px 18px;
+    padding: 5px 9px;
     position: relative;
     margin: 10px;
     max-width: 80%;
@@ -80,7 +80,7 @@
       }
     }
   }
-  ion-footer { 
+  ion-footer {
     .bar-buttons-md[start] {
       order: 3;
     }

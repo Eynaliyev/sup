@@ -8,20 +8,20 @@ page-meet-somebody {
     /*
     .circle {
         margin: auto;
-        text-align: center;    
-        line-height: 200px;    
+        text-align: center;
+        line-height: 200px;
         width: 100%;
         height: 0;
         background: #683f99;
         border-radius: 50%;
-        
+
     }*/
     .call-to-action {
         color: white;
         font-size: 2em;
     }
     .circle {
-        margin: 33% auto;
+        margin: 0% auto;
         width: 250px;
         height: 250px;
         /** height is required as absolute value **/
@@ -31,7 +31,7 @@ page-meet-somebody {
         position:relative;
         text-align: center;
       }
-      
+
       .circle:after {
         display: block;
         padding-bottom: 100%;
@@ -41,7 +41,7 @@ page-meet-somebody {
         background-color: color($colors, royal);
         content: "";
       }
-      
+
       .circle__inner {
         position: absolute;
         top: 0;
@@ -50,13 +50,13 @@ page-meet-somebody {
         width: 100%;
         height: 100%;
       }
-      
+
       .circle__wrapper {
         display: table;
         width: 100%;
         height: 100%;
       }
-      
+
       .circle__content {
         display: table-cell;
         padding: 1em;

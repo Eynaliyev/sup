@@ -21,13 +21,11 @@ export class MessageService {
     private usersByRoomUrl;
     private userByIdUrl;
     private messages: Message[];
-    private currentUser = {
-        id: 123
-    }
+
 	constructor(
         private http: Http,
         private utilService: UtilService
-        ) 
+        )
         {
             this.messages = [{
                 content: 'Hello from the other side.',
@@ -35,42 +33,47 @@ export class MessageService {
                 id: 123,
                 senderId: 123,
                 roomId: 321013,
+                senderImage: 'assets/img/pic.png',
+                senderName: 'Nicole'
             },{
                 content: 'Hello from the other side.',
                 date: new Date(),
                 id: 123,
-                senderId: 321,
+                senderId: 331,
                 roomId: 321013,
+                senderImage: 'assets/img/pic2.png',
+                senderName: 'Karolina'
             },{
                 content: 'Hello from the other side.Hello from the other side.Hello from the other side.Hello from the other side.Hello from the other side.',
                 date: new Date(),
                 id: 123,
                 senderId: 321,
                 roomId: 321013,
-            },{
+                senderImage: 'assets/img/pic3.png',
+                senderName: 'Lisa'
+              },{
                 content: 'Hello from the other side.Hello from the other side.Hello from the other side.Hello from the other side.Hello from the other side.',
                 date: new Date(),
                 id: 123,
                 senderId: 321,
                 roomId: 321013,
-            },{
+                senderImage: 'assets/img/pic2.png',
+                senderName: 'Lisa'
+              },{
                 content: 'Hello from the other side.',
                 date: new Date(),
                 id: 123,
                 senderId: 123,
                 roomId: 321013,
-            }]
+                senderImage: 'assets/img/pic.png',
+                senderName: 'Nicole'
+              }];
 
         }
     // TO DO: implement actual paginated message getter function
     getMessages(chatroomId, start?, end?): Promise<Message[]> {
         return new Promise(resolve => {
-            // add position property
-            let res = this.utilService.addMessagePosition(this.messages, this.currentUser.id);
-            // add time passed since the mssage was sent 
-            res = this.utilService.addMessageTimeSince(res);
-            // To Do : add sender name based on participants ID, or nothing
-            resolve(res);
+            resolve(this.messages);
         });
     }
 

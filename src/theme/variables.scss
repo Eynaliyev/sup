@@ -95,13 +95,35 @@ $colors: (
 @import "roboto";
 @import "noto-sans";
 
+img.profile-picture {
+  padding: 2px;
+  border-radius: 50%;
+  border: 2px solid #683f99;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  bottom: 10px;
+  &.left {
+    left: 10px;
+  }
+  &.right {
+    right: 10px;
+  }
+}
+
 ion-title{
+}
+.dark-bckg{
+  background: url('../assets/img/background.jpg');
+}
+.venti-spacer{
+  margin-top: 63px;
 }
 .tall-spacer{
   margin-top: 21px;
 }
 .lower{
-  padding-top: 75px;
+  padding-top: 21px;
 }
 .light-text{
   color: #d0d0d0;

@@ -1,12 +1,28 @@
-<ion-content style="background: url('https://s-media-cache-ak0.pinimg.com/236x/b3/1c/ce/b31cceccea15b00977c77fa7018345f9.jpg');">
+<ion-content padding class="dark-bckg">
     <menu-button></menu-button>
-    <ion-fab right top>
+    <!-- will be useful when we have multiple filters
+      <ion-fab right top>
         <button ion-fab color="dark" (click)="viewFilter()" class="menu-btn-border">
             <ion-icon name="md-settings"></ion-icon>
         </button>
-    </ion-fab>
+    </ion-fab>-->
     <span class="pageHeader">Meet somebody</span>
-    <div class="logo lower light-text" text-center></div>
+    <div class="venti-spacer"></div>
+    <ion-list class="lower">
+      <ion-item>
+          <ion-label stacked>Languages I want to speak in: </ion-label>
+          <ion-select name="language-select" [(ngModel)]="languages" multiple="true">
+              <ion-option>English</ion-option>
+              <ion-option>French</ion-option>
+              <ion-option>Mandarin Chinese</ion-option>
+              <ion-option>German</ion-option>
+              <ion-option>Spanish</ion-option>
+              <ion-option>Russian</ion-option>
+              <ion-option>Turkish</ion-option>
+          </ion-select>
+      </ion-item>
+    </ion-list>
+    <div class="logo light-text" text-center></div>
     <div class="circle" (click)="goToWaitlist()">
         <div class="circle__inner">
             <div class="circle__wrapper">

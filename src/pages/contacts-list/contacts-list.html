@@ -1,10 +1,10 @@
-<ion-content style="background: url('https://s-media-cache-ak0.pinimg.com/236x/b3/1c/ce/b31cceccea15b00977c77fa7018345f9.jpg');">
+<ion-content class="dark-bckg">
   <menu-button></menu-button>
       <span class="pageHeader">Messages</span>
   <ion-list class="lower">
       <ion-item [ngClass]="animateClass" style="background-color: transparent;color: #cfcfcf !important;" *ngFor=" let user of users " (click)="openChat(user)">
           <ion-thumbnail item-left>
-              <img src="{{user.picture.large}}">
+              <img src="{{user.picture.large}}" default="assets/images/user.png">
           </ion-thumbnail>
           <h2 style="text-transform: capitalize;">{{user.name.first}} {{user.name.last}}
               <span style="text-transform: capitalize;">{{user.name.first}}<img *ngIf="user.gender == 'female'" style="max-width: 9px;margin-left: 5px;" src="http://www.clker.com/cliparts/r/M/L/o/R/i/green-dot.svg.med.png"></span></h2>

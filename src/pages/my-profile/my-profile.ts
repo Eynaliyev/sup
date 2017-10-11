@@ -7,7 +7,9 @@ import { NavController } from 'ionic-angular';
 })
 export class MyProfilePage {
   private languages;
-  
+  user = {
+    images: ["assets/images/user.png" ]
+  };
   constructor(public navCtrl: NavController) {
   }
   ionViewDidLoad() {

@@ -7,7 +7,7 @@ import {Message} from '../../models/message.model';
 import { UserProfilePage } from '../pages';
 import { MeetSomebodyPage } from '../pages';
 import { UtilService } from '../../shared/util.service';
-
+import {ParticipantsListPage} from '../pages';
 @Component({
   selector: 'page-chatroom',
   templateUrl: 'chatroom.html'
@@ -95,6 +95,9 @@ export class ChatroomPage {
               }, 100 * i);
           }
       });
+    }
+    openParticipantsList(){
+      this.navCtrl.push(ParticipantsListPage, {'participants': this.users});
     }
     sendMessage(){
 

@@ -95,10 +95,15 @@ $colors: (
 @import "roboto";
 @import "noto-sans";
 
+img.avatar-border {
+  border: 2px solid color($colors, royal);
+}
+
+
 img.profile-picture {
   padding: 2px;
   border-radius: 50%;
-  border: 2px solid #683f99;
+  border: 2px solid color($colors, royal);
   width: 40px;
   height: 40px;
   position: absolute;

@@ -20,7 +20,7 @@ import {FilterPage} from '../pages/pages';
 import {VIPPage} from '../pages/pages';
 import {PurchasePage} from '../pages/pages';
 import {WaitlistPage} from '../pages/pages';
-//import {ParticipantsListModal} from '../pages/pages';
+import {ParticipantsListPage} from '../pages/pages';
 // components
 import { GalleryComponent } from '../components/components';
 import { ChatBubbleComponent } from '../components/components';
@@ -57,7 +57,7 @@ import {DefaultImageDirective} from '../shared/default-image.directive';
     ProfileTimelineComponent,
     BackButtonComponent,
     MenuButtonComponent,
-    //ParticipantsListModal,
+    ParticipantsListPage,
     DefaultImageDirective
   ],
   imports: [
@@ -80,7 +80,7 @@ import {DefaultImageDirective} from '../shared/default-image.directive';
     VIPPage,
     PurchasePage,
     FilterPage,
-    //ParticipantsListModal,
+    ParticipantsListPage,
     WaitlistPage
   ],
   providers: [

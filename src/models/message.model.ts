@@ -1,7 +1,9 @@
 export class Message {
-    id: number;
-    fromId: number;
+    content: string;
     date: Date;
-    roomId?: number;
-    userId?: number;
+    id: number;
+    senderId: number;
+    roomId: number;
+    senderName: string;
+    senderImage: string;
 }

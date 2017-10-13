@@ -1,18 +1,33 @@
-<ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>
-      My Profile
-    </ion-title>
-  </ion-navbar>
-</ion-header>
-<ion-content no-bounce padding id="page7">
-  <ion-list id="myProfile-list9">
+<ion-content no-bounce padding id="page7" class="dark-bckg">
+  <menu-button></menu-button>
+  <span class="pageHeader">My Profile</span>
+  <!--image slide-->
+  <div class="rlt">
+    <ion-slides pager>
+      <ion-slide *ngFor="let image of user.images">
+        <img src="{{ image }}" alt="">
+      </ion-slide>
+    </ion-slides>
+    <ion-grid class="action-btn">
+      <ion-row>
+        <ion-col text-center>
+          <button ion-button color="white" margin-right (click)="toggleFav()">
+            <ion-icon name="add" color="fb-color" (click)="addImage()"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col text-center>
+          <button ion-button color="white" margin-right (click)="toggleLike()">
+            <ion-icon name="close" color="fb-color" (click)="deleteImage()"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <ion-list id="myProfile-list9" class="lower">
     <ion-item color="none" id="myProfile-list-item39">
       <ion-avatar item-left>
-        <img />
+        <img default="assets/images/user.png"/>
       </ion-avatar>
       <h2>
         Rustam Eynaliyev
@@ -55,15 +70,10 @@
     <ion-item color="none" id="myProfile-list-item45">
       University: Indiana University, Bloomington
     </ion-item>
+    <ion-row class="tall-spacer">
+        <button id="settings-button3" ion-button color="royal" block>
+            Update Profile
+        </button>
+    </ion-row>
   </ion-list>
 </ion-content>
-<ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>
-      My Profile
-    </ion-title>
-  </ion-navbar>
-</ion-header>

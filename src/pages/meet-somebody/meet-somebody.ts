@@ -1,32 +1,25 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController } from 'ionic-angular';
+import { NavController, LoadingController, App } from 'ionic-angular';
+import {WaitlistPage} from '../pages';
+import {FilterPage} from '../pages';
 
 @Component({
   selector: 'page-meet-somebody',
   templateUrl: 'meet-somebody.html'
 })
 export class MeetSomebodyPage {
-  private languages;
-
   constructor(
     public navCtrl: NavController,
-    public loadingCtrl: LoadingController) {
+    public loadingCtrl: LoadingController,
+    public app: App) {
   }
-
-  presentLoadingText() {
-    let loading = this.loadingCtrl.create({
-      spinner: 'hide',
-      content: 'Loading Please Wait...'
-    });
-
-    loading.present();
-
-    setTimeout(() => {
-      loading.dismiss();
-    }, 5000);
-
-    loading.onDidDismiss(() => {
-      console.log('Dismissed loading');
-    });
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad MeetSomebodyPage');
+  }
+  goToWaitlist(){
+    this.navCtrl.push(WaitlistPage)
+  }
+  viewFilter(){
+    this.navCtrl.push(FilterPage);
   }
 }

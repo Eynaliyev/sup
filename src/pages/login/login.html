@@ -1,23 +1,40 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>
-      Login
-    </ion-title>
-  </ion-navbar>
-</ion-header>
-<ion-content no-bounce id="page5">
-  <form id="login-form1">
-    <div>
-      <img src="assets/img/H2x3UdREQ3CAa4G5AG4E_Jusco.png" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
-    </div>
-    <h3 id="login-heading1" style="color:#9B9999;text-align:center;">
-      adventure begins...
-    </h3>
-    <button id="login-button1" ion-button color="positive" (click)="goToMeetSomebody()" block style="color:#FFFFFF;">
-      Log in with facebook
-    </button>
-    <button id="login-button2" ion-button clear color="positive" block href-inappbrowser="/signup">
-      Or create an account
-    </button>
-  </form>
-</ion-content>
+
+<ion-slides pager="true">
+    
+  <ion-slide>
+    <h1 text-center class="light-text venti">discover people near you
+      </h1>
+    <img src="assets/img/slide1.jpg" />
+    <h2 text-center class="light-text grande">we put you in randomly selected groups of people
+      </h2>
+  </ion-slide>
+
+  <ion-slide>
+    <h1 text-center class="light-text venti">make new friends
+      </h1>
+    <img src="assets/img/slide2.jpg" />
+    <h2 text-center class="light-text grande">keep in touch with cool people you meet
+      </h2>
+  </ion-slide>
+
+  <ion-slide>
+    <form id="login-form1">
+      <div class="intro-logo">
+        <img src="assets/img/login-header.png" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+      </div>
+      <h3 id="login-heading1" style="color:#9B9999;text-align:center;">
+        adventure begins...
+      </h3>
+      <ion-row>
+          <button id="login-button1" ion-button color="royal" (click)="goToMeetSomebody()" block style="color:#FFFFFF;">
+              Log in with facebook
+          </button>
+      </ion-row>
+      <ion-row>
+          <button id="login-button2" ion-button clear color="royal" block href-inappbrowser="/signup">
+            Or create an account
+          </button>
+      </ion-row>
+    </form>
+  </ion-slide>
+</ion-slides>

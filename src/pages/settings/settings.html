@@ -1,57 +1,38 @@
-<ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>
-      Settings
-    </ion-title>
-  </ion-navbar>
-</ion-header>
-<ion-content no-bounce padding id="page3">
-  <form id="settings-form2">
-    <form id="settings-form4">
-      <ion-item id="settings-toggle3">
+<ion-content no-bounce padding id="page3" class="dark-bckg">
+  <menu-button></menu-button>
+  <span class="pageHeader">Settings</span>
+  <form id="settings-form" style="margin-top: 80px;">
+    <ion-item>
+      <ion-label>Languages I want to speak in: </ion-label>
+      <ion-select name="language-select" [(ngModel)]="languages" multiple="true">
+        <ion-option>English</ion-option>
+        <ion-option>French</ion-option>
+        <ion-option>Mandarin Chinese</ion-option>
+        <ion-option>German</ion-option>
+        <ion-option>Spanish</ion-option>
+        <ion-option>Russian</ion-option>
+        <ion-option>Turkish</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item id="settings-toggle3">
+      <ion-input type="text" placeholder="Username >"></ion-input>
+    </ion-item>
+    <ion-item id="settings-toggle1">
         <ion-label>
-          Toggle
+          Notifications
         </ion-label>
-        <ion-toggle color="positive" checked="false"></ion-toggle>
-      </ion-item>
-      <ion-item id="settings-radio2">
-        <ion-label>
-          Radio
-        </ion-label>
-        <ion-radio></ion-radio>
-      </ion-item>
-      <ion-item id="settings-input4">
-        <ion-label>
-          Input
-        </ion-label>
-        <ion-input type="text" placeholder=""></ion-input>
-      </ion-item>
-    </form>
-    <ion-item id="settings-select1">
-      <ion-label>
-        Select
-      </ion-label>
-      <ion-select name=""></ion-select>
+        <ion-toggle color="royal" checked="true"></ion-toggle>
     </ion-item>
     <ion-item id="settings-toggle1">
       <ion-label>
-        Toggle
+          git remote set-url origin Direct Messages from non-contacts
       </ion-label>
-      <ion-toggle color="positive" checked="false"></ion-toggle>
+      <ion-toggle color="royal" checked="true"></ion-toggle>
     </ion-item>
   </form>
-  <form id="settings-form3">
-    <ion-item id="settings-checkbox1">
-      <ion-label>
-        Checkbox
-      </ion-label>
-      <ion-checkbox></ion-checkbox>
-    </ion-item>
-  </form>
-  <button id="settings-button3" ion-button color="positive" block>
-    Tap me!
-  </button>
+  <div class="tall-spacer">
+    <button color="danger" ion-button id="menu-list-item34" (click)="logout()" block>
+      Logout
+    </button>
+  </div>
 </ion-content>

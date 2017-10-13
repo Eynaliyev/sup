@@ -1,0 +1,30 @@
+profile-posts {
+    .firstPost {
+        margin-top: 80px;
+        box-shadow: none;
+        border-radius: 0px;
+        background: rgba(0, 0, 0, 0.74);
+        padding-bottom: 10px;
+    }
+    .firstPost p {
+        padding: 0px 10px;
+        color: #ccc;
+    }
+    .posts {
+        box-shadow: none;
+        border-radius: 0px;
+        background: rgba(0, 0, 0, 0.74);
+        padding-bottom: 10px;
+    }
+    .posts p {
+        padding: 0px 10px;
+        color: #ccc;
+    }
+    .postTrans {
+        background: transparent;
+    }
+    .postName {
+        color: #ccc;
+        font-weight: bold;
+    }
+}

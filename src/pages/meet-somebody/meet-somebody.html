@@ -1,74 +1,33 @@
-<ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>
-      Meet Somebody
-    </ion-title>
-  </ion-navbar>
-</ion-header>
-<ion-content no-bounce padding id="page1">
-  <ion-list id="meetSomebody-list5">
-    <ion-item id="meetSomebody-list-item-container1">
-      <div id="meetSomebody-markdown2" class="show-list-numbers-and-dots">
-        <p style="margin-top:0px;color:#000000;">
-          Seaching for rooms speaking:
-          <strong>
-            {{languages}}
-          </strong>
-        </p>
-      </div>
-    </ion-item>
-    <ion-item>
-      <ion-label>Languages I speak</ion-label>
-      <ion-select [(ngModel)]="languages" multiple="true">
-        <ion-option value="English">English</ion-option>
-        <ion-option value="Spanish">Spanish</ion-option>
-        <ion-option value="German">German</ion-option>
-        <ion-option value="French">French</ion-option>
-        <ion-option value="Italian">Italian</ion-option>
-        <ion-option value="Mandarin">Mandarin</ion-option>
-      </ion-select>
-    </ion-item>
-  </ion-list>
-  <button id="meetSomebody-button4" (click)="presentLoadingText()" ion-button color="positive" block>Let's meet somebody!</button>
-  <ion-list id="meetSomebody-list6">
-    <ion-item id="meetSomebody-list-item-container2">
-      <div id="meetSomebody-markdown4" class="show-list-numbers-and-dots">
-        <p style="margin-top:0px;color:#000000;">
-          or join your friends
-          <strong>
-            who are online..
-          </strong>
-        </p>
-      </div>
-    </ion-item>
-  </ion-list>
-  <ion-list id="meetSomebody-list7">
-    <ion-item color="none" id="meetSomebody-list-item29">
-      <ion-avatar item-left>
-        <img />
-      </ion-avatar>
-      <h2>
-        Your Best friend
-      </h2>
-    </ion-item>
-    <ion-item color="none" id="meetSomebody-list-item30">
-      <ion-avatar item-left>
-        <img />
-      </ion-avatar>
-      <h2>
-        Your Best friend
-      </h2>
-    </ion-item>
-    <ion-item color="none" id="meetSomebody-list-item31">
-      <ion-avatar item-left>
-        <img />
-      </ion-avatar>
-      <h2>
-        Your Best friend
-      </h2>
-    </ion-item>
-  </ion-list>
+<ion-content padding class="dark-bckg">
+    <menu-button></menu-button>
+    <!-- will be useful when we have multiple filters
+      <ion-fab right top>
+        <button ion-fab color="dark" (click)="viewFilter()" class="menu-btn-border">
+            <ion-icon name="md-settings"></ion-icon>
+        </button>
+    </ion-fab>-->
+    <span class="pageHeader">Meet somebody</span>
+    <div class="venti-spacer"></div>
+    <ion-list class="lower">
+      <ion-item>
+          <ion-label stacked>Languages I want to speak in: </ion-label>
+          <ion-select name="language-select" [(ngModel)]="languages" multiple="true">
+              <ion-option>English</ion-option>
+              <ion-option>French</ion-option>
+              <ion-option>Mandarin Chinese</ion-option>
+              <ion-option>German</ion-option>
+              <ion-option>Spanish</ion-option>
+              <ion-option>Russian</ion-option>
+              <ion-option>Turkish</ion-option>
+          </ion-select>
+      </ion-item>
+    </ion-list>
+    <div class="logo light-text" text-center></div>
+    <div class="circle" (click)="goToWaitlist()">
+        <div class="circle__inner">
+            <div class="circle__wrapper">
+                <div class="circle__content call-to-action">Let's meet some people</div>
+            </div>
+        </div>
+    </div>
 </ion-content>

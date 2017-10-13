@@ -1,3 +1,65 @@
 page-meet-somebody {
+    /* Spinning, gradient circle; CSS only! */
+    *,
+    *:before,
+    *:after {
+      box-sizing: inherit;
+    }
+    /*
+    .circle {
+        margin: auto;
+        text-align: center;
+        line-height: 200px;
+        width: 100%;
+        height: 0;
+        background: #683f99;
+        border-radius: 50%;
 
+    }*/
+    .call-to-action {
+        color: white;
+        font-size: 2em;
+    }
+    .circle {
+        margin: 0% auto;
+        width: 250px;
+        height: 250px;
+        /** height is required as absolute value **/
+        background-color: color($colors, royal);
+        border-radius: 125px;
+        display: block;
+        position:relative;
+        text-align: center;
+      }
+
+      .circle:after {
+        display: block;
+        padding-bottom: 100%;
+        width: 100%;
+        height: 0;
+        border-radius: 50%;
+        background-color: color($colors, royal);
+        content: "";
+      }
+
+      .circle__inner {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .circle__wrapper {
+        display: table;
+        width: 100%;
+        height: 100%;
+      }
+
+      .circle__content {
+        display: table-cell;
+        padding: 1em;
+        vertical-align: middle;
+      }
 }

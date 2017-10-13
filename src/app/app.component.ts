@@ -6,7 +6,7 @@ import { LoadingController } from 'ionic-angular';
 import { MyProfilePage } from '../pages/pages';
 import { ContactsListPage } from '../pages/pages';
 import { VIPPage } from '../pages/pages';
-import { SettingsPage } from '../pages/pages';
+//import { SettingsPage } from '../pages/pages';
 import { MeetSomebodyPage } from '../pages/pages';
 import { LoginPage } from '../pages/pages';
 
@@ -21,12 +21,12 @@ export class MyApp {
   activePage: any;
   loader: any;
 
-  myProfile = { 
-    component: MyProfilePage, 
+  myProfile = {
+    component: MyProfilePage,
   };
-  
+
   constructor(
-    private platform: Platform, 
+    private platform: Platform,
     private menu: MenuController,
     private loadingCtrl: LoadingController,
     private storage: Storage
@@ -35,7 +35,7 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.presentLoading();
-      
+
       this.storage.get('introShown').then((result) => {
         if(result){
           this.rootPage = MeetSomebodyPage;
@@ -50,11 +50,11 @@ export class MyApp {
     this.pages = [
       { title: 'Meet people Nearby', component: MeetSomebodyPage, icon: 'ios-locate-outline' },
       { title: 'Edit Profile', component: MyProfilePage, icon: 'ios-contacts-outline' },
-      { title: 'Contacts', component: ContactsListPage, icon: 'ios-chatboxes-outline' },
-      { title: 'Settings', component: SettingsPage, icon: 'ios-settings-outline' }
+      { title: 'Contacts', component: ContactsListPage, icon: 'ios-chatboxes-outline' }/*,
+      { title: 'Settings', component: SettingsPage, icon: 'ios-settings-outline' }*/
     ];
   }
-  
+
   openPage(page) {
     // close the menu when clicking a link from the menu
     this.menu.close();
@@ -62,7 +62,7 @@ export class MyApp {
     // navigate to the new page if it is not the current page
     this.nav.setRoot(page.component);
   }
-  
+
   presentLoading() {
     this.loader = this.loadingCtrl.create({
       content: "Authenticating..."

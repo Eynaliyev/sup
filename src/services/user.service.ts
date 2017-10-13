@@ -13,24 +13,22 @@ import { User} from '../models/models';
 
 @Injectable()
 export class UserService {
-	//test url
-	private UsersUrl = 'app/Users'; // URL to internal web api
-	private usersByRoomUrl;
-	private userByIdUrl;
 
 	constructor(
 		private http: Http,
 		) { }
-
+// should come from chatroom in the participants property for the chatroom
+// should come from contacts property in get user by id for the contacts list
 	getRandomUsers(number) {
 		return this.http.get('https://randomuser.me/api/?results='+number)
 		.map(res => res.json())
 		.map(resp => resp.results)
 	}
-// get a specific User
-/*
+// get a specific User by id - that conforms to the user model
 	getUserById(id): Observable<User> {
-		return this.http.get(this.userByIdUrl)
+    //url constructed from id
+    let url = '';
+		return this.http.get(url)
     .subscribe(response => {
 				console.log('response.json().data for getting User by id', response.json().data);
 				return response.json().data as User;
@@ -38,21 +36,15 @@ export class UserService {
 				this.handleError(err);
 				return null;
 			})
-	}
-	getUsersByUChatroomId(id): Promise<any> {
-		let usersByChatroomUrl = this.usersByRoomUrl + '&chatroomId=${id}`;
-		return this.http.get(usersByChatroomUrl)
-		.subscribe(response => {
-				console.log('response.json().data for getting Users by chatroom id', response.json().data);
-				return response.json().data;
-		}).catch(err => {
-			this.handleError(err);
-			return null;
-		})
-	}
+  }
+  like(id){
+    //url constructed with id
+    let url = '';
+    // check if the other person like them, if yes, remove theh relationship from likes list and add to the friends list
+    // if not, add to the likes list
+  }
 	private handleError(error: any): Promise<any> {
 		console.error('An error occurred', error); // for demo purposes only
 		return Promise.reject(error.message || error);
 	}
-		*/
 }

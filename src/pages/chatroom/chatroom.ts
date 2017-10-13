@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { UserService } from '../../services/services';
-import { MessageService } from '../../services/services';
+import { ChatroomService } from '../../services/services';
 import { User } from '../../models/user.model';
 import {Message} from '../../models/message.model';
 import { UserProfilePage } from '../pages';
@@ -23,7 +23,7 @@ export class ChatroomPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private userService: UserService,
-    private messageService: MessageService,
+    private chatroomService: ChatroomService,
     private modalCtrl: ModalController,
     private utilService: UtilService
 ) {
@@ -38,7 +38,7 @@ export class ChatroomPage {
     ngAfterViewInit() {
       return new Promise(resolve => {
         let env = this;
-        this.messageService.getMessages(this.id, 10)
+        this.chatroomService.getMessages(this.id, 10)
         .then(newMessages => {
             console.log('newMessages: ', newMessages);
             // add position property

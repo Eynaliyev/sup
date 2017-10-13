@@ -34,7 +34,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import {UserService} from '../services/services';
 import {ChatroomService} from '../services/services';
-import {MessageService} from '../services/services';
 import {UtilService} from '../shared/util.service';
 import {DefaultImageDirective} from '../shared/default-image.directive';
 @NgModule({
@@ -88,7 +87,6 @@ import {DefaultImageDirective} from '../shared/default-image.directive';
     SplashScreen,
     UserService,
     ChatroomService,
-    MessageService,
     UtilService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

@@ -29,7 +29,7 @@ export class UserService {
     //url constructed from id
     let url = '';
 		return this.http.get(url)
-    .subscribe(response => {
+    .map(response => {
 				console.log('response.json().data for getting User by id', response.json().data);
 				return response.json().data as User;
 			}).catch(err => {

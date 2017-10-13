@@ -66,8 +66,15 @@ export class ChatroomService {
         }];
   }
 
-		getRandomChatroom() {
-		}
+		getAvailableChatrooms(){//: Promise<Chatroom[]> {
+      /*return new Promise(resolve => {
+        let res = new Chatroom();
+        resolve(res);
+      });*/
+    }
+    joinChatroom(id){
+
+    }
     // TO DO: implement actual paginated message getter function
     getMessages(chatroomId, start?, end?): Promise<Message[]> {
       return new Promise(resolve => {

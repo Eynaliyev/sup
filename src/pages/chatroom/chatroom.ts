@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { UserService } from '../../services/services';
 import { ChatroomService } from '../../services/services';
 import { User } from '../../models/user.model';
@@ -24,7 +24,6 @@ export class ChatroomPage {
     public navParams: NavParams,
     private userService: UserService,
     private chatroomService: ChatroomService,
-    private modalCtrl: ModalController,
     private utilService: UtilService
 ) {
     // get chatroom id
@@ -69,7 +68,7 @@ export class ChatroomPage {
     }
     getMessages(){
       let env = this;
-      this.messageService.getMessages(this.id, 10)
+      this.chatroomService.getMessages(this.id, 10)
       .then(newMessages => {
           // add position property
           let res = this.utilService.addMessagePosition(newMessages, this.currentUser.id);

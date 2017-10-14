@@ -12,6 +12,32 @@ import { User} from '../models/models';
 
 @Injectable()
 export class UserService {
+  user = {
+    id:'1234',
+    firstName: 'Rustam',
+    lastName: 'Eynaliyev',
+    relationshipStatus: 'single',
+    universityName: 'Indiana University, Bloomington',
+    birthday: '20/07/1992',
+    gender: 'male',
+    about: 'Creator of sup/Mypeeps',
+    company: 'Luxoft',
+    profession: 'Software Developer',
+    currentLocation: 'Baku, Azerbaijan',
+    contacts: [],
+    phoneNumber: 'xrx-ysy-zzzz',
+    email: 'r.e@g.com',
+    currentRoomId: '123',
+    socialProfiles: [],
+    profilePhoto: 'assets/img/pic.png',
+    photos: [
+      { id: '123', imgUrl: 'assets/users/images/1/1.jpg' },
+      { id: '123', imgUrl: 'assets/users/images/1/2.jpg' },
+      { id: '123', imgUrl: 'assets/users/images/1/3.jpg' },
+      { id: '123', imgUrl: 'assets/users/images/1/4.jpg' }
+    ],
+    interests: []
+  };
 
 	constructor(
 		private http: Http,
@@ -24,9 +50,13 @@ export class UserService {
 		.map(resp => resp.results)
 	}
 // get a specific User by id - that conforms to the user model
-	getUserById(id): Observable<User> {
+	getUserById(id): Promise<User>{//Observable<User> {
     //url constructed from id
     let url = '';
+    return new Promise(resolve => {
+      resolve(this.user);
+    });
+    /*
 		return this.http.get(url)
     .map(response => {
 				console.log('response.json().data for getting User by id', response.json().data);
@@ -34,7 +64,8 @@ export class UserService {
 			}).catch(err => {
 				this.handleError(err);
 				return null;
-			})
+      })
+      */
   }
   like(id){
     //url constructed with id

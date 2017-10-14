@@ -1,5 +1,3 @@
-import {Message} from './message.model';
-
 interface Photo {
     id: string;
     imgUrl: string;
@@ -17,10 +15,9 @@ interface Contact {
     profileImgUrl: string;
     wantToSeeActivity: boolean;
 }
-interface Fact {
-    id: string,
-    date: string,
-    text: string,
+interface SocialProfile{
+  networkName: string;
+  id: string;
 }
 
 export class User {
@@ -28,25 +25,21 @@ export class User {
     public id: string,
     public firstName: string,
     public lastName: string,
-    public status: string,
+    public relationshipStatus: string,
     public universityName: string,
     public birthday: string,
     public gender: string,
     public about: string,
-    public job: string,
+    public company: string,
     public profession: string,
-    public history: Fact[],
     public currentLocation: string,
     public contacts: Contact[],
-    public meassages: Message[],
-    public phoneNumbers?: string[],
+    public phoneNumber?: string,
     public email?: string,
     public currentRoomId?: string,
-    public facebook?: string,
-    public google?: string,
+    public socialProfiles?: SocialProfile[],
     public profilePhoto?: Photo,
     public photos?: Photo[],
-    public coverPhoto?: Photo,
     public interests?: Interest[],
     public warning?: string,
     public reputationScore?: number,

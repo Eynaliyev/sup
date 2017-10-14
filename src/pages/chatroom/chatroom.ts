@@ -17,7 +17,7 @@ import {ParticipantsListPage} from '../pages';
 export class ChatroomPage {
     users: any[] = [];
     messages: any[] = [];
-    chatroomId: number;
+    chatroomId: string;
     chatroom: Chatroom;
     currentUser = {
         id: '123',

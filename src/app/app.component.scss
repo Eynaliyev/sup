@@ -16,27 +16,22 @@
     border-left: 2px solid #f53d3d;
     color: #f53d3d;
 }
-
 .toolbar-background-md {
     border-color: #000000;
     background: rgba(0, 0, 0, 0.5);
-    ;
 }
-
 .toolbar-title-md {
     padding: 0 12px;
     font-size: 2rem;
     font-weight: 500;
     color: #ccc;
 }
-
 .bar-button-default-md,
 .bar-button-clear-md-default,
 .bar-button-md-default {
     color: #ccc;
     background-color: transparent;
 }
-
 .header-background-image {
     background-image: url(../assets/images/background/16.jpg);
     height: 200px;
@@ -44,7 +39,6 @@
     background-position: center;
     border-bottom: 1px solid #fff;
 }
-
 .header-background-image::before {
     content: "";
     display: block;
@@ -57,14 +51,12 @@
     mix-blend-mode: multiply;
     background-color: #2f3974 !important;
 }
-
 .zoom-in {
     -webkit-animation: zoomIn 500ms;
     -moz-animation: zoomIn 500ms;
     -o-animation: zoomIn 500ms;
     animation: zoomIn 500ms;
 }
-
 .menu-title {
     text-align: center;
     color: #d12829 !important;
@@ -79,7 +71,6 @@
         margin: 0 auto;
     }
 }
-
 // Settings Style Main Meni
 .header-background-image {
     background-image: url('../assets/images/background/16.jpg');
@@ -100,7 +91,6 @@
         z-index: 9;
     }
 }
-
 // Settings Main  Menu
 .main-menu {
     h2 {
@@ -114,7 +104,6 @@
         margin-right: 10px;
     }
 }
-
 // Settings Submenu
 .submenu {
     h2 {
@@ -125,7 +114,6 @@
         padding-left: 30px !important;
     }
 }
-
 .pageHeader {
     position: absolute;
     top: 28px;

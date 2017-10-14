@@ -1,6 +1,7 @@
 import { Component, trigger, state, style, transition, animate, keyframes } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-
+import { UserService } from '../../services/services';
+import {User} from '../../models/models';
 @Component({
   selector: 'page-user-profile',
   templateUrl: 'user-profile.html',
@@ -61,8 +62,8 @@ import { NavController, NavParams } from 'ionic-angular';
           ])
       ]),
       trigger('heroState', [
-          state('zoom', style({ 
-              transform: 'translateX(0) scale(1)' 
+          state('zoom', style({
+              transform: 'translateX(0) scale(1)'
           })),
           transition('* => zoom', [
               animate('800ms ease-in', keyframes([
@@ -73,37 +74,27 @@ import { NavController, NavParams } from 'ionic-angular';
   ]
 })
 export class UserProfilePage {
+  user: User;
   tab: string = "vote";
   backGround: any;
   animateClass: any;
   image: any;
-  items: any = [
-      { name: 'test', image: 'assets/users/images/1/1.jpg' },
-      { name: 'test', image: 'assets/users/images/1/2.jpg' },
-      { name: 'test', image: 'assets/users/images/1/3.jpg' },
-      { name: 'test', image: 'assets/users/images/1/4.jpg' },
-      { name: 'test', image: 'assets/users/images/1/3.jpg' },
-      { name: 'test', image: 'assets/users/images/1/4.jpg' },
-      { name: 'test', image: 'assets/users/images/1/1.jpg' },
-      { name: 'test', image: 'assets/users/images/1/2.jpg' },
-      { name: 'test', image: 'assets/users/images/1/3.jpg' },
-      { name: 'test', image: 'assets/users/images/1/4.jpg' },
-      { name: 'test', image: 'assets/users/images/1/3.jpg' },
-      { name: 'test', image: 'assets/users/images/1/4.jpg' }
-      
-  ];
-  data = { vote: 'assets/users/images/1/1.jpg', photos: 'https://s-media-cache-ak0.pinimg.com/236x/b3/1c/ce/b31cceccea15b00977c77fa7018345f9.jpg', about: 'assets/users/images/1/1.jpg', profile: 'assets/users/images/1/1.jpg' }
-  
+  items: any = [];
+
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams) {
+    public navParams: NavParams,
+    public userSrvc: UserService) {
       console.log(this.navParams.data);
-      /*
-      let id = this.navParams.data.get('id');
-      let name = this.navParams.data.get('name');
-      */
-      this.backGround = 'assets/users/images/1/1.jpg';
-      this.image = 'assets/users/images/1/1.jpg';
+      let id = this.navParams.get('user');
+      this.userSrvc.getUserById(id)
+      .then(user => {
+        this.user = user;
+        this.items = user.photos;
+        this.backGround = user.profilePhoto;
+        this.image = user.photos[0].imgUrl;
+        console.log('user in user profile: ', this.user);
+      });
       setTimeout(function() {}, 800);
       this.animateClass = { 'zoom-in': true };
   }
@@ -113,11 +104,8 @@ export class UserProfilePage {
   changeImage(image) {
     this.image = image
   }
-
   changeTab(tab) {
-      this.backGround = this.data[tab]
   }
-
   getHeight(tab){
       var height = "";
       if(tab == 'vote')

@@ -11,6 +11,7 @@ import { UserService } from '../../services/services';
 export class ParticipantsListPage {
   participants = [];
   animateClass: any;
+  users;
 
   constructor(
     public navCtrl: NavController,
@@ -20,10 +21,12 @@ export class ParticipantsListPage {
   }
   ngAfterViewInit() {
     //this.navParams.data - get users from navparams instead of loading from backend
-    let users = this.navParams.get('participants');
-    for (let i = 0; i < users.length; i++) {
+    var env = this;
+    this.users = this.navParams.get('participants');
+    console.log('users: ', this.users)
+    for (let i = 0; i < this.users.length; i++) {
         setTimeout(function() {
-            this.participants.push(users[i]);
+            env.participants.push(env.users[i]);
         }, 100 * i);
     }
   }

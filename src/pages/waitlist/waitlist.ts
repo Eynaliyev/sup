@@ -37,7 +37,7 @@ export class WaitlistPage {
   viewFilter() {
     this.app.getRootNav().push(FilterPage);
   }
-  goToChatroom(chatroomId: number){
+  goToChatroom(chatroomId: string){
     this.navCtrl.push(ChatroomPage, {room: `${chatroomId}`});
   }
 }

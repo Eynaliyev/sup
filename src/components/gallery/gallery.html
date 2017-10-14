@@ -1,9 +1,9 @@
 <ion-scroll scrollX='true' class="galleryBlock">
     <ion-grid>
         <ion-row nowrap>
-            <ion-col [ngClass]="animateClass" col-3 *ngFor=" let item of data; let i=index " (click)="changeImage(item.image)">
+            <ion-col [ngClass]="animateClass" col-3 *ngFor="let item of data; let i=index" (click)="changeImage(item.imgUrl)">
                 <ion-card style="width:100%;">
-                    <img class="galleryImage" src={{item.image}} />
+                    <img class="galleryImage" src={{item.imgUrl}} />
                 </ion-card>
             </ion-col>
         </ion-row>

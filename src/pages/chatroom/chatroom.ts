@@ -4,21 +4,35 @@ import { UserService } from '../../services/services';
 import { ChatroomService } from '../../services/services';
 import { User } from '../../models/user.model';
 import {Message} from '../../models/message.model';
+import { Chatroom } from '../../models/chatroom.model';
 import { UserProfilePage } from '../pages';
 import { MeetSomebodyPage } from '../pages';
 import { UtilService } from '../../shared/util.service';
 import {ParticipantsListPage} from '../pages';
+
 @Component({
   selector: 'page-chatroom',
   templateUrl: 'chatroom.html'
 })
 export class ChatroomPage {
-    users: User[] = [];
+    users: any[] = [];
     messages: any[] = [];
-    id: number;
+    chatroomId: number;
+    chatroom: Chatroom;
     currentUser = {
-        id: 123
+        id: '123',
+        image: 'assets/img/user.png',
+        name: 'Rusik'
     }
+    newMessage = {
+      content: '',
+      date: new Date(),
+      id: this.utilService.guid(),
+      senderId: this.currentUser.id,
+      roomId: '',
+      senderName: this.currentUser.name,
+      senderImage: this.currentUser.image
+    };
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -28,16 +42,25 @@ export class ChatroomPage {
 ) {
     // get chatroom id
     // on page loaded - load message history - paginated
-      }
+    // get chatroom id from the nav params
+    this.chatroomId = this.navParams.get('room');
+    console.log('Chatroom page loaded with id:', this.chatroomId);
+    this.chatroomService.getChatroomById(this.chatroomId)
+    .then(chatroom => {
+      this.chatroom = chatroom;
+      this.users = this.chatroom.participants;
+      console.log('chatroom detail in the room: ', this.chatroom);
+      this.newMessage.roomId = this.chatroom.id;
+    });
+
+    }
     ionViewDidLoad(){
-        this.getUsers();
-        // load initial last 10 messages
-        this.getMessages();
+
     }
     ngAfterViewInit() {
       return new Promise(resolve => {
         let env = this;
-        this.chatroomService.getMessages(this.id, 10)
+        this.chatroomService.getMessages(this.chatroomId, 10)
         .then(newMessages => {
             console.log('newMessages: ', newMessages);
             // add position property
@@ -68,7 +91,7 @@ export class ChatroomPage {
     }
     getMessages(){
       let env = this;
-      this.chatroomService.getMessages(this.id, 10)
+      this.chatroomService.getMessages(this.chatroomId, 10)
       .then(newMessages => {
           // add position property
           let res = this.utilService.addMessagePosition(newMessages, this.currentUser.id);
@@ -83,23 +106,14 @@ export class ChatroomPage {
           }
         });
     }
-    getUsers(){
-      let env = this;
-      this.id = this.navParams.get('id');
-      this.userService.getRandomUsers(5)
-      .subscribe(res => {
-          for (let i = 0; i < res.length; i++) {
-              setTimeout(function() {
-                  env.users.push(res[i]);
-              }, 100 * i);
-          }
-      });
-    }
     openParticipantsList(){
       this.navCtrl.push(ParticipantsListPage, {'participants': this.users});
     }
     sendMessage(){
-
+      this.newMessage.date = new Date();
+      this.newMessage.id = this.utilService.guid();
+      this.chatroomService.sendMessage(this.newMessage);
+      this.newMessage.content = '';
     }
 
 }

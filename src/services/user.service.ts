@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http} from '@angular/http';
+import { Http} from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 import { Observable } from 'rxjs/Observable';
-import { ReplaySubject } from 'rxjs/ReplaySubject';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/observable/forkJoin';
 import 'rxjs/add/operator/map';

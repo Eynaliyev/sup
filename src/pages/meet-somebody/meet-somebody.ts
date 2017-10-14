@@ -17,9 +17,12 @@ export class MeetSomebodyPage {
     console.log('ionViewDidLoad MeetSomebodyPage');
   }
   goToWaitlist(){
-    this.navCtrl.push(WaitlistPage)
+    // get location
+    // then, go to waitlist - perhaps waitlist should be a modal that can be dismissed as necessary?
+    this.navCtrl.push(WaitlistPage);
   }
+  /*
   viewFilter(){
     this.navCtrl.push(FilterPage);
-  }
+  }*/
 }

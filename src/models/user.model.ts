@@ -1,31 +1,31 @@
 import {Message} from './message.model';
 
 interface Photo {
-    id: number;
+    id: string;
     imgUrl: string;
     title?: string;
 }
 interface Interest {
-    id: number;
+    id: string;
     name: string;
     imgUrl: string;
 }
 interface Contact {
-    id: number;
+    id: string;
     name: string;
     canSeeMe: boolean;
     profileImgUrl: string;
     wantToSeeActivity: boolean;
 }
 interface Fact {
-    id: number,
+    id: string,
     date: string,
     text: string,
 }
 
 export class User {
   constructor(
-    public id: number,
+    public id: string,
     public firstName: string,
     public lastName: string,
     public status: string,
@@ -41,7 +41,7 @@ export class User {
     public meassages: Message[],
     public phoneNumbers?: string[],
     public email?: string,
-    public currentRoomId?: number,
+    public currentRoomId?: string,
     public facebook?: string,
     public google?: string,
     public profilePhoto?: Photo,

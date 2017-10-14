@@ -6,7 +6,7 @@
       <ion-row style="padding: 3px;">
           <ion-col [ngClass]="animateClass" col-4 *ngFor=" let user of participants " style="padding: 13px;color: #6c6c6c;text-align: center;">
               <ion-card style="margin: 0px 0px 5px 0px;border: 2px solid ;   width: calc(100%);height: 90px;border-radius: 50%;" (click)="goToUser(user.id)">
-                  <img class='avatar-border' src="{{user.picture.large}}" />
+                  <img class='avatar-border' src="{{user.picture.large}}" default="assets/images/user.png"/>
                   {{user.name}}
               </ion-card>
               <span style="text-transform: capitalize;">{{user.name.first}}<img *ngIf="user.gender == 'female'" style="max-width: 10%;margin-left: 5px;" src="http://www.clker.com/cliparts/r/M/L/o/R/i/green-dot.svg.med.png"></span>

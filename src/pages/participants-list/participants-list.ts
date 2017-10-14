@@ -20,14 +20,12 @@ export class ParticipantsListPage {
   }
   ngAfterViewInit() {
     //this.navParams.data - get users from navparams instead of loading from backend
-    let that = this;
-    that.userData.getRandomUsers(6).subscribe(function(res){
-        for (let i = 0; i < res.length; i++) {
-            setTimeout(function() {
-                that.participants.push(res[i]);
-            }, 100 * i);
-        }
-    });
+    let users = this.navParams.get('participants');
+    for (let i = 0; i < users.length; i++) {
+        setTimeout(function() {
+            this.participants.push(users[i]);
+        }, 100 * i);
+    }
   }
   goToUser(id){
     this.navCtrl.push(UserProfilePage, {user: id});

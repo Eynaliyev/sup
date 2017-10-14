@@ -1,15 +1,27 @@
 <ion-content>
-    <menu-button></menu-button>
-    <ion-fab top center>
-        <button ion-fab (click)="openParticipantsList()" color="dark" class="menu-btn-border">
-            <ion-icon name="people"></ion-icon>
-        </button>
-    </ion-fab>
-    <ion-fab right top>
-        <button ion-fab (click)="exit()" color="dark" class="menu-btn-border">
-            <ion-icon name="exit"></ion-icon>
-        </button>
-    </ion-fab>
+    <nav>
+        <ion-grid>
+            <ion-row>
+              <ion-col>
+                  <menu-button></menu-button>
+              </ion-col>
+              <ion-col>
+                  <ion-fab top center>
+                      <button ion-fab (click)="openParticipantsList()" color="dark" class="menu-btn-border">
+                          <ion-icon name="people"></ion-icon>
+                      </button>
+                  </ion-fab>
+              </ion-col>
+              <ion-col>
+                  <ion-fab right top>
+                      <button ion-fab (click)="exit()" color="dark" class="menu-btn-border">
+                          <ion-icon name="exit"></ion-icon>
+                      </button>
+                  </ion-fab>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+    </nav>
     <ion-list no-lines style="padding-top: 21px;">
         <ion-item *ngFor="let msg of messages">
             <chat-bubble [message]="msg" (select)="goToUser($event)"></chat-bubble>
@@ -29,7 +41,7 @@
             <ion-icon name="camera" color="dark"></ion-icon>
             </button>
         </ion-buttons>
-        <ion-input [(ngModel)]="newMessage" placeholder="Write your message"></ion-input>
+        <ion-input [(ngModel)]="newMessage.content" placeholder="Write your message"></ion-input>
         <ion-buttons end>
             <button ion-button (click)="sendMessage()">
             <ion-icon name="send" color="primary"></ion-icon>

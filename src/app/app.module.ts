@@ -36,6 +36,9 @@ import {UserService} from '../services/services';
 import {ChatroomService} from '../services/services';
 import {UtilService} from '../shared/util.service';
 import {DefaultImageDirective} from '../shared/default-image.directive';
+import { Geolocation } from '@ionic-native/geolocation';
+
+
 @NgModule({
   declarations: [
     MyApp,
@@ -88,6 +91,7 @@ import {DefaultImageDirective} from '../shared/default-image.directive';
     UserService,
     ChatroomService,
     UtilService,
+    Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

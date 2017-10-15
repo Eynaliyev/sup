@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { LoginPage } from '../login/login';
+import { LoginPage } from '../pages';
 
 @Component({
   selector: 'page-settings',
@@ -12,9 +12,5 @@ export class SettingsPage {
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad SettingsPage');
-  }
-  logout(){
-    //add actual logging out and localStorage clearing
-    this.navCtrl.setRoot(LoginPage);
   }
 }

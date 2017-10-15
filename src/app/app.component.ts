@@ -63,7 +63,6 @@ export class MyApp {
       this.user = user;
     });
   }
-
   openPage(page) {
     // close the menu when clicking a link from the menu
     this.menu.close();
@@ -71,7 +70,6 @@ export class MyApp {
     // navigate to the new page if it is not the current page
     this.nav.setRoot(page.component);
   }
-
   presentLoading() {
     this.loader = this.loadingCtrl.create({
       content: "Authenticating..."
@@ -80,6 +78,10 @@ export class MyApp {
   }
   viewVIP(){
     this.navCtrl.push(VIPPage);
+  }
+  logout(){
+    //add actual logging out and localStorage clearing
+    this.navCtrl.setRoot(LoginPage);
   }
   checkActive(page){
     return page == this.activePage;

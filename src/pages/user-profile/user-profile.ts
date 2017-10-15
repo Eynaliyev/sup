@@ -88,7 +88,7 @@ export class UserProfilePage {
       console.log(this.navParams.data);
       let id = this.navParams.get('user');
       this.userSrvc.getUserById(id)
-      .then(user => {
+      .subscribe(user => {
         this.user = user;
         this.items = user.photos;
         this.backGround = user.profilePhoto;

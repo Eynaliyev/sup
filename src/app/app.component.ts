@@ -58,7 +58,7 @@ export class MyApp {
       { title: 'Settings', component: SettingsPage, icon: 'ios-settings-outline' }*/
     ];
     this.userSrvc.getCurrentUser()
-    .then( user => {
+    .subscribe( user => {
       console.log('current user :', user);
       this.user = user;
     });

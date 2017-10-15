@@ -22,13 +22,12 @@ export class WaitlistPage {
   ionViewDidEnter(){
     // join a chatroom
     this.chatroomSrvc.joinChatroom()
-    .then(chatroomId => {
+    .subscribe(chatroomId => {
       let view = this.navCtrl.getActive();
       if(view.component.name === "WaitlistPage"){
         this.goToChatroom(chatroomId);
       }
     });
-
   }
   viewVIP(){
     this.navCtrl.push(VIPPage);

@@ -1,7 +1,7 @@
 <ion-content class="dark-bckg">
   <menu-button></menu-button>
       <span class="pageHeader">Messages</span>
-  <ion-list class="lower">
+  <ion-list class="tall-spacer">
       <ion-item [ngClass]="animateClass" style="background-color: transparent;color: #cfcfcf !important;" *ngFor=" let user of users " (click)="openChat(user)">
           <ion-thumbnail item-left>
               <img src="{{user.picture.large}}" default="assets/images/user.png">

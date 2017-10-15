@@ -50,12 +50,12 @@ export class UserService {
 		.map(resp => resp.results)
 	}
 // get a specific User by id - that conforms to the user model
-	getUserById(id): Promise<User>{//Observable<User> {
+	getUserById(id): Observable<User>{//Observable<User> {
     //url constructed from id
     let url = '';
     let env = this;
-    return new Promise(resolve => {
-      resolve(env.user);
+    return new Observable(observer => {
+      observer.next(env.user);
     });
     /*
 		return this.http.get(url)
@@ -68,12 +68,12 @@ export class UserService {
       })
       */
   }
-  getCurrentUser(): Promise<User>{//Observable<User> {
+  getCurrentUser(): Observable<User>{//Observable<User> {
     //url constructed from id
     let url = '';
     let env = this;
-    return new Promise(resolve => {
-      resolve(env.user);
+    return new Observable(observer => {
+      observer.next(env.user);
     });
   }
   updateUser(user){

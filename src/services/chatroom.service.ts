@@ -74,31 +74,31 @@ export class ChatroomService {
         }
       ];
   }
-		getAvailableChatrooms(): Promise<Chatroom[]> {
-      return new Promise(resolve => {
-        resolve(this.chatrooms);
+		getAvailableChatrooms(): Observable<Chatroom[]> {
+      return new Observable(observer => {
+        observer.next(this.chatrooms);
       });
     }
-    getChatroomById(id): Promise<Chatroom>{
+    getChatroomById(id): Observable<Chatroom>{
       // get full detailed data of the required chatroom
-      return new Promise(resolve => {
+      return new Observable(observer => {
         setTimeout(() => {
           let chatroom = this.getAvailableChatrooms()
-          .then(chatrooms =>{
+          .subscribe(chatrooms =>{
             let chatroom = chatrooms[0];
-            resolve(chatroom);
+            observer.next(chatroom);
           });
         },1800);
       });
     }
-    joinChatroom(): Promise<string>{
+    joinChatroom(): Observable<string>{
       // find available rooms
-      return new Promise(resolve => {
+      return new Observable(observer => {
         setTimeout(() => {
           let chatroom = this.getAvailableChatrooms()
-          .then(chatrooms =>{
+          .subscribe(chatrooms =>{
             let chatroomId = chatrooms[0].id;
-            resolve(chatroomId);
+            observer.next(chatroomId);
           });
         },1800);
       });
@@ -123,9 +123,9 @@ export class ChatroomService {
       this.messages.push(message);
     }
     // TO DO: implement actual paginated message getter function
-    getMessages(chatroomId, start?, end?): Promise<Message[]> {
-      return new Promise(resolve => {
-          resolve(this.messages);
+    getMessages(chatroomId, start?, end?): Observable<Message[]> {
+      return new Observable(observer => {
+          observer.next(this.messages);
       });
   }
 }

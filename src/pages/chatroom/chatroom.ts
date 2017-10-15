@@ -46,7 +46,7 @@ export class ChatroomPage {
     this.chatroomId = this.navParams.get('room');
     console.log('Chatroom page loaded with id:', this.chatroomId);
     this.chatroomService.getChatroomById(this.chatroomId)
-    .then(chatroom => {
+    .subscribe(chatroom => {
       this.chatroom = chatroom;
       this.users = this.chatroom.participants;
       console.log('chatroom detail in the room: ', this.chatroom);
@@ -61,7 +61,7 @@ export class ChatroomPage {
       return new Promise(resolve => {
         let env = this;
         this.chatroomService.getMessages(this.chatroomId, 10)
-        .then(newMessages => {
+        .subscribe(newMessages => {
             console.log('newMessages: ', newMessages);
             // add position property
             let res = this.utilService.addMessagePosition(newMessages, this.currentUser.id);
@@ -92,7 +92,7 @@ export class ChatroomPage {
     getMessages(){
       let env = this;
       this.chatroomService.getMessages(this.chatroomId, 10)
-      .then(newMessages => {
+      .subscribe(newMessages => {
           // add position property
           let res = this.utilService.addMessagePosition(newMessages, this.currentUser.id);
           console.log('newMessages: ', res);

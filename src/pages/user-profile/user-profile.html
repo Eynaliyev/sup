@@ -30,7 +30,8 @@
   <div [ngSwitch]="tab">
       <div *ngSwitchCase="'vote'">
           <div [ngClass]="animateClass" [style.display]="getHeight(tab)" class="profile-info">
-              <span class="nameDetails"><span class="light-text">{{user.firstName}} {{user.lastName}}</span> <span style="padding: 11px;background: rgba(211, 124, 166, 0.61);position: absolute;right: 20px;top: -10px;">22</span></span>
+              <span class="nameDetails"><span class="light-text">{{user.firstName}} {{user.lastName}}</span>
+              <span class="usr-profile-age-label">22</span></span>
           </div>
       </div>
       <div *ngSwitchCase="'photos'">
@@ -43,12 +44,14 @@
           <div [ngClass]="animateClass" class="profile-info">
               <span class="nameDetails"><span class="light-text">About {{user.firstName}}</span></span>
           </div>
-      </div><!--
+      </div>
+      <!--
       <div *ngSwitchCase="'profile'">
           <div [ngClass]="animateClass" class="profile-info">
               <span class="nameDetails"><span class="light-text">Posts from Alice</span></span>
           </div>
-      </div>-->
+      </div>
+      -->
   </div>
   <ion-segment [(ngModel)]="tab" (ionChange)="changeTab(tab)" color='dark'>
       <ion-segment-button [@flyInTopSlow4]="0" style="background: #df69a1;color: white;height: 60px;padding-top: 10px;" value="vote">
@@ -59,9 +62,11 @@
       </ion-segment-button>
       <ion-segment-button [@flyInTopSlow2]="0" style="background: #8649c8;color: white;height: 60px;padding-top: 10px;" value="about">
           <ion-icon name="ios-person-outline" item-left></ion-icon>
-      </ion-segment-button><!--
+      </ion-segment-button>
+      <!--
       <ion-segment-button [@flyInTopSlow1]="0" style="background: #ffd36a;color: white;height: 60px;padding-top: 10px;" value="profile">
           <ion-icon name="ios-paper-outline" item-left></ion-icon>
-      </ion-segment-button>-->
+      </ion-segment-button>
+    -->
   </ion-segment>
 </ion-footer>

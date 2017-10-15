@@ -24,9 +24,8 @@ export class UserService {
     company: 'Luxoft',
     profession: 'Software Developer',
     currentLocation: 'Baku, Azerbaijan',
+    age: 25,
     contacts: [],
-    phoneNumber: 'xrx-ysy-zzzz',
-    email: 'r.e@g.com',
     currentRoomId: '123',
     socialProfiles: [],
     profileImgUrl: 'assets/img/pic.png',
@@ -36,7 +35,8 @@ export class UserService {
       { imgUrl: 'assets/users/images/1/3.jpg' },
       { imgUrl: 'assets/users/images/1/4.jpg' }
     ],
-    interests: []
+    interests: [],
+    languages: []
   };
 
 	constructor(
@@ -75,6 +75,16 @@ export class UserService {
     return new Promise(resolve => {
       resolve(env.user);
     });
+  }
+  updateUser(user){
+    this.user = user;
+  }
+  addImage(image){
+    this.user.photos.push(image);
+  }
+  deleteImage(image){
+    let index = this.user.photos.indexOf(image);
+    this.user.photos.splice(index, 1);
   }
   like(id){
     //url constructed with id

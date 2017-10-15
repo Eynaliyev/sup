@@ -1,7 +1,10 @@
 interface Photo {
-    id: string;
     imgUrl: string;
     title?: string;
+}
+interface Language {
+  id: string;
+  name: string;
 }
 interface Interest {
     id: string;
@@ -33,15 +36,15 @@ export class User {
     public company: string,
     public profession: string,
     public currentLocation: string,
+    public age: number,
     public contacts: Contact[],
-    public phoneNumber?: string,
-    public email?: string,
     public currentRoomId?: string,
     public socialProfiles?: SocialProfile[],
     public profilePhoto?: Photo,
     public photos?: Photo[],
     public interests?: Interest[],
     public warning?: string,
+    public languages?: Language[],
     public reputationScore?: number,
   ) {  }
 }

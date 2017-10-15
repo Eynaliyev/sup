@@ -5,15 +5,12 @@
 // roboto, and noto sans fonts
 $font-path: "../assets/fonts";
 
-
 // The app direction is used to include
 // rtl styles in your app. For more info, please see:
 // http://ionicframework.com/docs/theming/rtl-support/
 $app-direction: ltr;
 
-
 @import "ionic.globals";
-
 
 // Shared Variables
 // --------------------------------------------------
@@ -21,8 +18,6 @@ $app-direction: ltr;
 // the Sass variables found in Ionic's source scss files.
 // To view all the possible Ionic variables, see:
 // http://ionicframework.com/docs/theming/overriding-ionic-variables/
-
-
 
 
 // Named Color Variables
@@ -49,12 +44,9 @@ $colors: (
   chat-bubble: #C4EBF7
 );
 
-
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here
-
-
 
 
 // App Material Design Variables
@@ -62,13 +54,9 @@ $colors: (
 // Material Design only Sass variables can go here
 
 
-
-
 // App Windows Variables
 // --------------------------------------------------
 // Windows only Sass variables can go here
-
-
 
 
 // App Theme
@@ -80,7 +68,6 @@ $colors: (
 
 @import "ionic.theme.default";
 
-
 // Ionicons
 // --------------------------------------------------
 // The premium icon font for Ionic. For more info, please see:
@@ -88,12 +75,18 @@ $colors: (
 
 @import "ionic.ionicons";
 
-
 // Fonts
 // --------------------------------------------------
 
 @import "roboto";
 @import "noto-sans";
+.usr-profile-age-label{
+  padding: 11px;
+  background: rgba(211, 124, 166, 0.61);
+  position: absolute;
+  right: 20px;
+  top: -10px;
+}
 .promo-text{
   text-align: center;
   margin: 0 auto;
@@ -152,7 +145,7 @@ ion-title{
   background: url('../assets/img/background.jpg');
 }
 .venti-spacer{
-  margin-top: 63px;
+  margin-top: 63px !important;
 }
 .tall-spacer{
   margin-top: 21px !important;

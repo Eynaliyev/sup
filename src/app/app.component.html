@@ -1,29 +1,25 @@
 <ion-menu [content]="mainContent">
-  <ion-header>
-    <ion-list style="margin: 0px;">
-        <ion-item (click)="openPage(myProfile)">
-            <ion-thumbnail item-left>
-                <img style="padding: 10px;" [src]="user.profileImgUrl" default="assets/images/user.png">
-            </ion-thumbnail>
-            <h2 style="text-transform: capitalize;">{{user.firstName}} {{user.lastName}}</h2>
-        </ion-item>
-    </ion-list>
-  </ion-header>
+
 
   <ion-content id="side-menu21">
-    <ion-list>
+      <ion-list class="tall-spacer">
+            <ion-item (click)="openPage(myProfile)" *ngIf="user">
+                <ion-thumbnail item-left>
+                    <img class="profile-picture" [src]="user.profileImgUrl" default="assets/images/user.png">
+                </ion-thumbnail>
+                <h2 style="text-transform: capitalize;">{{user.firstName}} {{user.lastName}}</h2>
+            </ion-item>
         <button ion-item *ngFor="let p of pages" (click)="openPage(p)" [class.activeHighlight]=checkActive(p)>
             <ion-icon name="{{p.icon}}" item-left></ion-icon>
             {{p.title}}
         </button>
     </ion-list>
     <!--<span style="padding: 20px;color: #7a7a7a;">Featured Members</span>-->
-    <hr>
     <ion-grid style="padding:0px">
-        <ion-row style="padding: 3px;">
+        <ion-row style="padding: 3px;" *ngIf="user">
             <ion-col col-4 *ngFor=" let user of featuredUsers " class="participant-col">
                 <ion-card class="menu-avatar">
-                    <img src="{{user.picture.large}}" />
+                    <img [src]="user.profileImgUrl" />
                 </ion-card>
                 <span style="">{{user.firstName}}</span>
             </ion-col>

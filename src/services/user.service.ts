@@ -29,12 +29,12 @@ export class UserService {
     email: 'r.e@g.com',
     currentRoomId: '123',
     socialProfiles: [],
-    profilePhoto: 'assets/img/pic.png',
+    profileImgUrl: 'assets/img/pic.png',
     photos: [
-      { id: '123', imgUrl: 'assets/users/images/1/1.jpg' },
-      { id: '123', imgUrl: 'assets/users/images/1/2.jpg' },
-      { id: '123', imgUrl: 'assets/users/images/1/3.jpg' },
-      { id: '123', imgUrl: 'assets/users/images/1/4.jpg' }
+      { imgUrl: 'assets/users/images/1/1.jpg' },
+      { imgUrl: 'assets/users/images/1/2.jpg' },
+      { imgUrl: 'assets/users/images/1/3.jpg' },
+      { imgUrl: 'assets/users/images/1/4.jpg' }
     ],
     interests: []
   };
@@ -53,8 +53,9 @@ export class UserService {
 	getUserById(id): Promise<User>{//Observable<User> {
     //url constructed from id
     let url = '';
+    let env = this;
     return new Promise(resolve => {
-      resolve(this.user);
+      resolve(env.user);
     });
     /*
 		return this.http.get(url)
@@ -70,8 +71,9 @@ export class UserService {
   getCurrentUser(): Promise<User>{//Observable<User> {
     //url constructed from id
     let url = '';
+    let env = this;
     return new Promise(resolve => {
-      resolve(this.user);
+      resolve(env.user);
     });
   }
   like(id){

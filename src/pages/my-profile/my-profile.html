@@ -2,10 +2,10 @@
   <menu-button></menu-button>
   <span class="pageHeader">My Profile</span>
   <!--image slide-->
-  <div class="rlt">
+  <div class="rlt tall-spacer">
     <ion-slides pager>
       <ion-slide *ngFor="let image of user.images">
-        <img src="{{ image }}" alt="">
+        <img [src]="image" alt="">
       </ion-slide>
     </ion-slides>
     <ion-grid class="action-btn">
@@ -31,9 +31,6 @@
         </button>
     </ion-row>
     <ion-item color="none" id="myProfile-list-item39">
-      <ion-avatar item-left>
-        <img default="assets/images/user.png"/>
-      </ion-avatar>
       <h2>
         Rustam Eynaliyev
       </h2>

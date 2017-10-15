@@ -2,13 +2,17 @@ import { Component, ViewChild } from '@angular/core';
 import { Platform, MenuController, Nav  } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { LoadingController } from 'ionic-angular';
-
+// pages
 import { MyProfilePage } from '../pages/pages';
 import { ContactsListPage } from '../pages/pages';
 import { VIPPage } from '../pages/pages';
 //import { SettingsPage } from '../pages/pages';
 import { MeetSomebodyPage } from '../pages/pages';
 import { LoginPage } from '../pages/pages';
+// providers
+import { UserService } from '../services/services';
+// models
+import { User } from '../models/models';
 
 @Component({
   templateUrl: 'app.component.html'
@@ -20,6 +24,7 @@ export class MyApp {
   pages: any[];
   activePage: any;
   loader: any;
+  user: User;
 
   myProfile = {
     component: MyProfilePage,
@@ -29,13 +34,13 @@ export class MyApp {
     private platform: Platform,
     private menu: MenuController,
     private loadingCtrl: LoadingController,
+    private userSrvc: UserService,
     private storage: Storage
   ) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.presentLoading();
-
       this.storage.get('introShown').then((result) => {
         if(result){
           this.rootPage = MeetSomebodyPage;
@@ -46,13 +51,17 @@ export class MyApp {
         this.loader.dismiss();
       });
     });
-
     this.pages = [
       { title: 'Meet people Nearby', component: MeetSomebodyPage, icon: 'ios-locate-outline' },
       { title: 'Edit Profile', component: MyProfilePage, icon: 'ios-contacts-outline' },
       { title: 'Contacts', component: ContactsListPage, icon: 'ios-chatboxes-outline' }/*,
       { title: 'Settings', component: SettingsPage, icon: 'ios-settings-outline' }*/
     ];
+    this.userSrvc.getCurrentUser()
+    .then( user => {
+      console.log('current user :', user);
+      this.user = user;
+    });
   }
 
   openPage(page) {

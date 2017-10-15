@@ -67,6 +67,13 @@ export class UserService {
       })
       */
   }
+  getCurrentUser(): Promise<User>{//Observable<User> {
+    //url constructed from id
+    let url = '';
+    return new Promise(resolve => {
+      resolve(this.user);
+    });
+  }
   like(id){
     //url constructed with id
     let url = '';

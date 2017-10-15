@@ -1,15 +1,15 @@
 <ion-menu [content]="mainContent">
   <ion-header>
     <ion-list style="margin: 0px;">
-        <ion-item style="" (click)="openPage(myProfile)">
+        <ion-item (click)="openPage(myProfile)">
             <ion-thumbnail item-left>
-                <img style="padding: 10px;" src="" default="assets/images/user.png">
+                <img style="padding: 10px;" [src]="user.profileImgUrl" default="assets/images/user.png">
             </ion-thumbnail>
-            <h2 style="text-transform: capitalize;">Rustam Eynaliyev</h2>
+            <h2 style="text-transform: capitalize;">{{user.firstName}} {{user.lastName}}</h2>
         </ion-item>
     </ion-list>
   </ion-header>
-  
+
   <ion-content id="side-menu21">
     <ion-list>
         <button ion-item *ngFor="let p of pages" (click)="openPage(p)" [class.activeHighlight]=checkActive(p)>
@@ -21,19 +21,22 @@
     <hr>
     <ion-grid style="padding:0px">
         <ion-row style="padding: 3px;">
-            <ion-col col-4 *ngFor=" let user of featuredUsers " style="padding: 13px;color: #6c6c6c;text-align: center;">
-                <ion-card style="margin: 0px 0px 0px 0px;border: 2px solid #f53d3d;    width: calc(100%);border-radius: 50%;">
+            <ion-col col-4 *ngFor=" let user of featuredUsers " class="participant-col">
+                <ion-card class="menu-avatar">
                     <img src="{{user.picture.large}}" />
                 </ion-card>
-                <span style="">{{user.name.first}}</span>
+                <span style="">{{user.firstName}}</span>
             </ion-col>
         </ion-row>
         <ion-row style="text-align: center;">
-            <span style="text-align: center;margin: 0 auto;font-size: 16px;color: #387ef5;font-family: sans-serif;">Get matched 2x faster</span>
+            <span class="promo-text">Get matched 2x faster</span>
         </ion-row>
         <ion-row style="padding: 20px;">
             <button menuToggle ion-button color="royal" (click)="viewVIP()" block>Skip the line</button>
-        </ion-row>  
+        </ion-row>
+        <ion-row style="padding: 0 20px 0 20px;">
+            <button ion-button (click)="logout()" block>Logout</button>
+        </ion-row>
     </ion-grid>
   </ion-content>
 </ion-menu>

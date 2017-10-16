@@ -6,7 +6,6 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HttpModule } from '@angular/http';
 import { IonicStorageModule } from '@ionic/storage';
-
 // declarations
 // pages
 import { MeetSomebodyPage } from '../pages/pages';
@@ -36,6 +35,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import {UserService} from '../services/services';
 import {ChatroomService} from '../services/services';
 import {UtilService} from '../shared/util.service';
+import {VipService} from '../services/services';
 import {DefaultImageDirective} from '../shared/default-image.directive';
 import { Geolocation } from '@ionic-native/geolocation';
 
@@ -91,6 +91,7 @@ import { Geolocation } from '@ionic-native/geolocation';
     SplashScreen,
     UserService,
     ChatroomService,
+    VipService,
     UtilService,
     Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler}

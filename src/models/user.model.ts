@@ -1,3 +1,7 @@
+interface VipStatus{
+  vip: boolean;
+  expiryDate: Date;
+}
 interface Photo {
     imgUrl: string;
     title?: string;
@@ -46,5 +50,6 @@ export class User {
     public warning?: string,
     public languages?: Language[],
     public reputationScore?: number,
+    public vipStatus?: VipStatus
   ) {  }
 }

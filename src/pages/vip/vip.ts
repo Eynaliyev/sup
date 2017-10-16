@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
 import { PurchasePage } from '../purchase/purchase';
-
+import {VipService} from '../../services/services';
 /**
  * Generated class for the VIP page.
  *
@@ -22,12 +22,8 @@ export class VIPPage {
     console.log('ionViewDidLoad VIPPage');
   }
   watchAd(){
-    // https://ionicframework.com/docs/native/admob-free/
   }
   invite(){
-    // https://developers.facebook.com/docs/applinks/overview - app links overview
-    // https://developers.facebook.com/docs/applinks/hosting-api - to hot a link to send in options
-    // https://ionicframework.com/docs/native/facebook/ - the invite docs
 
     //this.facebook.appInvite({applink, photoUrl});
   }

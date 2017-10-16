@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Http} from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
-import { ReplaySubject } from 'rxjs/ReplaySubject';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/observable/forkJoin';
 import 'rxjs/add/operator/map';
@@ -14,8 +13,6 @@ import {Language} from '../models/models';
 
 @Injectable()
 export class ChatroomService {
-	//test url
-	private ChatroomUrl = 'app/Chatrroms'; // URL to internal web api
   private chatroomByIdUrl;
   private messages: Message[];
   private chatrooms: Chatroom[];
@@ -100,7 +97,7 @@ export class ChatroomService {
         }
       ];
   }
-		getAvailableChatrooms(): Observable<Chatroom[]> {
+		getAvailableChatrooms(location, languages: Language[]): Observable<Chatroom[]> {
       return new Observable(observer => {
         observer.next(this.chatrooms);
       });
@@ -109,19 +106,17 @@ export class ChatroomService {
       // get full detailed data of the required chatroom
       return new Observable(observer => {
         setTimeout(() => {
-          let chatroom = this.getAvailableChatrooms()
-          .subscribe(chatrooms =>{
-            let chatroom = chatrooms[0];
-            observer.next(chatroom);
-          });
+          // temporary - need a different method
+          let chatroom = this.chatrooms[0];
+          observer.next(chatroom);
         },1800);
       });
     }
-    joinChatroom(): Observable<string>{
+    joinChatroom(locaiton, languages: Language[]): Observable<string>{
       // find available rooms
       return new Observable(observer => {
         setTimeout(() => {
-          let chatroom = this.getAvailableChatrooms()
+          let chatroom = this.getAvailableChatrooms(location, languages)
           .subscribe(chatrooms =>{
             let chatroomId = chatrooms[0].id;
             observer.next(chatroomId);

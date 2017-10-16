@@ -17,7 +17,7 @@ export class MeetSomebodyPage {
     public app: App) {
       this.chatroomSrvc.getAvailableLanguages().subscribe(languages => {
         this.languages = languages;
-        console.log('possible languages loaded from the servie: ', this.languages);
+        //console.log('possible languages loaded from the servie: ', this.languages);
       });
   }
   ionViewDidLoad() {
@@ -25,7 +25,7 @@ export class MeetSomebodyPage {
   }
   goToWaitlist(){
     // then, go to waitlist - perhaps waitlist should be a modal that can be dismissed as necessary?
-    console.log('selected languages being passed to waitlistPage: ', this.selectedLanguages);
+    //console.log('selected languages being passed to waitlistPage: ', this.selectedLanguages);
     this.navCtrl.push(WaitlistPage, {languages: this.selectedLanguages});
   }
   /*

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController, App } from 'ionic-angular';
+import { NavController, LoadingController, App, NavParams } from 'ionic-angular';
 import {FilterPage} from '../pages';
 import {VIPPage} from '../pages';
 import {ChatroomPage} from '../pages';
@@ -14,14 +14,20 @@ export class WaitlistPage {
     public navCtrl: NavController,
     public loadingCtrl: LoadingController,
     public chatroomSrvc: ChatroomService,
+    public navParams: NavParams,
     public app: App) {
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad MeetSomebodyPage');
   }
   ionViewDidEnter(){
+    // get location property
+    // TO DO
+    let location = '';
+    // get languages property
+    let languages = this.navParams.get('languages');
     // join a chatroom
-    this.chatroomSrvc.joinChatroom()
+    this.chatroomSrvc.joinChatroom(location, languages)
     .subscribe(chatroomId => {
       let view = this.navCtrl.getActive();
       if(view.component.name === "WaitlistPage"){
@@ -38,5 +44,8 @@ export class WaitlistPage {
   }
   goToChatroom(chatroomId: string){
     this.navCtrl.push(ChatroomPage, {room: `${chatroomId}`});
+  }
+  back(){
+    this.navCtrl.pop();
   }
 }

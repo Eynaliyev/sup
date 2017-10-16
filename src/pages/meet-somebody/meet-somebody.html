@@ -11,8 +11,8 @@
     <ion-list class="lower" *ngIf="languages">
       <ion-item>
           <ion-label stacked>Languages I want to speak in: </ion-label>
-          <ion-select name="language-select" [(ngModel)]="languages" multiple="true">
-              <ion-option *ngFor="let language of languages">{{language.name}}</ion-option>
+          <ion-select name="language-select" [(ngModel)]="selectedLanguages" multiple="true">
+              <ion-option *ngFor="let language of languages" [value]='language'>{{language.name}}</ion-option>
           </ion-select>
       </ion-item>
     </ion-list>

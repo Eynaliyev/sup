@@ -1,14 +1,18 @@
 <ion-content class="dark-bckg">
   <menu-button></menu-button>
       <span class="pageHeader">Messages</span>
-  <ion-list class="tall-spacer">
+  <ion-list class="venti-spacer">
       <ion-item [ngClass]="animateClass" style="background-color: transparent;color: #cfcfcf !important;" *ngFor=" let user of users " (click)="openChat(user)">
           <ion-thumbnail item-left>
-              <img src="{{user.picture.large}}" default="assets/images/user.png">
+              <img [src]="user.profileImgUrl" default="assets/images/user.png">
           </ion-thumbnail>
           <h2 style="text-transform: capitalize;">{{user.name.first}} {{user.name.last}}
-              <span style="text-transform: capitalize;">{{user.name.first}}<img *ngIf="user.gender == 'female'" style="max-width: 9px;margin-left: 5px;" src="http://www.clker.com/cliparts/r/M/L/o/R/i/green-dot.svg.med.png"></span></h2>
-          <p>Hello, how are you ? </p>
+              <span style="text-transform: capitalize;">{{user.name.first}}
+                <!-- the green button to show when there's a new message
+                <img *ngIf="user.gender == 'female'" src="http://www.clker.com/cliparts/r/M/L/o/R/i/green-dot.svg.med.png">
+                -->
+              </span></h2>
+          <p>{{user.lastMessage.content}}</p>
       </ion-item>
   </ion-list>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">

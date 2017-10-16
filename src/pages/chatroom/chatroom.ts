@@ -112,7 +112,8 @@ export class ChatroomPage {
     sendMessage(){
       this.newMessage.date = new Date();
       this.newMessage.id = this.utilService.guid();
-      this.chatroomService.sendMessage(this.newMessage);
+      this.chatroomService.sendMessage(this.chatroomId, this.newMessage);
+      this.userService.updateLastMessage(this.chatroomId, this.newMessage);
       this.newMessage.content = '';
     }
 

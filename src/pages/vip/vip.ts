@@ -15,16 +15,18 @@ import {VipService} from '../../services/services';
 })
 export class VIPPage {
   constructor(
-    public navCtrl: NavController ) {
+    public navCtrl: NavController,
+    public vipSrvc: VipService ) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad VIPPage');
   }
   watchAd(){
+    this.vipSrvc.presentAd();
   }
   invite(){
-
+    this.vipSrvc.inviteFriend();
     //this.facebook.appInvite({applink, photoUrl});
   }
   viewPurchasePage(){

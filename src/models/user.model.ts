@@ -1,3 +1,4 @@
+import {Message} from './models';
 interface VipStatus{
   vip: boolean;
   expiryDate: Date;
@@ -15,12 +16,12 @@ interface Interest {
     name: string;
     imgUrl: string;
 }
-interface Contact {
+export interface Contact {
     id: string;
     name: string;
-    canSeeMe: boolean;
     profileImgUrl: string;
-    wantToSeeActivity: boolean;
+    roomId: string;
+    lastMessage: Message;
 }
 interface SocialProfile{
   networkName: string;

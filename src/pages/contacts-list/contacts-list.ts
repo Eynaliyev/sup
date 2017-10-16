@@ -1,19 +1,17 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-
-import { UserProfilePage } from '../pages';
 import { ChatroomPage } from '../pages';
-
-import { UserService } from '../../services/user.service';
-
+import { UserService } from '../../services/services';
+import {User} from '../../models/models';
+import {Contact} from '../../models/models';
 @Component({
   selector: 'page-contacts-list',
   templateUrl: 'contacts-list.html'
 })
 export class ContactsListPage {
-
-  users = [];
+  users : Contact[] = [];
   animateClass: any;
+  currentUser: User;
 
   constructor(
     public navCtrl: NavController,
@@ -21,27 +19,25 @@ export class ContactsListPage {
   ) {
     console.log('ContactsListPage initialized');
     this.animateClass = { 'zoom-in': true };
-    
-  }
 
+  }
   ionViewWillEnter() {
   }
-  
-  ngAfterViewInit() {  
+  ngAfterViewInit() {
     return new Promise(resolve => {
         let env = this;
-        this.userService.getRandomUsers(8).subscribe(function(res){
-        for (let i = 0; i < res.length; i++) {
+        this.userService.getCurrentUser().subscribe(function(res){
+        let contacts = res.contacts;
+        for (let i = 0; i < contacts.length; i++) {
             setTimeout(function() {
-                env.users.push(res[i]);
+                env.users.push(contacts[i]);
             }, 100 * i);
         }
+        //console.log('contacts in contactsList: ', this.users);
         resolve(true);
       });
     });
   }
-
-
   doInfinite(infiniteScroll) {
    //Begin async operation
 
@@ -49,8 +45,7 @@ export class ContactsListPage {
        infiniteScroll.complete();
      });
   }
-
   openChat(user){
-  	this.navCtrl.push(ChatroomPage, {user: user})
+  	this.navCtrl.push(ChatroomPage, {room: user.roomId})
   }
 }

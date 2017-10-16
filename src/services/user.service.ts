@@ -7,7 +7,7 @@ import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/observable/forkJoin';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-
+import {Message} from '../models/models';
 import { User} from '../models/models';
 
 @Injectable()
@@ -25,7 +25,79 @@ export class UserService {
     profession: 'Software Developer',
     currentLocation: 'Baku, Azerbaijan',
     age: 25,
-    contacts: [],
+    contacts: [
+      {
+        id:'1234',
+        name: 'Rustam Eynaliyev',
+        profileImgUrl: 'assets/users/images/1/2.jpg',
+        roomId: 'string',
+        lastMessage: {
+          content: "What's up my man?!",
+          date: new Date(),
+          id: '123',
+          senderId: '432',
+          roomId: '123',
+          senderName: 'Ehmed',
+          senderImage: 'aef'
+        }
+      },{
+        id:'1223',
+        name: 'Bahram Koroglu',
+        profileImgUrl: 'assets/users/images/1/3.jpg',
+        roomId: 'string',
+        lastMessage: {
+          content: "What's up my man?!",
+          date: new Date(),
+          id: '123',
+          senderId: '432',
+          roomId: '123',
+          senderName: 'Ehmed',
+          senderImage: 'aef'
+        }
+      },{
+        id:'1114',
+        name: 'Aflatun Aliyev',
+        profileImgUrl: 'assets/users/images/1/4.jpg',
+        roomId: 'string',
+        lastMessage: {
+          content: "What's up my man?!",
+          date: new Date(),
+          id: '123',
+          senderId: '432',
+          roomId: '123',
+          senderName: 'Ehmed',
+          senderImage: 'aef'
+        }
+      },{
+        id:'1464',
+        name: 'Angelo Alexander',
+        profileImgUrl: 'assets/users/images/1/1.jpg',
+        roomId: 'string',
+        lastMessage: {
+          content: "What's up my man?!",
+          date: new Date(),
+          id: '123',
+          senderId: '432',
+          roomId: '123',
+          senderName: 'Ehmed',
+          senderImage: 'aef'
+        }
+      },{
+        id:'6434',
+        name: 'Kirito Maxilimillian',
+        profileImgUrl: 'assets/users/images/1/2.jpg',
+        roomId: 'string',
+        lastMessage: {
+          content: "What's up my man?!",
+          date: new Date(),
+          id: '123',
+          senderId: '432',
+          roomId: '123',
+          senderName: 'Ehmed',
+          senderImage: 'aef'
+        }
+      }
+    ],
     currentRoomId: '123',
     socialProfiles: [],
     profileImgUrl: 'assets/img/pic.png',
@@ -85,6 +157,10 @@ export class UserService {
   deleteImage(image){
     let index = this.user.photos.indexOf(image);
     this.user.photos.splice(index, 1);
+  }
+  updateLastMessage(roomId: string, message: Message){
+    let contact = this.user.contacts.filter( contact => contact.id === roomId)[0];
+    contact.lastMessage = message;
   }
   like(id){
     //url constructed with id

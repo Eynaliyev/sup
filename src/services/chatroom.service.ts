@@ -10,7 +10,6 @@ import {Message} from '../models/models';
 import { Chatroom} from '../models/models';
 import { UtilService } from '../shared/util.service';
 import {Language} from '../models/models';
-
 @Injectable()
 export class ChatroomService {
   private chatroomByIdUrl;
@@ -139,7 +138,7 @@ export class ChatroomService {
       // substract 1 from the votes property on the participant
       // if the votes is -2 or lower, kick the user out - on the backend
     }
-    sendMessage(message: Message){
+    sendMessage(roomId: string, message: Message){
       // add message to the messages list for the chatroom?
       this.messages.push(message);
     }

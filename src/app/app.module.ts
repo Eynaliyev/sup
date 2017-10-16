@@ -28,6 +28,7 @@ import { ProfilePostsComponent } from '../components/components';
 import { ProfileTimelineComponent } from '../components/components';
 import { BackButtonComponent } from '../components/components';
 import { MenuButtonComponent } from '../components/components';
+import firebase from 'firebase';
 
 // providers
 import { StatusBar } from '@ionic-native/status-bar';

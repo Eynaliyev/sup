@@ -2,7 +2,7 @@ interface Photo {
     imgUrl: string;
     title?: string;
 }
-interface Language {
+export interface Language {
   id: string;
   name: string;
 }

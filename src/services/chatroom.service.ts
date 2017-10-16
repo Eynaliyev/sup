@@ -10,6 +10,7 @@ import 'rxjs/add/operator/catch';
 import {Message} from '../models/models';
 import { Chatroom} from '../models/models';
 import { UtilService } from '../shared/util.service';
+import {Language} from '../models/models';
 
 @Injectable()
 export class ChatroomService {
@@ -18,6 +19,7 @@ export class ChatroomService {
   private chatroomByIdUrl;
   private messages: Message[];
   private chatrooms: Chatroom[];
+  private languages: Language[];
 
 	constructor(
     private http: Http,
@@ -33,6 +35,30 @@ export class ChatroomService {
           senderImage: 'assets/img/pic.png',
           senderName: 'Nicole'
       }];
+      this.languages = [
+        {
+          id: '1',
+          name: 'English'
+        },{
+          id: '2',
+          name: 'Mandarin Chinese'
+        },{
+          id: '3',
+          name: 'Spanish'
+        },{
+          id: '4',
+          name: 'German'
+        },{
+          id: '5',
+          name: 'French'
+        },{
+          id: '6',
+          name: 'Russian'
+        },{
+          id: '7',
+          name: 'Turkish'
+        }
+     ]
       this.chatrooms = [
         {
           id: '213',
@@ -127,5 +153,10 @@ export class ChatroomService {
       return new Observable(observer => {
           observer.next(this.messages);
       });
-  }
+    }
+    getAvailableLanguages(): Observable<Language[]>{
+      return new Observable(observer => {
+        observer.next(this.languages);
+      });
+    }
 }

@@ -8,17 +8,11 @@
     </ion-fab>-->
     <span class="pageHeader">Meet somebody</span>
     <div class="venti-spacer"></div>
-    <ion-list class="lower">
+    <ion-list class="lower" *ngIf="languages">
       <ion-item>
           <ion-label stacked>Languages I want to speak in: </ion-label>
           <ion-select name="language-select" [(ngModel)]="languages" multiple="true">
-              <ion-option>English</ion-option>
-              <ion-option>French</ion-option>
-              <ion-option>Mandarin Chinese</ion-option>
-              <ion-option>German</ion-option>
-              <ion-option>Spanish</ion-option>
-              <ion-option>Russian</ion-option>
-              <ion-option>Turkish</ion-option>
+              <ion-option *ngFor="let language of languages">{{language.name}}</ion-option>
           </ion-select>
       </ion-item>
     </ion-list>

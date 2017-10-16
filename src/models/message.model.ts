@@ -6,4 +6,5 @@ export class Message {
     roomId: string;
     senderName: string;
     senderImage: string;
+    seen: Array<string>;
 }

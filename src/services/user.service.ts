@@ -33,12 +33,13 @@ export class UserService {
         roomId: 'string',
         lastMessage: {
           content: "What's up my man?!",
-          date: new Date(),
+          date: this.createDate(10000),
           id: '123',
           senderId: '432',
           roomId: '123',
           senderName: 'Ehmed',
-          senderImage: 'aef'
+          senderImage: 'aef',
+          seen: []
         }
       },{
         id:'1223',
@@ -47,12 +48,13 @@ export class UserService {
         roomId: 'string',
         lastMessage: {
           content: "What's up my man?!",
-          date: new Date(),
+          date: this.createDate(200000),
           id: '123',
           senderId: '432',
           roomId: '123',
           senderName: 'Ehmed',
-          senderImage: 'aef'
+          senderImage: 'aef',
+          seen: []
         }
       },{
         id:'1114',
@@ -61,12 +63,13 @@ export class UserService {
         roomId: 'string',
         lastMessage: {
           content: "What's up my man?!",
-          date: new Date(),
+          date: this.createDate(0),
           id: '123',
           senderId: '432',
           roomId: '123',
           senderName: 'Ehmed',
-          senderImage: 'aef'
+          senderImage: 'aef',
+          seen: []
         }
       },{
         id:'1464',
@@ -75,12 +78,13 @@ export class UserService {
         roomId: 'string',
         lastMessage: {
           content: "What's up my man?!",
-          date: new Date(),
+          date: this.createDate(700000),
           id: '123',
           senderId: '432',
           roomId: '123',
           senderName: 'Ehmed',
-          senderImage: 'aef'
+          senderImage: 'aef',
+          seen: []
         }
       },{
         id:'6434',
@@ -94,7 +98,8 @@ export class UserService {
           senderId: '432',
           roomId: '123',
           senderName: 'Ehmed',
-          senderImage: 'aef'
+          senderImage: 'aef',
+          seen: []
         }
       }
     ],
@@ -110,6 +115,12 @@ export class UserService {
     interests: [],
     languages: []
   };
+  //a dummy method for ocming up with different dates
+  createDate(n){
+    let time = new Date().getTime() + n;
+    let date = new Date(time);
+    return date;
+  }
 
 	constructor(
 		private http: Http,

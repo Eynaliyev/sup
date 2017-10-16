@@ -29,7 +29,8 @@ export class ChatroomService {
           senderId: '123',
           roomId: '321013',
           senderImage: 'assets/img/pic.png',
-          senderName: 'Nicole'
+          senderName: 'Nicole',
+          seen: []
       }];
       this.languages = [
         {

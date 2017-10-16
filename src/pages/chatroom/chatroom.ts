@@ -31,7 +31,8 @@ export class ChatroomPage {
       senderId: this.currentUser.id,
       roomId: '',
       senderName: this.currentUser.name,
-      senderImage: this.currentUser.image
+      senderImage: this.currentUser.image,
+      seen: []
     };
   constructor(
     public navCtrl: NavController,

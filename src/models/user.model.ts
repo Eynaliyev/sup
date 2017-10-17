@@ -43,6 +43,7 @@ export class User {
     public currentLocation: string,
     public age: number,
     public contacts: Contact[],
+    public currentCoords?: string[],
     public currentRoomId?: string,
     public socialProfiles?: SocialProfile[],
     public profilePhoto?: Photo,

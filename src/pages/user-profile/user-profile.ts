@@ -83,9 +83,10 @@ export class UserProfilePage {
   items: any = [];
 
   constructor(
-    public navCtrl: NavController,
-    public navParams: NavParams,
-    public userSrvc: UserService) {
+    private navCtrl: NavController,
+    private navParams: NavParams,
+    private userSrvc: UserService
+  ) {
       console.log(this.navParams.data);
       let id = this.navParams.get('user');
       this.userSrvc.getCurrentUser()

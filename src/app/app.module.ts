@@ -32,12 +32,13 @@ import firebase from 'firebase';
 // providers
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import {UserService} from '../services/services';
-import {ChatroomService} from '../services/services';
-import {UtilService} from '../shared/util.service';
-import {VipService} from '../services/services';
-import {DefaultImageDirective} from '../shared/default-image.directive';
+import { UserService } from '../services/services';
+import { ChatroomService } from '../services/services';
+import { UtilService } from '../shared/util.service';
+import { VipService } from '../services/services';
+import { DefaultImageDirective } from '../shared/default-image.directive';
 import { Geolocation } from '@ionic-native/geolocation';
+import { PipeModule } from '../shared/pipe.module';
 
 
 @NgModule({
@@ -67,6 +68,7 @@ import { Geolocation } from '@ionic-native/geolocation';
     BrowserModule,
     HttpModule,
     BrowserAnimationsModule,
+    PipeModule.forRoot(),
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot()
   ],

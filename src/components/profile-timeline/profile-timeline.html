@@ -1,6 +1,9 @@
 <ion-card [ngClass]="animateClass" class="timeline grande-spacer">
     <ion-card-header class="cardHeader">
-        <ion-icon name="pin" class="cardIcon"></ion-icon> Current Location (~1.2 km away)
+        <ion-icon name="pin" class="cardIcon"></ion-icon>
+        Current Location
+        <span *ngIf="user.currentCoords && currentUser.currentCoords">
+          (~{{user.currentCoords | calculateDistance: currentUser.currentCoords}} km away)</span>
     </ion-card-header>
     <ion-card-content class="cardContent">
         <p>{{user.currentLocation}}</p>

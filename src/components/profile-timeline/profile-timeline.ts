@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-
+import { Component, Input } from '@angular/core';
+import { User } from '../../models/models';
 /*
   Generated class for the ProfileTimeline component.
 
@@ -11,6 +11,8 @@ import { Component } from '@angular/core';
   templateUrl: 'profile-timeline.html'
 })
 export class ProfileTimelineComponent {
+  @Input() user: User;
+  @Input() currentUser: User;
 
     animateClass: any;
   constructor() {

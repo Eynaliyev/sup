@@ -19,7 +19,7 @@
           </ion-card>
       </div>
       <div *ngSwitchCase="'about'">
-          <profile-timeline></profile-timeline>
+          <profile-timeline [currentUser]="currentUser" [user]="user"></profile-timeline>
       </div><!--
       <div *ngSwitchCase="'profile'">
           <profile-posts></profile-posts>
@@ -53,7 +53,7 @@
       </div>
       -->
   </div>
-  <ion-segment [(ngModel)]="tab" (ionChange)="changeTab(tab)" color='dark'>
+  <ion-segment [(ngModel)]="tab" color='dark'>
       <ion-segment-button [@flyInTopSlow4]="0" style="background: #df69a1;color: white;height: 60px;padding-top: 10px;" value="vote">
           <ion-icon name="ios-heart-outline" item-left></ion-icon>
       </ion-segment-button>

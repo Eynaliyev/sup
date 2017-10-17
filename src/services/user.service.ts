@@ -113,7 +113,16 @@ export class UserService {
       { imgUrl: 'assets/users/images/1/4.jpg' }
     ],
     interests: [],
-    languages: []
+    languages: [
+      {
+        id: '1',
+        name: 'English'
+      },
+      {
+        id: '2',
+        name: 'Mandarin Chinese'
+      }
+    ]
   };
   //a dummy method for ocming up with different dates
   createDate(n){

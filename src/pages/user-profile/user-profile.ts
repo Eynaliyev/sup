@@ -75,6 +75,7 @@ import {User} from '../../models/models';
 })
 export class UserProfilePage {
   user: User;
+  currentUser: User;
   tab: string = "vote";
   backGround: any;
   animateClass: any;
@@ -87,6 +88,8 @@ export class UserProfilePage {
     public userSrvc: UserService) {
       console.log(this.navParams.data);
       let id = this.navParams.get('user');
+      this.userSrvc.getCurrentUser()
+      .subscribe(user => this.currentUser = user);
       this.userSrvc.getUserById(id)
       .subscribe(user => {
         this.user = user;
@@ -103,8 +106,6 @@ export class UserProfilePage {
   }
   changeImage(image) {
     this.image = image
-  }
-  changeTab(tab) {
   }
   getHeight(tab){
       var height = "";

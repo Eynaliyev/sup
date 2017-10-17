@@ -95,9 +95,9 @@ export class UserProfilePage {
       .subscribe(user => {
         this.user = user;
         this.items = user.photos;
-        this.backGround = user.profilePhoto;
+        this.backGround = user.photos[0].imgUrl;
         this.image = user.photos[0].imgUrl;
-        console.log('user in user profile: ', this.user);
+        console.log('image, background, user in user profile: ', this.image, this.backGround, this.user);
       });
       setTimeout(function() {}, 800);
       this.animateClass = { 'zoom-in': true };

@@ -24,6 +24,7 @@ export class UserService {
     company: 'Luxoft',
     profession: 'Software Developer',
     currentLocation: 'Baku, Azerbaijan',
+    currentCoords: [50.0647, 19.9450],
     age: 25,
     contacts: [
       {

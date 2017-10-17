@@ -54,7 +54,7 @@ export class UserService {
           roomId: '123',
           senderName: 'Ehmed',
           senderImage: 'aef',
-          seen: []
+          seen: ['1234']
         }
       },{
         id:'1114',
@@ -63,13 +63,13 @@ export class UserService {
         roomId: 'string',
         lastMessage: {
           content: "What's up my man?!",
-          date: this.createDate(0),
+          date: this.createDate(500),
           id: '123',
           senderId: '432',
           roomId: '123',
           senderName: 'Ehmed',
           senderImage: 'aef',
-          seen: []
+          seen: ['124']
         }
       },{
         id:'1464',
@@ -84,7 +84,7 @@ export class UserService {
           roomId: '123',
           senderName: 'Ehmed',
           senderImage: 'aef',
-          seen: []
+          seen: ['123']
         }
       },{
         id:'6434',
@@ -99,7 +99,7 @@ export class UserService {
           roomId: '123',
           senderName: 'Ehmed',
           senderImage: 'aef',
-          seen: []
+          seen: ['125']
         }
       }
     ],
@@ -117,7 +117,7 @@ export class UserService {
   };
   //a dummy method for ocming up with different dates
   createDate(n){
-    let time = new Date().getTime() + n;
+    let time = new Date().getTime() - n;
     let date = new Date(time);
     return date;
   }

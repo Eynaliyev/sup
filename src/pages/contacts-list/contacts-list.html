@@ -8,9 +8,7 @@
           </ion-thumbnail>
           <h2 style="text-transform: capitalize;">{{user.name.first}} {{user.name.last}}
               <span style="text-transform: capitalize;">{{user.name.first}}
-                <!-- the green button to show when there's a new message
-                <img *ngIf="user.gender == 'female'" src="http://www.clker.com/cliparts/r/M/L/o/R/i/green-dot.svg.med.png">
-                -->
+                <img *ngIf="user.lastMessage.seen.indexOf(currentUser.id) === -1" class="notification" src="http://www.clker.com/cliparts/r/M/L/o/R/i/green-dot.svg.med.png">
               </span></h2>
           <p>{{user.lastMessage.content}}</p>
       </ion-item>

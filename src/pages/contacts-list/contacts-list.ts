@@ -26,16 +26,17 @@ export class ContactsListPage {
   ngAfterViewInit() {
     return new Promise(resolve => {
         let env = this;
-        this.userService.getCurrentUser().subscribe(function(res){
-        let contacts = res.contacts.sort((first, second) => {
+        this.userService.getCurrentUser().subscribe(user => {
+        this.currentUser = user;
+        let contacts = user.contacts.sort((first, second) => {
           return second.lastMessage.date.getTime() - first.lastMessage.date.getTime();
         });
         for (let i = 0; i < contacts.length; i++) {
             setTimeout(function() {
                 env.users.push(contacts[i]);
+                console.log('contacts in contactsList: ', env.users);
             }, 100 * i);
         }
-        //console.log('contacts in contactsList: ', this.users);
         resolve(true);
       });
     });
@@ -45,7 +46,7 @@ export class ContactsListPage {
 
      this.ngAfterViewInit().then(()=>{
        infiniteScroll.complete();
-     });
+      });
   }
   openChat(user){
   	this.navCtrl.push(ChatroomPage, {room: user.roomId})

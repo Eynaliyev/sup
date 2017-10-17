@@ -80,6 +80,11 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
+
+.notification{
+  max-width: 9px;
+  margin-left: 5px;
+}
 .usr-profile-age-label{
   padding: 11px;
   background: rgba(211, 124, 166, 0.61);
@@ -122,7 +127,6 @@ $colors: (
 img.avatar-border {
   border: 2px solid color($colors, royal);
 }
-
 img.profile-picture {
   padding: 2px;
   border-radius: 50%;
@@ -137,9 +141,6 @@ img.profile-picture {
   &.right {
     right: 10px;
   }
-}
-
-ion-title{
 }
 .dark-bckg{
   background: url('../assets/img/background.jpg');
@@ -189,8 +190,7 @@ ion-title{
   color:white;
   text-shadow:-1px -1px #333;
 }
-.load:after,
-.load:before {
+.load:after, .load:before {
   display: inline-block;
   margin: auto;
   position: absolute;
@@ -282,7 +282,6 @@ ion-title{
     opacity: 0.5;
   }
 }
-
 
 @keyframes outer-ripple {
   0% {

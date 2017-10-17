@@ -98,7 +98,6 @@ export class ChatroomPage {
       let result = [];
       messages.forEach(message => {
         if(message.seen.indexOf(id) === -1){
-          message.seen.push(id);
           this.chatroomService.toggleSeen(message, id);
         }
         result.push(message);
@@ -110,11 +109,11 @@ export class ChatroomPage {
       this.chatroomService.getMessages(this.chatroomId, 10)
       .subscribe(newMessages => {
           // add position property
-          let res = this.utilService.addMessagePosition(newMessages, this.currentUser.id);
-          console.log('newMessages: ', res);
-          // add time passed since the mssage was sent
-          //res = this.utilService.addMessageTimeSince(res);
-          // To Do : add sender name based on participants ID, or nothing
+          console.log('newMessages: ', newMessages);
+          let updatedMessages = this.utilService.addMessagePosition(newMessages, this.currentUser.id);
+          console.log('updatedMessages: ', updatedMessages);
+          // set the seen property
+          let res = this.updateSeen(updatedMessages, this.currentUser.id);
           for (let i = 0; i < res.length; i++) {
               setTimeout(function() {
                   env.messages.push(res[i]);

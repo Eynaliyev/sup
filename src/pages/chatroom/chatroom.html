@@ -2,25 +2,25 @@
     <nav>
         <ion-grid>
             <ion-row>
-              <ion-col>
-                  <menu-button></menu-button>
-              </ion-col>
-              <ion-col>
-                  <ion-fab top center>
-                      <button ion-fab (click)="openParticipantsList()" color="dark" class="menu-btn-border">
-                          <ion-icon name="people"></ion-icon>
-                      </button>
-                  </ion-fab>
-              </ion-col>
-              <ion-col>
-                  <ion-fab right top>
-                      <button ion-fab (click)="exit()" color="dark" class="menu-btn-border">
-                          <ion-icon name="exit"></ion-icon>
-                      </button>
-                  </ion-fab>
-              </ion-col>
+                <ion-col>
+                    <menu-button></menu-button>
+                </ion-col>
+                <ion-col>
+                    <ion-fab top center>
+                        <button ion-fab (click)="openParticipantsList()" color="dark" class="menu-btn-border">
+                            <ion-icon name="people"></ion-icon>
+                        </button>
+                    </ion-fab>
+                </ion-col>
+                <ion-col>
+                    <ion-fab right top>
+                        <button ion-fab (click)="exit()" color="dark" class="menu-btn-border">
+                            <ion-icon name="exit"></ion-icon>
+                        </button>
+                    </ion-fab>
+                </ion-col>
             </ion-row>
-          </ion-grid>
+        </ion-grid>
     </nav>
     <ion-list no-lines style="padding-top: 21px;">
         <ion-item *ngFor="let msg of messages">

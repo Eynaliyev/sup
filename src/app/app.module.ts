@@ -1,8 +1,8 @@
 // imports
-import { NgModule, ErrorHandler } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
-import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { IonicApp, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HttpModule } from '@angular/http';
 import { IonicStorageModule } from '@ionic/storage';
@@ -30,16 +30,19 @@ import { MenuButtonComponent } from '../components/components';
 import firebase from 'firebase';
 
 // providers
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { UserService } from '../services/services';
-import { ChatroomService } from '../services/services';
-import { UtilService } from '../shared/util.service';
-import { VipService } from '../services/services';
 import { DefaultImageDirective } from '../shared/default-image.directive';
-import { Geolocation } from '@ionic-native/geolocation';
 import { PipeModule } from '../shared/pipe.module';
+import { AppProviders } from './app.providers';
 
+// AF2 Settings
+export const firebaseConfig = {
+  apiKey: "AIzaSyDI22hmtv2clf3WYdo2y04z_h-eCfbv_F4",
+  authDomain: "huggable-9e981.firebaseapp.com",
+  databaseURL: "https://huggable-9e981.firebaseio.com",
+  projectId: "huggable-9e981",
+  storageBucket: "huggable-9e981.appspot.com",
+  messagingSenderId: "272489685620"
+};
 
 @NgModule({
   declarations: [
@@ -88,15 +91,7 @@ import { PipeModule } from '../shared/pipe.module';
     ParticipantsListPage,
     WaitlistPage
   ],
-  providers: [
-    StatusBar,
-    SplashScreen,
-    UserService,
-    ChatroomService,
-    VipService,
-    UtilService,
-    Geolocation,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
-  ]
+  providers: AppProviders.getProviders()
+
 })
 export class AppModule {}

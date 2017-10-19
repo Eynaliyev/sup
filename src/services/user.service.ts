@@ -113,6 +113,7 @@ export class UserService {
         }
       }
     ],
+    friendRequests: ['6434'],
     currentRoomId: '123',
     socialProfiles: [],
     profileImgUrl: 'assets/img/pic.png',
@@ -194,11 +195,37 @@ export class UserService {
     contact.lastMessage = message;
   }
   like(id){
-    //url constructed with id
-    let url = '';
     // check if the other person like them, if yes, remove theh relationship from likes list and add to the friends list
+    this.getCurrentUser()
+    .subscribe(currentUser => {
+      this.getUserById(id)
+      .subscribe(user => {
+        if(user.friendRequests.indexOf(currentUser.id) !== -1){
+          //remove the request
+          this.removeRequest(user.id);
+          // add to both contacts
+          this.addFriend(currentUser.id, user.id);
+        } else {
+          this.addRequest(currentUser.id, user.id);
+        }
+      })
+    });
     // if not, add to the likes list
-  }/*
+  }
+  addRequest(toId: string, requestedId: string){
+    console.log('added request from ', toId, ' to ', requestedId);
+  }
+  addFriend(id: string, otherId: string){
+    console.log('added request from ', id, ' to ', otherId);
+  }
+  removeRequest(id: string){
+    console.log('removeRequest method in user service called');
+  }
+  removeFriend(id: string){
+    console.log('removeFriend method in user service called');
+  }
+
+  /*
   getUid(): Promise<string>{
     let res = new Promise<any>((resolve, reject) => {
         console.log('uid in getUid(): ', JSON.parse(localStorage.getItem('currentUser')).uid);

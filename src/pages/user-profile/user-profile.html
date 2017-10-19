@@ -1,13 +1,18 @@
 <ion-content [ngClass]="animateClass" [ngStyle]="{'background-image': 'url(' + backGround + ')'}" style="background-size: cover;position: relative;">
   <back-button></back-button>
+  <!--
   <ion-fab *ngIf="tab == 'vote'" style="left: 27%;" left bottom>
       <button ion-fab color="light" style="width: 76px;height: 76px;">
           <ion-icon style="font-size: 4rem;" name="md-close"></ion-icon>
       </button>
   </ion-fab>
-  <ion-fab *ngIf="tab == 'vote'" style="right: 27%;" right bottom>
-      <button ion-fab color="light" style="width: 76px;height: 76px;">
-          <ion-icon style="font-size: 4rem;" name="ios-heart-outline"></ion-icon>
+-->
+  <ion-fab right top *ngIf="currentUser">
+      <button ion-fab (click)="like()" color="dark" class="menu-btn-border" *ngIf="!friend && !requested">
+          <ion-icon name="ios-heart-outline"></ion-icon>
+      </button>
+      <button ion-fab (click)="unlike()" color="dark" class="menu-btn-border" *ngIf="friend || requested">
+          <ion-icon name="ios-heart"></ion-icon>
       </button>
   </ion-fab>
   <div [ngSwitch]="tab">

@@ -2,6 +2,9 @@ import { Component, trigger, state, style, transition, animate, keyframes } from
 import { NavController, NavParams } from 'ionic-angular';
 import { UserService } from '../../services/services';
 import {User} from '../../models/models';
+import { UtilService } from '../../shared/util.service';
+import { AlertController } from 'ionic-angular';
+
 @Component({
   selector: 'page-user-profile',
   templateUrl: 'user-profile.html',
@@ -81,25 +84,36 @@ export class UserProfilePage {
   animateClass: any;
   image: any;
   items: any = [];
+  friend: boolean = false;
+  requested: boolean = false;
 
   constructor(
     private navCtrl: NavController,
     private navParams: NavParams,
-    private userSrvc: UserService
+    private userSrvc: UserService,
+    private utilSrvc: UtilService,
+    public alertCtrl: AlertController
   ) {
       console.log(this.navParams.data);
       let id = this.navParams.get('user');
       this.userSrvc.getCurrentUser()
-      .subscribe(user => this.currentUser = user);
-      this.userSrvc.getUserById(id)
       .subscribe(user => {
-        this.user = user;
-        this.items = user.photos;
-        this.backGround = user.photos[0].imgUrl;
-        this.image = user.photos[0].imgUrl;
-        console.log('image, background, user in user profile: ', this.image, this.backGround, this.user);
+        this.currentUser = user;
+        console.log('currentUser in userProfile: ', this.currentUser);
+        this.userSrvc.getUserById(id)
+        .subscribe(user => {
+          this.user = user;
+          this.items = user.photos;
+          this.backGround = user.photos[0].imgUrl;
+          this.image = user.photos[0].imgUrl;
+          if(this.currentUser.friendRequests.indexOf(this.user.id) !== -1) {
+            this.requested = true;
+          } else if(this.currentUser.contacts.forEach(contact => contact.id === this.user.id)){
+            this.friend = true;
+          }
+          console.log('image, background, user in user profile: ', this.image, this.backGround, this.user);
+        });
       });
-      setTimeout(function() {}, 800);
       this.animateClass = { 'zoom-in': true };
   }
   ionViewDidLoad() {
@@ -114,4 +128,79 @@ export class UserProfilePage {
       height = "hidden";
       return height;
   }
+  like() {
+    // alert
+    const alert = this.alertCtrl.create({
+      title: 'Confirm Like',
+      message: 'Do you want to add this person to contacts?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Like',
+          handler: () => {
+            console.log('Buy clicked');
+            this.userSrvc.like(this.user.id);
+          }
+        }
+      ]
+    });
+    alert.present();
+  }    // call the like
+  unlike() {
+    // alert
+    // check if it's just a request or a friendship
+    if(this.currentUser.friendRequests.indexOf(this.user.id) !== -1){
+      const alert = this.alertCtrl.create({
+        title: 'Confirm Like',
+        message: "Do you want to cancel your friend request?",
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+            }
+          },
+          {
+            text: 'Remove',
+            handler: () => {
+              console.log('Request cancelled');
+              this.userSrvc.removeRequest(this.user.id)
+            }
+          }
+        ]
+      });
+      alert.present();
+    } else if(this.currentUser.contacts.forEach(contact => contact.id === this.user.id)){
+      // if he's a friend
+      const alert = this.alertCtrl.create({
+        title: 'Confirm Like',
+        message: "Do you want to remove user from your contacts list?",
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+            }
+          },
+          {
+            text: 'Like',
+            handler: () => {
+              console.log('Remove');
+              this.userSrvc.removeFriend(this.user.id);
+            }
+          }
+        ]
+      });
+      alert.present();
+    }
+  }
+
 }

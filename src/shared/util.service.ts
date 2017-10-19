@@ -60,7 +60,7 @@ export class UtilService {
     alert.present();
   }
   // adds right or left to the position property depending on whether the sender is the current User
-  addMessagePosition(messages: Message[], currentUserId): any[]{
+  addMessagePosition(messages: any[], currentUserId): any[]{
     let res = [];
     for(var i = 0; i < messages.length; i++){
         res.push(messages[i])

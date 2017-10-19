@@ -200,31 +200,26 @@ export class UserService {
     .subscribe(currentUser => {
       this.getUserById(id)
       .subscribe(user => {
-        if(user.friendRequests.indexOf(currentUser.id) !== -1){
-          //remove the request
-          this.removeRequest(user.id);
-          // add to both contacts
-          this.addFriend(currentUser.id, user.id);
-        } else {
-          this.addRequest(currentUser.id, user.id);
-        }
+        // just add the / set teh value
+        this.addRequest(user.id, currentUser.id);
       })
     });
     // if not, add to the likes list
   }
   addRequest(toId: string, requestedId: string){
+    // add property to the likes / relationships list
+    // find a url
+    // set to true for currentUser
     console.log('added request from ', toId, ' to ', requestedId);
   }
-  addFriend(id: string, otherId: string){
-    console.log('added request from ', id, ' to ', otherId);
-  }
   removeRequest(id: string){
+    // find a url
+    // set to true for currentUser
     console.log('removeRequest method in user service called');
   }
-  removeFriend(id: string){
-    console.log('removeFriend method in user service called');
+  hasLiked(fromId: string, toId: string){
+    // check the relationship whether current user is set to true or not while the other is not
   }
-
   /*
   getUid(): Promise<string>{
     let res = new Promise<any>((resolve, reject) => {

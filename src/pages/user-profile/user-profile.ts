@@ -106,7 +106,7 @@ export class UserProfilePage {
           this.items = user.photos;
           this.backGround = user.photos[0].imgUrl;
           this.image = user.photos[0].imgUrl;
-          if(this.currentUser.friendRequests.indexOf(this.user.id) !== -1) {
+          if(this.userSrvc.hasLiked(this.currentUser.id, user.id)) {
             this.requested = true;
           } else if(this.currentUser.contacts.forEach(contact => contact.id === this.user.id)){
             this.friend = true;
@@ -151,56 +151,36 @@ export class UserProfilePage {
       ]
     });
     alert.present();
-  }    // call the like
+  }
   unlike() {
     // alert
-    // check if it's just a request or a friendship
-    if(this.currentUser.friendRequests.indexOf(this.user.id) !== -1){
-      const alert = this.alertCtrl.create({
-        title: 'Confirm Like',
-        message: "Do you want to cancel your friend request?",
-        buttons: [
-          {
-            text: 'Cancel',
-            role: 'cancel',
-            handler: () => {
-              console.log('Cancel clicked');
-            }
-          },
-          {
-            text: 'Remove',
-            handler: () => {
-              console.log('Request cancelled');
-              this.userSrvc.removeRequest(this.user.id)
-            }
-          }
-        ]
-      });
-      alert.present();
-    } else if(this.currentUser.contacts.forEach(contact => contact.id === this.user.id)){
-      // if he's a friend
-      const alert = this.alertCtrl.create({
-        title: 'Confirm Like',
-        message: "Do you want to remove user from your contacts list?",
-        buttons: [
-          {
-            text: 'Cancel',
-            role: 'cancel',
-            handler: () => {
-              console.log('Cancel clicked');
-            }
-          },
-          {
-            text: 'Like',
-            handler: () => {
-              console.log('Remove');
-              this.userSrvc.removeFriend(this.user.id);
-            }
-          }
-        ]
-      });
-      alert.present();
+    let message = 'Are you sure?';
+    if(this.currentUser.contacts.forEach(contact => contact.id === this.user.id){
+      message = "Do you want to cancel your friend request?";
+    } else {
+      message = "Do you want to remove user from your contacts list?"
     }
+    // check if it's just a request or a friendship
+    const alert = this.alertCtrl.create({
+      title: 'Confirm Like',
+      message: message,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Remove',
+          handler: () => {
+            console.log('Request cancelled');
+            this.userSrvc.removeRequest(this.user.id);
+          }
+        }
+      ]
+    });
+    alert.present();
   }
-
 }

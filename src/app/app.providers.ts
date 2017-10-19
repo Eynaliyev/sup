@@ -12,6 +12,7 @@ import { VipService } from '../services/services';
 import {UserService} from '../services/services';
 import {AuthService} from '../services/services';
 import {NotificationService} from '../services/services';
+import {RequestService} from '../services/services';
 // end import services
 
 /*
@@ -42,6 +43,7 @@ export class AppProviders {
             ChatroomService,
             VipService,
             UtilService,
+            RequestService,
             Geolocation,
             {provide: ErrorHandler, useClass: IonicErrorHandler}
             /* import services */
@@ -61,6 +63,7 @@ export class AppProviders {
             ChatroomService,
             VipService,
             UtilService,
+            RequestService,
             Geolocation,
             {provide: ErrorHandler, useClass: IonicErrorHandler}
             /* import services */

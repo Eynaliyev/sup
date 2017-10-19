@@ -155,7 +155,7 @@ export class UserProfilePage {
   unlike() {
     // alert
     let message = 'Are you sure?';
-    if(this.currentUser.contacts.forEach(contact => contact.id === this.user.id){
+    if(this.currentUser.contacts.forEach(contact => contact.id === this.user.id)){
       message = "Do you want to cancel your friend request?";
     } else {
       message = "Do you want to remove user from your contacts list?"

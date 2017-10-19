@@ -20,6 +20,8 @@ import {VIPPage} from '../pages/pages';
 import {PurchasePage} from '../pages/pages';
 import {WaitlistPage} from '../pages/pages';
 import {ParticipantsListPage} from '../pages/pages';
+import {NotificationsListPage} from '../pages/pages';
+import {RequestsListPage} from '../pages/pages';
 // components
 import { GalleryComponent } from '../components/components';
 import { ChatBubbleComponent } from '../components/components';
@@ -28,12 +30,10 @@ import { ProfileTimelineComponent } from '../components/components';
 import { BackButtonComponent } from '../components/components';
 import { MenuButtonComponent } from '../components/components';
 import firebase from 'firebase';
-
 // providers
 import { DefaultImageDirective } from '../shared/default-image.directive';
 import { PipeModule } from '../shared/pipe.module';
 import { AppProviders } from './app.providers';
-
 // AF2 Settings
 export const firebaseConfig = {
   apiKey: "AIzaSyDI22hmtv2clf3WYdo2y04z_h-eCfbv_F4",
@@ -65,6 +65,8 @@ export const firebaseConfig = {
     BackButtonComponent,
     MenuButtonComponent,
     ParticipantsListPage,
+    NotificationsListPage,
+    RequestsListPage,
     DefaultImageDirective
   ],
   imports: [
@@ -89,6 +91,8 @@ export const firebaseConfig = {
     PurchasePage,
     FilterPage,
     ParticipantsListPage,
+    NotificationsListPage,
+    RequestsListPage,
     WaitlistPage
   ],
   providers: AppProviders.getProviders()

@@ -7,10 +7,11 @@ import firebase from 'firebase';
 // pages
 import { MyProfilePage } from '../pages/pages';
 import { ContactsListPage } from '../pages/pages';
+import { NotificationsListPage } from '../pages/pages';
 import { VIPPage } from '../pages/pages';
-//import { SettingsPage } from '../pages/pages';
 import { MeetSomebodyPage } from '../pages/pages';
 import { LoginPage } from '../pages/pages';
+//import { SettingsPage } from '../pages/pages';
 // providers
 import { UserService } from '../services/services';
 // models
@@ -63,6 +64,7 @@ export class MyApp {
     this.pages = [
       { title: 'Meet people Nearby', component: MeetSomebodyPage, icon: 'ios-locate-outline' },
       { title: 'Contacts', component: ContactsListPage, icon: 'ios-chatboxes-outline' },
+      { title: 'Notifications', component: NotificationsListPage, icon: 'ios-chatboxes-outline' },
       { title: 'Edit Profile', component: MyProfilePage, icon: 'ios-contacts-outline' },
       /*
       { title: 'Settings', component: SettingsPage, icon: 'ios-settings-outline' }

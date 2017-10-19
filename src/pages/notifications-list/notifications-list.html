@@ -1,0 +1,19 @@
+<ion-content class="dark-bckg">
+  <menu-button></menu-button>
+      <span class="pageHeader">Notifications</span>
+  <ion-list class="venti-spacer" *ngIf="notifications">
+      <ion-item [ngClass]="animateClass" style="background-color: transparent;color: #cfcfcf !important;" *ngFor=" let notification of notifications">
+          <ion-thumbnail item-left *ngIf="notification.senderImage">
+              <img [src]="notification.senderImage" default="assets/images/user.png">
+          </ion-thumbnail>
+          <h2 style="text-transform: capitalize;">
+              <span style="text-transform: capitalize;">
+                <img *ngIf="notification.seen.indexOf(currentUser.id) === -1" class="notification" src="http://www.clker.com/cliparts/r/M/L/o/R/i/green-dot.svg.med.png">
+              </span></h2>
+          <p>{{notification.content}}</p>
+      </ion-item>
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

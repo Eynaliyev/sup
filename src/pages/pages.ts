@@ -10,3 +10,5 @@ export * from './user-profile/user-profile';
 export * from './vip/vip';
 export * from './waitlist/waitlist';
 export * from './participants-list/participants-list';
+export * from './notifications-list/notifications-list';
+export * from './requests-list/requests-list';

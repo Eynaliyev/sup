@@ -81,4 +81,10 @@ export class UtilService {
     }
     return res;
   }
+  //a dummy method for ocming up with different dates
+  createDate(n){
+    let time = new Date().getTime() - n;
+    let date = new Date(time);
+    return date;
+  }
 }

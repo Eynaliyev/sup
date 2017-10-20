@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Platform, MenuController, Nav  } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { LoadingController } from 'ionic-angular';
-//import firebase from 'firebase';
+import firebase from 'firebase';
 
 // pages
 import { MyProfilePage } from '../pages/pages';
@@ -43,7 +43,7 @@ export class MyApp {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-/*
+
 			firebase.initializeApp({
         apiKey: "AIzaSyBIPhiXirh6lV5ar219FOeE-d45RvwYmVQ",
         authDomain: "my-soup-6f9aa.firebaseapp.com",
@@ -51,7 +51,7 @@ export class MyApp {
         projectId: "my-soup-6f9aa",
         storageBucket: "",
         messagingSenderId: "732240331718"
-      });*/
+			});
       this.presentLoading();
       this.storage.get('introShown').then((result) => {
         if(result){

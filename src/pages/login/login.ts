@@ -22,7 +22,7 @@ export class LoginPage {
   }
   goToMeetSomebody(){
     this.navCtrl.setRoot(MeetSomebodyPage);
-	}/*
+	}
   facebookLogin(): void {
     var env = this;
     this.authService.facebookLogin()
@@ -41,5 +41,5 @@ export class LoginPage {
     );
     let loading = this.loadingCtrl.create();
     loading.present();
-  }*/
+  }
 }

@@ -17,7 +17,7 @@ export class AuthService {
   	private facebook: Facebook,
   	public userService: UserService) {
     console.log('Hello AuthService');
-  }
+		}/*
 	facebookLogin() {
 		//check for platform if web return a promise,
 		if(document.URL.includes('https://') || document.URL.includes('http://')){
@@ -64,5 +64,5 @@ export class AuthService {
 	}
  	logoutUser() {
 		return firebase.auth().signOut();
- 	}
+ 	}*/
 }

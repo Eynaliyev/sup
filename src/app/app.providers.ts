@@ -5,7 +5,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Geolocation } from '@ionic-native/geolocation';
 //import { Camera } from '@ionic-native/camera';
-//import { Facebook } from '@ionic-native/facebook';
+import { Facebook } from '@ionic-native/facebook';
 import { ChatroomService } from '../services/services';
 import { UtilService } from '../shared/util.service';
 import { VipService } from '../services/services';
@@ -34,7 +34,7 @@ export class AppProviders {
             UserService,
             NotificationService,
             //{provide: Camera, useClass: CameraMock},
-            //Facebook,
+            Facebook,
             AuthService,
             UtilService,
             StatusBar,
@@ -54,7 +54,7 @@ export class AppProviders {
             UserService,
             NotificationService,
             //Camera,
-            //Facebook,
+            Facebook,
             AuthService,
             UtilService,
             StatusBar,

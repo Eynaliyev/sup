@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, LoadingController } from 'ionic-angular';
 import { MeetSomebodyPage } from '../meet-somebody/meet-somebody';
 import { AuthService } from "../../services/services";
 import { UtilService } from "../../shared/util.service";
@@ -9,30 +9,37 @@ import { UtilService } from "../../shared/util.service";
 })
 export class LoginPage {
 
-  constructor(public navCtrl: NavController) {
+  constructor(
+    public navCtrl: NavController,
+    public loadingCtrl: LoadingController,
+    public utilService: UtilService,
+    public authService: AuthService
+
+  ) {
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
   }
-  goToMeetSomebody(params){
-    if (!params) params = {};
+  goToMeetSomebody(){
     this.navCtrl.setRoot(MeetSomebodyPage);
-  }/*
+  }
   facebookLogin(): void {
+    var env = this;
     this.authService.facebookLogin()
       .then( authData => {
         loading.dismiss().then( () => {
-          this.goToHome();
+					console.log('login suvvessful: ', authData);
+          env.goToMeetSomebody();
       });
-    }, error => {
+    }, error =>
       loading.dismiss().then( () => {
         this.utilService.doAlert(error.message, {
           text: "Ok",
           role: 'cancel'
         });
-      });
-    });
+      })
+    );
     let loading = this.loadingCtrl.create();
     loading.present();
-  }*/
+  }
 }

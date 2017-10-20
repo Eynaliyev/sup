@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { ChatroomPage } from '../pages';
+import { RequestsListPage } from '../pages';
 import { UserService } from '../../services/services';
 import {User} from '../../models/models';
 import {Contact} from '../../models/models';
@@ -42,10 +43,12 @@ export class ContactsListPage {
   }
   doInfinite(infiniteScroll) {
    //Begin async operation
-
      this.ngAfterViewInit().then(()=>{
        infiniteScroll.complete();
       });
+  }
+  viewRequests(){
+    this.navCtrl.push(RequestsListPage);
   }
   openChat(user){
   	this.navCtrl.push(ChatroomPage, {room: user.roomId})

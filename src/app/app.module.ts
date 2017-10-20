@@ -36,12 +36,12 @@ import { PipeModule } from '../shared/pipe.module';
 import { AppProviders } from './app.providers';
 // AF2 Settings
 export const firebaseConfig = {
-  apiKey: "AIzaSyDI22hmtv2clf3WYdo2y04z_h-eCfbv_F4",
-  authDomain: "huggable-9e981.firebaseapp.com",
-  databaseURL: "https://huggable-9e981.firebaseio.com",
-  projectId: "huggable-9e981",
-  storageBucket: "huggable-9e981.appspot.com",
-  messagingSenderId: "272489685620"
+	apiKey: "AIzaSyDI22hmtv2clf3WYdo2y04z_h-eCfbv_F4",
+	authDomain: "huggable-9e981.firebaseapp.com",
+	databaseURL: "https://huggable-9e981.firebaseio.com",
+	projectId: "huggable-9e981",
+	storageBucket: "huggable-9e981.appspot.com",
+	messagingSenderId: "272489685620"
 };
 
 @NgModule({

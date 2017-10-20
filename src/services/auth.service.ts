@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import firebase from 'firebase';
-//import { Facebook } from '@ionic-native/facebook';
+import { Facebook } from '@ionic-native/facebook';
 import {UserService} from '../services/services';
 /*
   Generated class for the AuthService provider.
@@ -14,25 +14,24 @@ import {UserService} from '../services/services';
 @Injectable()
 export class AuthService {
   constructor(public http: Http,
-  	//private facebook: Facebook,
+  	private facebook: Facebook,
   	public userService: UserService) {
     console.log('Hello AuthService');
   }
-  /*
-	facebookLogin(): firebase.Promise<any> {
+	facebookLogin() {
 		//check for platform if web return a promise,
 		if(document.URL.includes('https://') || document.URL.includes('http://')){
 			console.log("we're in the browser");
 			let resPromise = new Promise<any>((resolve, reject) => {
 				//set currentuser using the dummy data
 				resolve(
-			        this.userService.setCurrentUser({
-						name: "Rustam Eynaliyev",
-						email: "rustam.eynaliyev@gmail.com",
-						photoUrl: "https://scontent.xx.fbcdn.net/v/t1.0-1/p100x100/13001075_10208279436177586_7844301951605599393_n.jpg?oh=557408b1b135f7f79592b50473b9b3af&oe=59B9D2CD",
-						provider: "facebook.com",
-						uid: 10211310937803232
-			        })
+            this.userService.setCurrentUser({
+              name: "Rustam Eynaliyev",
+              email: "rustam.eynaliyev@gmail.com",
+              photoUrl: "https://scontent.xx.fbcdn.net/v/t1.0-1/p100x100/13001075_10208279436177586_7844301951605599393_n.jpg?oh=557408b1b135f7f79592b50473b9b3af&oe=59B9D2CD",
+              provider: "facebook.com",
+              uid: 10211310937803232
+            })
 				);
 			});
 			return resPromise;
@@ -63,7 +62,7 @@ export class AuthService {
 			}).catch((error) => { console.log(error) });
 		}
 	}
- 	logoutUser(): firebase.Promise<void> {
+ 	logoutUser() {
 		return firebase.auth().signOut();
- 	}*/
+ 	}
 }

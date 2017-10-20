@@ -9,15 +9,13 @@ import 'rxjs/add/operator/catch';
 import {Message} from '../models/models';
 import { User} from '../models/models';
 import {USER} from "./mock-user";
-
-/*
 import firebase from 'firebase';
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
-import { Camera } from 'ionic-native';
-*/
+//import { AngularFireDatabase, AngularFireObject, AngularFireList } from 'angularfire2/database';
+//import { Camera } from 'ionic-native';
 @Injectable()
 export class UserService {
   private user:User;
+  private currentUser:User;
 
 /*
   private contacts: FirebaseListObservable<any[]>;
@@ -148,6 +146,7 @@ constructor(
   updateProfile(user){
 
   }
+  */
   //set current user depending on whether there's somebody like this, or create a new one
   //check for presence of dummy data with arguments
   //if it's there, set current user to dummy data
@@ -157,11 +156,22 @@ constructor(
       localStorage.setItem('currentUser', JSON.stringify(dummy));
     } else {
       localStorage.setItem('currentUser', JSON.stringify(firebase.auth().currentUser.providerData[0]));
-      this.currentUser = this.toUser(firebase.auth().currentUser.providerData[0]);
+      /*this.currentUser = this.toUser(firebase.auth().currentUser.providerData[0]);
       let userId = JSON.parse(localStorage.getItem('currentUser')).uid;
       console.log('checking if the user is there: ', userId);
-      this.checkIfUserExists(userId);
+      this.checkIfUserExists(userId);*/
     }
+	}
+	/*
+  toUser(data): User{
+    let user = {
+      uid: data.uid,
+      name: data.displayName,
+      email: data.email,
+      photoUrl: data.photoURL,
+      provider: data.providerId
+    }
+    return user;
   }
   // Tests to see if /users/<userId> has any data.
   checkIfUserExists(id: string): void {
@@ -180,6 +190,7 @@ constructor(
       this.createUser(this.currentUser);
     }
   }
+
   // Get Info of a Single User
   getUserProfile(id: string): FirebaseObjectObservable<User> {
     return this.db.object(`/users/${id}`);
@@ -190,21 +201,13 @@ constructor(
     console.log('creating a new user in the back-end: ', userCredentials.uid);
     userObservable.set(this.toUser(this.currentUser));
   }
-  toUser(data): User{
-    let user = {
-      uid: data.uid,
-      name: data.displayName,
-      email: data.email,
-      photoUrl: data.photoURL,
-      provider: data.providerId
-    }
-    return user;
-  }
   //deleting a user from the database
   removeUser(id: string): void {
     let usersRef = this.db.list(`/users`)
     usersRef.remove(id);
   }
+      /*
+
   //logic for contacts list page
   // get list of contacts of the current user
   getUserContacts(uid): FirebaseListObservable<any[]> {

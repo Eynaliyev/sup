@@ -43,13 +43,15 @@ export class MyApp {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      firebase.initializeApp({
-        apiKey: "",
-        authDomain: "",
-        databaseURL: "",
+			/*
+			firebase.initializeApp({
+        apiKey: "AIzaSyBIPhiXirh6lV5ar219FOeE-d45RvwYmVQ",
+        authDomain: "my-soup-6f9aa.firebaseapp.com",
+        databaseURL: "https://my-soup-6f9aa.firebaseio.com",
+        projectId: "my-soup-6f9aa",
         storageBucket: "",
-        messagingSenderId: ""
-      });
+        messagingSenderId: "732240331718"
+      });*/
       this.presentLoading();
       this.storage.get('introShown').then((result) => {
         if(result){

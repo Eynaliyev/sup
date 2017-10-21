@@ -9,7 +9,7 @@ import 'rxjs/add/operator/catch';
 import {Message} from '../models/models';
 import { User} from '../models/models';
 import {USER} from "./mock-user";
-//import firebase from 'firebase';
+import firebase from 'firebase';
 //import { AngularFireDatabase, AngularFireObject, AngularFireList } from 'angularfire2/database';
 //import { Camera } from 'ionic-native';
 @Injectable()
@@ -151,16 +151,12 @@ constructor(
   //check for presence of dummy data with arguments
   //if it's there, set current user to dummy data
   setCurrentUser(dummy?: any): void{
-    if (dummy) {
-      console.log("setting current user to:", dummy);
-      localStorage.setItem('currentUser', JSON.stringify(dummy));
-    } else {
-      //localStorage.setItem('currentUser', JSON.stringify(firebase.auth().currentUser.providerData[0]));
+      localStorage.setItem('currentUser', JSON.stringify(firebase.auth().currentUser.providerData[0]));
+      console.log("setting current user to:", localStorage.getItem('currentUser'));
       /*this.currentUser = this.toUser(firebase.auth().currentUser.providerData[0]);
       let userId = JSON.parse(localStorage.getItem('currentUser')).uid;
       console.log('checking if the user is there: ', userId);
       this.checkIfUserExists(userId);*/
-    }
 	}
 	/*
   toUser(data): User{

@@ -3,13 +3,14 @@ import { NavController } from 'ionic-angular';
 import { UserService } from '../../services/services';
 import { RequestService } from '../../services/services';
 import {User} from '../../models/models';
-import {Contact} from '../../models/models';
+import {Request} from '../../models/models';
+
 @Component({
   selector: 'page-requests-list',
   templateUrl: 'requests-list.html'
 })
 export class RequestsListPage {
-  requests : any[] = [];
+  requests : Request[] = [];
   animateClass: any;
   currentUser: User;
 
@@ -30,6 +31,7 @@ export class RequestsListPage {
       this.userService.getCurrentUser().subscribe(user => {
         this.currentUser = user;
         this.requestsSrvc.getRequests(user.id).subscribe(requests => {
+					console.log("requests from the service: ", requests);
           let res = requests.sort((first, second) => {
             return second.date.getTime() - first.date.getTime();
           });

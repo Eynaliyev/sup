@@ -1,10 +1,9 @@
 export class Request {
     content: string;
-    date: Date;
     id: string;
+    date: Date;
     senderId: string;
-    seen: Array<string>;
-    roomId?: string;
     senderName?: string;
     senderImage?: string;
+    seen: Array<string>;
 }

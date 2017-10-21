@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
+import { Observable } from 'rxjs/Observable';
 import {NOTIFICATIONS} from "./mock-notifications";
 import {Notification} from '../models/models';
-import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class NotificationService {

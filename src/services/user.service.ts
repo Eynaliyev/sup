@@ -99,7 +99,10 @@ constructor(
     // find a url
     // set to true for currentUser
     console.log('removeRequest method in user service called');
-  }
+	}
+	block(id: string){
+		console.log('block method in user service called');
+	}
   hasLiked(fromId: string, toId: string){
     // check the relationship whether current user is set to true or not while the other is not
   }

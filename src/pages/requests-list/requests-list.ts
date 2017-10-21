@@ -4,6 +4,7 @@ import { UserService } from '../../services/services';
 import { RequestService } from '../../services/services';
 import {User} from '../../models/models';
 import {Request} from '../../models/models';
+import { AlertController } from 'ionic-angular';
 
 @Component({
   selector: 'page-requests-list',
@@ -13,11 +14,15 @@ export class RequestsListPage {
   requests : Request[] = [];
   animateClass: any;
   currentUser: User;
+	likeAlertPresented: boolean = false;
+	unlikeAlertPresented: boolean = false;
+	blockAlertPresented: boolean = false;
 
   constructor(
     public navCtrl: NavController,
-    private userService: UserService,
-    private requestsSrvc: RequestService
+		private requestsSrvc: RequestService,
+		private userSrvc: UserService,
+    public alertCtrl: AlertController
   ) {
     console.log('RequestsListPage initialized');
     this.animateClass = { 'zoom-in': true };
@@ -28,7 +33,7 @@ export class RequestsListPage {
   ngAfterViewInit() {
     return new Promise(resolve => {
       let env = this;
-      this.userService.getCurrentUser().subscribe(user => {
+      this.userSrvc.getCurrentUser().subscribe(user => {
         this.currentUser = user;
         this.requestsSrvc.getRequests(user.id).subscribe(requests => {
 					console.log("requests from the service: ", requests);
@@ -50,5 +55,99 @@ export class RequestsListPage {
      this.ngAfterViewInit().then(()=>{
        infiniteScroll.complete();
       });
+	}
+
+  like(id: string) {
+		if(!this.likeAlertPresented){
+			// alert
+			const alert = this.alertCtrl.create({
+				title: 'Confirm Like',
+				message: 'Do you want to add this person to contacts?',
+				buttons: [
+					{
+						text: 'Cancel',
+						role: 'cancel',
+						handler: () => {
+							console.log('Cancel clicked');
+						}
+					},
+					{
+						text: 'Like',
+						handler: () => {
+							console.log('Buy clicked');
+							this.userSrvc.like(id);
+						}
+					}
+				]
+			});
+			alert.present();
+			this.likeAlertPresented = true;
+		} else {
+			this.userSrvc.like(id);
+		}
+	}
+	block(id: string){
+		if(!this.blockAlertPresented){
+			const alert = this.alertCtrl.create({
+				title: 'Confirm Like',
+				message: "Do you want to block this contact? You won't be placed in the same room with them again.",
+				buttons: [
+					{
+						text: 'Cancel',
+						role: 'cancel',
+						handler: () => {
+							console.log('Cancel clicked');
+						}
+					},
+					{
+						text: 'Block',
+						handler: () => {
+							console.log('Request cancelled');
+							this.userSrvc.block(id);
+						}
+					}
+				]
+			});
+			alert.present();
+			this.blockAlertPresented = true;
+		} else {
+			this.userSrvc.block(id);
+		}
+  }
+  unlike(id: string){
+		if(!this.unlikeAlertPresented){
+    // alert
+    let message = 'Are you sure?';
+    if(this.currentUser.contacts.forEach(contact => contact.id === this.user.id)){
+      message = "Do you want to cancel your friend request?";
+    } else {
+      message = "Do you want to remove user from your contacts list?"
+    }
+    // check if it's just a request or a friendship
+    const alert = this.alertCtrl.create({
+      title: 'Confirm Like',
+      message: message,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Remove',
+          handler: () => {
+            console.log('Request cancelled');
+            this.userSrvc.removeRequest(id);
+          }
+        }
+      ]
+    });
+		alert.present();
+		this.unlikeAlertPresented = true;
+		} else {
+			this.userSrvc.removeRequest(id);
+		}
   }
 }

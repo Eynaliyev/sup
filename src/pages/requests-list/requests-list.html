@@ -1,6 +1,6 @@
 <ion-content class="dark-bckg">
   <back-button></back-button>
-      <span class="pageHeader">Messages</span>
+      <span class="pageHeader">Friend Requests</span>
   <ion-list class="venti-spacer" *ngIf="requests">
       <ion-item [ngClass]="animateClass" style="background-color: transparent;color: #cfcfcf !important;" *ngFor="let request of requests">
           <ion-thumbnail item-left *ngIf="request.senderImage">
@@ -9,7 +9,17 @@
           <h2 style="text-transform: capitalize;">{{request.content}}
               <span style="text-transform: capitalize;">
                 <img *ngIf="request.seen.indexOf(currentUser.id) === -1" class="notification" src="http://www.clker.com/cliparts/r/M/L/o/R/i/green-dot.svg.med.png">
-              </span></h2>
+							</span></h2>
+					<ion-fab class="right">
+						<button ion-fab color="light" (click)="block()" class="menu-btn-border">
+								<ion-icon name="md-close"></ion-icon>
+						</button>
+					</ion-fab>
+					<ion-fab class="right" style="margin-right: 76px;">
+						<button ion-fab (click)="like()" color="light" class="menu-btn-border">
+								<ion-icon name="ios-heart-outline"></ion-icon>
+						</button>
+					</ion-fab>
       </ion-item>
   </ion-list>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">

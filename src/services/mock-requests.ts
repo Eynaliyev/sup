@@ -1,4 +1,4 @@
-export let NOTIFICATIONS = [
+export let REQUESTS = [
   {
     content: 'liked',
     id: '1',

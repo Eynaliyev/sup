@@ -52,7 +52,7 @@ export class AuthService {
 				return firebase.auth().signInWithCredential(facebookCredential)
 				.then((success) => {
 					console.log("Firebase success: ", JSON.stringify(success));
-					console.log('current user.providerData: ', JSON.stringify(firebase.auth().currentUser.providerData[0]));
+					//console.log('current user.providerData: ', JSON.stringify(firebase.auth().currentUser.providerData[0]));
 					// check if the user exists in backend
 					// if yes,
 						// set the current user in the localstorage to the one recovered from there

@@ -1,12 +1,10 @@
 <ion-content class="dark-bckg">
   <menu-button></menu-button>
-  <!--
   <ion-fab right top>
     <button ion-fab color="dark" (click)="viewRequests()" class="menu-btn-border">
-        <ion-icon name="md-bell-outline"></ion-icon>
+        <ion-icon name="ios-person-add-outline" style="font-size: 4rem;"></ion-icon>
     </button>
   </ion-fab>
-  -->
   <span class="pageHeader">Messages</span>
   <ion-list class="venti-spacer" *ngIf="users">
       <ion-item [ngClass]="animateClass" style="background-color: transparent;color: #cfcfcf !important;" *ngFor=" let user of users " (click)="openChat(user)">

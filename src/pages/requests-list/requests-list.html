@@ -1,10 +1,10 @@
 <ion-content class="dark-bckg">
-  <menu-button></menu-button>
+  <back-button></back-button>
       <span class="pageHeader">Messages</span>
   <ion-list class="venti-spacer" *ngIf="requests">
       <ion-item [ngClass]="animateClass" style="background-color: transparent;color: #cfcfcf !important;" *ngFor="let request of requests">
           <ion-thumbnail item-left *ngIf="request.senderImage">
-              <img [src]="request.senderImage" default="assets/images/user.png">
+              <img [src]="request.senderImage" class="profile-picture" default="assets/images/user.png">
           </ion-thumbnail>
           <h2 style="text-transform: capitalize;">{{request.content}}
               <span style="text-transform: capitalize;">

@@ -9,7 +9,7 @@
   <ion-list class="venti-spacer" *ngIf="users">
       <ion-item [ngClass]="animateClass" style="background-color: transparent;color: #cfcfcf !important;" *ngFor=" let user of users " (click)="openChat(user)">
           <ion-thumbnail item-left>
-              <img [src]="user.profileImgUrl" default="assets/images/user.png">
+              <img [src]="user.profileImgUrl" class="profile-picture" default="assets/images/user.png">
           </ion-thumbnail>
           <h2 style="text-transform: capitalize;">{{user.name}}
               <span style="text-transform: capitalize;">

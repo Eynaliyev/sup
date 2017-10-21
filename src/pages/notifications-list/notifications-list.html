@@ -4,7 +4,7 @@
   <ion-list class="venti-spacer" *ngIf="notifications">
       <ion-item [ngClass]="animateClass" style="background-color: transparent;color: #cfcfcf !important;" *ngFor=" let notification of notifications">
           <ion-thumbnail item-left *ngIf="notification.senderImage">
-              <img [src]="notification.senderImage" default="assets/images/user.png">
+              <img [src]="notification.senderImage" class="profile-picture" default="assets/images/user.png">
           </ion-thumbnail>
           <h2 style="text-transform: capitalize;">{{notification.content}}
               <span style="text-transform: capitalize;">

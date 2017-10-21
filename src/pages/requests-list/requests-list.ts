@@ -19,7 +19,7 @@ export class RequestsListPage {
     private userService: UserService,
     private requestsSrvc: RequestService
   ) {
-    console.log('ContactsListPage initialized');
+    console.log('RequestsListPage initialized');
     this.animateClass = { 'zoom-in': true };
 
   }

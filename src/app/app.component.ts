@@ -45,12 +45,12 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
 
 			firebase.initializeApp({
-        apiKey: "AIzaSyBIPhiXirh6lV5ar219FOeE-d45RvwYmVQ",
-        authDomain: "my-soup-6f9aa.firebaseapp.com",
-        databaseURL: "https://my-soup-6f9aa.firebaseio.com",
-        projectId: "my-soup-6f9aa",
-        storageBucket: "",
-        messagingSenderId: "732240331718"
+				apiKey: "AIzaSyDI22hmtv2clf3WYdo2y04z_h-eCfbv_F4",
+				authDomain: "huggable-9e981.firebaseapp.com",
+				databaseURL: "https://huggable-9e981.firebaseio.com",
+				projectId: "huggable-9e981",
+				storageBucket: "huggable-9e981.appspot.com",
+				messagingSenderId: "272489685620"
 			});
       this.presentLoading();
       this.storage.get('introShown').then((result) => {

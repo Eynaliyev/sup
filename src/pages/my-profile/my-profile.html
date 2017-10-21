@@ -8,24 +8,6 @@
         <img class="user-images" [src]="image.imgUrl" alt="">
       </ion-slide>
     </ion-slides>
-    <ion-grid class="action-btn">
-      <ion-row>
-        <ion-col>
-          <ion-fab style="left: 20%;">
-            <button (click)="addImage()" ion-fab class="img-btn" color="white" margin-right left bottom>
-              <ion-icon style="font-size: 4rem;" name="add" color="fb-color"></ion-icon>
-            </button>
-          </ion-fab>
-        </ion-col>
-        <ion-col>
-          <ion-fab style="right: 20%;">
-            <button (click)="deleteImage()" ion-fab class="img-btn" color="white" margin-right right bottom>
-              <ion-icon style="font-size: 4rem;" name="close" color="fb-color"></ion-icon>
-            </button>
-          </ion-fab>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
   </div>
   <div *ngIf="currentTab == 'about'" class="venti-spacer">
     <ion-list *ngIf="user">

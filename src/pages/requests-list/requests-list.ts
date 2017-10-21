@@ -86,47 +86,14 @@ export class RequestsListPage {
 			this.userSrvc.like(id);
 		}
 	}
-	block(id: string){
-		if(!this.blockAlertPresented){
-			const alert = this.alertCtrl.create({
-				title: 'Confirm Like',
-				message: "Do you want to block this contact? You won't be placed in the same room with them again.",
-				buttons: [
-					{
-						text: 'Cancel',
-						role: 'cancel',
-						handler: () => {
-							console.log('Cancel clicked');
-						}
-					},
-					{
-						text: 'Block',
-						handler: () => {
-							console.log('Request cancelled');
-							this.userSrvc.block(id);
-						}
-					}
-				]
-			});
-			alert.present();
-			this.blockAlertPresented = true;
-		} else {
-			this.userSrvc.block(id);
-		}
-  }
+	// should remove request from requests list, while keeping it as pending in the other person
   unlike(id: string){
 		if(!this.unlikeAlertPresented){
     // alert
-    let message = 'Are you sure?';
-    if(this.currentUser.contacts.forEach(contact => contact.id === this.user.id)){
-      message = "Do you want to cancel your friend request?";
-    } else {
-      message = "Do you want to remove user from your contacts list?"
-    }
     // check if it's just a request or a friendship
     const alert = this.alertCtrl.create({
       title: 'Confirm Like',
-      message: message,
+      message: "Do you want to refuse friend request? Don't worry we won't tell.",
       buttons: [
         {
           text: 'Cancel',

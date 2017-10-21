@@ -80,6 +80,9 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
+.btn-top-align{
+	top: 10px;
+}
 .right {
 	right: 0;
 }

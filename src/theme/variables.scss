@@ -80,7 +80,25 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
-
+.gallery-bckg{
+	margin: 0px 0px 0px 0px;
+	position: absolute;
+	width: 100%;
+	top:0;
+	height:100%;
+	background: none;
+}/*
+.selected-img{
+	padding: 5px;
+	width: auto;
+	margin: 0 auto;
+	padding-bottom: 90px;
+	height: 95%;
+}*/
+.actn-btn{
+	width: 76px;
+	height: 76px;
+}
 .notification{
   max-width: 9px;
   margin-left: 5px;

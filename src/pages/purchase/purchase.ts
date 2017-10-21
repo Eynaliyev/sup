@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {VipService} from '../../services/services';
 
 /**
  * Generated class for the PurchasePage page.
@@ -16,8 +17,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class PurchasePage {
 	selected;
   constructor(
-    public navCtrl: NavController, 
-    public navParams: NavParams
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public vipSrvc: VipService
   ) { }
   select(btn){
   	this.selected = btn;
@@ -27,7 +29,8 @@ export class PurchasePage {
     console.log('ionViewDidLoad PurchaseVipPage');
   }
   buyVIP(){
-  	console.log(this.selected);
+    console.log(this.selected);
+    this.vipSrvc.buyVIP(this.selected);
   }
   back() {
     this.navCtrl.pop();

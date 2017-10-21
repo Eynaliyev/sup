@@ -1,20 +1,17 @@
 import {Message} from './message.model';
 
 interface Participant {
-    id: number;
+    id: string;
     name: string;
-    blocked: boolean;
+    votes: number;
     profileImgUrl: string;
-    private: boolean;
 }
 
 export class Chatroom {
   constructor(
-    public id: number,
+    public id: string,
     public participants: Participant[],
-    public meassages: Message[],
-    public imgUrl?: string,
-    public coverImgUrl?: string,
+    public messages: Message[],
     public blocked?: Participant[],
     public warnings?: Participant[],
   ) {  }

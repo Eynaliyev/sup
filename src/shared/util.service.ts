@@ -60,7 +60,7 @@ export class UtilService {
     alert.present();
   }
   // adds right or left to the position property depending on whether the sender is the current User
-  addMessagePosition(messages: Message[], currentUserId): any[]{
+  addMessagePosition(messages: any[], currentUserId): any[]{
     let res = [];
     for(var i = 0; i < messages.length; i++){
         res.push(messages[i])
@@ -80,5 +80,11 @@ export class UtilService {
       res[i].time = this.timeSince(messages[i].date);
     }
     return res;
+  }
+  //a dummy method for ocming up with different dates
+  createDate(n){
+    let time = new Date().getTime() - n;
+    let date = new Date(time);
+    return date;
   }
 }

@@ -1,5 +1,9 @@
 import { Component, trigger, state, style, transition, animate, keyframes } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { UserService } from '../../services/services';
+import {User} from '../../models/models';
+import { UtilService } from '../../shared/util.service';
+import { AlertController } from 'ionic-angular';
 
 @Component({
   selector: 'page-user-profile',
@@ -61,8 +65,8 @@ import { NavController, NavParams } from 'ionic-angular';
           ])
       ]),
       trigger('heroState', [
-          state('zoom', style({ 
-              transform: 'translateX(0) scale(1)' 
+          state('zoom', style({
+              transform: 'translateX(0) scale(1)'
           })),
           transition('* => zoom', [
               animate('800ms ease-in', keyframes([
@@ -73,38 +77,43 @@ import { NavController, NavParams } from 'ionic-angular';
   ]
 })
 export class UserProfilePage {
+  user: User;
+  currentUser: User;
   tab: string = "vote";
   backGround: any;
   animateClass: any;
   image: any;
-  items: any = [
-      { name: 'test', image: 'assets/users/images/1/1.jpg' },
-      { name: 'test', image: 'assets/users/images/1/2.jpg' },
-      { name: 'test', image: 'assets/users/images/1/3.jpg' },
-      { name: 'test', image: 'assets/users/images/1/4.jpg' },
-      { name: 'test', image: 'assets/users/images/1/3.jpg' },
-      { name: 'test', image: 'assets/users/images/1/4.jpg' },
-      { name: 'test', image: 'assets/users/images/1/1.jpg' },
-      { name: 'test', image: 'assets/users/images/1/2.jpg' },
-      { name: 'test', image: 'assets/users/images/1/3.jpg' },
-      { name: 'test', image: 'assets/users/images/1/4.jpg' },
-      { name: 'test', image: 'assets/users/images/1/3.jpg' },
-      { name: 'test', image: 'assets/users/images/1/4.jpg' }
-      
-  ];
-  data = { vote: 'assets/users/images/1/1.jpg', photos: 'https://s-media-cache-ak0.pinimg.com/236x/b3/1c/ce/b31cceccea15b00977c77fa7018345f9.jpg', about: 'assets/users/images/1/1.jpg', profile: 'assets/users/images/1/1.jpg' }
-  
+  items: any = [];
+  friend: boolean = false;
+  requested: boolean = false;
+
   constructor(
-    public navCtrl: NavController,
-    public navParams: NavParams) {
+    private navCtrl: NavController,
+    private navParams: NavParams,
+    private userSrvc: UserService,
+    private utilSrvc: UtilService,
+    public alertCtrl: AlertController
+  ) {
       console.log(this.navParams.data);
-      /*
-      let id = this.navParams.data.get('id');
-      let name = this.navParams.data.get('name');
-      */
-      this.backGround = 'assets/users/images/1/1.jpg';
-      this.image = 'assets/users/images/1/1.jpg';
-      setTimeout(function() {}, 800);
+      let id = this.navParams.get('user');
+      this.userSrvc.getCurrentUser()
+      .subscribe(user => {
+        this.currentUser = user;
+        console.log('currentUser in userProfile: ', this.currentUser);
+        this.userSrvc.getUserById(id)
+        .subscribe(user => {
+          this.user = user;
+          this.items = user.photos;
+          this.backGround = user.photos[0].imgUrl;
+          this.image = user.photos[0].imgUrl;
+          if(this.userSrvc.hasLiked(this.currentUser.id, user.id)) {
+            this.requested = true;
+          } else if(this.currentUser.contacts.forEach(contact => contact.id === this.user.id)){
+            this.friend = true;
+          }
+          console.log('image, background, user in user profile: ', this.image, this.backGround, this.user);
+        });
+      });
       this.animateClass = { 'zoom-in': true };
   }
   ionViewDidLoad() {
@@ -113,15 +122,65 @@ export class UserProfilePage {
   changeImage(image) {
     this.image = image
   }
-
-  changeTab(tab) {
-      this.backGround = this.data[tab]
-  }
-
   getHeight(tab){
       var height = "";
       if(tab == 'vote')
       height = "hidden";
       return height;
+  }
+  like() {
+    // alert
+    const alert = this.alertCtrl.create({
+      title: 'Confirm Like',
+      message: 'Do you want to add this person to contacts?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Like',
+          handler: () => {
+            console.log('Buy clicked');
+            this.userSrvc.like(this.user.id);
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+  unlike() {
+    // alert
+    let message = 'Are you sure?';
+    if(this.currentUser.contacts.forEach(contact => contact.id === this.user.id)){
+      message = "Do you want to cancel your friend request?";
+    } else {
+      message = "Do you want to remove user from your contacts list?"
+    }
+    // check if it's just a request or a friendship
+    const alert = this.alertCtrl.create({
+      title: 'Confirm Like',
+      message: message,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Remove',
+          handler: () => {
+            console.log('Request cancelled');
+            this.userSrvc.removeRequest(this.user.id);
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 }

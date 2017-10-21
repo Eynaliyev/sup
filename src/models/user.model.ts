@@ -1,54 +1,58 @@
-import {Message} from './message.model';
-
+import {Message} from './models';
+interface VipStatus{
+  vip: boolean;
+  expiryDate: Date;
+}
 interface Photo {
-    id: number;
     imgUrl: string;
     title?: string;
 }
+export interface Language {
+  id: string;
+  name: string;
+}
 interface Interest {
-    id: number;
+    id: string;
     name: string;
     imgUrl: string;
 }
-interface Contact {
-    id: number;
+export interface Contact {
+    id: string;
     name: string;
-    canSeeMe: boolean;
     profileImgUrl: string;
-    wantToSeeActivity: boolean;
+    roomId: string;
+    lastMessage: Message;
 }
-interface Fact {
-    id: number,
-    date: string,
-    text: string,
+interface SocialProfile{
+  networkName: string;
+  id: string;
 }
 
 export class User {
   constructor(
-    public id: number,
+    public id: string,
     public firstName: string,
     public lastName: string,
-    public status: string,
+    public relationshipStatus: string,
     public universityName: string,
     public birthday: string,
     public gender: string,
     public about: string,
-    public job: string,
+    public company: string,
     public profession: string,
-    public history: Fact[],
     public currentLocation: string,
+    public age: number,
     public contacts: Contact[],
-    public meassages: Message[],
-    public phoneNumbers?: string[],
-    public email?: string,
-    public currentRoomId?: number,
-    public facebook?: string,
-    public google?: string,
+    public friendRequests: string[],
+    public currentCoords?: number[],
+    public currentRoomId?: string,
+    public socialProfiles?: SocialProfile[],
     public profilePhoto?: Photo,
     public photos?: Photo[],
-    public coverPhoto?: Photo,
     public interests?: Interest[],
     public warning?: string,
+    public languages?: Language[],
     public reputationScore?: number,
+    public vipStatus?: VipStatus
   ) {  }
 }

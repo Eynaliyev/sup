@@ -16,7 +16,6 @@ export class GalleryComponent {
 
   @Output()
   change: EventEmitter<number> = new EventEmitter<number>();
-
   image: any;
   animateClass: any;
 

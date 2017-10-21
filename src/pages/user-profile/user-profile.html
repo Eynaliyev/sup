@@ -1,13 +1,18 @@
 <ion-content [ngClass]="animateClass" [ngStyle]="{'background-image': 'url(' + backGround + ')'}" style="background-size: cover;position: relative;">
   <back-button></back-button>
+  <!--
   <ion-fab *ngIf="tab == 'vote'" style="left: 27%;" left bottom>
       <button ion-fab color="light" style="width: 76px;height: 76px;">
           <ion-icon style="font-size: 4rem;" name="md-close"></ion-icon>
       </button>
   </ion-fab>
-  <ion-fab *ngIf="tab == 'vote'" style="right: 27%;" right bottom>
-      <button ion-fab color="light" style="width: 76px;height: 76px;">
-          <ion-icon style="font-size: 4rem;" name="ios-heart-outline"></ion-icon>
+-->
+  <ion-fab right top *ngIf="currentUser">
+      <button ion-fab (click)="like()" color="dark" class="menu-btn-border" *ngIf="!friend && !requested">
+          <ion-icon name="ios-heart-outline"></ion-icon>
+      </button>
+      <button ion-fab (click)="unlike()" color="dark" class="menu-btn-border" *ngIf="friend || requested">
+          <ion-icon name="ios-heart"></ion-icon>
       </button>
   </ion-fab>
   <div [ngSwitch]="tab">
@@ -15,42 +20,45 @@
       </div>
       <div *ngSwitchCase="'photos'">
           <ion-card [ngClass]="animateClass" style="margin: 0px 0px 0px 0px;position: absolute;width: 100%;top:0;height:100%;background: none;">
-              <img style="padding: 5px;width: auto;margin: 0 auto;padding-bottom: 90px;height: 95%;" src={{image}} />
+              <img style="padding: 5px;width: auto;margin: 0 auto;padding-bottom: 90px;height: 95%;" [src]="image" />
           </ion-card>
       </div>
       <div *ngSwitchCase="'about'">
-          <profile-timeline></profile-timeline>
-      </div>
+          <profile-timeline [currentUser]="currentUser" [user]="user"></profile-timeline>
+      </div><!--
       <div *ngSwitchCase="'profile'">
           <profile-posts></profile-posts>
-      </div>
+      </div>-->
   </div>
 </ion-content>
 <ion-footer>
   <div [ngSwitch]="tab">
       <div *ngSwitchCase="'vote'">
-          <div [ngClass]="animateClass" [style.display]="getHeight(tab)" style="height:50px;background: rgba(0, 0, 0, 0.5);">
-              <span class="nameDetails"><span style="">Alice Mennell</span> <span style="padding: 11px;background: rgba(211, 124, 166, 0.61);position: absolute;right: 20px;top: -10px;">22</span></span>
+          <div [ngClass]="animateClass" [style.display]="getHeight(tab)" class="profile-info">
+              <span class="nameDetails"><span class="light-text">{{user.firstName}} {{user.lastName}}</span>
+              <span class="usr-profile-age-label">{{user.age}}</span></span>
           </div>
       </div>
       <div *ngSwitchCase="'photos'">
           <gallery [data]="items" (change)="changeImage($event)"></gallery>
-          <div [ngClass]="animateClass" style="height: 50px;background: rgba(0, 0, 0, 0.5);">
-              <span class="nameDetails"><span style="">Photos of Alice</span></span>
+          <div [ngClass]="animateClass" class="profile-info">
+              <span class="nameDetails"><span class="light-text">Photos of {{user.firstName}}</span></span>
           </div>
       </div>
       <div *ngSwitchCase="'about'">
-          <div [ngClass]="animateClass" style="height: 50px;background: rgba(0, 0, 0, 0.5);">
-              <span class="nameDetails"><span style="">About Alice</span></span>
+          <div [ngClass]="animateClass" class="profile-info">
+              <span class="nameDetails"><span class="light-text">About {{user.firstName}}</span></span>
           </div>
-      </div><!--
+      </div>
+      <!--
       <div *ngSwitchCase="'profile'">
-          <div [ngClass]="animateClass" style="height: 50px;background: rgba(0, 0, 0, 0.5);">
-              <span class="nameDetails"><span style="">Posts from Alice</span></span>
+          <div [ngClass]="animateClass" class="profile-info">
+              <span class="nameDetails"><span class="light-text">Posts from Alice</span></span>
           </div>
-      </div>-->
+      </div>
+      -->
   </div>
-  <ion-segment [(ngModel)]="tab" (ionChange)="changeTab(tab)" color='dark'>
+  <ion-segment [(ngModel)]="tab" color='dark'>
       <ion-segment-button [@flyInTopSlow4]="0" style="background: #df69a1;color: white;height: 60px;padding-top: 10px;" value="vote">
           <ion-icon name="ios-heart-outline" item-left></ion-icon>
       </ion-segment-button>
@@ -59,9 +67,11 @@
       </ion-segment-button>
       <ion-segment-button [@flyInTopSlow2]="0" style="background: #8649c8;color: white;height: 60px;padding-top: 10px;" value="about">
           <ion-icon name="ios-person-outline" item-left></ion-icon>
-      </ion-segment-button><!--
+      </ion-segment-button>
+      <!--
       <ion-segment-button [@flyInTopSlow1]="0" style="background: #ffd36a;color: white;height: 60px;padding-top: 10px;" value="profile">
           <ion-icon name="ios-paper-outline" item-left></ion-icon>
-      </ion-segment-button>-->
+      </ion-segment-button>
+    -->
   </ion-segment>
 </ion-footer>

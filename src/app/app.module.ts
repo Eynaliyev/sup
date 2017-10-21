@@ -1,12 +1,11 @@
 // imports
-import { NgModule, ErrorHandler } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
-import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { IonicApp, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HttpModule } from '@angular/http';
 import { IonicStorageModule } from '@ionic/storage';
-
 // declarations
 // pages
 import { MeetSomebodyPage } from '../pages/pages';
@@ -21,6 +20,8 @@ import {VIPPage} from '../pages/pages';
 import {PurchasePage} from '../pages/pages';
 import {WaitlistPage} from '../pages/pages';
 import {ParticipantsListPage} from '../pages/pages';
+import {NotificationsListPage} from '../pages/pages';
+import {RequestsListPage} from '../pages/pages';
 // components
 import { GalleryComponent } from '../components/components';
 import { ChatBubbleComponent } from '../components/components';
@@ -28,15 +29,12 @@ import { ProfilePostsComponent } from '../components/components';
 import { ProfileTimelineComponent } from '../components/components';
 import { BackButtonComponent } from '../components/components';
 import { MenuButtonComponent } from '../components/components';
-
+import firebase from 'firebase';
 // providers
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import {UserService} from '../services/services';
-import {ChatroomService} from '../services/services';
-import {MessageService} from '../services/services';
-import {UtilService} from '../shared/util.service';
-import {DefaultImageDirective} from '../shared/default-image.directive';
+import { DefaultImageDirective } from '../shared/default-image.directive';
+import { PipeModule } from '../shared/pipe.module';
+import { AppProviders } from './app.providers';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -58,12 +56,15 @@ import {DefaultImageDirective} from '../shared/default-image.directive';
     BackButtonComponent,
     MenuButtonComponent,
     ParticipantsListPage,
+    NotificationsListPage,
+    RequestsListPage,
     DefaultImageDirective
   ],
   imports: [
     BrowserModule,
     HttpModule,
     BrowserAnimationsModule,
+    PipeModule.forRoot(),
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot()
   ],
@@ -81,16 +82,11 @@ import {DefaultImageDirective} from '../shared/default-image.directive';
     PurchasePage,
     FilterPage,
     ParticipantsListPage,
+    NotificationsListPage,
+    RequestsListPage,
     WaitlistPage
   ],
-  providers: [
-    StatusBar,
-    SplashScreen,
-    UserService,
-    ChatroomService,
-    MessageService,
-    UtilService,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
-  ]
+  providers: AppProviders.getProviders()
+
 })
 export class AppModule {}

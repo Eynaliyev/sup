@@ -1,9 +1,10 @@
 export class Message {
     content: string;
     date: Date;
-    id: number;
-    senderId: number;
-    roomId: number;
+    id: string;
+    senderId: string;
+    roomId: string;
     senderName: string;
     senderImage: string;
+    seen: Array<string>;
 }

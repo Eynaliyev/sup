@@ -1,14 +1,23 @@
 <ion-content class="dark-bckg">
   <menu-button></menu-button>
-      <span class="pageHeader">Messages</span>
-  <ion-list class="lower">
+  <!--
+  <ion-fab right top>
+    <button ion-fab color="dark" (click)="viewRequests()" class="menu-btn-border">
+        <ion-icon name="md-bell-outline"></ion-icon>
+    </button>
+  </ion-fab>
+  -->
+  <span class="pageHeader">Messages</span>
+  <ion-list class="venti-spacer" *ngIf="users">
       <ion-item [ngClass]="animateClass" style="background-color: transparent;color: #cfcfcf !important;" *ngFor=" let user of users " (click)="openChat(user)">
           <ion-thumbnail item-left>
-              <img src="{{user.picture.large}}" default="assets/images/user.png">
+              <img [src]="user.profileImgUrl" default="assets/images/user.png">
           </ion-thumbnail>
-          <h2 style="text-transform: capitalize;">{{user.name.first}} {{user.name.last}}
-              <span style="text-transform: capitalize;">{{user.name.first}}<img *ngIf="user.gender == 'female'" style="max-width: 9px;margin-left: 5px;" src="http://www.clker.com/cliparts/r/M/L/o/R/i/green-dot.svg.med.png"></span></h2>
-          <p>Hello, how are you ? </p>
+          <h2 style="text-transform: capitalize;">{{user.name}}
+              <span style="text-transform: capitalize;">
+                <img *ngIf="user.lastMessage.seen.indexOf(currentUser.id) === -1" class="notification" src="http://www.clker.com/cliparts/r/M/L/o/R/i/green-dot.svg.med.png">
+              </span></h2>
+          <p>{{user.lastMessage.content}}</p>
       </ion-item>
   </ion-list>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">

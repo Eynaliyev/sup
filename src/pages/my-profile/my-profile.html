@@ -1,79 +1,91 @@
-<ion-content no-bounce padding id="page7" class="dark-bckg">
+<ion-content no-bounce padding class="dark-bckg">
   <menu-button></menu-button>
   <span class="pageHeader">My Profile</span>
   <!--image slide-->
-  <div class="rlt">
-    <ion-slides pager>
-      <ion-slide *ngFor="let image of user.images">
-        <img src="{{ image }}" alt="">
+  <div class="rlt tall-spacer" *ngIf="currentTab == 'photos'">
+    <ion-slides pager *ngIf="user" (ionSlideDidChange)="slideChanged()">
+      <ion-slide *ngFor="let image of user.photos">
+        <img class="user-images" [src]="image.imgUrl" alt="">
       </ion-slide>
     </ion-slides>
     <ion-grid class="action-btn">
       <ion-row>
-        <ion-col text-center>
-          <button ion-button color="white" margin-right (click)="toggleFav()">
-            <ion-icon name="add" color="fb-color" (click)="addImage()"></ion-icon>
-          </button>
+        <ion-col>
+          <ion-fab style="left: 20%;">
+            <button (click)="addImage()" ion-fab class="img-btn" color="white" margin-right left bottom>
+              <ion-icon style="font-size: 4rem;" name="add" color="fb-color"></ion-icon>
+            </button>
+          </ion-fab>
         </ion-col>
-        <ion-col text-center>
-          <button ion-button color="white" margin-right (click)="toggleLike()">
-            <ion-icon name="close" color="fb-color" (click)="deleteImage()"></ion-icon>
-          </button>
+        <ion-col>
+          <ion-fab style="right: 20%;">
+            <button (click)="deleteImage()" ion-fab class="img-btn" color="white" margin-right right bottom>
+              <ion-icon style="font-size: 4rem;" name="close" color="fb-color"></ion-icon>
+            </button>
+          </ion-fab>
         </ion-col>
       </ion-row>
     </ion-grid>
   </div>
-
-  <ion-list id="myProfile-list9" class="lower">
-    <ion-item color="none" id="myProfile-list-item39">
-      <ion-avatar item-left>
-        <img default="assets/images/user.png"/>
-      </ion-avatar>
-      <h2>
-        Rustam Eynaliyev
-      </h2>
-    </ion-item>
-    <ion-item id="myProfile-textarea1">
-      <ion-label>
-        About me...
-      </ion-label>
-      <ion-textarea placeholder=""></ion-textarea>
-    </ion-item>
-    <ion-item id="meetSomebody-list-item-container1" *ngIf="languages">
-      <div id="meetSomebody-markdown2" class="show-list-numbers-and-dots">
-        <p style="margin-top:0px;color:#000000;">
-          <strong>
-            {{languages}}
-          </strong>
-        </p>
-      </div>
-    </ion-item>
-    <ion-item>
-      <ion-label *ngIf="!languages">Languages I speak:</ion-label>
-      <ion-label *ngIf="languages" class="alert">Change Languages:</ion-label>
-      <ion-select [(ngModel)]="languages" multiple="true">
-        <ion-option value="English">English</ion-option>
-        <ion-option value="Spanish">Spanish</ion-option>
-        <ion-option value="German">German</ion-option>
-        <ion-option value="French">French</ion-option>
-        <ion-option value="Italian">Italian</ion-option>
-        <ion-option value="Mandarin">Mandarin</ion-option>
-      </ion-select>
-    </ion-item>
-    <ion-item color="none" id="myProfile-list-item43">
-      <ion-icon name="pin" item-left></ion-icon>
-      Krakow, Poland
-    </ion-item>
-    <ion-item color="none" id="myProfile-list-item44">
-      Age: 25
-    </ion-item>
-    <ion-item color="none" id="myProfile-list-item45">
-      University: Indiana University, Bloomington
-    </ion-item>
-    <ion-row class="tall-spacer">
-        <button id="settings-button3" ion-button color="royal" block>
+  <div *ngIf="currentTab == 'about'" class="venti-spacer">
+    <ion-list *ngIf="user">
+      <ion-item color="none" id="myProfile-list-item39">
+        <h2>
+          {{user.firstName}} {{user.lastName}}
+        </h2>
+      </ion-item>
+      <ion-item id="myProfile-textarea1">
+        <ion-label>
+          About me...
+        </ion-label>
+        <ion-textarea [(ngModel)]="user.about" placeholder="{{user.about}}"></ion-textarea>
+      </ion-item>
+      <ion-item id="meetSomebody-list-item-container1" *ngIf="languages">
+        <div id="meetSomebody-markdown2" class="show-list-numbers-and-dots">
+          <p style="margin-top:0px;color:#000000;">
+            <strong>
+              {{user.languages}}
+            </strong>
+          </p>
+        </div>
+      </ion-item>
+      <ion-item>
+        <ion-label *ngIf="!user.languages">Languages I speak:</ion-label>
+        <ion-label *ngIf="user.languages" class="alert">Change Languages:</ion-label>
+        <ion-select [(ngModel)]="user.languages" multiple="true">
+          <ion-option value="English">English</ion-option>
+          <ion-option value="Spanish">Spanish</ion-option>
+          <ion-option value="German">German</ion-option>
+          <ion-option value="French">French</ion-option>
+          <ion-option value="Italian">Italian</ion-option>
+          <ion-option value="Mandarin">Mandarin</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item color="none" id="myProfile-list-item43">
+        <ion-icon name="pin" item-left></ion-icon>
+        {{user.currentLocation}}
+      </ion-item>
+      <ion-item color="none" id="myProfile-list-item44">
+        Age: {{user.age}}
+      </ion-item>
+      <ion-item color="none" id="myProfile-list-item45">
+        University: {{user.universityName}}
+      </ion-item>
+      <ion-row class="tall-spacer">
+        <button ion-button color="royal" block (click)="updateProfile()">
             Update Profile
         </button>
-    </ion-row>
-  </ion-list>
+      </ion-row>
+    </ion-list>
+  </div>
 </ion-content>
+<ion-footer>
+  <ion-segment [(ngModel)]="currentTab" (ionChange)="changeTab(currentTab)" color='dark'>
+    <ion-segment-button style="background: #a75ada;color: white;height: 60px;padding-top: 10px;" value="photos">
+      <ion-icon name="ios-camera-outline" item-left></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button style="background: #8649c8;color: white;height: 60px;padding-top: 10px;" value="about">
+      <ion-icon name="ios-person-outline" item-left></ion-icon>
+    </ion-segment-button>
+  </ion-segment>
+</ion-footer>

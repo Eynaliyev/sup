@@ -2,13 +2,20 @@ import { Component, ViewChild } from '@angular/core';
 import { Platform, MenuController, Nav  } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { LoadingController } from 'ionic-angular';
+import firebase from 'firebase';
 
+// pages
 import { MyProfilePage } from '../pages/pages';
 import { ContactsListPage } from '../pages/pages';
+import { NotificationsListPage } from '../pages/pages';
 import { VIPPage } from '../pages/pages';
-import { SettingsPage } from '../pages/pages';
 import { MeetSomebodyPage } from '../pages/pages';
 import { LoginPage } from '../pages/pages';
+//import { SettingsPage } from '../pages/pages';
+// providers
+import { UserService } from '../services/services';
+// models
+import { User } from '../models/models';
 
 @Component({
   templateUrl: 'app.component.html'
@@ -20,22 +27,32 @@ export class MyApp {
   pages: any[];
   activePage: any;
   loader: any;
+  user: User;
 
-  myProfile = { 
-    component: MyProfilePage, 
+  myProfile = {
+    component: MyProfilePage,
   };
-  
+
   constructor(
-    private platform: Platform, 
+    private platform: Platform,
     private menu: MenuController,
     private loadingCtrl: LoadingController,
+    private userSrvc: UserService,
     private storage: Storage
   ) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
+
+			firebase.initializeApp({
+				apiKey: "AIzaSyDI22hmtv2clf3WYdo2y04z_h-eCfbv_F4",
+				authDomain: "huggable-9e981.firebaseapp.com",
+				databaseURL: "https://huggable-9e981.firebaseio.com",
+				projectId: "huggable-9e981",
+				storageBucket: "huggable-9e981.appspot.com",
+				messagingSenderId: "272489685620"
+			});
       this.presentLoading();
-      
       this.storage.get('introShown').then((result) => {
         if(result){
           this.rootPage = MeetSomebodyPage;
@@ -46,15 +63,21 @@ export class MyApp {
         this.loader.dismiss();
       });
     });
-
     this.pages = [
       { title: 'Meet people Nearby', component: MeetSomebodyPage, icon: 'ios-locate-outline' },
-      { title: 'Edit Profile', component: MyProfilePage, icon: 'ios-contacts-outline' },
       { title: 'Contacts', component: ContactsListPage, icon: 'ios-chatboxes-outline' },
+      { title: 'Notifications', component: NotificationsListPage, icon: 'ios-chatboxes-outline' },
+      { title: 'Edit Profile', component: MyProfilePage, icon: 'ios-contacts-outline' },
+      /*
       { title: 'Settings', component: SettingsPage, icon: 'ios-settings-outline' }
+      */
     ];
+    this.userSrvc.getCurrentUser()
+    .subscribe( user => {
+      console.log('current user :', user);
+      this.user = user;
+    });
   }
-  
   openPage(page) {
     // close the menu when clicking a link from the menu
     this.menu.close();
@@ -62,7 +85,6 @@ export class MyApp {
     // navigate to the new page if it is not the current page
     this.nav.setRoot(page.component);
   }
-  
   presentLoading() {
     this.loader = this.loadingCtrl.create({
       content: "Authenticating..."
@@ -71,6 +93,10 @@ export class MyApp {
   }
   viewVIP(){
     this.navCtrl.push(VIPPage);
+  }
+  logout(){
+    //add actual logging out and localStorage clearing
+    this.navCtrl.setRoot(LoginPage);
   }
   checkActive(page){
     return page == this.activePage;

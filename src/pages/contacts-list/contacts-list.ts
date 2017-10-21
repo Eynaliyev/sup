@@ -1,19 +1,18 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-
-import { UserProfilePage } from '../pages';
 import { ChatroomPage } from '../pages';
-
-import { UserService } from '../../services/user.service';
-
+import { RequestsListPage } from '../pages';
+import { UserService } from '../../services/services';
+import {User} from '../../models/models';
+import {Contact} from '../../models/models';
 @Component({
   selector: 'page-contacts-list',
   templateUrl: 'contacts-list.html'
 })
 export class ContactsListPage {
-
-  users = [];
+  users : Contact[] = [];
   animateClass: any;
+  currentUser: User;
 
   constructor(
     public navCtrl: NavController,
@@ -21,36 +20,37 @@ export class ContactsListPage {
   ) {
     console.log('ContactsListPage initialized');
     this.animateClass = { 'zoom-in': true };
-    
-  }
 
+  }
   ionViewWillEnter() {
   }
-  
-  ngAfterViewInit() {  
+  ngAfterViewInit() {
     return new Promise(resolve => {
         let env = this;
-        this.userService.getRandomUsers(8).subscribe(function(res){
-        for (let i = 0; i < res.length; i++) {
+        this.userService.getCurrentUser().subscribe(user => {
+        this.currentUser = user;
+        let contacts = user.contacts.sort((first, second) => {
+          return second.lastMessage.date.getTime() - first.lastMessage.date.getTime();
+        });
+        for (let i = 0; i < contacts.length; i++) {
             setTimeout(function() {
-                env.users.push(res[i]);
+                env.users.push(contacts[i]);
+                console.log('contacts in contactsList: ', env.users);
             }, 100 * i);
         }
-        resolve(true);
       });
     });
   }
-
-
   doInfinite(infiniteScroll) {
    //Begin async operation
-
      this.ngAfterViewInit().then(()=>{
        infiniteScroll.complete();
-     });
+      });
   }
-
+  viewRequests(){
+    this.navCtrl.push(RequestsListPage);
+  }
   openChat(user){
-  	this.navCtrl.push(ChatroomPage, {user: user})
+  	this.navCtrl.push(ChatroomPage, {room: user.roomId})
   }
 }

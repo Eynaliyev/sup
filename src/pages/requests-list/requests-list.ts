@@ -17,6 +17,8 @@ export class RequestsListPage {
 	likeAlertPresented: boolean = false;
 	unlikeAlertPresented: boolean = false;
 	blockAlertPresented: boolean = false;
+	unblockAlertPresented: boolean = false;
+	blockedListVisible: boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -56,7 +58,9 @@ export class RequestsListPage {
        infiniteScroll.complete();
       });
 	}
-
+	toggleBlockListVisibility(){
+		this.blockedListVisible != this.blockedListVisible;
+	}
   like(id: string) {
 		if(!this.likeAlertPresented){
 			// alert
@@ -116,5 +120,35 @@ export class RequestsListPage {
 		} else {
 			this.userSrvc.removeRequest(id);
 		}
-  }
+	}
+	unblock(id: string){
+		if(!this.unblockAlertPresented){
+			// alert
+			// check if it's just a request or a friendship
+			const alert = this.alertCtrl.create({
+				title: 'Confirm Unblock',
+				message: "Do you want to unblock this user?",
+				buttons: [
+					{
+						text: 'Cancel',
+						role: 'cancel',
+						handler: () => {
+							console.log('Cancel clicked');
+						}
+					},
+					{
+						text: 'Unblock',
+						handler: () => {
+							console.log('Unblock clicked');
+							this.userSrvc.unblock(id);
+						}
+					}
+				]
+			});
+			alert.present();
+			this.unlikeAlertPresented = true;
+			} else {
+				this.userSrvc.removeRequest(id);
+			}
+	}
 }

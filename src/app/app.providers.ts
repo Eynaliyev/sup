@@ -13,6 +13,8 @@ import {UserService} from '../services/services';
 import {AuthService} from '../services/services';
 import {NotificationService} from '../services/services';
 import {RequestService} from '../services/services';
+import {AngularFireDatabase } from 'angularfire2/database';
+
 // end import services
 
 /*
@@ -43,7 +45,8 @@ export class AppProviders {
             ChatroomService,
             VipService,
             UtilService,
-            RequestService,
+						RequestService,
+						AngularFireDatabase,
             Geolocation,
             {provide: ErrorHandler, useClass: IonicErrorHandler}
             /* import services */
@@ -60,7 +63,8 @@ export class AppProviders {
             StatusBar,
             SplashScreen,
             UserService,
-            ChatroomService,
+						ChatroomService,
+						AngularFireDatabase,
             VipService,
             UtilService,
             RequestService,

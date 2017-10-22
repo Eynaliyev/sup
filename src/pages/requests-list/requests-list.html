@@ -21,7 +21,20 @@
 						</button>
 					</ion-fab>
       </ion-item>
-  </ion-list>
+	</ion-list>
+	<span (click)="toggleBlockListVisibility()">Blocked List</span>
+	<ion-list class="venti-spacer" *ngIf="blockedListVisible">
+		<ion-item [ngClass]="animateClass" style="background-color: transparent;color: #cfcfcf !important;" *ngFor="let blockedUser of user.blockedList">
+				<ion-thumbnail item-left *ngIf="blockedUser.imgUrl">
+						<img [src]="blockedUser.imgUrl" class="profile-picture" default="assets/images/user.png">
+				</ion-thumbnail>
+				<ion-fab class="right btn-top-align">
+					<button ion-fab color="light" (click)="unblock(blockedUser.id)" class="menu-btn-border">
+							<ion-icon name="md-close"></ion-icon>
+					</button>
+				</ion-fab>
+		</ion-item>
+</ion-list>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
       <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>

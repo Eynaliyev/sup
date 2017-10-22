@@ -76,23 +76,45 @@ constructor(
   updateLastMessage(roomId: string, message: Message){
     let contact = this.user.contacts.filter( contact => contact.id === roomId)[0];
     contact.lastMessage = message;
-  }
-  like(id){
-    // check if the other person like them, if yes, remove theh relationship from likes list and add to the friends list
-    this.getCurrentUser()
-    .subscribe(currentUser => {
-      this.getUserById(id)
-      .subscribe(user => {
-        // just add the / set teh value
-        this.addRequest(user.id, currentUser.id);
-      })
-    });
-    // if not, add to the likes list
-  }
+	}
+	acceptFriendRequest(id: string){
+		/*
+		1. [ ] add to each others’ contacts list
+		2. [ ] create a new chatroom
+		3. [ ] add to relationships list
+		*/
+		console.log('acceptFriendRequest method in user service called');
+	}
+	rejectFriendRequest(id: string){
+		/*[ ] just set to null?
+		*/
+		console.log('rejectFriendRequest method in user service called');
+	}
+  like(id: string){
+		/*
+		1. [ ] if mutual - friendship
+    1. [ ] in relationships collection
+    2. [ ] in contacts list
+    3. [ ] create a new chatroom
+		2. [ ] if not, request
+		*/
+		console.log('like method in user service called');
+	}
+	//method for cancelling sentrequest
+	unlike(id: string){
+				/*
+		1. set the property in relationship to null
+		2. remove from users' requests list
+		3. [ ] add to relationships list
+		*/
+		console.log('unlike method in user service called');
+	}
   addRequest(toId: string, requestedId: string){
-    // add property to the likes / relationships list
-    // find a url
-    // set to true for currentUser
+		/*
+		1. [ ] add to the other users’ requests list
+		2. [ ] add to relationships collection
+		3. [ ] to the friendRequests list - to be able to cancel it
+		*/
     console.log('added request from ', toId, ' to ', requestedId);
   }
   removeRequest(id: string){
@@ -101,7 +123,20 @@ constructor(
     console.log('removeRequest method in user service called');
 	}
 	block(id: string){
+		/*
+		1. [ ] add to user’s blocked list
+		2. [ ] set the relations collection
+		3. [ ] remove from contacts if he’s there
+		4. [ ] kick the user out of the chatroom and tell him he was kicked out
+		*/
 		console.log('block method in user service called');
+	}
+	unblock(id: string){
+		/*
+			1. [ ] set it back to null, without adding the false
+			2. [ ] remove from blocked list
+		*/
+		console.log('unblock method in user service called');
 	}
   hasLiked(fromId: string, toId: string){
     // check the relationship whether current user is set to true or not while the other is not

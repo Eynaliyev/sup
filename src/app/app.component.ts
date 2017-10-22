@@ -44,16 +44,9 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
 
-			firebase.initializeApp({
-				apiKey: "AIzaSyDI22hmtv2clf3WYdo2y04z_h-eCfbv_F4",
-				authDomain: "huggable-9e981.firebaseapp.com",
-				databaseURL: "https://huggable-9e981.firebaseio.com",
-				projectId: "huggable-9e981",
-				storageBucket: "huggable-9e981.appspot.com",
-				messagingSenderId: "272489685620"
-			});
+
       this.presentLoading();
-      this.storage.get('introShown').then((result) => {
+      this.userSrvc.getCurrentUser().subscribe((result) => {
         if(result){
           this.rootPage = MeetSomebodyPage;
         } else {

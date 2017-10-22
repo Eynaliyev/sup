@@ -6,6 +6,9 @@ import { IonicApp, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HttpModule } from '@angular/http';
 import { IonicStorageModule } from '@ionic/storage';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 // declarations
 // pages
 import { MeetSomebodyPage } from '../pages/pages';
@@ -34,6 +37,16 @@ import firebase from 'firebase';
 import { DefaultImageDirective } from '../shared/default-image.directive';
 import { PipeModule } from '../shared/pipe.module';
 import { AppProviders } from './app.providers';
+
+export const firebaseConfig = {
+	apiKey: "AIzaSyDI22hmtv2clf3WYdo2y04z_h-eCfbv_F4",
+	authDomain: "huggable-9e981.firebaseapp.com",
+	databaseURL: "https://huggable-9e981.firebaseio.com",
+	projectId: "huggable-9e981",
+	storageBucket: "huggable-9e981.appspot.com",
+	messagingSenderId: "272489685620"
+};
+
 
 @NgModule({
   declarations: [
@@ -65,7 +78,10 @@ import { AppProviders } from './app.providers';
     HttpModule,
     BrowserAnimationsModule,
     PipeModule.forRoot(),
-    IonicModule.forRoot(MyApp),
+		IonicModule.forRoot(MyApp),
+		AngularFireModule.initializeApp(firebaseConfig),
+		AngularFireDatabaseModule,
+		AngularFirestoreModule,
     IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],

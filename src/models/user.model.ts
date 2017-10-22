@@ -1,4 +1,5 @@
 import {Message} from './models';
+import {Request} from './models';
 interface VipStatus{
   vip: boolean;
   expiryDate: Date;
@@ -10,6 +11,12 @@ interface Photo {
 export interface Language {
   id: string;
   name: string;
+}
+interface BlockedUser {
+	id: string,
+	name: string,
+	imgUrl: string,
+	date: Date
 }
 interface Interest {
     id: string;
@@ -43,7 +50,8 @@ export class User {
     public currentLocation: string,
     public age: number,
     public contacts: Contact[],
-    public friendRequests: string[],
+		public friendRequests: Request[],
+		public blockedList: BlockedUser[],
     public currentCoords?: number[],
     public currentRoomId?: string,
     public socialProfiles?: SocialProfile[],

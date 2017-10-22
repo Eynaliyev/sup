@@ -74,9 +74,9 @@ export class ChatroomService {
       // substract 1 from the votes property on the participant
       // if the votes is -2 or lower, kick the user out - on the backend
     }
-    toggleSeen(message: Message, id: string){
-      let index = this.messages.indexOf(message);
-      this.messages[index].seen.push(id);
+    updateSeen(messageId: string, id: string){
+      //let index = this.messages.indexOf(message);
+      //this.messages[index].seen.push(id);
     }
     sendMessage(roomId: string, message: Message){
       // add message to the messages list for the chatroom?

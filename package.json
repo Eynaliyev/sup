@@ -29,7 +29,8 @@
     "@ionic-native/status-bar": "3.12.1",
     "@ionic/storage": "2.0.1",
     "angularfire2": "^5.0.0-rc.3",
-    "cordova-android": "^6.2.3",
+    "cordova-android": "6.3.0",
+    "cordova-ios": "4.5.2",
     "cordova-plugin-console": "^1.1.0",
     "cordova-plugin-device": "^1.1.6",
     "cordova-plugin-splashscreen": "^4.0.3",
@@ -49,7 +50,7 @@
     "@ionic/app-scripts": "^3.0.0",
     "angular-mocks": "^1.6.6",
     "jasmine": "^2.8.0",
-    "typescript": "2.3.4"
+    "typescript": "^2.3.4"
   },
   "description": "An Ionic project",
   "cordova": {
@@ -63,7 +64,8 @@
       "ionic-plugin-deploy": {}
     },
     "platforms": [
-      "android"
+      "android",
+      "ios"
     ]
   }
 }

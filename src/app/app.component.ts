@@ -22,7 +22,7 @@ import { User } from '../models/models';
 })
 export class MyApp {
   @ViewChild(Nav) navCtrl: Nav;
-  rootPage:any = MeetSomebodyPage;
+  rootPage:any = LoginPage;
   @ViewChild(Nav) nav: Nav;
   pages: any[];
   activePage: any;
@@ -43,8 +43,6 @@ export class MyApp {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-
-
       this.presentLoading();
       this.userSrvc.getCurrentUser().subscribe((result) => {
         if(result){

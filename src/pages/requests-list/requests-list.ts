@@ -47,7 +47,11 @@ export class RequestsListPage {
                 env.requests.push(res[i]);
                 console.log('requests in requestsList: ', env.requests);
             }, 100 * i);
-          }
+					}
+					// make sure the requests are seen
+					for(let i = 0; i < this.requests.length; i++){
+						this.requestsSrvc.updateRequestSeen(this.requests[i].id, this.currentUser.id);
+					}
         });
       });
     });

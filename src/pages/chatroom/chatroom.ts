@@ -98,7 +98,7 @@ export class ChatroomPage {
       let result = [];
       messages.forEach(message => {
         if(message.seen.indexOf(id) === -1){
-          this.chatroomService.toggleSeen(message, id);
+          this.chatroomService.updateSeen(message.id, id);
         }
         result.push(message);
       });

@@ -59,7 +59,7 @@ export class MyApp {
     this.pages = [
       { title: 'Meet people Nearby', component: MeetSomebodyPage, icon: 'ios-locate-outline' },
       { title: 'Contacts', component: ContactsListPage, icon: 'ios-chatboxes-outline' },
-      { title: 'Notifications', component: NotificationsListPage, icon: 'ios-notifications-outline' },
+      //{ title: 'Notifications', component: NotificationsListPage, icon: 'ios-notifications-outline' },
       { title: 'Edit Profile', component: MyProfilePage, icon: 'ios-contacts-outline' },
       /*
       { title: 'Settings', component: SettingsPage, icon: 'ios-settings-outline' }

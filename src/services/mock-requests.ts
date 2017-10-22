@@ -1,11 +1,12 @@
 export let REQUESTS = [
   {
-    content: 'liked',
     id: '1',
     date: new Date(),
+    seen: [],
     senderId: '123',
     senderName: 'Max Lynx',
     senderImage: 'assets/img/pic4.png',
-    seen: []
+		toUserId: '123',
+		content: 'liked'
   }
 ];

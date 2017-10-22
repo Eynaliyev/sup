@@ -11,6 +11,9 @@ import {Message} from '../models/models';
 import { Chatroom} from '../models/models';
 import { UtilService } from '../shared/util.service';
 import {Language} from '../models/models';
+import {MESSAGES} from './mock-messages';
+import {CHATROOMS} from './mock-chatrooms';
+import {LANGUAGES} from './mock-languages';
 @Injectable()
 export class ChatroomService {
   private chatroomByIdUrl;
@@ -24,80 +27,9 @@ export class ChatroomService {
     private utilService: UtilService
   )
   {
-      this.messages = [{
-          content: 'Hello from the other side.',
-          date: new Date(),
-          id: '123',
-          senderId: '123',
-          roomId: '321013',
-          senderImage: 'assets/img/pic.png',
-          senderName: 'Nicole',
-          seen: ['321']
-      }];
-      this.languages = [
-        {
-          id: '1',
-          name: 'English'
-        },{
-          id: '2',
-          name: 'Mandarin Chinese'
-        },{
-          id: '3',
-          name: 'Spanish'
-        },{
-          id: '4',
-          name: 'German'
-        },{
-          id: '5',
-          name: 'French'
-        },{
-          id: '6',
-          name: 'Russian'
-        },{
-          id: '7',
-          name: 'Turkish'
-        }
-     ]
-      this.chatrooms = [
-        {
-          id: '213',
-          participants: [
-            {
-              id: '98',
-              name: 'Megebbet',
-              votes: 0,
-              profileImgUrl: "assets/images/user.png",
-            },
-            {
-              id: '98',
-              name: 'Aflatun',
-              votes: 0,
-              profileImgUrl: "assets/images/user.png",
-            },
-            {
-              id: '98',
-              name: 'Gudret',
-              votes: 0,
-              profileImgUrl: "assets/images/user.png",
-            },
-            {
-              id: '98',
-              name: 'Thomas',
-              votes: 0,
-              profileImgUrl: "assets/images/user.png",
-            },
-            {
-              id: '98',
-              name: 'Eshgin',
-              votes: 0,
-              profileImgUrl: "assets/images/user.png",
-            }
-          ],
-          messages: this.messages,
-          blocked: [],
-          warnings: []
-        }
-      ];
+			this.messages = MESSAGES;
+			this.languages = LANGUAGES;
+      this.chatrooms = CHATROOMS;
   }
 		getAvailableChatrooms(location, languages: Language[]): Observable<Chatroom[]> {
       return new Observable(observer => {
@@ -115,7 +47,8 @@ export class ChatroomService {
       });
     }
     joinChatroom(locaiton, languages: Language[]): Observable<string>{
-      // find available rooms
+			// find available rooms
+			// join it - https://angularfirebase.com/lessons/managing-firebase-user-relationships-to-database-records/#3-Data-that-Belongs-to-Multiple-Users
       return new Observable(observer => {
         setTimeout(() => {
           let chatroom = this.getAvailableChatrooms(location, languages)

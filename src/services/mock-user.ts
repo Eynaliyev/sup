@@ -92,7 +92,6 @@ export let USER = {
       }
     }
   ],
-  friendRequests: ['6434'],
   currentRoomId: '123',
   socialProfiles: [],
   profileImgUrl: 'assets/img/pic.png',

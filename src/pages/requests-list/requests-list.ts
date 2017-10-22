@@ -59,6 +59,7 @@ export class RequestsListPage {
       });
 	}
 	toggleBlockListVisibility(){
+		console.log('toggled BlockListVisibility: ', this.currentUser.blockedList);
 		this.blockedListVisible != this.blockedListVisible;
 	}
   like(id: string) {

@@ -23,7 +23,7 @@ export class WaitlistPage {
   ionViewDidEnter(){
     // get location property
     // TO DO
-    let location = '';
+    let location =  this.navParams.get('location');
     // get languages property
     let languages = this.navParams.get('languages');
     // join a chatroom

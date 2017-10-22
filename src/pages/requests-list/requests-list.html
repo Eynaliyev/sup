@@ -22,7 +22,7 @@
 					</ion-fab>
       </ion-item>
 	</ion-list>
-	<span (click)="toggleBlockListVisibility()">Blocked List</span>
+	<span class="light-text" (click)="toggleBlockListVisibility()">Blocked List</span>
 	<ion-list class="venti-spacer" *ngIf="blockedListVisible">
 		<ion-item [ngClass]="animateClass" style="background-color: transparent;color: #cfcfcf !important;" *ngFor="let blockedUser of user.blockedList">
 				<ion-thumbnail item-left *ngIf="blockedUser.imgUrl">

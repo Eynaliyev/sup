@@ -10,23 +10,17 @@ import {Message} from '../models/models';
 import { User} from '../models/models';
 import {USER} from "./mock-user";
 import firebase from 'firebase';
-//import { AngularFireDatabase, AngularFireObject, AngularFireList } from 'angularfire2/database';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 //import { Camera } from 'ionic-native';
 @Injectable()
 export class UserService {
   private user:User;
-  private currentUser:User;
-
-/*
-  private contacts: FirebaseListObservable<any[]>;
-  private currentUser: User;
-  private user: User = JSON.parse(localStorage.getItem('currentUser'));
-*/
+	private currentUser:User;
 
 constructor(
   private http: Http,
-  //public db: AngularFireDatabase
-  ) {
+	private afs: AngularFirestore
+) {
     this.user = USER;
   }
 // should come from chatroom in the participants property for the chatroom
@@ -37,45 +31,29 @@ constructor(
 		.map(resp => resp.results)
 	}
 // get a specific User by id - that conforms to the user model
-	getUserById(id): Observable<User>{//Observable<User> {
-    //url constructed from id
-    let url = '';
-    let env = this;
-    return new Observable(observer => {
-      observer.next(env.user);
-    });
-    /*
-		return this.http.get(url)
-    .map(response => {
-				console.log('response.json().data for getting User by id', response.json().data);
-				return response.json().data as User;
-			}).catch(err => {
-				this.handleError(err);
-				return null;
-      })
-      */
+	getUserById(id: string): Observable<any>{//Observable<User> {
+		return this.afs.collection(`users/${id}`).valueChanges();
   }
-  getCurrentUser(): Observable<User>{//Observable<User> {
-    //url constructed from id
-    let url = '';
-    let env = this;
-    return new Observable(observer => {
-      observer.next(env.user);
-    });
+  getCurrentUser(): Observable<any>{
+		return new Observable(observer => {
+			observer.next(localStorage.getItem('currentUser'));
+		});
   }
-  updateUser(user){
-    this.user = user;
+  updateUser(userId: string, userData: User){
+		let user = this.afs.doc(`users/${userId}`);
+		user.update(userData);
   }
-  addImage(image){
-    this.user.photos.push(image);
+  addImage(userId: string, image){
+		let photos = this.afs.collection(`users/${userId}/photos`);
+    photos.add(image);
   }
-  deleteImage(image){
-    let index = this.user.photos.indexOf(image);
-    this.user.photos.splice(index, 1);
+  deleteImage(userId: string, imageUrl: string){
+		let image = this.afs.doc(`users/${userId}/photos/${imageUrl}`);
+    image.delete();
   }
-  updateLastMessage(roomId: string, message: Message){
-    let contact = this.user.contacts.filter( contact => contact.id === roomId)[0];
-    contact.lastMessage = message;
+  updateLastMessage(userId: string, contactId: string, message: Message){
+    let lastMessage = this.afs.doc(`users/${userId}/contacts/${contactId}/last-message`);
+    lastMessage.update(message);
 	}
 	acceptFriendRequest(id: string){
 		/*

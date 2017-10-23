@@ -48,9 +48,9 @@ export class ChatroomPage {
     console.log('Chatroom page loaded with id:', this.chatroomId);
     this.chatroomService.getChatroomById(this.chatroomId)
     .subscribe(chatroom => {
+      console.log('chatroom loaded from firebase: ', chatroom);
       this.chatroom = chatroom;
       this.users = this.chatroom.participants;
-      console.log('chatroom detail in the room: ', this.chatroom);
       this.newMessage.roomId = this.chatroom.id;
     });
 
@@ -82,6 +82,7 @@ export class ChatroomPage {
       });
     }
     exit(){
+				this.chatroomService.leaveChatroom(this.chatroomId, this.currentUser.id);
         this.navCtrl.setRoot(MeetSomebodyPage);
     }
     doRefresh(infiniteScroll) {
@@ -98,7 +99,7 @@ export class ChatroomPage {
       let result = [];
       messages.forEach(message => {
         if(message.seen.indexOf(id) === -1){
-          this.chatroomService.updateSeen(message.id, id);
+          this.chatroomService.updateSeen(this.chatroomId, message.id, id);
         }
         result.push(message);
       });

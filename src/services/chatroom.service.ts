@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http} from '@angular/http';
-//import {AngularFireDatabase, AngularFireList, AngularFireObject} from 'angularfire2/database';
+import {AngularFireDatabase, AngularFireList, AngularFireObject} from 'angularfire2/database';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
@@ -23,7 +24,8 @@ export class ChatroomService {
 
 	constructor(
     private http: Http,
-    //private db: AngularFireDatabase,
+		private db: AngularFireDatabase,
+		private afs: AngularFirestore,
     private utilService: UtilService
   )
   {
@@ -32,22 +34,21 @@ export class ChatroomService {
       this.chatrooms = CHATROOMS;
   }
 		getAvailableChatrooms(location, languages: Language[]): Observable<Chatroom[]> {
-      return new Observable(observer => {
-        observer.next(this.chatrooms);
-      });
-    }
+			// TO DO:
+			// add a query by the number of participants
+			// use firestore to sort by location and filter by availability
+			return this.db.list(`chatrooms`).valueChanges();
+		}
     getChatroomById(id): Observable<Chatroom>{
-			return new Observable(observer => {
-        observer.next(this.chatrooms[0]);
-      });
       // get full detailed data of the required chatroom
-      //return this.db.object(`chatroom/${id}`).valueChanges();
-    }
+      return this.db.object(`chatrooms/${id}`).valueChanges();
+		}
     joinChatroom(locaiton, languages: Language[]): Observable<string>{
-			// find available rooms
 			// perhaps should be a cloud function?
+			// find available rooms
 			// join it - https://angularfirebase.com/lessons/managing-firebase-user-relationships-to-database-records/#3-Data-that-Belongs-to-Multiple-Users
-      return new Observable(observer => {
+			// if no chatroom available create a new one., add gender equality, maleCount, femaleCount
+			return new Observable(observer => {
         setTimeout(() => {
           let chatroom = this.getAvailableChatrooms(location, languages)
           .subscribe(chatrooms =>{
@@ -62,29 +63,24 @@ export class ChatroomService {
       // get messages for the room - first 15 for example
       // return the chatroom details
     }
-    leaveChatroom(){
-      // remove the user from participants list
-      // publish a 'left the room  type of message'
+    leaveChatroom(chatroomId: string, userId: string){
+			// remove the user from participants list
+			let participants = this.db.object(`chatrooms/${chatroomId}/participants/${userId}`);
+			participants.remove();
+      // publish a 'left the room  type of message' - a cloud function?
       // remove the chatroom id from local storage
-      // go back to the meet-people page
     }
-    voteAgainst(id){
-      // substract 1 from the votes property on the participant
-      // if the votes is -2 or lower, kick the user out - on the backend
+    updateSeen(chatroomId: string, messageId: string, userId: string){
+			let messageSeen = this.afs.collection(`chatrooms/${chatroomId}/messages/${messageId}/seen`);
+      messageSeen.add(userId);
     }
-    updateSeen(messageId: string, id: string){
-      //let index = this.messages.indexOf(message);
-      //this.messages[index].seen.push(id);
-    }
-    sendMessage(roomId: string, message: Message){
-      // add message to the messages list for the chatroom?
-      this.messages.push(message);
+    sendMessage(chatroomId: string, message: Message){
+			let messages = this.afs.collection(`chatrooms/${chatroomId}/messages`);
+      messages.add(message);
     }
     // TO DO: implement actual paginated message getter function
-    getMessages(chatroomId, start?, end?): Observable<Message[]> {
-      return new Observable(observer => {
-          observer.next(this.messages);
-      });
+    getMessages(chatroomId: string, start?, end?): Observable<any[]> {
+      return this.afs.collection(`chatrooms/${chatroomId}/messages`).valueChanges();
     }
     /*
   // get a specific room from the list - get room reference
@@ -145,9 +141,7 @@ export class ChatroomService {
 
 
     */
-    getAvailableLanguages(): Observable<Language[]>{
-      return new Observable(observer => {
-        observer.next(this.languages);
-      });
+    getAvailableLanguages(): Observable<any[]>{
+      return this.afs.collection(`languages`).valueChanges();
     }
 }

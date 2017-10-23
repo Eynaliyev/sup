@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http} from '@angular/http';
-//import {AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+//import {AngularFireDatabase, AngularFireList, AngularFireObject} from 'angularfire2/database';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
@@ -23,7 +23,7 @@ export class ChatroomService {
 
 	constructor(
     private http: Http,
-//    public db: AngularFireDatabase,
+    //private db: AngularFireDatabase,
     private utilService: UtilService
   )
   {
@@ -37,17 +37,15 @@ export class ChatroomService {
       });
     }
     getChatroomById(id): Observable<Chatroom>{
-      // get full detailed data of the required chatroom
-      return new Observable(observer => {
-        setTimeout(() => {
-          // temporary - need a different method
-          let chatroom = this.chatrooms[0];
-          observer.next(chatroom);
-        },1800);
+			return new Observable(observer => {
+        observer.next(this.chatrooms[0]);
       });
+      // get full detailed data of the required chatroom
+      //return this.db.object(`chatroom/${id}`).valueChanges();
     }
     joinChatroom(locaiton, languages: Language[]): Observable<string>{
 			// find available rooms
+			// perhaps should be a cloud function?
 			// join it - https://angularfirebase.com/lessons/managing-firebase-user-relationships-to-database-records/#3-Data-that-Belongs-to-Multiple-Users
       return new Observable(observer => {
         setTimeout(() => {

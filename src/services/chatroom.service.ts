@@ -48,20 +48,14 @@ export class ChatroomService {
 			// find available rooms
 			// join it - https://angularfirebase.com/lessons/managing-firebase-user-relationships-to-database-records/#3-Data-that-Belongs-to-Multiple-Users
 			// if no chatroom available create a new one., add gender equality, maleCount, femaleCount
-			return new Observable(observer => {
-        setTimeout(() => {
-          let chatroom = this.getAvailableChatrooms(location, languages)
-          .subscribe(chatrooms =>{
-            let chatroomId = chatrooms[0].id;
-            observer.next(chatroomId);
-          });
-        },1800);
-      });
       // add the user to the participants list for the room
       // get chatroom id - save it in local storage
       // get chatroom details by the id?
       // get messages for the room - first 15 for example
-      // return the chatroom details
+			// return the chatroom details
+			return new Observable(observer => {
+				observer.next('');
+			});
     }
     leaveChatroom(chatroomId: string, userId: string){
 			// remove the user from participants list

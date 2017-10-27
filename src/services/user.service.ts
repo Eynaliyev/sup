@@ -39,7 +39,8 @@ constructor(
 			observer.next(localStorage.getItem('currentUser'));
 		});
   }
-  updateUser(userId: string, userData: User){
+  updateUser(userData: User){
+		let userId = userData.id;
 		let user = this.afs.doc(`users/${userId}`);
 		user.update(userData);
   }
@@ -51,8 +52,9 @@ constructor(
 		let image = this.afs.doc(`users/${userId}/photos/${imageUrl}`);
     image.delete();
   }
-  updateLastMessage(userId: string, contactId: string, message: Message){
-    let lastMessage = this.afs.doc(`users/${userId}/contacts/${contactId}/last-message`);
+  updateLastMessage(userId: string, contactRoomId: string, message: Message){
+		// the data in contacts list should be organised by room IDs
+    let lastMessage = this.afs.doc(`users/${userId}/contacts/${contactRoomId}/last-message`);
     lastMessage.update(message);
 	}
 	acceptFriendRequest(id: string){

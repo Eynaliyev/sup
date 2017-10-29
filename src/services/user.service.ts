@@ -32,7 +32,7 @@ constructor(
 	}
 // get a specific User by id - that conforms to the user model
 	getUserById(id: string): Observable<any>{//Observable<User> {
-		return this.afs.collection(`users/${id}`).valueChanges();
+		return this.afs.doc(`users/${id}`).valueChanges();
   }
   getCurrentUser(): Observable<any>{
 		return new Observable(observer => {
@@ -40,19 +40,27 @@ constructor(
 		});
 	}
   setCurrentUser(uid, dummy?: any): Promise<any>{
-		let user;
+		let currentUser;
+		this.getUserById(uid).subscribe(user =>{
 			// check if the user exists in backend
-			// if yes,
+			if(user){
+				// if yes,
 				// set the current user in the localstorage to the one recovered from there
+				currentUser = user;
+				localStorage.setItem('currentUser', user);
+				console.log("setting current user to:", localStorage.getItem('currentUser'));
+				return new Promise<any>( resolve => resolve(user));
+			} else {
 			// if no,
-			//create the get user infor from facebook graph API from a bunch of APIS that are joined into a single stream
+			// create the get user infor from facebook graph API
+			// from a bunch of APIS that are joined into a single stream
 
-			// set current user in the backend
+			// set the returned user in the backend
 			// set current user in localstorage - pass the access token and email
-      localStorage.setItem('currentUser', user);
-			console.log("setting current user to:", localStorage.getItem('currentUser'));
 			return new Promise<any>( resolve => resolve(user));
-		}
+			}
+		});
+	}
 
       /*this.currentUser = this.toUser(firebase.auth().currentUser.providerData[0]);
       let userId = JSON.parse(localStorage.getItem('currentUser')).uid;

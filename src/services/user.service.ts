@@ -38,7 +38,27 @@ constructor(
 		return new Observable(observer => {
 			observer.next(localStorage.getItem('currentUser'));
 		});
-  }
+	}
+  setCurrentUser(uid, dummy?: any): Promise<any>{
+		let user;
+			// check if the user exists in backend
+			// if yes,
+				// set the current user in the localstorage to the one recovered from there
+			// if no,
+			//create the get user infor from facebook graph API from a bunch of APIS that are joined into a single stream
+
+			// set current user in the backend
+			// set current user in localstorage - pass the access token and email
+      localStorage.setItem('currentUser', user);
+			console.log("setting current user to:", localStorage.getItem('currentUser'));
+			return new Promise<any>( resolve => resolve(user));
+		}
+
+      /*this.currentUser = this.toUser(firebase.auth().currentUser.providerData[0]);
+      let userId = JSON.parse(localStorage.getItem('currentUser')).uid;
+      console.log('checking if the user is there: ', userId);
+      this.checkIfUserExists(userId);*/
+	}
   updateUser(userData: User){
 		let userId = userData.id;
 		let user = this.afs.doc(`users/${userId}`);
@@ -164,19 +184,7 @@ constructor(
   updateProfile(user){
 
   }
-  */
-  //set current user depending on whether there's somebody like this, or create a new one
-  //check for presence of dummy data with arguments
-  //if it's there, set current user to dummy data
-  setCurrentUser(dummy?: any): void{
-      localStorage.setItem('currentUser', JSON.stringify(firebase.auth().currentUser.providerData[0]));
-      console.log("setting current user to:", localStorage.getItem('currentUser'));
-      /*this.currentUser = this.toUser(firebase.auth().currentUser.providerData[0]);
-      let userId = JSON.parse(localStorage.getItem('currentUser')).uid;
-      console.log('checking if the user is there: ', userId);
-      this.checkIfUserExists(userId);*/
-	}
-	/*
+
   toUser(data): User{
     let user = {
       uid: data.uid,

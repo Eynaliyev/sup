@@ -28,7 +28,7 @@ export class LoginPage {
     this.authService.facebookLogin()
       .then( authData => {
         loading.dismiss().then( () => {
-					console.log('login suvvessful: ', authData);
+					console.log('login suvvessful: ', JSON.stringify(authData));
           env.goToMeetSomebody();
       });
     }, error =>

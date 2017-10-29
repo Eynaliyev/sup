@@ -5,6 +5,7 @@ import 'rxjs/add/operator/map';
 import firebase from 'firebase';
 import { Facebook } from '@ionic-native/facebook';
 import {UserService} from '../services/services';
+import {User} from '../models/models';
 /*
   Generated class for the AuthService provider.
 
@@ -16,34 +17,17 @@ export class AuthService {
   constructor(public http: Http,
   	private facebook: Facebook,
   	public userService: UserService) {
-    console.log('Hello AuthService');
+		console.log('Hello AuthService');
+
 		}
-	facebookLogin() {
+	facebookLogin(){//: Promise<User> {
 		//check for platform if web return a promise,
 		if(document.URL.includes('https://') || document.URL.includes('http://')){
 			console.log("we're in the browser");
-			let resPromise = new Promise<any>((resolve, reject) => {
-				//set currentuser using the dummy data
-				resolve({
-              name: "Rustam Eynaliyev",
-              email: "rustam.eynaliyev@gmail.com",
-              photoUrl: "https://scontent.xx.fbcdn.net/v/t1.0-1/p100x100/13001075_10208279436177586_7844301951605599393_n.jpg?oh=557408b1b135f7f79592b50473b9b3af&oe=59B9D2CD",
-              provider: "facebook.com",
-              uid: 10211310937803232
-            }
-				);
-			});
-			this.userService.setCurrentUser({
-				name: "Rustam Eynaliyev",
-				email: "rustam.eynaliyev@gmail.com",
-				photoUrl: "https://scontent.xx.fbcdn.net/v/t1.0-1/p100x100/13001075_10208279436177586_7844301951605599393_n.jpg?oh=557408b1b135f7f79592b50473b9b3af&oe=59B9D2CD",
-				provider: "facebook.com",
-				uid: 10211310937803232
-			});
-			return resPromise;
+			return this.userService.setCurrentUser('10211310937803232');
 		} else {
 			console.log("we're on the device");
-			return this.facebook.login(['email', 'public_profile', 'user_about_me', 'user_birthday']).then( (response) => {
+			return this.facebook.login(['email', 'public_profile']).then( (response) => {
 				const facebookCredential = firebase.auth.FacebookAuthProvider
 				.credential(response.authResponse.accessToken);
 				//just to see what data is usully returned - for mocking purposes
@@ -52,20 +36,12 @@ export class AuthService {
 				return firebase.auth().signInWithCredential(facebookCredential)
 				.then((success) => {
 					console.log("Firebase success: ", JSON.stringify(success));
-					//console.log('current user.providerData: ', JSON.stringify(firebase.auth().currentUser.providerData[0]));
-					// check if the user exists in backend
-					// if yes,
-						// set the current user in the localstorage to the one recovered from there
-					// if no,
-					//create the get user infor from facebook graph API from a bunch of APIS that are joined into a single stream
-
-					// set current user in the backend
-						// set current user in localstorage
-					this.userService.setCurrentUser(facebookCredential);
-					return success;
+					let providerData = firebase.auth().currentUser.providerData[0];
+					console.log('current user.providerData: ', JSON.stringify(providerData));
+					return this.userService.setCurrentUser(providerData.uid);
 				})
 				.catch((error) => {
-				console.log("Firebase failure: " + JSON.stringify(error));
+					console.log("Firebase failure: " + JSON.stringify(error));
 				return error;
 				});
 			}).catch((error) => { console.log(error) });

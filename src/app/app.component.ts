@@ -44,15 +44,20 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.presentLoading();
-      this.userSrvc.getCurrentUser().subscribe((result) => {
-        if(result){
-          this.rootPage = MeetSomebodyPage;
-        } else {
-          this.rootPage = LoginPage;
-          this.storage.set('introShown', true);
-        }
-        this.loader.dismiss();
-      });
+      this.userSrvc.getCurrentUser().subscribe(
+				result => {
+					if(result){
+						this.rootPage = MeetSomebodyPage;
+					} else {
+						this.rootPage = LoginPage;
+						this.storage.set('introShown', true);
+					}
+					this.loader.dismiss();
+				},
+				err => {
+					console.error(err);
+				}
+			);
     });
     this.pages = [
       { title: 'Meet people Nearby', component: MeetSomebodyPage, icon: 'ios-locate-outline' },
@@ -64,10 +69,15 @@ export class MyApp {
       */
     ];
     this.userSrvc.getCurrentUser()
-    .subscribe( user => {
-      console.log('current user :', user);
-      this.user = user;
-    });
+    .subscribe(
+			user => {
+				console.log('current user :', user);
+				this.user = user;
+			},
+			err => {
+				console.error(err);
+			}
+		);
   }
   openPage(page) {
     // close the menu when clicking a link from the menu

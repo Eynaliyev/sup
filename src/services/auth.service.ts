@@ -43,7 +43,7 @@ export class AuthService {
 			return resPromise;
 		} else {
 			console.log("we're on the device");
-			return this.facebook.login(['email']).then( (response) => {
+			return this.facebook.login(['email', 'public_profile', 'user_about_me', 'user_birthday']).then( (response) => {
 				const facebookCredential = firebase.auth.FacebookAuthProvider
 				.credential(response.authResponse.accessToken);
 				//just to see what data is usully returned - for mocking purposes
@@ -56,15 +56,12 @@ export class AuthService {
 					// check if the user exists in backend
 					// if yes,
 						// set the current user in the localstorage to the one recovered from there
-					// if no, create the get user infor from facebook graph API
-						// set current user in the backend
+					// if no,
+					//create the get user infor from facebook graph API from a bunch of APIS that are joined into a single stream
+
+					// set current user in the backend
 						// set current user in localstorage
-					this.userService.setCurrentUser();
-          // DO NOT REMOVE IMMEDIATELY
-          //creating a user profile - for user profile purposes?
-					//firebase.database().ref('/userProfile').child(success.uid)
-					//.set({ email: email });
-					//});
+					this.userService.setCurrentUser(facebookCredential);
 					return success;
 				})
 				.catch((error) => {

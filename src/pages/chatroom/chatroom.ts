@@ -9,6 +9,7 @@ import { UserProfilePage } from '../pages';
 import { MeetSomebodyPage } from '../pages';
 import { UtilService } from '../../shared/util.service';
 import {ParticipantsListPage} from '../pages';
+import { AlertController } from 'ionic-angular';
 
 @Component({
   selector: 'page-chatroom',
@@ -39,21 +40,26 @@ export class ChatroomPage {
     public navParams: NavParams,
     private userService: UserService,
     private chatroomService: ChatroomService,
-    private utilService: UtilService
-) {
+    private utilService: UtilService,
+    public alertCtrl: AlertController
+	) {
     // get chatroom id
     // on page loaded - load message history - paginated
     // get chatroom id from the nav params
     this.chatroomId = this.navParams.get('room');
     console.log('Chatroom page loaded with id:', this.chatroomId);
     this.chatroomService.getChatroomById(this.chatroomId)
-    .subscribe(chatroom => {
-      console.log('chatroom loaded from firebase: ', chatroom);
-      this.chatroom = chatroom;
-      this.users = this.chatroom.participants;
-      this.newMessage.roomId = this.chatroom.id;
-    });
-
+    .subscribe(
+			chatroom => {
+				console.log('chatroom loaded from firebase: ', chatroom);
+				this.chatroom = chatroom;
+				this.users = this.chatroom.participants;
+				this.newMessage.roomId = this.chatroom.id;
+			},
+			err => {
+				console.error(err);
+			}
+		);
     }
     ionViewDidLoad(){
 
@@ -62,7 +68,8 @@ export class ChatroomPage {
       return new Promise(resolve => {
         let env = this;
         this.chatroomService.getMessages(this.chatroomId, 10)
-        .subscribe(newMessages => {
+        .subscribe(
+					newMessages => {
             console.log('newMessages: ', newMessages);
             // add position property
             let updatedMessages = this.utilService.addMessagePosition(newMessages, this.currentUser.id);
@@ -77,8 +84,12 @@ export class ChatroomPage {
                     env.messages.push(res[i]);
                 }, 100 * i);
             }
-          resolve(true);
-        });
+						resolve(true);
+					},
+					err => {
+						console.error(err);
+					}
+				);
       });
     }
     exit(){
@@ -120,10 +131,30 @@ export class ChatroomPage {
                   env.messages.push(res[i]);
               }, 100 * i);
           }
-        });
+        },
+				err => {
+					console.error(err);
+				});
     }
     openParticipantsList(){
-      this.navCtrl.push(ParticipantsListPage, {'participants': this.users});
+			if(this.users){
+				this.navCtrl.push(ParticipantsListPage, {'participants': this.users});
+			} else {
+				const alert = this.alertCtrl.create({
+					title: 'Sorry...',
+					message: "Can't access the particiapnts list.",
+					buttons: [
+						{
+							text: 'Ok',
+							role: 'Ok',
+							handler: () => {
+								console.log('Ok clicked');
+							}
+						}
+					]
+				});
+				alert.present();
+			}
     }
     sendMessage(){
       this.newMessage.date = new Date();

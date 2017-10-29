@@ -86,5 +86,21 @@ export class UtilService {
     let time = new Date().getTime() - n;
     let date = new Date(time);
     return date;
-  }
+	}
+	presentFakedoorAlert(action:string){
+		const alert = this.alertCtrl.create({
+			title: 'Sorry',
+			message: "This function is not available at this time",
+			buttons: [
+				{
+					text: 'Got it',
+					role: 'cancel',
+					handler: () => {
+						console.log('Got it clicked');
+					}
+				}
+			]
+		});
+		alert.present();
+	}
 }

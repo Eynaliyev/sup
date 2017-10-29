@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
 import { PurchasePage } from '../purchase/purchase';
 import {VipService} from '../../services/services';
+import {UtilService} from '../../shared/util.service';
 import { AlertController } from 'ionic-angular';
 
 /**
@@ -19,7 +20,8 @@ export class VIPPage {
   constructor(
     public navCtrl: NavController,
 		public vipSrvc: VipService,
-		private alertCtrl: AlertController
+		private alertCtrl: AlertController,
+		private utilSrvc: UtilService
 	 ) {
   }
 
@@ -27,32 +29,17 @@ export class VIPPage {
     console.log('ionViewDidLoad VIPPage');
   }
   watchAd(){
-		this.presentAlert();
+		this.utilSrvc.presentFakedoorAlert('watchAd');
     //this.vipSrvc.presentAd();
   }
   invite(){
-		this.presentAlert();
+		this.utilSrvc.presentFakedoorAlert('invite');
     //this.vipSrvc.inviteFriend();
     //this.facebook.appInvite({applink, photoUrl});
   }
   viewPurchasePage(){
-		this.presentAlert();
+		this.utilSrvc.presentFakedoorAlert('viewPurchasePage');
     //this.navCtrl.push(PurchasePage);
 	}
-	presentAlert(){
-		const alert = this.alertCtrl.create({
-			title: 'Sorry',
-			message: "This function is not available at this time",
-			buttons: [
-				{
-					text: 'Got it',
-					role: 'cancel',
-					handler: () => {
-						console.log('Got it clicked');
-					}
-				}
-			]
-		});
-		alert.present();
-	}
+
 }

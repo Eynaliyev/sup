@@ -54,7 +54,7 @@ export class ChatroomService {
       // get messages for the room - first 15 for example
 			// return the chatroom details
 			return new Observable(observer => {
-				observer.next('');
+				observer.next('123');
 			});
     }
     leaveChatroom(chatroomId: string, userId: string){

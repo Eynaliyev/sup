@@ -20,9 +20,9 @@ export class MyProfilePage {
   ) {
     this.userSrvc.getCurrentUser()
     .subscribe(user => {
+      console.log('current user in myProfilePage: ', user);
       this.currentUser = user;
       this.currentImage = user.photos[0];
-      console.log('current user in myProfilePage: ', this.currentUser);
     });
   }
   ionViewDidLoad() {

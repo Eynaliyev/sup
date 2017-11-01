@@ -1,4 +1,5 @@
-import {Message} from './message.model';
+import {Message} from './models';
+import {Language} from './models';
 
 interface Participant {
     id: string;
@@ -9,8 +10,9 @@ interface Participant {
 
 export class Chatroom {
   constructor(
-    public id: string,
-    public participants: Participant[],
+    public femaleParticipants: Participant[],
+		public maleParticipants: Participant[],
+		public language: Language,
     public messages: Message[],
     public blocked?: Participant[],
     public warnings?: Participant[],

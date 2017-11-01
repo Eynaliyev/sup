@@ -10,6 +10,7 @@ import {Message} from '../models/models';
 import { User} from '../models/models';
 import {USER} from "./mock-user";
 import firebase from 'firebase';
+import { Facebook } from '@ionic-native/facebook';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 //import { Camera } from 'ionic-native';
 @Injectable()
@@ -18,7 +19,8 @@ export class UserService {
 	private currentUser:User;
 
 constructor(
-  private http: Http,
+	private http: Http,
+	private facebook: Facebook,
 	private afs: AngularFirestore
 ) {
     this.user = USER;
@@ -39,34 +41,83 @@ constructor(
 			observer.next(localStorage.getItem('currentUser'));
 		});
 	}
-  setCurrentUser(uid, dummy?: any): Promise<any>{
-		let currentUser;
-		this.getUserById(uid).subscribe(user =>{
+  setCurrentUser(uid, dummy?): void{
+		let currentUser: User;
+		this.getUserById(uid).subscribe(user => {
+			console.log('res from getUserById', user);
 			// check if the user exists in backend
 			if(user){
 				// if yes,
 				// set the current user in the localstorage to the one recovered from there
 				currentUser = user;
-				localStorage.setItem('currentUser', user);
-				console.log("setting current user to:", localStorage.getItem('currentUser'));
-				return new Promise<any>( resolve => resolve(user));
+				localStorage.setItem('currentUser', JSON.stringify(user));
+				console.log("setting current user to:", JSON.stringify(localStorage.getItem('currentUser')));
 			} else {
-			// if no,
-			// create the get user infor from facebook graph API
-			// from a bunch of APIS that are joined into a single stream
-
-			// set the returned user in the backend
-			// set current user in localstorage - pass the access token and email
-			return new Promise<any>( resolve => resolve(user));
+				// if no,
+				// if dummy, just return the dummy data
+				if(dummy){
+					let userInfo = {
+						"id": "10203432411524999",
+						"name": "Rustam Eynaliyev",
+						"gender": "male",
+						"locale": "en_US",
+						"picture": {
+							"data": {
+								"is_silhouette": false,
+								"url": "https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/13001075_10208279436177586_7844301951605599393_n.jpg?oh=1ee5a5b481be739dada9ad8fcff8e0d1&oe=5A6675B9"
+							}
+						},
+						"email": "rustam.eynaliyev@gmail.com",
+						"first_name": "Rustam",
+						"last_name": "Eynaliyev"
+					};
+					this.createUser(userInfo);
+				} else {
+					// create the get user infor from facebook graph API
+					this.facebook.api(`${uid}?fields=id,name,gender,locale,picture,email,first_name,last_name`,[])
+					.then(userInfo => {
+						console.log('user info from fb api: ', JSON.stringify(userInfo));
+						// set the returned user in the backend
+						this.createUser(userInfo);
+					});
+				}
 			}
 		});
 	}
-
-      /*this.currentUser = this.toUser(firebase.auth().currentUser.providerData[0]);
-      let userId = JSON.parse(localStorage.getItem('currentUser')).uid;
-      console.log('checking if the user is there: ', userId);
-      this.checkIfUserExists(userId);*/
+  // create user in firebase
+  createUser(userCredentials) {
+		// convert info to our model
+		let user = this.toUser(userCredentials);
+		// set it in the backend
+		this.afs.doc(`/users/${user.id}`).set(user)
+		.then(() => this.setProfilePicture(user.id) );
+		// set current user in nativeStorage - pass the access token and email
+		localStorage.setItem('currentUser', JSON.stringify(user));
 	}
+	toUser(data){//: User{
+    let user = {
+      id: data.id,
+      firstName: data.first_name,
+      lastName: data.last_name,
+      contacts: [],
+      friendRequests: [],
+      blockedList: [],
+      photoUrl: data.picture.data.url,
+			gender: data.gender
+    }
+    return user;
+  }
+  setProfilePicture(uid: string): void{
+		console.log('setProfilePicture called');
+		// set picture to the larger one
+		this.facebook.api(`${uid}/picture?type=large`,[])
+		.then(photo => {
+			console.log('photo from fb api: ', JSON.stringify(photo));
+			// set the returned user in the backend
+		this.afs.doc(`/users/${uid}/photoUrl`).set(photo.data.url);
+		});
+	}
+
   updateUser(userData: User){
 		let userId = userData.id;
 		let user = this.afs.doc(`users/${userId}`);
@@ -150,19 +201,6 @@ constructor(
     // check the relationship whether current user is set to true or not while the other is not
   }
   /*
-  getUid(): Promise<string>{
-    let res = new Promise<any>((resolve, reject) => {
-        console.log('uid in getUid(): ', JSON.parse(localStorage.getItem('currentUser')).uid);
-        resolve(JSON.parse(localStorage.getItem('currentUser')).uid);
-    });
-    return res;
-  }
-  getCurrentUser(): Promise<User>{
-    let res = new Promise<any>((resolve, reject) => {
-        resolve(JSON.parse(localStorage.getItem('currentUser')));
-    });
-    return res;
-  }
   getPicture(){
     let base64Picture;
     let options = {
@@ -193,16 +231,7 @@ constructor(
 
   }
 
-  toUser(data): User{
-    let user = {
-      uid: data.uid,
-      name: data.displayName,
-      email: data.email,
-      photoUrl: data.photoURL,
-      provider: data.providerId
-    }
-    return user;
-  }
+
   // Tests to see if /users/<userId> has any data.
   checkIfUserExists(id: string): void {
     var usersRef = firebase.database().ref('/users');
@@ -225,12 +254,7 @@ constructor(
   getUserProfile(id: string): FirebaseObjectObservable<User> {
     return this.db.object(`/users/${id}`);
   }
-  // create user in firebase
-  createUser(userCredentials): void {
-    const userObservable = this.db.object(`/users/${userCredentials.uid}`);
-    console.log('creating a new user in the back-end: ', userCredentials.uid);
-    userObservable.set(this.toUser(this.currentUser));
-  }
+
   //deleting a user from the database
   removeUser(id: string): void {
     let usersRef = this.db.list(`/users`)

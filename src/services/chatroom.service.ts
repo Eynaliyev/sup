@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Http} from '@angular/http';
 import {AngularFireDatabase, AngularFireList, AngularFireObject} from 'angularfire2/database';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
-
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/observable/forkJoin';
@@ -13,11 +12,9 @@ import { Chatroom} from '../models/models';
 import { UtilService } from '../shared/util.service';
 import {Language} from '../models/models';
 import {MESSAGES} from './mock-messages';
-import {CHATROOMS} from './mock-chatrooms';
 import {LANGUAGES} from './mock-languages';
 @Injectable()
 export class ChatroomService {
-  private chatroomByIdUrl;
   private messages: Message[];
   private chatrooms: Chatroom[];
   private languages: Language[];
@@ -26,24 +23,36 @@ export class ChatroomService {
     private http: Http,
 		private db: AngularFireDatabase,
 		private afs: AngularFirestore,
-    private utilService: UtilService
+		private utilService: UtilService
   )
-  {
-			this.messages = MESSAGES;
-			this.languages = LANGUAGES;
-      this.chatrooms = CHATROOMS;
-  }
-		getAvailableChatrooms(location, languages: Language[]): Observable<Chatroom[]> {
+  {  }
+		getAvailableChatrooms(location, language: Language): Observable<any[]> {
+			console.log('joinChatroom called');
+			let gender = JSON.parse(localStorage.getItem('currentUser')).gender;
+			let otherGender;
+			if(gender === 'male'){
+				otherGender = 'femaleParticipants';
+			} else {
+				otherGender = 'maleParticipants';
+			}
 			// TO DO:
-			// add a query by the number of participants
-			// use firestore to sort by location and filter by availability
+			// 1. [ ] get all rooms
 			return this.db.list(`chatrooms`).valueChanges();
+			// .filter(room => room[otherGender].length < 2)
+			// .filter(relevantRooms => releaseEvents.language === language);
+			// 2. [ ] filter out rooms with less than 3 participants of opposite gender
+			// 3. [ ] filter by language
+			// 4. [ ] sort by distance from user - calculate average from users’ locations
+			// 5. [ ] join the room
+			// 6. [ ] if none create room
+			// with given language and add the user to the participants list of his gender to it
 		}
     getChatroomById(id): Observable<Chatroom>{
       // get full detailed data of the required chatroom
       return this.db.object(`chatrooms/${id}`).valueChanges();
 		}
-    joinChatroom(locaiton, languages: Language[]): Observable<string>{
+    joinChatroom(location, language: Language): Observable<any>{
+			console.log('joinChatroom called');
 			// perhaps should be a cloud function?
 			// find available rooms
 			// join it - https://angularfirebase.com/lessons/managing-firebase-user-relationships-to-database-records/#3-Data-that-Belongs-to-Multiple-Users
@@ -54,9 +63,47 @@ export class ChatroomService {
       // get messages for the room - first 15 for example
 			// return the chatroom details
 			return new Observable(observer => {
-				observer.next('123');
+				this.getAvailableChatrooms(location, language)
+				.subscribe(chatrooms => {
+					if(chatrooms.length !== 0){
+						console.log('available chatrooms: ', chatrooms);
+						observer.next(chatrooms[0]);
+					} else {
+						this.createChatroom(location, language)
+						.then(() => this.getAvailableChatrooms(location, language));
+					}
+				},
+				err => {
+					console.error(err);
+				});
 			});
-    }
+		}
+		createChatroom(location, language){
+			console.log('createChatroom called');
+			let gender = JSON.parse(localStorage.getItem('currentUser')).gender;
+			let thisGender;
+			if(gender === 'female'){
+				thisGender = 'femaleParticipants';
+			} else {
+				thisGender = 'maleParticipants';
+			}
+			let chatroom = {
+				femaleParticipants: [],
+				maleParticipants: [],
+				language: language,
+				messages: [],
+				blocked: [],
+				warnings: []
+			};
+			let user = JSON.parse(localStorage.getItem('currentUser'));
+			chatroom[thisGender].push({
+				id: user.id,
+				name: user.firstName + ' ' + user.lastName,
+				votes: 0,
+				profileImgUrl: user.profilePhoto.imgUrl
+			});
+			return this.db.list(`/chatrooms`).push(chatroom);
+		}
     leaveChatroom(chatroomId: string, userId: string){
 			// remove the user from participants list
 			let participants = this.db.object(`chatrooms/${chatroomId}/participants/${userId}`);

@@ -53,7 +53,8 @@ export class ChatroomPage {
 			chatroom => {
 				console.log('chatroom loaded from firebase: ', chatroom);
 				this.chatroom = chatroom;
-				this.users = this.chatroom.participants;
+				this.users = this.chatroom.maleParticipants;
+				this.users = this.users.concat(this.chatroom.femaleParticipants);
 				this.newMessage.roomId = this.chatroom.id;
 			},
 			err => {

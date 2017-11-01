@@ -91,4 +91,5 @@
         <variable name="APP_ID" value="158451481343120" />
         <variable name="APP_NAME" value="FlyChats" />
     </plugin>
+    <plugin name="cordova-plugin-nativestorage" spec="^2.2.2" />
 </widget>

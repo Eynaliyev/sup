@@ -1,4 +1,3 @@
-
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -14,24 +13,27 @@ import {User} from '../models/models';
 */
 @Injectable()
 export class AuthService {
-  constructor(public http: Http,
+  constructor(
+		public http: Http,
   	private facebook: Facebook,
-  	public userService: UserService) {
+  	public userService: UserService
+	) {
 		console.log('Hello AuthService');
 
 		}
-	facebookLogin(){//: Promise<User> {
+	facebookLogin(): Promise<User> {
 		//check for platform if web return a promise,
 		if(document.URL.includes('https://') || document.URL.includes('http://')){
 			console.log("we're in the browser");
-			return this.userService.setCurrentUser('10211310937803232');
+			this.userService.setCurrentUser('10211310937803232', 'dummy');
+			return new Promise(resolve => resolve(null));
 		} else {
 			console.log("we're on the device");
 			return this.facebook.login(['email', 'public_profile']).then( (response) => {
 				const facebookCredential = firebase.auth.FacebookAuthProvider
 				.credential(response.authResponse.accessToken);
 				//just to see what data is usully returned - for mocking purposes
-				console.log(response);
+				console.log('response: ', response, 'credential: ', facebookCredential);
 
 				return firebase.auth().signInWithCredential(facebookCredential)
 				.then((success) => {
@@ -48,6 +50,7 @@ export class AuthService {
 		}
 	}
  	logoutUser() {
+		localStorage.removeItem('currentUser');
 		return firebase.auth().signOut();
  	}
 }

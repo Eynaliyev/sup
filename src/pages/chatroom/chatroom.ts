@@ -20,19 +20,15 @@ export class ChatroomPage {
     messages: any[] = [];
     chatroomId: string;
     chatroom: Chatroom;
-    currentUser = {
-        id: '123',
-        image: 'assets/img/user.png',
-        name: 'Rusik'
-    }
+    currentUser;
     newMessage = {
       content: '',
       date: new Date(),
       id: this.utilService.guid(),
-      senderId: this.currentUser.id,
+      senderId: '',
       roomId: '',
-      senderName: this.currentUser.name,
-      senderImage: this.currentUser.image,
+      senderName: '',
+      senderImage: '',
       seen: []
     };
   constructor(
@@ -43,27 +39,33 @@ export class ChatroomPage {
     private utilService: UtilService,
     public alertCtrl: AlertController
 	) {
-    // get chatroom id
-    // on page loaded - load message history - paginated
-    // get chatroom id from the nav params
-    this.chatroomId = this.navParams.get('room');
-    console.log('Chatroom page loaded with id:', this.chatroomId);
-    this.chatroomService.getChatroomById(this.chatroomId)
-    .subscribe(
-			chatroom => {
-				console.log('chatroom loaded from firebase: ', chatroom);
-				this.chatroom = chatroom;
-				this.users = this.chatroom.maleParticipants;
-				this.users = this.users.concat(this.chatroom.femaleParticipants);
-				this.newMessage.roomId = this.chatroom.id;
-			},
-			err => {
-				console.error(err);
-			}
-		);
+			// get chatroom id
+			// on page loaded - load message history - paginated
+			// get chatroom id from the nav params
+			this.chatroomId = this.navParams.get('room');
+			console.log('Chatroom page loaded with id:', this.chatroomId);
+			this.userService.getCurrentUser()
+			.subscribe(user => {
+				this.currentUser = user;
+				this.newMessage.senderId = this.currentUser.id;
+				this.newMessage.senderName = this.currentUser.name;
+				this.newMessage.senderImage = this.currentUser.image;
+				this.chatroomService.getChatroomById(this.chatroomId)
+				.subscribe(
+					chatroom => {
+						console.log('chatroom loaded from firebase: ', chatroom);
+						this.chatroom = chatroom;
+						this.users = this.chatroom.maleParticipants;
+						this.users = this.users.concat(this.chatroom.femaleParticipants);
+						this.newMessage.roomId = this.chatroom.id;
+					},
+					err => {
+						console.error(err);
+					}
+				);
+			});
     }
     ionViewDidLoad(){
-
     }
     ngAfterViewInit() {
       return new Promise(resolve => {
@@ -159,10 +161,8 @@ export class ChatroomPage {
     }
     sendMessage(){
       this.newMessage.date = new Date();
-      this.newMessage.id = this.utilService.guid();
       this.chatroomService.sendMessage(this.chatroomId, this.newMessage);
       this.userService.updateLastMessage(this.currentUser.id, this.chatroomId, this.newMessage);
       this.newMessage.content = '';
     }
-
 }

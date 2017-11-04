@@ -11,8 +11,8 @@ import {Message} from '../models/models';
 import { Chatroom} from '../models/models';
 import { UtilService } from '../shared/util.service';
 import {Language} from '../models/models';
-import {MESSAGES} from './mock-messages';
 import {LANGUAGES} from './mock-languages';
+import {Participant} from '../models/models';
 @Injectable()
 export class ChatroomService {
   private messages: Message[];
@@ -27,7 +27,7 @@ export class ChatroomService {
   )
   {  }
 		getAvailableChatrooms(location, language: Language): Observable<any[]> {
-			console.log('joinChatroom called');
+			console.log('getAvailableChatrooms called');
 			let gender = JSON.parse(localStorage.getItem('currentUser')).gender;
 			let otherGender;
 			if(gender === 'male'){
@@ -47,7 +47,7 @@ export class ChatroomService {
 			// 6. [ ] if none create room
 			// with given language and add the user to the participants list of his gender to it
 		}
-    getChatroomById(id): Observable<Chatroom>{
+    getChatroomById(id: string): Observable<Chatroom>{
       // get full detailed data of the required chatroom
       return this.db.object(`chatrooms/${id}`).valueChanges();
 		}
@@ -65,12 +65,19 @@ export class ChatroomService {
 			return new Observable(observer => {
 				this.getAvailableChatrooms(location, language)
 				.subscribe(chatrooms => {
-					if(chatrooms.length !== 0){
+					if(chatrooms && chatrooms.length !== 0){
 						console.log('available chatrooms: ', chatrooms);
 						observer.next(chatrooms[0]);
 					} else {
 						this.createChatroom(location, language)
-						.then(() => this.getAvailableChatrooms(location, language));
+						.then(() => {
+							console.log('createChatroom completed');
+							this.getAvailableChatrooms(location, language)
+							.subscribe(chatrooms => {
+									console.log('available chatrooms: ', chatrooms);
+									observer.next(chatrooms[0]);;
+							})
+						});
 					}
 				},
 				err => {
@@ -78,8 +85,8 @@ export class ChatroomService {
 				});
 			});
 		}
-		createChatroom(location, language){
-			console.log('createChatroom called');
+		createChatroom(location, language: Language){
+			console.log('createChatroom called ');
 			let gender = JSON.parse(localStorage.getItem('currentUser')).gender;
 			let thisGender;
 			if(gender === 'female'){
@@ -87,7 +94,9 @@ export class ChatroomService {
 			} else {
 				thisGender = 'maleParticipants';
 			}
+			let randomId = this.utilService.guid();
 			let chatroom = {
+				id: randomId,
 				femaleParticipants: [],
 				maleParticipants: [],
 				language: language,
@@ -96,13 +105,19 @@ export class ChatroomService {
 				warnings: []
 			};
 			let user = JSON.parse(localStorage.getItem('currentUser'));
-			chatroom[thisGender].push({
+			let name = user.firstName + ' ' + user.lastName;
+			console.log(name, user,thisGender, chatroom[thisGender]);
+			let participant: Participant = {
 				id: user.id,
-				name: user.firstName + ' ' + user.lastName,
+				name: name,
 				votes: 0,
-				profileImgUrl: user.profilePhoto.imgUrl
-			});
-			return this.db.list(`/chatrooms`).push(chatroom);
+				profileImgUrl: user.photoUrl
+			};
+			console.log(user, participant);
+			chatroom[thisGender].push(participant);
+			console.log('creating chatroom: ', chatroom);
+			console.log(user);
+			return this.db.object(`chatrooms/${randomId}`).set(chatroom);
 		}
     leaveChatroom(chatroomId: string, userId: string){
 			// remove the user from participants list
@@ -112,16 +127,16 @@ export class ChatroomService {
       // remove the chatroom id from local storage
     }
     updateSeen(chatroomId: string, messageId: string, userId: string){
-			let messageSeen = this.afs.collection(`chatrooms/${chatroomId}/messages/${messageId}/seen`);
-      messageSeen.add(userId);
+			let messageSeen = this.db.list(`chatrooms/${chatroomId}/messages/${messageId}/seen`);
+      messageSeen.push(userId);
     }
     sendMessage(chatroomId: string, message: Message){
-			let messages = this.afs.collection(`chatrooms/${chatroomId}/messages`);
-      messages.add(message);
+			let messageRef = this.db.object(`chatrooms/${chatroomId}/messages/${message.id}`);
+      messageRef.set(message);
     }
     // TO DO: implement actual paginated message getter function
     getMessages(chatroomId: string, start?, end?): Observable<any[]> {
-      return this.afs.collection(`chatrooms/${chatroomId}/messages`).valueChanges();
+      return this.db.list(`chatrooms/${chatroomId}/messages`).valueChanges();
     }
     /*
   // get a specific room from the list - get room reference

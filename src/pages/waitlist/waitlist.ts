@@ -28,10 +28,10 @@ export class WaitlistPage {
     let languages = this.navParams.get('languages');
     // join a chatroom
     this.chatroomSrvc.joinChatroom(location, languages)
-    .subscribe(chatroomId => {
+    .subscribe(chatroom => {
       let view = this.navCtrl.getActive();
       if(view.component.name === "WaitlistPage"){
-        this.goToChatroom(chatroomId);
+        this.goToChatroom(chatroom.id);
       }
     });
   }

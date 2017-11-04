@@ -21,7 +21,7 @@ export class ChatroomPage {
     chatroomId: string;
     chatroom: Chatroom;
     currentUser;
-    newMessage = {
+    newMessage: Message = {
       content: '',
       date: new Date(),
       id: this.utilService.guid(),
@@ -48,16 +48,27 @@ export class ChatroomPage {
 			.subscribe(user => {
 				this.currentUser = user;
 				this.newMessage.senderId = this.currentUser.id;
-				this.newMessage.senderName = this.currentUser.name;
-				this.newMessage.senderImage = this.currentUser.image;
+				this.newMessage.senderName = this.currentUser.firstName + ' ', this.currentUser.lastName;
+				this.newMessage.senderImage = this.currentUser.photoUrl;
+				this.newMessage.seen.push(this.currentUser.id);
+				console.log('currentUser: ', this.currentUser);
 				this.chatroomService.getChatroomById(this.chatroomId)
 				.subscribe(
 					chatroom => {
 						console.log('chatroom loaded from firebase: ', chatroom);
 						this.chatroom = chatroom;
-						this.users = this.chatroom.maleParticipants;
-						this.users = this.users.concat(this.chatroom.femaleParticipants);
+						if(this.chatroom.maleParticipants && chatroom.femaleParticipants){
+							console.log('both male and female participants exist');
+							this.users = chatroom.maleParticipants.concat(this.chatroom.femaleParticipants);
+						} else if(this.chatroom.maleParticipants){
+							console.log('only male participants exist');
+							this.users = chatroom.maleParticipants;
+						} else {
+							console.log('only female participants exist');
+							this.users = chatroom.femaleParticipants;
+						}
 						this.newMessage.roomId = this.chatroom.id;
+						console.log('participants in the room: ', this.users);
 					},
 					err => {
 						console.error(err);
@@ -161,8 +172,11 @@ export class ChatroomPage {
     }
     sendMessage(){
       this.newMessage.date = new Date();
-      this.chatroomService.sendMessage(this.chatroomId, this.newMessage);
-      this.userService.updateLastMessage(this.currentUser.id, this.chatroomId, this.newMessage);
+			this.chatroomService.sendMessage(this.chatroomId, this.newMessage);
+			// if the chatroom is in contacts
+			if(this.currentUser.contacts.indexOf(this.chatroomId) !== -1){
+				this.userService.updateLastMessage(this.currentUser.id, this.chatroomId, this.newMessage);
+			}
       this.newMessage.content = '';
     }
 }

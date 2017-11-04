@@ -1,4 +1,4 @@
-<ion-content [ngClass]="animateClass" [ngStyle]="{'background-image': 'url(' + backGround + ')'}" style="background-size: cover;position: relative;">
+<ion-content *ngIf="user" [ngClass]="animateClass" [ngStyle]="{'background-image': 'url(' + backGround + ')'}" style="background-size: cover;position: relative;">
   <back-button></back-button>
   <ion-fab *ngIf="tab == 'vote'" style="left: 27%;" left bottom>
       <button ion-fab color="light" (click)="block(user.id)" class="menu-btn-border actn-btn">
@@ -29,7 +29,7 @@
       </div>-->
   </div>
 </ion-content>
-<ion-footer>
+<ion-footer *ngIf="user">
   <div [ngSwitch]="tab">
       <div *ngSwitchCase="'vote'">
           <div [ngClass]="animateClass" [style.display]="getHeight(tab)" class="profile-info">

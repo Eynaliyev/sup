@@ -36,9 +36,9 @@ constructor(
 	getUserById(id: string): Observable<any>{//Observable<User> {
 		return this.afs.doc(`users/${id}`).valueChanges();
   }
-  getCurrentUser(): Observable<any>{
+  getCurrentUser(): Observable<User>{
 		return new Observable(observer => {
-			observer.next(localStorage.getItem('currentUser'));
+			observer.next(JSON.parse(localStorage.getItem('currentUser')));
 		});
 	}
   setCurrentUser(uid, dummy?): void{
@@ -94,7 +94,7 @@ constructor(
 		// set current user in nativeStorage - pass the access token and email
 		localStorage.setItem('currentUser', JSON.stringify(user));
 	}
-	toUser(data){//: User{
+	toUser(data): User{
     let user = {
       id: data.id,
       firstName: data.first_name,
@@ -102,9 +102,14 @@ constructor(
       contacts: [],
       friendRequests: [],
       blockedList: [],
-      photoUrl: data.picture.data.url,
-			gender: data.gender
-    }
+      profilePhoto: {
+				imgUrl: data.picture.data.url
+			},
+			gender: data.gender,
+			photos: [{
+				imgUrl: data.picture.data.url
+			}]
+		}
     return user;
   }
   setProfilePicture(uid: string): void{

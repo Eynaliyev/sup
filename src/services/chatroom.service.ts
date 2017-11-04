@@ -131,6 +131,7 @@ export class ChatroomService {
       messageSeen.push(userId);
     }
     sendMessage(chatroomId: string, message: Message){
+			console.log('sending message: ', message);
 			let messageRef = this.db.object(`chatrooms/${chatroomId}/messages/${message.id}`);
       messageRef.set(message);
     }

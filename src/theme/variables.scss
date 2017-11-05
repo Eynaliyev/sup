@@ -80,6 +80,10 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
+.user-photo-bckg{
+	background-size: cover;
+	position: relative;
+}
 .btn-top-align{
 	top: 10px;
 }
@@ -104,6 +108,7 @@ $colors: (
 .actn-btn{
 	width: 76px;
 	height: 76px;
+	margin-bottom: 100px;
 }
 .notification{
   max-width: 9px;

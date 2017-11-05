@@ -105,7 +105,7 @@ export class UserProfilePage {
         console.log('currentUser in userProfile: ', this.currentUser);
         this.userSrvc.getUserById(id)
         .subscribe(user => {
-					console.log('user from getUserByID()', user);
+					console.log('user, id from getUserByID()', user, id);
           this.user = user;
           this.items = user.photos;
           this.backGround = user.photos[0].imgUrl;

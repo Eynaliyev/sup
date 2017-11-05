@@ -11,7 +11,10 @@ import { Slides } from 'ionic-angular';
 export class MyProfilePage {
   currentUser: User;
   currentTab = 'photos';
-  currentImage;
+	image: any;
+	items: any = [];
+	backGround: any;
+
   @ViewChild(Slides) slides: Slides;
 
   constructor(
@@ -21,8 +24,10 @@ export class MyProfilePage {
     this.userSrvc.getCurrentUser()
     .subscribe(user => {
       console.log('current user in myProfilePage: ', user);
-      this.currentUser = user;
-      this.currentImage = user.photos[0];
+			this.currentUser = user;
+			this.items = user.photos;
+			this.backGround = user.photos[0].imgUrl;
+			this.image = user.photos[0].imgUrl;
     });
   }
   ionViewDidLoad() {
@@ -43,10 +48,13 @@ export class MyProfilePage {
   deleteImage(){
     this.userSrvc.deleteImage(this.currentUser.id, this.currentImage);
     //console.log(this.user.photos);
+	}
+	changeImage(image) {
+    this.image = image
   }
   slideChanged() {
     let currentIndex = this.slides.getActiveIndex();
-    this.currentImage = this.currentUser.photos[currentIndex];
+    this.image = this.currentUser.photos[currentIndex];
     //console.log('Current index, image, photos: ', currentIndex, this.currentImage, this.user.photos);
   }
 }

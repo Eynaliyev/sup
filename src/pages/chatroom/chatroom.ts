@@ -116,8 +116,8 @@ export class ChatroomPage {
             infiniteScroll.complete();
         });
     }
-    goToUser(userId){
-        this.navCtrl.push(UserProfilePage, userId);
+    goToUser(id){
+        this.navCtrl.push(UserProfilePage, {user: id});
     }
     updateSeen(messages: Message[], id: string): Message[]{
       console.log(messages);

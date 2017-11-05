@@ -1,40 +1,36 @@
-<ion-content no-bounce padding class="dark-bckg">
+<ion-content *ngIf="currentUser" [ngClass]="animateClass" [ngStyle]="{'background-image': 'url(' + backGround + ')'}" class="user-photo-bckg">
   <menu-button></menu-button>
   <span class="pageHeader">My Profile</span>
   <!--image slide-->
   <div class="rlt tall-spacer" *ngIf="currentTab == 'photos'">
-    <ion-slides pager *ngIf="user" (ionSlideDidChange)="slideChanged()">
-      <ion-slide *ngFor="let image of user.photos">
-        <img class="user-images" [src]="image.imgUrl" alt="">
-      </ion-slide>
-    </ion-slides>
+		<gallery [data]="currentUser.photos" (change)="changeImage($event)"></gallery>
   </div>
   <div *ngIf="currentTab == 'about'" class="venti-spacer">
-    <ion-list *ngIf="user">
-      <ion-item color="none" id="myProfile-list-item39">
+    <ion-list *ngIf="currentUser">
+      <ion-item color="white" id="myProfile-list-item39">
         <h2>
-          {{user.firstName}} {{user.lastName}}
+          {{currentUser.firstName}} {{currentUser.lastName}}
         </h2>
       </ion-item>
       <ion-item id="myProfile-textarea1">
         <ion-label>
           About me...
         </ion-label>
-        <ion-textarea [(ngModel)]="user.about" placeholder="{{user.about}}"></ion-textarea>
+        <ion-textarea [(ngModel)]="currentUser.about" placeholder="{{currentUser.about}}"></ion-textarea>
       </ion-item>
       <ion-item id="meetSomebody-list-item-container1" *ngIf="languages">
         <div id="meetSomebody-markdown2" class="show-list-numbers-and-dots">
           <p style="margin-top:0px;color:#000000;">
             <strong>
-              {{user.languages}}
+              {{currentUser.languages}}
             </strong>
           </p>
         </div>
       </ion-item>
       <ion-item>
-        <ion-label *ngIf="!user.languages">Languages I speak:</ion-label>
-        <ion-label *ngIf="user.languages" class="alert">Change Languages:</ion-label>
-        <ion-select [(ngModel)]="user.languages" multiple="true">
+        <ion-label *ngIf="!currentUser.languages">Languages I speak:</ion-label>
+        <ion-label *ngIf="currentUser.languages" class="alert">Change Languages:</ion-label>
+        <ion-select [(ngModel)]="currentUser.languages" multiple="true">
           <ion-option value="English">English</ion-option>
           <ion-option value="Spanish">Spanish</ion-option>
           <ion-option value="German">German</ion-option>
@@ -45,13 +41,13 @@
       </ion-item>
       <ion-item color="none" id="myProfile-list-item43">
         <ion-icon name="pin" item-left></ion-icon>
-        {{user.currentLocation}}
+        {{currentUser.currentLocation}}
       </ion-item>
       <ion-item color="none" id="myProfile-list-item44">
-        Age: {{user.age}}
+        Age: {{currentUser.age}}
       </ion-item>
       <ion-item color="none" id="myProfile-list-item45">
-        University: {{user.universityName}}
+        University: {{currentUser.universityName}}
       </ion-item>
       <ion-row class="tall-spacer">
         <button ion-button color="royal" block (click)="updateProfile()">

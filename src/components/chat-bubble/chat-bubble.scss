@@ -52,7 +52,6 @@
     &.left {
       background-color: color($colors, gray);
       float: left;
-      margin-left: 55px;
 
       &:before {
         background-color: color($colors, gray);
@@ -63,7 +62,6 @@
     &.right {
       background-color: color($colors, chat-bubble);
       float: right;
-      margin-right: 55px;
 
       &:before {
         background-color: color($colors, chat-bubble);

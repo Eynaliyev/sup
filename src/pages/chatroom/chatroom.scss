@@ -61,7 +61,6 @@ page-chatroom {
       &.left {
         background-color: color($colors, white);
         float: left;
-        margin-left: 55px;
 
         &:before {
           background-color: color($colors, white);
@@ -72,7 +71,6 @@ page-chatroom {
       &.right {
         background-color: color($colors, chat-bubble);
         float: right;
-        margin-right: 55px;
 
         &:before {
           background-color: color($colors, chat-bubble);

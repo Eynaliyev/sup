@@ -49,7 +49,7 @@ export class ChatroomPage {
 				this.currentUser = user;
 				this.newMessage.senderId = this.currentUser.id;
 				this.newMessage.senderName = this.currentUser.firstName + ' ', this.currentUser.lastName;
-				this.newMessage.senderImage = this.currentUser.photoUrl;
+				this.newMessage.senderImage = this.currentUser.profilePhoto.imgUrl;
 				this.newMessage.seen.push(this.currentUser.id);
 				console.log('currentUser: ', this.currentUser);
 				this.chatroomService.getChatroomById(this.chatroomId)

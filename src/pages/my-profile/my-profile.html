@@ -1,8 +1,12 @@
-<ion-content *ngIf="currentUser" [ngClass]="animateClass" [ngStyle]="{'background-image': 'url(' + backGround + ')'}" class="user-photo-bckg">
+<ion-content *ngIf="currentUser" class="dark-bckg">
   <menu-button></menu-button>
   <span class="pageHeader">My Profile</span>
-  <!--image slide-->
+
+	<!--image slide-->
   <div class="rlt tall-spacer" *ngIf="currentTab == 'photos'">
+		<ion-card class="animateClass gallery-bckg">
+				<img class="selected-img" [src]="image" />
+		</ion-card>
 		<gallery [data]="currentUser.photos" (change)="changeImage($event)"></gallery>
   </div>
   <div *ngIf="currentTab == 'about'" class="venti-spacer">

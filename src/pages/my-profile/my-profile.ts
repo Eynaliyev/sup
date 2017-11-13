@@ -42,11 +42,11 @@ export class MyProfilePage {
     //console.log('currentTab in my-profile: ', this.currentTab);
   }
   addImage(){
-    this.userSrvc.addImage(this.currentUser.id, this.currentImage);
+    this.userSrvc.addImage(this.currentUser.id, this.image);
     //console.log(this.user.photos);
   }
   deleteImage(){
-    this.userSrvc.deleteImage(this.currentUser.id, this.currentImage);
+    this.userSrvc.deleteImage(this.currentUser.id, this.image);
     //console.log(this.user.photos);
 	}
 	changeImage(image) {

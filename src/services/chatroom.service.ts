@@ -1,18 +1,18 @@
-import { Injectable } from '@angular/core';
-import { Http} from '@angular/http';
+import {Injectable} from '@angular/core';
+import {Http} from '@angular/http';
 import {AngularFireDatabase, AngularFireList, AngularFireObject} from 'angularfire2/database';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
-import { Observable } from 'rxjs/Observable';
+import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from 'angularfire2/firestore';
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/observable/forkJoin';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import {Message} from '../models/models';
-import { Chatroom} from '../models/models';
-import { UtilService } from '../shared/util.service';
+import {Chatroom} from '../models/models';
 import {Language} from '../models/models';
-import {LANGUAGES} from './mock-languages';
 import {Participant} from '../models/models';
+import {UtilService} from '../shared/util.service';
+import {LANGUAGES} from './mock-languages';
 
 @Injectable()
 export class ChatroomService {

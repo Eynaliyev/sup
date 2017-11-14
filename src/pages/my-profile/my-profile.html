@@ -4,10 +4,11 @@
 
 	<!--image slide-->
   <div class="rlt tall-spacer" *ngIf="currentTab == 'photos'">
-		<ion-card class="animateClass gallery-bckg">
-				<img class="selected-img" [src]="image" />
-		</ion-card>
-		<gallery [data]="currentUser.photos" (change)="changeImage($event)"></gallery>
+		<ion-slides>
+				<ion-slide *ngFor="let img of currentUser.photos">
+					<img [src]="img.imgUrl" alt="">
+				</ion-slide>
+		</ion-slides>
   </div>
   <div *ngIf="currentTab == 'about'" class="venti-spacer">
     <ion-list *ngIf="currentUser">

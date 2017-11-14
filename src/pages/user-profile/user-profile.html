@@ -15,18 +15,29 @@
   </ion-fab>
   <div [ngSwitch]="tab">
       <div *ngSwitchCase="'vote'">
-      </div>
+					<ion-slides>
+							<ion-slide *ngFor="let img of currentUser.photos">
+								<img [src]="img.imgUrl" alt="">
+							</ion-slide>
+					</ion-slides>
+			</div>
+			<!--
       <div *ngSwitchCase="'photos'">
-          <ion-card class="animateClass gallery-bckg">
-              <img class="selected-img" [src]="image" />
-          </ion-card>
-      </div>
+					<ion-slides>
+							<ion-slide *ngFor="let img of currentUser.photos">
+								<img [src]="img.imgUrl" alt="">
+							</ion-slide>
+					</ion-slides>
+			</div>
+			-->
       <div *ngSwitchCase="'about'">
           <profile-timeline [currentUser]="currentUser" [user]="user"></profile-timeline>
-      </div><!--
+			</div>
+			<!--
       <div *ngSwitchCase="'profile'">
           <profile-posts></profile-posts>
-      </div>-->
+			</div>
+			-->
   </div>
 </ion-content>
 <ion-footer *ngIf="user">
@@ -36,13 +47,14 @@
               <span class="nameDetails"><span class="light-text">{{user.firstName}} {{user.lastName}}</span>
               <span *ngIf="user.age" class="usr-profile-age-label">{{user.age}}</span></span>
           </div>
-      </div>
+			</div>
+			<!--
       <div *ngSwitchCase="'photos'">
-          <gallery [data]="items" (change)="changeImage($event)"></gallery>
           <div [ngClass]="animateClass" class="profile-info">
               <span class="nameDetails"><span class="light-text">Photos of {{user.firstName}}</span></span>
           </div>
-      </div>
+			</div>
+			-->
       <div *ngSwitchCase="'about'">
           <div [ngClass]="animateClass" class="profile-info">
               <span class="nameDetails"><span class="light-text">About {{user.firstName}}</span></span>
@@ -59,10 +71,12 @@
   <ion-segment [(ngModel)]="tab" color='dark'>
       <ion-segment-button [@flyInTopSlow4]="0" style="background: #df69a1;color: white;height: 60px;padding-top: 10px;" value="vote">
           <ion-icon name="ios-heart-outline" item-left></ion-icon>
-      </ion-segment-button>
+			</ion-segment-button>
+			<!--
       <ion-segment-button [@flyInTopSlow3]="0" style="background: #a75ada;color: white;height: 60px;padding-top: 10px;" value="photos">
           <ion-icon name="ios-camera-outline" item-left></ion-icon>
-      </ion-segment-button>
+			</ion-segment-button>
+		-->
       <ion-segment-button [@flyInTopSlow2]="0" style="background: #8649c8;color: white;height: 60px;padding-top: 10px;" value="about">
           <ion-icon name="ios-person-outline" item-left></ion-icon>
       </ion-segment-button>

@@ -51,7 +51,6 @@ export class User {
     public company?: string,
     public profession?: string,
     public currentLocation?: string,
-    public age?: number,
     public currentCoords?: number[],
     public currentRoomId?: string,
     public socialProfiles?: SocialProfile[],

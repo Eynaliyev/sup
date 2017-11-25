@@ -15,7 +15,7 @@
   </ion-fab>
   <div [ngSwitch]="tab">
       <div *ngSwitchCase="'vote'">
-					<ion-slides>
+					<ion-slides pager>
 							<ion-slide *ngFor="let img of currentUser.photos">
 								<img [src]="img.imgUrl" alt="">
 							</ion-slide>
@@ -44,9 +44,11 @@
   <div [ngSwitch]="tab">
       <div *ngSwitchCase="'vote'">
           <div [ngClass]="animateClass" [style.display]="getHeight(tab)" class="profile-info">
-              <span class="nameDetails"><span class="light-text">{{user.firstName}} {{user.lastName}}</span>
-              <span *ngIf="user.age" class="usr-profile-age-label">{{user.age}}</span></span>
-          </div>
+              <span class="nameDetails">
+								<span class="light-text">{{user.firstName}} {{user.lastName}}</span>
+								<span *ngIf="user.birthday" class="usr-profile-age-label">{{user.birthday|age}}</span>
+							</span>
+						</div>
 			</div>
 			<!--
       <div *ngSwitchCase="'photos'">

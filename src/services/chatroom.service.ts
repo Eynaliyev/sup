@@ -127,13 +127,14 @@ export class ChatroomService {
       // remove the chatroom id from local storage
     }
     updateSeen(chatroomId: string, messageId: string, userId: string){
+			console.log('updating seen of: ', chatroomId, messageId, 'with user id: ', userId);
 			let messageSeen = this.db.list(`chatrooms/${chatroomId}/messages/${messageId}/seen`);
       messageSeen.push(userId);
     }
     sendMessage(chatroomId: string, message: Message){
 			console.log('sending message: ', message);
-			let messageRef = this.db.object(`chatrooms/${chatroomId}/messages/${message.id}`);
-      messageRef.set(message);
+			let messageRef = this.db.list(`chatrooms/${chatroomId}/messages`);
+      messageRef.push(message);
     }
     // TO DO: implement actual paginated message getter function
     getMessages(chatroomId: string, start?, end?): Observable<any[]> {

@@ -1,3 +1,14 @@
 page-user-profile {
 
+	ion-slides {
+		height: auto;
+
+		.swiper-pagination {
+			top: 10px;
+
+			.swiper-pagination-bullet {
+				background: color($colors, white);
+			}
+		}
+	}
 }

@@ -44,7 +44,7 @@ constructor(
   setCurrentUser(uid, dummy?): void{
 		let currentUser: User;
 		this.getUserById(uid).subscribe(user => {
-			console.log('res from getUserById', user);
+			console.log('res from getUserById', JSON.stringify(user));
 			// check if the user exists in backend
 			if(user){
 				// if yes,
@@ -89,6 +89,7 @@ constructor(
 		// convert info to our model
 		let user = this.toUser(userCredentials);
 		// set it in the backend
+		console.log('creating user: ', user );
 		this.afs.doc(`/users/${user.id}`).set(user)
 		.then(() => this.setProfilePicture(user.id) );
 		// set current user in nativeStorage - pass the access token and email
@@ -119,7 +120,7 @@ constructor(
 		.then(photo => {
 			console.log('photo from fb api: ', JSON.stringify(photo));
 			// set the returned user in the backend
-		this.afs.doc(`/users/${uid}/photoUrl`).set(photo.data.url);
+		this.afs.doc(`/users/${uid}/photoUrl`).set(photo.data.url + '?type=large');
 		});
 	}
 
@@ -367,21 +368,7 @@ constructor(
   updateProfile(user){
 
   }
-  //set current user depending on whether there's somebody like this, or create a new one
-  //check for presence of dummy data with arguments
-  //if it's there, set current user to dummy data
-  setCurrentUser(dummy?: any): void{
-    if (dummy) {
-      console.log("setting current user to:", dummy);
-      localStorage.setItem('currentUser', JSON.stringify(dummy));
-    } else {
-      localStorage.setItem('currentUser', JSON.stringify(firebase.auth().currentUser.providerData[0]));
-      this.currentUser = this.toUser(firebase.auth().currentUser.providerData[0]);
-      let userId = JSON.parse(localStorage.getItem('currentUser')).uid;
-      console.log('checking if the user is there: ', userId);
-      this.checkIfUserExists(userId);
-    }
-  }
+
   // Tests to see if /users/<userId> has any data.
   checkIfUserExists(id: string): void {
     var usersRef = firebase.database().ref('/users');

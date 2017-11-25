@@ -4,7 +4,7 @@
 
 	<!--image slide-->
   <div class="rlt tall-spacer" *ngIf="currentTab == 'photos'">
-		<ion-slides>
+		<ion-slides pager>
 				<ion-slide *ngFor="let img of currentUser.photos">
 					<img [src]="img.imgUrl" alt="">
 				</ion-slide>

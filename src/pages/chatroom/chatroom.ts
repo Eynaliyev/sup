@@ -93,7 +93,8 @@ export class ChatroomPage {
             // add time passed since the mssage was sent
             //res = this.utilService.addMessageTimeSince(res);
             // To Do : add sender name based on participants ID, or nothing
-            for (let i = 0; i < res.length; i++) {
+						env.messages = [];
+						for (let i = 0; i < res.length; i++) {
                 setTimeout(function() {
                     env.messages.push(res[i]);
                 }, 100 * i);

@@ -13,7 +13,7 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 .scroll-content {
-  background-image: url('../assets/images/background.png');
+  background-image: url('../assets/images/background-0.jpg');
   background-position: initial initial;
   background-repeat: initial initial;
 }
@@ -121,9 +121,9 @@
 }
 .pageHeader {
     position: absolute;
-    top: 28px;
+    top: 42px;
     left: 80px;
-    color: #ccc;
+    //color: #ccc;
     font-size: 18px;
     text-transform: capitalize;
 }

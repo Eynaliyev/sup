@@ -81,6 +81,9 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
+ion-fab{
+	top: 21px !important;
+}
 .user-photo-bckg{
 	background-size: cover;
 	position: relative;

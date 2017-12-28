@@ -38,14 +38,12 @@ export class RequestsListPage {
       this.userSrvc.getCurrentUser().subscribe(user => {
         this.currentUser = user;
         this.requestsSrvc.getRequests(user.id).subscribe(requests => {
-					console.log("requests from the service: ", requests);
           let res = requests.sort((first, second) => {
             return second.date.getTime() - first.date.getTime();
           });
           for (let i = 0; i < res.length; i++) {
             setTimeout(function() {
                 env.requests.push(res[i]);
-                console.log('requests in requestsList: ', env.requests);
             }, 100 * i);
 					}
 					// make sure the requests are seen

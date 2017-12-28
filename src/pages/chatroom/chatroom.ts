@@ -20,7 +20,10 @@ export class ChatroomPage {
     messages: any[] = [];
     chatroomId: string;
     chatroom: Chatroom;
-    currentUser;
+		currentUser;
+		bckgImgNum = Math.floor(Math.random()*50);
+		backgroundImage;
+
     newMessage: Message = {
       content: '',
       date: new Date(),
@@ -39,6 +42,8 @@ export class ChatroomPage {
     private utilService: UtilService,
     public alertCtrl: AlertController
 	) {
+			let photoUrl = `../assets/images/background-${this.bckgImgNum}.jpg`;
+			this.backgroundImage = `{'background-image': url('${photoUrl}')}`;
 			// get chatroom id
 			// on page loaded - load message history - paginated
 			// get chatroom id from the nav params
@@ -89,14 +94,14 @@ export class ChatroomPage {
             let updatedMessages = this.utilService.addMessagePosition(newMessages, this.currentUser.id);
             console.log('updatedMessages: ', updatedMessages);
             // set the seen property
-            let res = this.updateSeen(updatedMessages, this.currentUser.id);
+            //let res = this.updateSeen(updatedMessages, this.currentUser.id);
             // add time passed since the mssage was sent
             //res = this.utilService.addMessageTimeSince(res);
             // To Do : add sender name based on participants ID, or nothing
 						env.messages = [];
-						for (let i = 0; i < res.length; i++) {
+						for (let i = 0; i < updatedMessages.length; i++) {
                 setTimeout(function() {
-                    env.messages.push(res[i]);
+                    env.messages.push(updatedMessages[i]);
                 }, 100 * i);
             }
 						resolve(true);
@@ -121,7 +126,6 @@ export class ChatroomPage {
         this.navCtrl.push(UserProfilePage, {user: id});
     }
     updateSeen(messages: Message[], id: string): Message[]{
-      console.log(messages);
       let result = [];
       messages.forEach(message => {
         if(message.seen.indexOf(id) === -1){

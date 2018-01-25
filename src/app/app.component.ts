@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { Platform, MenuController, Nav  } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
+//import { Storage } from '@ionic/storage';
 import { LoadingController } from 'ionic-angular';
 import firebase from 'firebase';
 
@@ -37,8 +37,8 @@ export class MyApp {
     private platform: Platform,
     private menu: MenuController,
     private loadingCtrl: LoadingController,
-    private userSrvc: UserService,
-    private storage: Storage
+    private storage: Storage,
+    private userSrvc: UserService
   ) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -50,7 +50,7 @@ export class MyApp {
 						this.rootPage = MeetSomebodyPage;
 					} else {
 						this.rootPage = LoginPage;
-						this.storage.set('introShown', true);
+//						this.storage.set('introShown', true);
 					}
 					this.loader.dismiss();
 				},

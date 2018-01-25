@@ -37,7 +37,7 @@ export class MyApp {
     private platform: Platform,
     private menu: MenuController,
     private loadingCtrl: LoadingController,
-    private storage: Storage,
+    //private storage: Storage,
     private userSrvc: UserService
   ) {
     platform.ready().then(() => {

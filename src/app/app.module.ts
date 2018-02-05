@@ -82,7 +82,7 @@ export const firebaseConfig = {
 		AngularFireModule.initializeApp(firebaseConfig),
 		AngularFireDatabaseModule,
 		AngularFirestoreModule.enablePersistence(),
-    IonicStorageModule.forRoot()
+		IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [

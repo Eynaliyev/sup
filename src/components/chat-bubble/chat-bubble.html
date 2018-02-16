@@ -1,3 +1,4 @@
+
 <div class="chatBubble" >
     <div class="message-detail light-text {{message.position}}">
       <span><b>{{message.senderName}}</b></span>
@@ -9,20 +10,7 @@
     <div class="chat-bubble {{message.position}}">
       <div class="message">
         <img src="{{ message.image }}" class="block" *ngIf="message.image" alt=""/>
-				<span>>{{message.content}}</span>
+          {{message.content}}
       </div>
     </div>
   </div>
-	<ion-col class="message right col" col-9="" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
-		<div>
-			<p float-right="" no-margin="" word-wrap="">afafafafa</p>
-			<div class="float-break"></div>
-		</div>
-		<ion-badge float-right="" class="badge badge-ios">an hour ago</ion-badge>
-	</ion-col>
-	<ion-col class="avatar col" col-2="" text-center="">
-		<span class="active" ng-reflect-ng-class="[object Object]"></span>
-		<img-loader _nghost-c0="" ng-reflect-src="assets/images/profile.png">
-	    <img class="profile-picture" default="assets/images/user.png" [src]="message.senderImage"  (click)="goToUser(message.senderId)">
-		</img-loader>
-	</ion-col>

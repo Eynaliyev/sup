@@ -29,7 +29,10 @@ export class MeetSomebodyPage {
         //console.log('possible languages loaded from the servie: ', this.languages);
 			});
 			this.userSrvc.getCurrentUser().subscribe(user => this.currentUser = user);
-			this.geolocation.getCurrentPosition().then(location => this.currentLocation = location);
+			this.geolocation.getCurrentPosition().then(location => {
+				this.currentLocation = location;
+				console.log("user's locations: ", location);
+			});
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad MeetSomebodyPage');

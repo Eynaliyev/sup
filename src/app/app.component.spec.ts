@@ -1,8 +1,6 @@
 /*
 import {async, TestBed} from '@angular/core/testing';
 import {IonicModule} from 'ionic-angular';
-import {StatusBar} from '@ionic-native/status-bar';
-import {SplashScreen} from '@ionic-native/splash-screen';
 import {UserService} from '../services/services';
 import {MenuController } from 'ionic-angular';
 import {Storage} from '@ionic/storage';
@@ -21,8 +19,6 @@ describe('MyApp Component', () => {
 				IonicModule.forRoot(MyApp)
 			],
 			providers: [
-				StatusBar,
-				SplashScreen,
 				UserService,
 				MenuController,
 				LoadingController

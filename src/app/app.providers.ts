@@ -1,8 +1,6 @@
 // import services
 import { ErrorHandler } from '@angular/core';
 import { IonicErrorHandler } from 'ionic-angular';
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
 import { Geolocation } from '@ionic-native/geolocation';
 //import { Camera } from '@ionic-native/camera';
 import { Facebook } from '@ionic-native/facebook';
@@ -39,8 +37,6 @@ export class AppProviders {
             Facebook,
             AuthService,
             UtilService,
-            StatusBar,
-            SplashScreen,
             UserService,
             ChatroomService,
             VipService,
@@ -60,8 +56,6 @@ export class AppProviders {
             Facebook,
             AuthService,
             UtilService,
-            StatusBar,
-            SplashScreen,
             UserService,
 						ChatroomService,
 						AngularFireDatabase,

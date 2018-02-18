@@ -25,13 +25,6 @@ constructor(
 ) {
     this.user = USER;
   }
-// should come from chatroom in the participants property for the chatroom
-// should come from contacts property in get user by id for the contacts list
-	getRandomUsers(number) {
-		return this.http.get('https://randomuser.me/api/?results='+number)
-		.map(res => res.json())
-		.map(resp => resp.results)
-	}
 // get a specific User by id - that conforms to the user model
 	getUserById(id: string): Observable<any>{//Observable<User> {
 		return this.afs.doc(`users/${id}`).valueChanges();

@@ -50,7 +50,10 @@ export class ChatroomService {
 		}
     getChatroomById(id: string): Observable<Chatroom>{
       // get full detailed data of the required chatroom
-      return this.db.object(`chatrooms/${id}`).valueChanges();
+      return this.db.object(`chatrooms/${id}`).valueChanges().map(chatroom => this.toChatroom(chatroom));
+		}
+		toChatroom(obj: any): Chatroom {
+			return obj;
 		}
     joinChatroom(location, language: Language): Observable<any>{
 			console.log('joinChatroom called');

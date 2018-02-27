@@ -11,7 +11,9 @@ export let USER = {
   profession: 'Software Developer',
   currentLocation: 'Baku, Azerbaijan',
   currentCoords: [50.0647, 19.9450],
-  age: 25,
+	age: 25,
+	blockedList: [],
+	friendRequests: [],
   contacts: [
     {
       id:'1234',
@@ -90,7 +92,6 @@ export let USER = {
       }
     }
   ],
-  friendRequests: ['6434'],
   currentRoomId: '123',
   socialProfiles: [],
   profileImgUrl: 'assets/img/pic.png',

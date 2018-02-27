@@ -9,7 +9,6 @@ import {VipService} from '../../services/services';
  * on Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-purchase',
   templateUrl: 'purchase.html',

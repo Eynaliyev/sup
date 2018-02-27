@@ -85,7 +85,10 @@ export class UserProfilePage {
   image: any;
   items: any = [];
   friend: boolean = false;
-  requested: boolean = false;
+	requested: boolean = false;
+	likeAlertPresented: boolean = false;
+	unlikeAlertPresented: boolean = false;
+	blockAlertPresented: boolean = false;
 
   constructor(
     private navCtrl: NavController,
@@ -102,6 +105,7 @@ export class UserProfilePage {
         console.log('currentUser in userProfile: ', this.currentUser);
         this.userSrvc.getUserById(id)
         .subscribe(user => {
+					console.log('user, id from getUserByID()', user, id);
           this.user = user;
           this.items = user.photos;
           this.backGround = user.photos[0].imgUrl;
@@ -128,31 +132,65 @@ export class UserProfilePage {
       height = "hidden";
       return height;
   }
-  like() {
-    // alert
-    const alert = this.alertCtrl.create({
-      title: 'Confirm Like',
-      message: 'Do you want to add this person to contacts?',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
-        },
-        {
-          text: 'Like',
-          handler: () => {
-            console.log('Buy clicked');
-            this.userSrvc.like(this.user.id);
-          }
-        }
-      ]
-    });
-    alert.present();
+  like(id: string) {
+		if(!this.likeAlertPresented){
+			// alert
+			const alert = this.alertCtrl.create({
+				title: 'Confirm Like',
+				message: 'Do you want to add this person to contacts?',
+				buttons: [
+					{
+						text: 'Cancel',
+						role: 'cancel',
+						handler: () => {
+							console.log('Cancel clicked');
+						}
+					},
+					{
+						text: 'Like',
+						handler: () => {
+							console.log('Buy clicked');
+							this.userSrvc.like(id);
+						}
+					}
+				]
+			});
+			alert.present();
+			this.likeAlertPresented = true;
+		} else {
+			this.userSrvc.like(id);
+		}
+	}
+	block(id: string){
+		if(!this.blockAlertPresented){
+			const alert = this.alertCtrl.create({
+				title: 'Confirm Like',
+				message: "Do you want to block this contact? You won't be placed in the same room with them again.",
+				buttons: [
+					{
+						text: 'Cancel',
+						role: 'cancel',
+						handler: () => {
+							console.log('Cancel clicked');
+						}
+					},
+					{
+						text: 'Block',
+						handler: () => {
+							console.log('Request cancelled');
+							this.userSrvc.block(id);
+						}
+					}
+				]
+			});
+			alert.present();
+			this.blockAlertPresented = true;
+		} else {
+			this.userSrvc.block(id);
+		}
   }
-  unlike() {
+  unlike(id: string){
+		if(!this.unlikeAlertPresented){
     // alert
     let message = 'Are you sure?';
     if(this.currentUser.contacts.forEach(contact => contact.id === this.user.id)){
@@ -176,11 +214,15 @@ export class UserProfilePage {
           text: 'Remove',
           handler: () => {
             console.log('Request cancelled');
-            this.userSrvc.removeRequest(this.user.id);
+            this.userSrvc.removeRequest(id);
           }
         }
       ]
     });
-    alert.present();
+		alert.present();
+		this.unlikeAlertPresented = true;
+		} else {
+			this.userSrvc.removeRequest(id);
+		}
   }
 }

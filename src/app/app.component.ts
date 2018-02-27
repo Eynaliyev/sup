@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { Platform, MenuController, Nav  } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
+//import { Storage } from '@ionic/storage';
 import { LoadingController } from 'ionic-angular';
 import firebase from 'firebase';
 
@@ -14,6 +14,7 @@ import { LoginPage } from '../pages/pages';
 //import { SettingsPage } from '../pages/pages';
 // providers
 import { UserService } from '../services/services';
+import { AuthService } from '../services/services';
 // models
 import { User } from '../models/models';
 
@@ -22,7 +23,7 @@ import { User } from '../models/models';
 })
 export class MyApp {
   @ViewChild(Nav) navCtrl: Nav;
-  rootPage:any = MeetSomebodyPage;
+  rootPage:any = LoginPage;
   @ViewChild(Nav) nav: Nav;
   pages: any[];
   activePage: any;
@@ -36,47 +37,49 @@ export class MyApp {
   constructor(
     private platform: Platform,
     private menu: MenuController,
-    private loadingCtrl: LoadingController,
-    private userSrvc: UserService,
-    private storage: Storage
+		private loadingCtrl: LoadingController,
+		private authService: AuthService,
+    //private storage: Storage,
+    private userSrvc: UserService
   ) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-
-			firebase.initializeApp({
-				apiKey: "AIzaSyDI22hmtv2clf3WYdo2y04z_h-eCfbv_F4",
-				authDomain: "huggable-9e981.firebaseapp.com",
-				databaseURL: "https://huggable-9e981.firebaseio.com",
-				projectId: "huggable-9e981",
-				storageBucket: "huggable-9e981.appspot.com",
-				messagingSenderId: "272489685620"
-			});
       this.presentLoading();
-      this.storage.get('introShown').then((result) => {
-        if(result){
-          this.rootPage = MeetSomebodyPage;
-        } else {
-          this.rootPage = LoginPage;
-          this.storage.set('introShown', true);
-        }
-        this.loader.dismiss();
-      });
+      this.userSrvc.getCurrentUser().subscribe(
+				result => {
+					if(result){
+						this.rootPage = MeetSomebodyPage;
+					} else {
+						this.rootPage = LoginPage;
+//						this.storage.set('introShown', true);
+					}
+					this.loader.dismiss();
+				},
+				err => {
+					console.error(err);
+				}
+			);
     });
     this.pages = [
       { title: 'Meet people Nearby', component: MeetSomebodyPage, icon: 'ios-locate-outline' },
       { title: 'Contacts', component: ContactsListPage, icon: 'ios-chatboxes-outline' },
-      { title: 'Notifications', component: NotificationsListPage, icon: 'ios-chatboxes-outline' },
+      //{ title: 'Notifications', component: NotificationsListPage, icon: 'ios-notifications-outline' },
       { title: 'Edit Profile', component: MyProfilePage, icon: 'ios-contacts-outline' },
       /*
       { title: 'Settings', component: SettingsPage, icon: 'ios-settings-outline' }
       */
     ];
     this.userSrvc.getCurrentUser()
-    .subscribe( user => {
-      console.log('current user :', user);
-      this.user = user;
-    });
+    .subscribe(
+			user => {
+				console.log('current user :', user);
+				this.user = user;
+			},
+			err => {
+				console.error(err);
+			}
+		);
   }
   openPage(page) {
     // close the menu when clicking a link from the menu
@@ -95,8 +98,8 @@ export class MyApp {
     this.navCtrl.push(VIPPage);
   }
   logout(){
-    //add actual logging out and localStorage clearing
-    this.navCtrl.setRoot(LoginPage);
+		//add actual logging out and locaStorage clearing
+    this.authService.logout().then((res) => this.navCtrl.setRoot(LoginPage));
   }
   checkActive(page){
     return page == this.activePage;

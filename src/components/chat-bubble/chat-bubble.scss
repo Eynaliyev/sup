@@ -52,7 +52,6 @@
     &.left {
       background-color: color($colors, gray);
       float: left;
-      margin-left: 55px;
 
       &:before {
         background-color: color($colors, gray);
@@ -62,8 +61,7 @@
     }
     &.right {
       background-color: color($colors, chat-bubble);
-      float: right;
-      margin-right: 55px;
+			float: right;
 
       &:before {
         background-color: color($colors, chat-bubble);
@@ -79,14 +77,5 @@
         text-align: right;
       }
     }
-  }
-  ion-footer {
-    .bar-buttons-md[start] {
-      order: 3;
-    }
-
-    ion-icon {
-      font-size: 1.6em;
-    }
-  }
+	}
 }

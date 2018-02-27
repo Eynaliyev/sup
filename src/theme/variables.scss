@@ -40,7 +40,8 @@ $colors: (
   gray: #F7F7F7,
   fb-color: #3B5998,
   white: #FFFFFF,
-  chat-bg: #EDECEC,
+	chat-bg: #EDECEC,
+	bee-gold: #ffcf00,
   chat-bubble: #C4EBF7
 );
 
@@ -80,15 +81,48 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
-
+ion-fab{
+	top: 21px !important;
+}
+.user-photo-bckg{
+	background-size: cover;
+	position: relative;
+}
+.btn-top-align{
+	top: 10px;
+}
+.right {
+	right: 0;
+}
+.gallery-bckg{
+	margin: 0px 0px 0px 0px;
+	position: absolute;
+	width: 100%;
+	top:0;
+	height:100%;
+	background: none;
+}/*
+.selected-img{
+	padding: 5px;
+	width: auto;
+	margin: 0 auto;
+	padding-bottom: 90px;
+	height: 95%;
+}*/
+.actn-btn{
+	width: 76px;
+	height: 76px;
+	margin-bottom: 100px;
+}
 .notification{
   max-width: 9px;
   margin-left: 5px;
 }
 .usr-profile-age-label{
   padding: 11px;
-  background: rgba(211, 124, 166, 0.61);
-  position: absolute;
+  background: rgba(207, 83, 143, 0.61);
+	position: absolute;
+	color: white;
   right: 20px;
   top: -10px;
 }
@@ -141,9 +175,6 @@ img.profile-picture {
   &.right {
     right: 10px;
   }
-}
-.dark-bckg{
-  background: url('../assets/img/background.jpg');
 }
 .venti-spacer{
   margin-top: 63px !important;

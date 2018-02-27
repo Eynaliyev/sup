@@ -10,113 +10,176 @@ import {Message} from '../models/models';
 import { User} from '../models/models';
 import {USER} from "./mock-user";
 import firebase from 'firebase';
-//import { AngularFireDatabase, AngularFireObject, AngularFireList } from 'angularfire2/database';
+import { Facebook } from '@ionic-native/facebook';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 //import { Camera } from 'ionic-native';
 @Injectable()
 export class UserService {
   private user:User;
-  private currentUser:User;
-
-/*
-  private contacts: FirebaseListObservable<any[]>;
-  private currentUser: User;
-  private user: User = JSON.parse(localStorage.getItem('currentUser'));
-*/
+	private currentUser:User;
 
 constructor(
-  private http: Http,
-  //public db: AngularFireDatabase
-  ) {
+	private http: Http,
+	private facebook: Facebook,
+	private afs: AngularFirestore
+) {
     this.user = USER;
   }
-// should come from chatroom in the participants property for the chatroom
-// should come from contacts property in get user by id for the contacts list
-	getRandomUsers(number) {
-		return this.http.get('https://randomuser.me/api/?results='+number)
-		.map(res => res.json())
-		.map(resp => resp.results)
-	}
 // get a specific User by id - that conforms to the user model
-	getUserById(id): Observable<User>{//Observable<User> {
-    //url constructed from id
-    let url = '';
-    let env = this;
-    return new Observable(observer => {
-      observer.next(env.user);
-    });
-    /*
-		return this.http.get(url)
-    .map(response => {
-				console.log('response.json().data for getting User by id', response.json().data);
-				return response.json().data as User;
-			}).catch(err => {
-				this.handleError(err);
-				return null;
-      })
-      */
+	getUserById(id: string): Observable<any>{//Observable<User> {
+		return this.afs.doc(`users/${id}`).valueChanges();
   }
-  getCurrentUser(): Observable<User>{//Observable<User> {
-    //url constructed from id
-    let url = '';
-    let env = this;
-    return new Observable(observer => {
-      observer.next(env.user);
-    });
+  getCurrentUser(): Observable<User>{
+		return new Observable(observer => {
+			observer.next(JSON.parse(localStorage.getItem('currentUser')));
+		});
+	}
+  setCurrentUser(uid): void{
+		let currentUser: User;
+		this.getUserById(uid).subscribe(user => {
+			console.log('res from getUserById', JSON.stringify(user));
+			// check if the user exists in backend
+			if(user){
+				// if yes,
+				// set the current user in the localstorage to the one recovered from there
+				currentUser = user;
+				localStorage.setItem('currentUser', JSON.stringify(user));
+				console.log("setting current user to:", JSON.stringify(localStorage.getItem('currentUser')));
+			} else {
+				// if no,
+					// create the get user infor from facebook graph API
+					this.facebook.api(`${uid}?fields=id,name,gender,locale,picture,email,first_name,last_name`,[])
+					.then(userInfo => {
+						console.log('user info from fb api: ', JSON.stringify(userInfo));
+						// set the returned user in the backend
+						this.createUser(userInfo);
+					});
+			}
+		});
+	}
+  // create user in firebase
+  createUser(userCredentials) {
+		// convert info to our model
+		let user = this.toUser(userCredentials);
+		// set it in the backend
+		console.log('creating user: ', user );
+		this.afs.doc(`/users/${user.id}`).set(user)
+		.then(() => this.setProfilePicture(user.id) );
+		// set current user in nativeStorage - pass the access token and email
+		localStorage.setItem('currentUser', JSON.stringify(user));
+	}
+	toUser(data): User{
+    let user = {
+      id: data.id,
+      firstName: data.first_name,
+      lastName: data.last_name,
+      contacts: [],
+      friendRequests: [],
+      blockedList: [],
+      profilePhoto: {
+				imgUrl: data.picture.data.url
+			},
+			gender: data.gender,
+			photos: [{
+				imgUrl: data.picture.data.url
+			}]
+		}
+    return user;
   }
-  updateUser(user){
-    this.user = user;
+  setProfilePicture(uid: string): void{
+		console.log('setProfilePicture called');
+		// set picture to the larger one
+		this.facebook.api(`${uid}/picture?type=large`,[])
+		.then(photo => {
+			console.log('photo from fb api: ', JSON.stringify(photo));
+			// set the returned user in the backend
+		this.afs.doc(`/users/${uid}/photoUrl`).set(photo.data.url + '?type=large');
+		});
+	}
+
+  updateUser(userData: User){
+		let userId = userData.id;
+		let user = this.afs.doc(`users/${userId}`);
+		user.update(userData);
   }
-  addImage(image){
-    this.user.photos.push(image);
+  addImage(userId: string, image){
+		let photos = this.afs.collection(`users/${userId}/photos`);
+    photos.add(image);
   }
-  deleteImage(image){
-    let index = this.user.photos.indexOf(image);
-    this.user.photos.splice(index, 1);
+  deleteImage(userId: string, imageUrl: string){
+		let image = this.afs.doc(`users/${userId}/photos/${imageUrl}`);
+    image.delete();
   }
-  updateLastMessage(roomId: string, message: Message){
-    let contact = this.user.contacts.filter( contact => contact.id === roomId)[0];
-    contact.lastMessage = message;
-  }
-  like(id){
-    // check if the other person like them, if yes, remove theh relationship from likes list and add to the friends list
-    this.getCurrentUser()
-    .subscribe(currentUser => {
-      this.getUserById(id)
-      .subscribe(user => {
-        // just add the / set teh value
-        this.addRequest(user.id, currentUser.id);
-      })
-    });
-    // if not, add to the likes list
-  }
+  updateLastMessage(userId: string, contactRoomId: string, message: Message){
+		// the data in contacts list should be organised by room IDs
+    let lastMessage = this.afs.doc(`users/${userId}/contacts/${contactRoomId}/last-message`);
+    lastMessage.update(message);
+	}
+	acceptFriendRequest(id: string){
+		/*
+		1. [ ] add to each others’ contacts list
+		2. [ ] create a new chatroom
+		3. [ ] add to relationships list
+		*/
+		console.log('acceptFriendRequest method in user service called');
+	}
+	rejectFriendRequest(id: string){
+		/*[ ] just set to null?
+		*/
+		console.log('rejectFriendRequest method in user service called');
+	}
+  like(id: string){
+		/*
+		1. [ ] if mutual - friendship
+    1. [ ] in relationships collection
+    2. [ ] in contacts list
+    3. [ ] create a new chatroom
+		2. [ ] if not, request
+		*/
+		console.log('like method in user service called');
+	}
+	//method for cancelling sentrequest
+	unlike(id: string){
+				/*
+		1. set the property in relationship to null
+		2. remove from users' requests list
+		3. [ ] add to relationships list
+		*/
+		console.log('unlike method in user service called');
+	}
   addRequest(toId: string, requestedId: string){
-    // add property to the likes / relationships list
-    // find a url
-    // set to true for currentUser
+		/*
+		1. [ ] add to the other users’ requests list
+		2. [ ] add to relationships collection
+		3. [ ] to the friendRequests list - to be able to cancel it
+		*/
     console.log('added request from ', toId, ' to ', requestedId);
   }
   removeRequest(id: string){
     // find a url
     // set to true for currentUser
     console.log('removeRequest method in user service called');
-  }
+	}
+	block(id: string){
+		/*
+		1. [ ] add to user’s blocked list
+		2. [ ] set the relations collection
+		3. [ ] remove from contacts if he’s there
+		4. [ ] kick the user out of the chatroom and tell him he was kicked out
+		*/
+		console.log('block method in user service called');
+	}
+	unblock(id: string){
+		/*
+			1. [ ] set it back to null, without adding the false
+			2. [ ] remove from blocked list
+		*/
+		console.log('unblock method in user service called');
+	}
   hasLiked(fromId: string, toId: string){
     // check the relationship whether current user is set to true or not while the other is not
   }
   /*
-  getUid(): Promise<string>{
-    let res = new Promise<any>((resolve, reject) => {
-        console.log('uid in getUid(): ', JSON.parse(localStorage.getItem('currentUser')).uid);
-        resolve(JSON.parse(localStorage.getItem('currentUser')).uid);
-    });
-    return res;
-  }
-  getCurrentUser(): Promise<User>{
-    let res = new Promise<any>((resolve, reject) => {
-        resolve(JSON.parse(localStorage.getItem('currentUser')));
-    });
-    return res;
-  }
   getPicture(){
     let base64Picture;
     let options = {
@@ -144,30 +207,6 @@ constructor(
     });
   }
   updateProfile(user){
-
-  }
-  */
-  //set current user depending on whether there's somebody like this, or create a new one
-  //check for presence of dummy data with arguments
-  //if it's there, set current user to dummy data
-  setCurrentUser(dummy?: any): void{
-      localStorage.setItem('currentUser', JSON.stringify(firebase.auth().currentUser.providerData[0]));
-      console.log("setting current user to:", localStorage.getItem('currentUser'));
-      /*this.currentUser = this.toUser(firebase.auth().currentUser.providerData[0]);
-      let userId = JSON.parse(localStorage.getItem('currentUser')).uid;
-      console.log('checking if the user is there: ', userId);
-      this.checkIfUserExists(userId);*/
-	}
-	/*
-  toUser(data): User{
-    let user = {
-      uid: data.uid,
-      name: data.displayName,
-      email: data.email,
-      photoUrl: data.photoURL,
-      provider: data.providerId
-    }
-    return user;
   }
   // Tests to see if /users/<userId> has any data.
   checkIfUserExists(id: string): void {
@@ -186,16 +225,9 @@ constructor(
       this.createUser(this.currentUser);
     }
   }
-
   // Get Info of a Single User
   getUserProfile(id: string): FirebaseObjectObservable<User> {
     return this.db.object(`/users/${id}`);
-  }
-  // create user in firebase
-  createUser(userCredentials): void {
-    const userObservable = this.db.object(`/users/${userCredentials.uid}`);
-    console.log('creating a new user in the back-end: ', userCredentials.uid);
-    userObservable.set(this.toUser(this.currentUser));
   }
   //deleting a user from the database
   removeUser(id: string): void {
@@ -203,7 +235,6 @@ constructor(
     usersRef.remove(id);
   }
       /*
-
   //logic for contacts list page
   // get list of contacts of the current user
   getUserContacts(uid): FirebaseListObservable<any[]> {
@@ -211,7 +242,6 @@ constructor(
     return contacts;
   }
   // TO DO ADD LIKING< CREATING AND CHECKING FOR THEM
-
   // create a contact - add chat references to both users
   addContact(uid: string, otherId: string): void {
     let thisRef = this.db.list(`/users/${uid}/contacts`);
@@ -302,22 +332,6 @@ constructor(
     });
   }
   updateProfile(user){
-
-  }
-  //set current user depending on whether there's somebody like this, or create a new one
-  //check for presence of dummy data with arguments
-  //if it's there, set current user to dummy data
-  setCurrentUser(dummy?: any): void{
-    if (dummy) {
-      console.log("setting current user to:", dummy);
-      localStorage.setItem('currentUser', JSON.stringify(dummy));
-    } else {
-      localStorage.setItem('currentUser', JSON.stringify(firebase.auth().currentUser.providerData[0]));
-      this.currentUser = this.toUser(firebase.auth().currentUser.providerData[0]);
-      let userId = JSON.parse(localStorage.getItem('currentUser')).uid;
-      console.log('checking if the user is there: ', userId);
-      this.checkIfUserExists(userId);
-    }
   }
   // Tests to see if /users/<userId> has any data.
   checkIfUserExists(id: string): void {
@@ -368,7 +382,6 @@ constructor(
     return contacts;
   }
   // TO DO ADD LIKING< CREATING AND CHECKING FOR THEM
-
   // create a contact - add chat references to both users
   addContact(uid: string, otherId: string): void {
     let thisRef = this.db.list(`/users/${uid}/contacts`);

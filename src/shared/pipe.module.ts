@@ -1,10 +1,10 @@
- import { NgModule } from '@angular/core';
- import { CalculateDistancePipe } from './calculate-distance.pipe';
-
+import { NgModule } from '@angular/core';
+import { CalculateDistancePipe } from './calculate-distance.pipe';
+import {AgePipe} from './age.pipe';
  @NgModule({
      imports:        [],
-     declarations:   [CalculateDistancePipe],
-     exports:        [CalculateDistancePipe],
+     declarations:   [CalculateDistancePipe, AgePipe],
+     exports:        [CalculateDistancePipe, AgePipe],
  })
 
  export class PipeModule {

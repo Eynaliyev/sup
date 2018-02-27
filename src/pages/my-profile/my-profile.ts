@@ -9,9 +9,12 @@ import { Slides } from 'ionic-angular';
   templateUrl: 'my-profile.html'
 })
 export class MyProfilePage {
-  user: User;
+  currentUser: User;
   currentTab = 'photos';
-  currentImage;
+	image: any;
+	items: any = [];
+	backGround: any;
+
   @ViewChild(Slides) slides: Slides;
 
   constructor(
@@ -20,33 +23,38 @@ export class MyProfilePage {
   ) {
     this.userSrvc.getCurrentUser()
     .subscribe(user => {
-      this.user = user;
-      this.currentImage = user.photos[0];
-      console.log('current user in myProfilePage: ', this.user);
+      console.log('current user in myProfilePage: ', user);
+			this.currentUser = user;
+			this.items = user.photos;
+			this.backGround = user.photos[0].imgUrl;
+			this.image = user.photos[0].imgUrl;
     });
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad MyProfilePage');
   }
   updateProfile(){
-    //console.log('update profile with: ', this.user);
-    this.userSrvc.updateUser(this.user);
+    //console.log('update profile with: ', this.currentUser);
+    this.userSrvc.updateUser(this.currentUser);
   }
   changeTab(tab){
     this.currentTab = tab;
     //console.log('currentTab in my-profile: ', this.currentTab);
   }
   addImage(){
-    this.userSrvc.addImage(this.currentImage);
+    this.userSrvc.addImage(this.currentUser.id, this.image);
     //console.log(this.user.photos);
   }
   deleteImage(){
-    this.userSrvc.deleteImage(this.currentImage);
+    this.userSrvc.deleteImage(this.currentUser.id, this.image);
     //console.log(this.user.photos);
+	}
+	changeImage(image) {
+    this.image = image
   }
   slideChanged() {
     let currentIndex = this.slides.getActiveIndex();
-    this.currentImage = this.user.photos[currentIndex];
+    this.image = this.currentUser.photos[currentIndex];
     //console.log('Current index, image, photos: ', currentIndex, this.currentImage, this.user.photos);
   }
 }

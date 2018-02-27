@@ -23,15 +23,15 @@ export class WaitlistPage {
   ionViewDidEnter(){
     // get location property
     // TO DO
-    let location = '';
+    let location =  this.navParams.get('location');
     // get languages property
     let languages = this.navParams.get('languages');
     // join a chatroom
     this.chatroomSrvc.joinChatroom(location, languages)
-    .subscribe(chatroomId => {
+    .subscribe(chatroom => {
       let view = this.navCtrl.getActive();
       if(view.component.name === "WaitlistPage"){
-        this.goToChatroom(chatroomId);
+        this.goToChatroom(chatroom.id);
       }
     });
   }

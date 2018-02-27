@@ -17,8 +17,9 @@
     "src/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
-  ],
+		"node_modules",
+		"src/**/*.spec.ts"
+	],
   "compileOnSave": false,
   "atom": {
     "rewriteTsconfig": false

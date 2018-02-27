@@ -1,58 +1,41 @@
-<ion-content no-bounce padding class="dark-bckg">
+<ion-content *ngIf="currentUser">
   <menu-button></menu-button>
   <span class="pageHeader">My Profile</span>
-  <!--image slide-->
+
+	<!--image slide-->
   <div class="rlt tall-spacer" *ngIf="currentTab == 'photos'">
-    <ion-slides pager *ngIf="user" (ionSlideDidChange)="slideChanged()">
-      <ion-slide *ngFor="let image of user.photos">
-        <img class="user-images" [src]="image.imgUrl" alt="">
-      </ion-slide>
-    </ion-slides>
-    <ion-grid class="action-btn">
-      <ion-row>
-        <ion-col>
-          <ion-fab style="left: 20%;">
-            <button (click)="addImage()" ion-fab class="img-btn" color="white" margin-right left bottom>
-              <ion-icon style="font-size: 4rem;" name="add" color="fb-color"></ion-icon>
-            </button>
-          </ion-fab>
-        </ion-col>
-        <ion-col>
-          <ion-fab style="right: 20%;">
-            <button (click)="deleteImage()" ion-fab class="img-btn" color="white" margin-right right bottom>
-              <ion-icon style="font-size: 4rem;" name="close" color="fb-color"></ion-icon>
-            </button>
-          </ion-fab>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+		<ion-slides pager>
+				<ion-slide *ngFor="let img of currentUser.photos">
+					<img [src]="img.imgUrl" alt="">
+				</ion-slide>
+		</ion-slides>
   </div>
   <div *ngIf="currentTab == 'about'" class="venti-spacer">
-    <ion-list *ngIf="user">
-      <ion-item color="none" id="myProfile-list-item39">
+    <ion-list *ngIf="currentUser">
+      <ion-item color="white" id="myProfile-list-item39">
         <h2>
-          {{user.firstName}} {{user.lastName}}
+          {{currentUser.firstName}} {{currentUser.lastName}}
         </h2>
       </ion-item>
       <ion-item id="myProfile-textarea1">
         <ion-label>
           About me...
         </ion-label>
-        <ion-textarea [(ngModel)]="user.about" placeholder="{{user.about}}"></ion-textarea>
+        <ion-textarea [(ngModel)]="currentUser.about" placeholder="{{currentUser.about}}"></ion-textarea>
       </ion-item>
       <ion-item id="meetSomebody-list-item-container1" *ngIf="languages">
         <div id="meetSomebody-markdown2" class="show-list-numbers-and-dots">
           <p style="margin-top:0px;color:#000000;">
             <strong>
-              {{user.languages}}
+              {{currentUser.languages}}
             </strong>
           </p>
         </div>
       </ion-item>
       <ion-item>
-        <ion-label *ngIf="!user.languages">Languages I speak:</ion-label>
-        <ion-label *ngIf="user.languages" class="alert">Change Languages:</ion-label>
-        <ion-select [(ngModel)]="user.languages" multiple="true">
+        <ion-label *ngIf="!currentUser.languages">Languages I speak:</ion-label>
+        <ion-label *ngIf="currentUser.languages" class="alert">Change Languages:</ion-label>
+        <ion-select [(ngModel)]="currentUser.languages" multiple="true">
           <ion-option value="English">English</ion-option>
           <ion-option value="Spanish">Spanish</ion-option>
           <ion-option value="German">German</ion-option>
@@ -63,13 +46,13 @@
       </ion-item>
       <ion-item color="none" id="myProfile-list-item43">
         <ion-icon name="pin" item-left></ion-icon>
-        {{user.currentLocation}}
+        {{currentUser.currentLocation}}
       </ion-item>
       <ion-item color="none" id="myProfile-list-item44">
-        Age: {{user.age}}
+        Age: {{currentUser.age}}
       </ion-item>
       <ion-item color="none" id="myProfile-list-item45">
-        University: {{user.universityName}}
+        University: {{currentUser.universityName}}
       </ion-item>
       <ion-row class="tall-spacer">
         <button ion-button color="royal" block (click)="updateProfile()">

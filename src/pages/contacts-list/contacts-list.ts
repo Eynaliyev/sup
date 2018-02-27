@@ -12,7 +12,8 @@ import {Contact} from '../../models/models';
 export class ContactsListPage {
   users : Contact[] = [];
   animateClass: any;
-  currentUser: User;
+	currentUser: User;
+	newRequests: boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -26,19 +27,31 @@ export class ContactsListPage {
   }
   ngAfterViewInit() {
     return new Promise(resolve => {
-        let env = this;
-        this.userService.getCurrentUser().subscribe(user => {
-        this.currentUser = user;
-        let contacts = user.contacts.sort((first, second) => {
-          return second.lastMessage.date.getTime() - first.lastMessage.date.getTime();
-        });
-        for (let i = 0; i < contacts.length; i++) {
-            setTimeout(function() {
-                env.users.push(contacts[i]);
-                console.log('contacts in contactsList: ', env.users);
-            }, 100 * i);
-        }
-      });
+			let env = this;
+			this.userService.getCurrentUser().subscribe(
+				user => {
+					this.currentUser = user;
+					// setting contacts
+					let contacts = user.contacts.sort((first, second) => {
+						return second.lastMessage.date.getTime() - first.lastMessage.date.getTime();
+					});
+					for (let i = 0; i < contacts.length; i++) {
+							setTimeout(function() {
+									env.users.push(contacts[i]);
+									console.log('contacts in contactsList: ', env.users);
+							}, 100 * i);
+					}
+					// checking for new requests
+					for(let i = 0; i < user.friendRequests.length; i++){
+						if(user.friendRequests[i].seen.indexOf(this.currentUser.id) === -1){
+							this.newRequests = true;
+						}
+					}
+				},
+				err => {
+					console.error(err);
+				}
+			);
     });
   }
   doInfinite(infiniteScroll) {

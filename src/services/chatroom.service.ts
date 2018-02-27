@@ -1,222 +1,149 @@
-import { Injectable } from '@angular/core';
-import { Http} from '@angular/http';
-//import {AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
-
-import { Observable } from 'rxjs/Observable';
+import {Injectable} from '@angular/core';
+import {Http} from '@angular/http';
+import {AngularFireDatabase, AngularFireList, AngularFireObject} from 'angularfire2/database';
+import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from 'angularfire2/firestore';
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/observable/forkJoin';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import {Message} from '../models/models';
-import { Chatroom} from '../models/models';
-import { UtilService } from '../shared/util.service';
+import {Chatroom} from '../models/models';
 import {Language} from '../models/models';
+import {Participant} from '../models/models';
+import {UtilService} from '../shared/util.service';
+import {LANGUAGES} from './mock-languages';
+
 @Injectable()
 export class ChatroomService {
-  private chatroomByIdUrl;
   private messages: Message[];
   private chatrooms: Chatroom[];
   private languages: Language[];
 
 	constructor(
     private http: Http,
-//    public db: AngularFireDatabase,
-    private utilService: UtilService
+		private db: AngularFireDatabase,
+		private afs: AngularFirestore,
+		private utilService: UtilService
   )
-  {
-      this.messages = [{
-          content: 'Hello from the other side.',
-          date: new Date(),
-          id: '123',
-          senderId: '123',
-          roomId: '321013',
-          senderImage: 'assets/img/pic.png',
-          senderName: 'Nicole',
-          seen: ['321']
-      }];
-      this.languages = [
-        {
-          id: '1',
-          name: 'English'
-        },{
-          id: '2',
-          name: 'Mandarin Chinese'
-        },{
-          id: '3',
-          name: 'Spanish'
-        },{
-          id: '4',
-          name: 'German'
-        },{
-          id: '5',
-          name: 'French'
-        },{
-          id: '6',
-          name: 'Russian'
-        },{
-          id: '7',
-          name: 'Turkish'
-        }
-     ]
-      this.chatrooms = [
-        {
-          id: '213',
-          participants: [
-            {
-              id: '98',
-              name: 'Megebbet',
-              votes: 0,
-              profileImgUrl: "assets/images/user.png",
-            },
-            {
-              id: '98',
-              name: 'Aflatun',
-              votes: 0,
-              profileImgUrl: "assets/images/user.png",
-            },
-            {
-              id: '98',
-              name: 'Gudret',
-              votes: 0,
-              profileImgUrl: "assets/images/user.png",
-            },
-            {
-              id: '98',
-              name: 'Thomas',
-              votes: 0,
-              profileImgUrl: "assets/images/user.png",
-            },
-            {
-              id: '98',
-              name: 'Eshgin',
-              votes: 0,
-              profileImgUrl: "assets/images/user.png",
-            }
-          ],
-          messages: this.messages,
-          blocked: [],
-          warnings: []
-        }
-      ];
-  }
-		getAvailableChatrooms(location, languages: Language[]): Observable<Chatroom[]> {
-      return new Observable(observer => {
-        observer.next(this.chatrooms);
-      });
-    }
-    getChatroomById(id): Observable<Chatroom>{
+  {  }
+		getAvailableChatrooms(location, language: Language): Observable<any[]> {
+			console.log('getAvailableChatrooms called');
+			let gender = JSON.parse(localStorage.getItem('currentUser')).gender;
+			let otherGender;
+			if(gender === 'male'){
+				otherGender = 'femaleParticipants';
+			} else {
+				otherGender = 'maleParticipants';
+			}
+			// TO DO:
+			// 1. [ ] get all rooms
+			return this.db.list(`chatrooms`).valueChanges();
+			// .filter(room => room[otherGender].length < 2)
+			// .filter(relevantRooms => releaseEvents.language === language);
+			// 2. [ ] filter out rooms with less than 3 participants of opposite gender
+			// 3. [ ] filter by language
+			// 4. [ ] sort by distance from user - calculate average from users’ locations
+			// 5. [ ] join the room
+			// 6. [ ] if none create room
+			// with given language and add the user to the participants list of his gender to it
+		}
+    getChatroomById(id: string): Observable<Chatroom>{
       // get full detailed data of the required chatroom
-      return new Observable(observer => {
-        setTimeout(() => {
-          // temporary - need a different method
-          let chatroom = this.chatrooms[0];
-          observer.next(chatroom);
-        },1800);
-      });
-    }
-    joinChatroom(locaiton, languages: Language[]): Observable<string>{
-      // find available rooms
-      return new Observable(observer => {
-        setTimeout(() => {
-          let chatroom = this.getAvailableChatrooms(location, languages)
-          .subscribe(chatrooms =>{
-            let chatroomId = chatrooms[0].id;
-            observer.next(chatroomId);
-          });
-        },1800);
-      });
+      return this.db.object(`chatrooms/${id}`).valueChanges().map(chatroom => this.toChatroom(chatroom));
+		}
+		toChatroom(obj: any): Chatroom {
+			return obj;
+		}
+    joinChatroom(location, language: Language): Observable<any>{
+			console.log('joinChatroom called');
+			// perhaps should be a cloud function?
+			// find available rooms
+			// join it - https://angularfirebase.com/lessons/managing-firebase-user-relationships-to-database-records/#3-Data-that-Belongs-to-Multiple-Users
+			// if no chatroom available create a new one., add gender equality, maleCount, femaleCount
       // add the user to the participants list for the room
       // get chatroom id - save it in local storage
       // get chatroom details by the id?
       // get messages for the room - first 15 for example
-      // return the chatroom details
-    }
-    leaveChatroom(){
-      // remove the user from participants list
-      // publish a 'left the room  type of message'
+			// return the chatroom details
+			return new Observable(observer => {
+				this.getAvailableChatrooms(location, language)
+				.subscribe(chatrooms => {
+					if(chatrooms && chatrooms.length !== 0){
+						console.log('available chatrooms: ', chatrooms);
+						observer.next(chatrooms[0]);
+					} else {
+						this.createChatroom(location, language)
+						.then(() => {
+							console.log('createChatroom completed');
+							this.getAvailableChatrooms(location, language)
+							.subscribe(chatrooms => {
+									console.log('available chatrooms: ', chatrooms);
+									observer.next(chatrooms[0]);;
+							})
+						});
+					}
+				},
+				err => {
+					console.error(err);
+				});
+			});
+		}
+		createChatroom(location, language: Language){
+			console.log('createChatroom called ');
+			let gender = JSON.parse(localStorage.getItem('currentUser')).gender;
+			let thisGender;
+			if(gender === 'female'){
+				thisGender = 'femaleParticipants';
+			} else {
+				thisGender = 'maleParticipants';
+			}
+			let randomId = this.utilService.guid();
+			let chatroom = {
+				id: randomId,
+				femaleParticipants: [],
+				maleParticipants: [],
+				language: language,
+				messages: [],
+				blocked: [],
+				warnings: []
+			};
+			let user = JSON.parse(localStorage.getItem('currentUser'));
+			let name = user.firstName + ' ' + user.lastName;
+			console.log(name, user,thisGender, chatroom[thisGender]);
+			let participant: Participant = {
+				id: user.id,
+				name: name,
+				votes: 0,
+				profileImgUrl: user.photoUrl
+			};
+			console.log(user, participant);
+			chatroom[thisGender].push(participant);
+			console.log('creating chatroom: ', chatroom, user);
+			return this.db.object(`chatrooms/${randomId}`).set(chatroom);
+		}
+    leaveChatroom(chatroomId: string, userId: string){
+			// remove the user from participants list
+			let participant = this.db.object(`chatrooms/${chatroomId}/participants/${userId}`);
+			participant.remove();
+      // publish a 'left the room  type of message' - a cloud function?
       // remove the chatroom id from local storage
-      // go back to the meet-people page
     }
-    voteAgainst(id){
-      // substract 1 from the votes property on the participant
-      // if the votes is -2 or lower, kick the user out - on the backend
+    updateSeen(chatroomId: string, messageId: string, userId: string){
+			console.log('updating seen of: ', chatroomId, messageId, 'with user id: ', userId);
+			let messageSeen = this.db.list(`chatrooms/${chatroomId}/messages/${messageId}/seen`);
+      messageSeen.push(userId);
     }
-    toggleSeen(message: Message, id: string){
-      let index = this.messages.indexOf(message);
-      this.messages[index].seen.push(id);
-    }
-    sendMessage(roomId: string, message: Message){
-      // add message to the messages list for the chatroom?
-      this.messages.push(message);
+    sendMessage(chatroomId: string, message: Message){
+			console.log('sending message: ', message);
+			let messageRef = this.db.list(`chatrooms/${chatroomId}/messages`);
+      messageRef.push(message);
     }
     // TO DO: implement actual paginated message getter function
-    getMessages(chatroomId, start?, end?): Observable<Message[]> {
-      return new Observable(observer => {
-          observer.next(this.messages);
-      });
+    getMessages(chatroomId: string, start?, end?): Observable<any[]> {
+      return this.db.list(`chatrooms/${chatroomId}/messages`).valueChanges();
     }
-    /*
-  // get a specific room from the list - get room reference
-  getRoom(uid: string, id: string): FirebaseObjectObservable<any> {
-    let roomRef = this.db.object(`/rooms/${uid},${id}`);
-    return roomRef;
-  }
-  findRoom():Promise<any>{
-    let res = new Promise<any>((resolve, reject) => resolve());
-    return res;
-  }
-  leaveRoom(){
-
-  }
-  getMessages(uid: string, id: string): FirebaseListObservable<any> {
-    let messagesRef = this.db.list(`/rooms/${uid},${id}/messages`);
-    return messagesRef;
-  }  // mapping to the room data used in-app
-  toRoom(userId, otherId, messages): Room{
-    // unique id based on the ids of two users
-    let room = {
-      id: userId,
-      messages: messages,
-      guysWaitlist: [],
-      girlsWaitlist: [],
-      location: [],
-      menNum: 0,
-      womenNum: 0,
-      members: []
-    }
-    return room;
-  }
-  // create a room - add room references to both users
-  addMessage(uid: string, otherId: string, message: Message): void {
-    //push it to the rooms list
-    let roomsRef = this.db.list(`/rooms/${uid},${otherId}/messages`);
-    if (message.picture === null){
-      roomsRef.push(message);
-    } else {
-      //assuming we have a picture so we'll need to store it in firebase
-      //storage and save the URL as a picture property
-      //generate a unique name for storing in firebase storage
-      let uidName = this.utilService.guid();
-      firebase.storage().ref(`/rooms/${uid},${otherId}/messages`)
-      .child(`${uidName}.png`)
-      .putString(message.picture, 'base64', {contentType: 'image/png'})
-      .then((savedPicture) => {
-        message.picture = savedPicture.downloadURL;
-        roomsRef.push(message);
-      });
-    }
-  }
-  // remove a room from the list
-  removeMessage(userId, otherId: string, messageId: string): void {
-    //rooms list
-    this.db.list(`/rooms/${userId},${otherId}/messages`).remove(messageId);
-  }
-
-
-    */
-    getAvailableLanguages(): Observable<Language[]>{
-      return new Observable(observer => {
-        observer.next(this.languages);
-      });
+    getAvailableLanguages(): Observable<any[]>{
+      return this.afs.collection(`languages`).valueChanges();
     }
 }

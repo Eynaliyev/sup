@@ -1,17 +1,40 @@
-<ion-content class="dark-bckg">
-  <menu-button></menu-button>
-      <span class="pageHeader">Messages</span>
+<ion-content>
+  <back-button></back-button>
+      <span class="pageHeader">Friend Requests</span>
   <ion-list class="venti-spacer" *ngIf="requests">
-      <ion-item [ngClass]="animateClass" style="background-color: transparent;color: #cfcfcf !important;" *ngFor="let request of requests">
-          <ion-thumbnail item-left *ngIf="request.senderImage">
-              <img [src]="request.senderImage" default="assets/images/user.png">
-          </ion-thumbnail>
-          <h2 style="text-transform: capitalize;">{{request.content}}
-              <span style="text-transform: capitalize;">
-                <img *ngIf="request.seen.indexOf(currentUser.id) === -1" class="notification" src="http://www.clker.com/cliparts/r/M/L/o/R/i/green-dot.svg.med.png">
-              </span></h2>
-      </ion-item>
-  </ion-list>
+      <ion-item [ngClass]="animateClass" class="" style="background-color: transparent;" *ngFor="let request of requests">
+						<ion-thumbnail item-left *ngIf="request.senderImage">
+								<img [src]="request.senderImage" class="profile-picture" default="assets/images/user.png">
+						</ion-thumbnail>
+						<h2 style="text-transform: capitalize;">{{request.content}}
+								<span style="text-transform: capitalize;">
+									<img *ngIf="request.seen.indexOf(currentUser.id) === -1" class="notification" src="http://www.clker.com/cliparts/r/M/L/o/R/i/green-dot.svg.med.png">
+								</span></h2>
+						<ion-fab class="right btn-top-align">
+							<button ion-fab color="light" (click)="unlike(request.senderId)" class="menu-btn-border">
+									<ion-icon name="md-close"></ion-icon>
+							</button>
+						</ion-fab>
+						<ion-fab class="right btn-top-align" style="margin-right: 76px;">
+							<button ion-fab (click)="like(request.senderId)" color="light" class="menu-btn-border">
+									<ion-icon name="ios-heart-outline"></ion-icon>
+							</button>
+						</ion-fab>
+				</ion-item>
+	</ion-list>
+	<span class="" (click)="toggleBlockListVisibility()">Blocked List</span>
+	<ion-list class="venti-spacer" *ngIf="blockedListVisible">
+		<ion-item [ngClass]="animateClass" style="background-color: transparent;color: #cfcfcf !important;" *ngFor="let blockedUser of user.blockedList">
+				<ion-thumbnail item-left *ngIf="blockedUser.imgUrl">
+						<img [src]="blockedUser.imgUrl" class="profile-picture" default="assets/images/user.png">
+				</ion-thumbnail>
+				<ion-fab class="right btn-top-align">
+					<button ion-fab color="light" (click)="unblock(blockedUser.id)" class="menu-btn-border">
+							<ion-icon name="md-close"></ion-icon>
+					</button>
+				</ion-fab>
+		</ion-item>
+</ion-list>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
       <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>

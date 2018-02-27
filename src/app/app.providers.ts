@@ -1,8 +1,6 @@
 // import services
 import { ErrorHandler } from '@angular/core';
 import { IonicErrorHandler } from 'ionic-angular';
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
 import { Geolocation } from '@ionic-native/geolocation';
 //import { Camera } from '@ionic-native/camera';
 import { Facebook } from '@ionic-native/facebook';
@@ -13,6 +11,8 @@ import {UserService} from '../services/services';
 import {AuthService} from '../services/services';
 import {NotificationService} from '../services/services';
 import {RequestService} from '../services/services';
+import {AngularFireDatabase } from 'angularfire2/database';
+
 // end import services
 
 /*
@@ -31,22 +31,21 @@ export class AppProviders {
         if(document.URL.includes('https://') || document.URL.includes('http://')){
           // Use browser providers
           providers = [
-            UserService,
-            NotificationService,
-            //{provide: Camera, useClass: CameraMock},
-            Facebook,
-            AuthService,
-            UtilService,
-            StatusBar,
-            SplashScreen,
-            UserService,
-            ChatroomService,
-            VipService,
-            UtilService,
-            RequestService,
-            Geolocation,
-            {provide: ErrorHandler, useClass: IonicErrorHandler}
-            /* import services */
+						UserService,
+						NotificationService,
+						//Camera,
+						Facebook,
+						AuthService,
+						UtilService,
+						UserService,
+						ChatroomService,
+						AngularFireDatabase,
+						VipService,
+						UtilService,
+						RequestService,
+						Geolocation,
+						{provide: ErrorHandler, useClass: IonicErrorHandler}
+						/* import services */
           ];
         } else {
           // Use device providers
@@ -57,10 +56,9 @@ export class AppProviders {
             Facebook,
             AuthService,
             UtilService,
-            StatusBar,
-            SplashScreen,
             UserService,
-            ChatroomService,
+						ChatroomService,
+						AngularFireDatabase,
             VipService,
             UtilService,
             RequestService,

@@ -25,10 +25,10 @@ export class LoginPage {
 	}
   facebookLogin(): void {
     var env = this;
-    this.authService.facebookLogin()
+    this.authService.signInWithFacebook()
       .then( authData => {
         loading.dismiss().then( () => {
-					console.log('login suvvessful: ', JSON.stringify(authData));
+					console.log('login successful: ', JSON.stringify(authData));
           env.goToMeetSomebody();
       });
     }, error =>

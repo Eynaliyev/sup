@@ -14,6 +14,7 @@ import { LoginPage } from '../pages/pages';
 //import { SettingsPage } from '../pages/pages';
 // providers
 import { UserService } from '../services/services';
+import { AuthService } from '../services/services';
 // models
 import { User } from '../models/models';
 
@@ -36,7 +37,8 @@ export class MyApp {
   constructor(
     private platform: Platform,
     private menu: MenuController,
-    private loadingCtrl: LoadingController,
+		private loadingCtrl: LoadingController,
+		private authService: AuthService,
     //private storage: Storage,
     private userSrvc: UserService
   ) {
@@ -96,8 +98,8 @@ export class MyApp {
     this.navCtrl.push(VIPPage);
   }
   logout(){
-    //add actual logging out and localStorage clearing
-    this.navCtrl.setRoot(LoginPage);
+		//add actual logging out and locaStorage clearing
+    this.authService.logout().then((res) => this.navCtrl.setRoot(LoginPage));
   }
   checkActive(page){
     return page == this.activePage;

@@ -9,6 +9,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 // declarations
 // pages
 import { MeetSomebodyPage } from '../pages/pages';
@@ -96,6 +97,7 @@ export const firebaseConfig = {
 		AngularFireModule.initializeApp(firebaseConfig),
 		AngularFireDatabaseModule,
 		AngularFirestoreModule.enablePersistence(),
+		AngularFireAuthModule,
 		IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],

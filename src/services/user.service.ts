@@ -34,7 +34,7 @@ constructor(
 			observer.next(JSON.parse(localStorage.getItem('currentUser')));
 		});
 	}
-  setCurrentUser(uid, dummy?): void{
+  setCurrentUser(uid): void{
 		let currentUser: User;
 		this.getUserById(uid).subscribe(user => {
 			console.log('res from getUserById', JSON.stringify(user));
@@ -47,25 +47,6 @@ constructor(
 				console.log("setting current user to:", JSON.stringify(localStorage.getItem('currentUser')));
 			} else {
 				// if no,
-				// if dummy, just return the dummy data
-				if(dummy){
-					let userInfo = {
-						"id": "10203432411524999",
-						"name": "Rustam Eynaliyev",
-						"gender": "male",
-						"locale": "en_US",
-						"picture": {
-							"data": {
-								"is_silhouette": false,
-								"url": "https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/13001075_10208279436177586_7844301951605599393_n.jpg?oh=1ee5a5b481be739dada9ad8fcff8e0d1&oe=5A6675B9"
-							}
-						},
-						"email": "rustam.eynaliyev@gmail.com",
-						"first_name": "Rustam",
-						"last_name": "Eynaliyev"
-					};
-					this.createUser(userInfo);
-				} else {
 					// create the get user infor from facebook graph API
 					this.facebook.api(`${uid}?fields=id,name,gender,locale,picture,email,first_name,last_name`,[])
 					.then(userInfo => {
@@ -73,7 +54,6 @@ constructor(
 						// set the returned user in the backend
 						this.createUser(userInfo);
 					});
-				}
 			}
 		});
 	}
@@ -227,10 +207,7 @@ constructor(
     });
   }
   updateProfile(user){
-
   }
-
-
   // Tests to see if /users/<userId> has any data.
   checkIfUserExists(id: string): void {
     var usersRef = firebase.database().ref('/users');
@@ -248,19 +225,16 @@ constructor(
       this.createUser(this.currentUser);
     }
   }
-
   // Get Info of a Single User
   getUserProfile(id: string): FirebaseObjectObservable<User> {
     return this.db.object(`/users/${id}`);
   }
-
   //deleting a user from the database
   removeUser(id: string): void {
     let usersRef = this.db.list(`/users`)
     usersRef.remove(id);
   }
       /*
-
   //logic for contacts list page
   // get list of contacts of the current user
   getUserContacts(uid): FirebaseListObservable<any[]> {
@@ -268,7 +242,6 @@ constructor(
     return contacts;
   }
   // TO DO ADD LIKING< CREATING AND CHECKING FOR THEM
-
   // create a contact - add chat references to both users
   addContact(uid: string, otherId: string): void {
     let thisRef = this.db.list(`/users/${uid}/contacts`);
@@ -359,9 +332,7 @@ constructor(
     });
   }
   updateProfile(user){
-
   }
-
   // Tests to see if /users/<userId> has any data.
   checkIfUserExists(id: string): void {
     var usersRef = firebase.database().ref('/users');
@@ -411,7 +382,6 @@ constructor(
     return contacts;
   }
   // TO DO ADD LIKING< CREATING AND CHECKING FOR THEM
-
   // create a contact - add chat references to both users
   addContact(uid: string, otherId: string): void {
     let thisRef = this.db.list(`/users/${uid}/contacts`);

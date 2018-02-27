@@ -80,15 +80,8 @@ export class AuthService {
 				return true;
 			}
 		}
-	logout() {
-		if(document.URL.includes('https://') || document.URL.includes('http://')){
-			console.log("we're in the browser");
-			localStorage.removeItem('currentUser');
-			this._firebaseAuth.auth.signOut();
-		} else {
-			console.log("we're on the device");
-			localStorage.removeItem('currentUser');
-			return firebase.auth().signOut();
-		}
+	logout(): Promise<any> {
+		localStorage.removeItem('currentUser');
+		return firebase.auth().signOut();
 	}
 }

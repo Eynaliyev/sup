@@ -38,20 +38,6 @@ import firebase from 'firebase';
 import { DefaultImageDirective } from '../shared/default-image.directive';
 import { PipeModule } from '../shared/pipe.module';
 import { AppProviders } from './app.providers';
-// import services
-import { ErrorHandler } from '@angular/core';
-import { IonicErrorHandler } from 'ionic-angular';
-import { Geolocation } from '@ionic-native/geolocation';
-//import { Camera } from '@ionic-native/camera';
-import { Facebook } from '@ionic-native/facebook';
-import { ChatroomService } from '../services/services';
-import { UtilService } from '../shared/util.service';
-import { VipService } from '../services/services';
-import {UserService} from '../services/services';
-import {AuthService} from '../services/services';
-import {NotificationService} from '../services/services';
-import {RequestService} from '../services/services';
-import {AngularFireDatabase } from 'angularfire2/database';
 
 export const firebaseConfig = {
 	apiKey: "AIzaSyDI22hmtv2clf3WYdo2y04z_h-eCfbv_F4",
@@ -117,24 +103,7 @@ export const firebaseConfig = {
     NotificationsListPage,
     RequestsListPage,
     WaitlistPage
-  ],
-//  providers: AppProviders.getProviders()
-providers: [
-		UserService,
-		NotificationService,
-		//Camera,
-		Facebook,
-		AuthService,
-		UtilService,
-		UserService,
-		ChatroomService,
-		AngularFireDatabase,
-		VipService,
-		UtilService,
-		RequestService,
-		Geolocation,
-		{provide: ErrorHandler, useClass: IonicErrorHandler}
-		/* import services */
-		]
+	],
+	providers: AppProviders.getProviders()
 })
 export class AppModule {}

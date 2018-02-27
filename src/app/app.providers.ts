@@ -31,21 +31,21 @@ export class AppProviders {
         if(document.URL.includes('https://') || document.URL.includes('http://')){
           // Use browser providers
           providers = [
-            UserService,
-            NotificationService,
-            //{provide: Camera, useClass: CameraMock},
-            Facebook,
-            AuthService,
-            UtilService,
-            UserService,
-            ChatroomService,
-            VipService,
-            UtilService,
-						RequestService,
+						UserService,
+						NotificationService,
+						//Camera,
+						Facebook,
+						AuthService,
+						UtilService,
+						UserService,
+						ChatroomService,
 						AngularFireDatabase,
-            Geolocation,
-            {provide: ErrorHandler, useClass: IonicErrorHandler}
-            /* import services */
+						VipService,
+						UtilService,
+						RequestService,
+						Geolocation,
+						{provide: ErrorHandler, useClass: IonicErrorHandler}
+						/* import services */
           ];
         } else {
           // Use device providers

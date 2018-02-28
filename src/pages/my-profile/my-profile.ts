@@ -1,5 +1,6 @@
+import { AuthService } from './../../services/auth.service';
 import { Component, ViewChild } from '@angular/core';
-import { NavController } from 'ionic-angular';
+//import { NavController } from 'ionic-angular';
 import { UserService } from '../../services/services';
 import { User } from '../../models/models';
 import { Slides } from 'ionic-angular';
@@ -18,8 +19,9 @@ export class MyProfilePage {
   @ViewChild(Slides) slides: Slides;
 
   constructor(
-    public navCtrl: NavController,
-    public userSrvc: UserService
+    //private navCtrl: NavController,
+		private userSrvc: UserService,
+		private authSrvc: AuthService
   ) {
     this.userSrvc.getCurrentUser()
     .subscribe(user => {
@@ -30,6 +32,9 @@ export class MyProfilePage {
 			this.image = user.photos[0].imgUrl;
     });
   }
+	ionViewCanEnter() {
+		return this.authSrvc.isLoggedIn();
+	}
   ionViewDidLoad() {
     console.log('ionViewDidLoad MyProfilePage');
   }

@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { UserService } from '../../services/services';
@@ -15,13 +16,16 @@ export class NotificationsListPage {
 
   constructor(
     private navCtrl: NavController,
-    private userSrvc: UserService,
+		private userSrvc: UserService,
+		private authSrvc: AuthService,
     private notificationSrvc: NotificationService
   ) {
     console.log('ContactsListPage initialized');
     this.animateClass = { 'zoom-in': true };
-
-  }
+	}
+	ionViewCanEnter() {
+		return this.authSrvc.isLoggedIn();
+	}
   ionViewWillEnter() {
   }
   ngAfterViewInit() {

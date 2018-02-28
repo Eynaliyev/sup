@@ -1,3 +1,4 @@
+
 import { Component, ViewChild } from '@angular/core';
 import { Platform, MenuController, Nav  } from 'ionic-angular';
 //import { Storage } from '@ionic/storage';
@@ -38,7 +39,7 @@ export class MyApp {
     private platform: Platform,
     private menu: MenuController,
 		private loadingCtrl: LoadingController,
-		private authService: AuthService,
+		private authSrvc: AuthService,
     //private storage: Storage,
     private userSrvc: UserService
   ) {
@@ -99,7 +100,7 @@ export class MyApp {
   }
   logout(){
 		//add actual logging out and locaStorage clearing
-    this.authService.logout().then((res) => this.navCtrl.setRoot(LoginPage));
+    this.authSrvc.logout().then((res) => this.navCtrl.setRoot(LoginPage));
   }
   checkActive(page){
     return page == this.activePage;

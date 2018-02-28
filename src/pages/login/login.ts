@@ -13,8 +13,7 @@ export class LoginPage {
     public navCtrl: NavController,
     public loadingCtrl: LoadingController,
     public utilService: UtilService,
-    public authService: AuthService
-
+    public authSrvc: AuthService
   ) {
   }
   ionViewDidLoad() {
@@ -25,7 +24,7 @@ export class LoginPage {
 	}
   facebookLogin(): void {
     var env = this;
-    this.authService.signInWithFacebook()
+    this.authSrvc.signInWithFacebook()
       .then( authData => {
         loading.dismiss().then( () => {
 					console.log('login successful: ', JSON.stringify(authData));
@@ -41,5 +40,5 @@ export class LoginPage {
     );
     let loading = this.loadingCtrl.create();
     loading.present();
-  }
+	}
 }

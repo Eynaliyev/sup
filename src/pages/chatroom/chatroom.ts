@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { UserService } from '../../services/services';
+import { UserService, AuthService } from '../../services/services';
 import { ChatroomService } from '../../services/services';
 import { User } from '../../models/user.model';
 import {Message} from '../../models/message.model';
@@ -20,7 +20,7 @@ export class ChatroomPage {
     messages: any[] = [];
     chatroomId: string;
     chatroom: Chatroom;
-		currentUser;
+		currentUser: User;
 		bckgImgNum = Math.floor(Math.random()*50);
 		backgroundImage;
 
@@ -35,12 +35,13 @@ export class ChatroomPage {
       seen: []
     };
   constructor(
-    public navCtrl: NavController,
-    public navParams: NavParams,
+    private navCtrl: NavController,
+    private navParams: NavParams,
     private userService: UserService,
     private chatroomService: ChatroomService,
     private utilService: UtilService,
-    public alertCtrl: AlertController
+		private alertCtrl: AlertController,
+		private authSrvc: AuthService
 	) {
 			let photoUrl = `../assets/images/background-${this.bckgImgNum}.jpg`;
 			this.backgroundImage = `{'background-image': url('${photoUrl}')}`;
@@ -81,6 +82,9 @@ export class ChatroomPage {
 				);
 			});
     }
+		ionViewCanEnter() {
+			return this.authSrvc.isLoggedIn();
+		}
     ionViewDidLoad(){
     }
     ngAfterViewInit() {
@@ -179,7 +183,7 @@ export class ChatroomPage {
       this.newMessage.date = new Date();
 			this.chatroomService.sendMessage(this.chatroomId, this.newMessage);
 			// if the chatroom is in contacts
-			if(this.currentUser.contacts.indexOf(this.chatroomId) !== -1){
+			if(this.currentUser.contacts.map(contact => contact.id).indexOf(this.chatroomId) !== -1){
 				this.userService.updateLastMessage(this.currentUser.id, this.chatroomId, this.newMessage);
 			}
       this.newMessage.content = '';

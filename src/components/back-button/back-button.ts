@@ -3,7 +3,6 @@ import { NavController } from 'ionic-angular';
 
 /*
   Generated class for the ChatBubble component.
-
   See https://angular.io/docs/ts/latest/api/core/index/ComponentMetadata-class.html
   for more info on Angular 2 Components.
 */
@@ -12,8 +11,8 @@ import { NavController } from 'ionic-angular';
   templateUrl: 'back-button.html'
 })
 export class BackButtonComponent {
-    constructor(    
-        public navCtrl: NavController
+    constructor(
+        private navCtrl: NavController
     ){}
     back() {
       this.navCtrl.pop();

@@ -52,6 +52,7 @@ constructor(
 					.then(userInfo => {
 						console.log('user info from fb api: ', JSON.stringify(userInfo));
 						// set the returned user in the backend
+						localStorage.setItem('currentUser', JSON.stringify(user));
 						this.createUser(userInfo);
 					});
 			}

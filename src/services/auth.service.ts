@@ -31,7 +31,6 @@ export class AuthService {
 		this.user.subscribe((user) => {
 				if (user) {
 					this.userDetails = user;
-					console.log(this.userDetails);
 				}
 				else {
 					this.userDetails = null;
@@ -47,25 +46,14 @@ export class AuthService {
 			);
 		} else {
 			// code for handling fb login when deployed to device with cordova
-			console.log("we're on the device");
+			console.log("we're on the device");/*
 			return this.facebook.login(['email', 'public_profile']).then( (response) => {
 				const facebookCredential = firebase.auth.FacebookAuthProvider
 				.credential(response.authResponse.accessToken);
 				//just to see what data is usully returned - for mocking purposes
 				console.log('response: ', response, 'credential: ', facebookCredential);
-
-				return firebase.auth().signInWithCredential(facebookCredential)
-				.then((success) => {
-					console.log("Firebase success: ", JSON.stringify(success));
-					let providerData = firebase.auth().currentUser.providerData[0];
-					console.log('current user.providerData: ', JSON.stringify(providerData));
-					return this.userService.setCurrentUser(providerData.uid);
-				})
-				.catch((error) => {
-					console.log("Firebase failure: " + JSON.stringify(error));
-				return error;
-				});
-			}).catch((error) => { console.log(error) });
+				return firebase.auth().signInWithCredential(facebookCredential);
+			}).catch((error) => { console.log(error) });*/
 		}
 	}
 	signInWithGoogle() {

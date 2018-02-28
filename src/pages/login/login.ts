@@ -1,3 +1,4 @@
+import { UserService } from './../../services/user.service';
 import { Component } from '@angular/core';
 import { NavController, LoadingController } from 'ionic-angular';
 import { MeetSomebodyPage } from '../meet-somebody/meet-somebody';
@@ -13,7 +14,8 @@ export class LoginPage {
     public navCtrl: NavController,
     public loadingCtrl: LoadingController,
     public utilService: UtilService,
-    public authSrvc: AuthService
+		public authSrvc: AuthService,
+		public userSrvc: UserService
   ) {
   }
   ionViewDidLoad() {
@@ -23,11 +25,12 @@ export class LoginPage {
     this.navCtrl.setRoot(MeetSomebodyPage);
 	}
   facebookLogin(): void {
-    var env = this;
+		var env = this;
     this.authSrvc.signInWithFacebook()
       .then( authData => {
         loading.dismiss().then( () => {
-					console.log('login successful: ', JSON.stringify(authData));
+					console.log('login successful: ', JSON.stringify(authData['user']['providerData'][0]['uid']));
+					this.userSrvc.setCurrentUser(authData['user']['providerData'][0]['uid']);
           env.goToMeetSomebody();
       });
     }, error =>

@@ -61,7 +61,7 @@ export class AppProviders {
 						AngularFireDatabase,
             VipService,
             UtilService,
-            RequestService,
+						RequestService,
             Geolocation,
             {provide: ErrorHandler, useClass: IonicErrorHandler}
             /* import services */

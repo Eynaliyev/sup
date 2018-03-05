@@ -94,7 +94,7 @@ export let USER = {
   ],
   currentRoomId: '123',
   socialProfiles: [],
-  profileImgUrl: 'assets/img/pic.png',
+  profileImgUrl: 'assets/images/pic.png',
   photos: [
     { imgUrl: 'assets/users/images/1/1.jpg' },
     { imgUrl: 'assets/users/images/1/2.jpg' },

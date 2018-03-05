@@ -26,6 +26,7 @@ import {WaitlistPage} from '../pages/pages';
 import {ParticipantsListPage} from '../pages/pages';
 import {NotificationsListPage} from '../pages/pages';
 import {RequestsListPage} from '../pages/pages';
+import { PrelaunchPage } from './../pages/prelaunch/prelaunch';
 // components
 import { GalleryComponent } from '../components/components';
 import { ChatBubbleComponent } from '../components/components';
@@ -61,7 +62,8 @@ export const firebaseConfig = {
     ChatroomPage,
     VIPPage,
     FilterPage,
-    PurchasePage,
+		PurchasePage,
+		PrelaunchPage,
     WaitlistPage,
     GalleryComponent,
     ChatBubbleComponent,
@@ -96,7 +98,8 @@ export const firebaseConfig = {
     UserProfilePage,
     MyProfilePage,
     ChatroomPage,
-    VIPPage,
+		VIPPage,
+		PrelaunchPage,
     PurchasePage,
     FilterPage,
     ParticipantsListPage,

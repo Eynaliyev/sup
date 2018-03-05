@@ -5,7 +5,7 @@ export let NOTIFICATIONS = [
     date: new Date(),
     senderId: '123',
     senderName: 'Max Lynx',
-    senderImage: 'assets/img/pic3.png',
+    senderImage: 'assets/images/pic3.png',
     seen: []
   }
 ];

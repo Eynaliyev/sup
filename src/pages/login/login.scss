@@ -1,14 +1,32 @@
 page-login {
     ion-slide {
-        background-color: black;
+				background-color: black;
+				#login-heading {
+					color:#9B9999;text-align:center;
+				}
+				#login-button1 {
+					line-height: 42px;
+					background-color: #4267b2;
+					border-color: #4267b2;
+					margin-left:auto;
+					margin-right:auto;
+					font-size: 14px;
+					width: 252px;
+					font-family: system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
+				}
       }
-   
+
       ion-slide img {
         height: 70vh !important;
         width: auto !important;
       }
-      .intro-logo img{
-          height: auto !important;
+      #intro-logo img{
+					height: auto !important;
+					display:block;
+					width:100%;
+					height:auto;
+					margin-left:auto;
+					margin-right:auto;
       }
-   
+
 }

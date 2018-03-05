@@ -5,7 +5,7 @@ export let REQUESTS = [
     seen: [],
     senderId: '123',
     senderName: 'Max Lynx',
-    senderImage: 'assets/img/pic4.png',
+    senderImage: 'assets/images/pic4.png',
 		toUserId: '123',
 		content: 'liked'
   }

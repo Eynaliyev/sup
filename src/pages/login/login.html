@@ -16,25 +16,19 @@
   </ion-slide>
 
   <ion-slide>
-    <form id="login-form1">
-      <div class="intro-logo">
-        <!--<img src="assets/img/login-header.png" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />-->
-      </div>
-      <h3 id="login-heading1" style="color:#9B9999;text-align:center;">
-        adventure begins...
-      </h3>
-      <ion-row>
-          <button id="login-button1" ion-button color="royal" (click)="facebookLogin()" block style="color:#FFFFFF;">
-              Log in with facebook
-          </button>
-      </ion-row>
-      <ion-row>
+		<div id="intro-logo">
+			<img src="assets/images/logo/logo.png"/>
+		</div>
+		<h3 text-center id="login-heading1" class="light-text grande">
+				adventure begins...
+		</h3>
+			<button id="login-button1" ion-button (click)="facebookLogin()" block style="color:#FFFFFF;">
+					Log in with facebook
+			</button>
         <!--
           <button id="login-button2" ion-button clear color="royal" block href-inappbrowser="/signup">
             Or create an account
           </button>
         -->
-      </ion-row>
-    </form>
   </ion-slide>
 </ion-slides>

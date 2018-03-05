@@ -1,3 +1,5 @@
+import { PrelaunchPage } from './../prelaunch/prelaunch';
+import { WaitlistPage } from './../waitlist/waitlist';
 import { UserService } from './../../services/user.service';
 import { Component } from '@angular/core';
 import { NavController, LoadingController } from 'ionic-angular';
@@ -24,6 +26,9 @@ export class LoginPage {
   goToMeetSomebody(){
     this.navCtrl.setRoot(MeetSomebodyPage);
 	}
+	goToPrelaunchPage(){
+		this.navCtrl.setRoot(PrelaunchPage);
+	}
   facebookLogin(): void {
 		var env = this;
     this.authSrvc.signInWithFacebook()
@@ -31,7 +36,8 @@ export class LoginPage {
         loading.dismiss().then( () => {
 					console.log('login successful: ', JSON.stringify(authData['user']['providerData'][0]['uid']));
 					this.userSrvc.setCurrentUser(authData['user']['providerData'][0]['uid']);
-          env.goToMeetSomebody();
+					//env.goToMeetSomebody(); - stop this for pre-launch
+					env.goToPrelaunchPage();
       });
     }, error =>
       loading.dismiss().then( () => {

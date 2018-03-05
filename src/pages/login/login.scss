@@ -14,19 +14,24 @@ page-login {
 					width: 252px;
 					font-family: system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 				}
-      }
-
-      ion-slide img {
-        height: 70vh !important;
-        width: auto !important;
-      }
-      #intro-logo img{
+				#intro-logo img{
 					height: auto !important;
 					display:block;
 					width:100%;
 					height:auto;
 					margin-left:auto;
 					margin-right:auto;
-      }
+				}
+				.intro-img-screenshot{
+					height: auto !important;
+					margin-left:auto;
+					margin-right:auto;
+					display:block;
 
+				}
+				img {
+					height: 70vh !important;
+					width: auto !important;
+				}
+      }
 }

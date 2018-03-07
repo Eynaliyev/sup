@@ -269,6 +269,10 @@
   version "4.5.3"
   resolved "https://registry.yarnpkg.com/@ionic-native/geolocation/-/geolocation-4.5.3.tgz#18624b1f0fea844a61e668472b0ec51bb0511883"
 
+"@ionic-native/google-analytics@^4.5.3":
+  version "4.5.3"
+  resolved "https://registry.yarnpkg.com/@ionic-native/google-analytics/-/google-analytics-4.5.3.tgz#b7cd57d65362e92ee6f223ac956a416545b58186"
+
 "@ionic-native/native-storage@^4.5.3":
   version "4.5.3"
   resolved "https://registry.yarnpkg.com/@ionic-native/native-storage/-/native-storage-4.5.3.tgz#4441c19c3b7ea8cd9eaa1e89d4ca3842e874e924"
@@ -1714,6 +1718,10 @@ cordova-plugin-device@^1.1.6:
 cordova-plugin-facebook4@^1.9.1:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/cordova-plugin-facebook4/-/cordova-plugin-facebook4-1.9.1.tgz#60acb3a026b5eaceb1160e97ab28be6c68192e4f"
+
+cordova-plugin-google-analytics@^1.8.3:
+  version "1.8.3"
+  resolved "https://registry.yarnpkg.com/cordova-plugin-google-analytics/-/cordova-plugin-google-analytics-1.8.3.tgz#234b152c4874e22675fcffc9a57ac378385f6a0a"
 
 cordova-plugin-nativestorage@^2.2.2:
   version "2.3.1"

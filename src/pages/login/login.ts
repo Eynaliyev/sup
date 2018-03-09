@@ -37,7 +37,7 @@ export class LoginPage {
 					console.log('login successful: ', JSON.stringify(authData['user']['providerData'][0]['uid']));
 					this.userSrvc.setCurrentUser(authData['user']['providerData'][0]['uid']);
 					//env.goToMeetSomebody(); - stop this for pre-launch
-					env.goToPrelaunchPage();
+					env.goToMeetSomebody();
       });
     }, error =>
       loading.dismiss().then( () => {

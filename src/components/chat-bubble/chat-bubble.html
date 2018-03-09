@@ -10,7 +10,7 @@
     <div class="chat-bubble {{message.position}}">
       <div class="message">
         <img src="{{ message.image }}" class="block" *ngIf="message.image" alt=""/>
-          {{message.content}}
+				<span id="message-content">{{message.content}}</span>
       </div>
     </div>
   </div>

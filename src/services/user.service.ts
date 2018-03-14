@@ -51,7 +51,6 @@ export class UserService {
 					}
 				})
 				.catch(error => this.handleError(error));
-			console.log("setting current user to:", JSON.stringify(user));
 		});
 	}
 	// create user in firebase

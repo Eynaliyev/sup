@@ -39,7 +39,7 @@ export class MyProfilePage {
 	}
 	updateProfile() {
 		//console.log('update profile with: ', this.currentUser);
-		this.userSrvc.updateUser(this.currentUser);
+		this.userSrvc.updateUser(this.currentUser.id, this.currentUser);
 	}
 	changeTab(tab) {
 		this.currentTab = tab;

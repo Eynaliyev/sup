@@ -28,31 +28,30 @@ export class UserService {
 	setCurrentUser(uid): void {
 		this.getUserById(uid).subscribe(user => {
 			console.log("res from getUserById", JSON.stringify(user));
-			// check if the user exists in backend
-			if (user) {
-				// if yes,
-				// next it via the subject to keep everything up to daye
-				this.updateUser(uid, user)
-					.then(() => this.currentUser.next(user))
-					.catch(error => this.handleError(error));
-				console.log("setting current user to:", JSON.stringify(user));
-			} else {
-				// if no,
-				// create the get user infor from facebook graph API
-				this.facebook
-					.api(
-						`${uid}?fields=id,name,gender,locale,picture,email,first_name,last_name`,
-						[]
-					)
-					.then(userInfo => {
-						console.log("user info from fb api: ", JSON.stringify(userInfo));
+			this.facebook
+				.api(
+					`${uid}?fields=id,name,gender,locale,picture,email,first_name,last_name`,
+					[]
+				)
+				.then(userInfo => {
+					console.log("user info from fb api: ", JSON.stringify(userInfo));
+					// check if the user exists in backend
+					if (user) {
+						// if yes,
+						// next it via the subject to keep everything up to daye
 						// set the returned user in the backend
-						this.createUser(userInfo)
-							.then(() => this.currentUser.next(user))
-							.catch(error => this.handleError(error));
-					})
-					.catch(error => this.handleError(error));
-			}
+						this.currentUser.next(user);
+						this.updateUser(uid, userInfo).catch(error =>
+							this.handleError(error)
+						);
+					} else {
+						// set the returned user in the backend
+						this.currentUser.next(this.toUser(userInfo));
+						this.createUser(userInfo).catch(error => this.handleError(error));
+					}
+				})
+				.catch(error => this.handleError(error));
+			console.log("setting current user to:", JSON.stringify(user));
 		});
 	}
 	// create user in firebase
@@ -68,9 +67,10 @@ export class UserService {
 			.catch(error => this.handleError(error));
 	}
 	updateUser(id: string, userData: User): Promise<any> {
-		let user = this.afs.doc(`users/${id}`);
-		return user
-			.update(userData)
+		let user = this.toUser(userData);
+		return this.afs
+			.doc(`users/${id}`)
+			.update(user)
 			.then(() => this.setProfilePicture(id))
 			.catch(error => this.handleError(error));
 	}

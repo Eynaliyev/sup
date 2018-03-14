@@ -14,14 +14,12 @@
   }
 
   .message {
-    font-size: medium;
     word-wrap: break-word;
     white-space: pre-wrap;
   }
 
   .message-detail {
     white-space: nowrap;
-    font-size: 14px;
     &.left {
       float: left;
       margin-left: 10px;
@@ -35,10 +33,14 @@
   .chat-bubble {
     border-radius: 5px;
     display: inline-block;
-    padding: 5px 9px;
+    padding: 0px 9px;
     position: relative;
     margin: 10px;
-    max-width: 80%;
+		max-width: 70%;
+		#message-content {
+			float: left;
+			margin-top: -21px;
+		}
 
     &:before {
       content: "\00a0";

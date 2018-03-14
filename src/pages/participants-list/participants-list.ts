@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import {UserProfilePage} from '../pages';
@@ -14,12 +15,15 @@ export class ParticipantsListPage {
   users;
 
   constructor(
-    public navCtrl: NavController,
-    public navParams: NavParams,
-    private userData: UserService) {
+    private navCtrl: NavController,
+		private navParams: NavParams,
+		private authSrvc: AuthService) {
   	this.animateClass = { 'zoom-in': true };
-  }
-  ngAfterViewInit() {
+	}
+	ionViewCanEnter() {
+		return this.authSrvc.isLoggedIn();
+	}
+  ionViewDidLoad() {
     //this.navParams.data - get users from navparams instead of loading from backend
     var env = this;
     this.users = this.navParams.get('participants');

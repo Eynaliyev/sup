@@ -1,3 +1,4 @@
+import { LANGUAGES } from './../../services/languages-list';
 import { Component } from '@angular/core';
 import { NavController, LoadingController, App } from 'ionic-angular';
 import {WaitlistPage} from '../pages';
@@ -24,10 +25,7 @@ export class MeetSomebodyPage {
 		public userSrvc: UserService,
 		public geolocation: Geolocation,
     public app: App) {
-      this.chatroomSrvc.getAvailableLanguages().subscribe(languages => {
-        this.languages = languages;
-        //console.log('possible languages loaded from the servie: ', this.languages);
-			});
+      this.languages = LANGUAGES;
 			this.userSrvc.getCurrentUser().subscribe(user => this.currentUser = user);
 			this.geolocation.getCurrentPosition().then(location => {
 				this.currentLocation = location;

@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {VipService} from '../../services/services';
@@ -16,10 +17,14 @@ import {VipService} from '../../services/services';
 export class PurchasePage {
 	selected;
   constructor(
-    public navCtrl: NavController,
-    public navParams: NavParams,
-    public vipSrvc: VipService
-  ) { }
+    private navCtrl: NavController,
+		private navParams: NavParams,
+		private authSrvc: AuthService,
+    private vipSrvc: VipService
+	) { }
+	ionViewCanEnter() {
+		return this.authSrvc.isLoggedIn();
+	}
   select(btn){
   	this.selected = btn;
     console.log(btn);

@@ -1,15 +1,15 @@
 <ion-content>
-  <back-button></back-button>
-  <span class="pageHeader">People in the room</span>
-  <div class="venti-spacer"></div>
-  <ion-grid>
-      <ion-row style="padding: 3px;">
-          <ion-col class="participant-col" [ngClass]="animateClass" col-4 *ngFor=" let user of participants">
-              <ion-card class="participant-avatar" (click)="goToUser(user.id)">
-                  <img [src]="user.profileImgUrl" default="assets/images/user.png"/>
-              </ion-card>
-              <div style="text-transform: capitalize;">{{user.name}}</div>
-          </ion-col>
-      </ion-row>
-  </ion-grid>
+	<back-button></back-button>
+	<span class="pageHeader">People in the room</span>
+	<div class="venti-spacer"></div>
+	<ion-grid>
+		<ion-row style="padding: 3px;">
+			<ion-col class="participant-col" [ngClass]="animateClass" col-4 *ngFor=" let user of participants">
+				<ion-card class="participant-avatar" (click)="goToUser(user.id)">
+					<img [src]="user.profileImgUrl" default="assets/images/other-assets/user.png" />
+				</ion-card>
+				<div style="text-transform: capitalize;">{{user.name}}</div>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
 </ion-content>

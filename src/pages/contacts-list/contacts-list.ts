@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { ChatroomPage } from '../pages';
@@ -16,13 +17,16 @@ export class ContactsListPage {
 	newRequests: boolean = false;
 
   constructor(
-    public navCtrl: NavController,
-    private userService: UserService
+    private navCtrl: NavController,
+		private userService: UserService,
+		private authSrvc: AuthService
   ) {
     console.log('ContactsListPage initialized');
     this.animateClass = { 'zoom-in': true };
-
-  }
+	}
+	ionViewCanEnter() {
+		return this.authSrvc.isLoggedIn();
+	}
   ionViewWillEnter() {
   }
   ngAfterViewInit() {

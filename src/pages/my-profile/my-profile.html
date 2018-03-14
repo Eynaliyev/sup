@@ -1,74 +1,80 @@
 <ion-content *ngIf="currentUser">
-  <menu-button></menu-button>
-  <span class="pageHeader">My Profile</span>
+	<menu-button></menu-button>
+	<span class="pageHeader">My Profile</span>
 
 	<!--image slide-->
-  <div class="rlt tall-spacer" *ngIf="currentTab == 'photos'">
+	<!--
+  <div class="rlt tall-spacer" *ngIf="currentTab == 'photos' && currentUser">
 		<ion-slides pager>
 				<ion-slide *ngFor="let img of currentUser.photos">
 					<img [src]="img.imgUrl" alt="">
 				</ion-slide>
 		</ion-slides>
-  </div>
-  <div *ngIf="currentTab == 'about'" class="venti-spacer">
-    <ion-list *ngIf="currentUser">
-      <ion-item color="white" id="myProfile-list-item39">
-        <h2>
-          {{currentUser.firstName}} {{currentUser.lastName}}
-        </h2>
-      </ion-item>
-      <ion-item id="myProfile-textarea1">
-        <ion-label>
-          About me...
-        </ion-label>
-        <ion-textarea [(ngModel)]="currentUser.about" placeholder="{{currentUser.about}}"></ion-textarea>
-      </ion-item>
-      <ion-item id="meetSomebody-list-item-container1" *ngIf="languages">
-        <div id="meetSomebody-markdown2" class="show-list-numbers-and-dots">
-          <p style="margin-top:0px;color:#000000;">
-            <strong>
-              {{currentUser.languages}}
-            </strong>
-          </p>
-        </div>
-      </ion-item>
-      <ion-item>
-        <ion-label *ngIf="!currentUser.languages">Languages I speak:</ion-label>
-        <ion-label *ngIf="currentUser.languages" class="alert">Change Languages:</ion-label>
-        <ion-select [(ngModel)]="currentUser.languages" multiple="true">
-          <ion-option value="English">English</ion-option>
-          <ion-option value="Spanish">Spanish</ion-option>
-          <ion-option value="German">German</ion-option>
-          <ion-option value="French">French</ion-option>
-          <ion-option value="Italian">Italian</ion-option>
-          <ion-option value="Mandarin">Mandarin</ion-option>
-        </ion-select>
-      </ion-item>
-      <ion-item color="none" id="myProfile-list-item43">
-        <ion-icon name="pin" item-left></ion-icon>
-        {{currentUser.currentLocation}}
-      </ion-item>
-      <ion-item color="none" id="myProfile-list-item44">
-        Age: {{currentUser.age}}
-      </ion-item>
-      <ion-item color="none" id="myProfile-list-item45">
-        University: {{currentUser.universityName}}
-      </ion-item>
-      <ion-row class="tall-spacer">
-        <button ion-button color="royal" block (click)="updateProfile()">
-            Update Profile
-        </button>
-      </ion-row>
-    </ion-list>
-  </div>
+  </div>-->
+	<div *ngIf="currentTab == 'about' && currentUser" class="venti-spacer">
+		<ion-slides pager>
+			<ion-slide *ngFor="let img of photos">
+				<img [src]="img.imgUrl" alt="">
+			</ion-slide>
+		</ion-slides>
+		<ion-list>
+			<ion-item color="white" id="myProfile-list-item39">
+				<h2>
+					{{currentUser.firstName}} {{currentUser.lastName}}
+				</h2>
+			</ion-item>
+			<ion-item id="myProfile-textarea1">
+				<ion-label>
+					About me...
+				</ion-label>
+				<ion-textarea [(ngModel)]="currentUser.about" placeholder="{{currentUser.about}}"></ion-textarea>
+			</ion-item>
+			<ion-item id="meetSomebody-list-item-container1" *ngIf="languages">
+				<div id="meetSomebody-markdown2" class="show-list-numbers-and-dots">
+					<p style="margin-top:0px;color:#000000;">
+						<strong>
+							{{currentUser.languages}}
+						</strong>
+					</p>
+				</div>
+			</ion-item>
+			<ion-item>
+				<ion-label *ngIf="!currentUser.languages">Languages I speak:</ion-label>
+				<ion-label *ngIf="currentUser.languages" class="alert">Change Languages:</ion-label>
+				<ion-select [(ngModel)]="currentUser.languages" multiple="true">
+					<ion-option value="English">English</ion-option>
+					<ion-option value="Spanish">Spanish</ion-option>
+					<ion-option value="German">German</ion-option>
+					<ion-option value="French">French</ion-option>
+					<ion-option value="Italian">Italian</ion-option>
+					<ion-option value="Mandarin">Mandarin</ion-option>
+				</ion-select>
+			</ion-item>
+			<ion-item color="none" id="myProfile-list-item43">
+				<ion-icon name="pin" item-left></ion-icon>
+				{{currentUser.currentLocation}}
+			</ion-item>
+			<ion-item color="none" id="myProfile-list-item44">
+				Age: {{currentUser.age}}
+			</ion-item>
+			<ion-item color="none" id="myProfile-list-item45">
+				University: {{currentUser.universityName}}
+			</ion-item>
+			<ion-row class="tall-spacer">
+				<button ion-button color="royal" block (click)="updateProfile()">
+					Update Profile
+				</button>
+			</ion-row>
+		</ion-list>
+	</div>
 </ion-content>
 <ion-footer>
-  <ion-segment [(ngModel)]="currentTab" (ionChange)="changeTab(currentTab)" color='dark'>
-    <ion-segment-button style="background: #a75ada;color: white;height: 60px;padding-top: 10px;" value="photos">
+	<ion-segment [(ngModel)]="currentTab" (ionChange)="changeTab(currentTab)" color='dark'>
+		<!--<ion-segment-button id="photos-button" value="photos">
       <ion-icon name="ios-camera-outline" item-left></ion-icon>
-    </ion-segment-button>
-    <ion-segment-button style="background: #8649c8;color: white;height: 60px;padding-top: 10px;" value="about">
-      <ion-icon name="ios-person-outline" item-left></ion-icon>
-    </ion-segment-button>
-  </ion-segment>
+    </ion-segment-button>-->
+		<ion-segment-button id="about-button" value="about">
+			<ion-icon name="ios-person" item-left></ion-icon>
+		</ion-segment-button>
+	</ion-segment>
 </ion-footer>

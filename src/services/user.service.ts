@@ -1,134 +1,146 @@
-import { Injectable } from '@angular/core';
-import { Http} from '@angular/http';
-import 'rxjs/add/operator/toPromise';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/toPromise';
-import 'rxjs/add/observable/forkJoin';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import {Message} from '../models/models';
-import { User} from '../models/models';
-import {USER} from "./mock-user";
-import firebase from 'firebase';
-import { Facebook } from '@ionic-native/facebook';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { Injectable } from "@angular/core";
+import { Http } from "@angular/http";
+import "rxjs/add/operator/toPromise";
+import { Observable } from "rxjs/Observable";
+import "rxjs/add/operator/toPromise";
+import "rxjs/add/observable/forkJoin";
+import "rxjs/add/operator/map";
+import "rxjs/add/operator/catch";
+import { Message } from "../models/models";
+import { User } from "../models/models";
+import { Facebook } from "@ionic-native/facebook";
+import { AngularFirestore } from "angularfire2/firestore";
+import { ReplaySubject } from "rxjs/ReplaySubject";
 //import { Camera } from 'ionic-native';
 @Injectable()
 export class UserService {
-  private user:User;
-	private currentUser:User;
+	public currentUser: ReplaySubject<User> = new ReplaySubject<User>();
 
-constructor(
-	private http: Http,
-	private facebook: Facebook,
-	private afs: AngularFirestore
-) {
-    this.user = USER;
-  }
-// get a specific User by id - that conforms to the user model
-	getUserById(id: string): Observable<any>{//Observable<User> {
+	constructor(private facebook: Facebook, private afs: AngularFirestore) {}
+	// get a specific User by id - that conforms to the user model
+	getUserById(id: string): Observable<any> {
+		//Observable<User> {
 		return this.afs.doc(`users/${id}`).valueChanges();
-  }
-  getCurrentUser(): Observable<User>{
-		return new Observable(observer => {
-			observer.next(JSON.parse(localStorage.getItem('currentUser')));
-		});
 	}
-  setCurrentUser(uid): void{
-		let currentUser: User;
+	getCurrentUser(): ReplaySubject<User> {
+		return this.currentUser;
+	}
+	setCurrentUser(uid): void {
 		this.getUserById(uid).subscribe(user => {
-			console.log('res from getUserById', JSON.stringify(user));
-			// check if the user exists in backend
-			if(user){
-				// if yes,
-				// set the current user in the localstorage to the one recovered from there
-				currentUser = user;
-				localStorage.setItem('currentUser', JSON.stringify(user));
-				console.log("setting current user to:", JSON.stringify(localStorage.getItem('currentUser')));
-			} else {
-				// if no,
-					// create the get user infor from facebook graph API
-					this.facebook.api(`${uid}?fields=id,name,gender,locale,picture,email,first_name,last_name`,[])
-					.then(userInfo => {
-						console.log('user info from fb api: ', JSON.stringify(userInfo));
+			console.log("res from getUserById", JSON.stringify(user));
+			this.facebook
+				.api(
+					`${uid}?fields=id,name,gender,locale,picture,email,first_name,last_name`,
+					[]
+				)
+				.then(userInfo => {
+					console.log("user info from fb api: ", JSON.stringify(userInfo));
+					// check if the user exists in backend
+					if (user) {
+						// if yes,
+						// next it via the subject to keep everything up to daye
 						// set the returned user in the backend
-						this.createUser(userInfo);
-					});
-			}
+						this.currentUser.next(user);
+						this.updateUser(uid, userInfo).catch(error =>
+							this.handleError(error)
+						);
+					} else {
+						// set the returned user in the backend
+						this.currentUser.next(this.toUser(userInfo));
+						this.createUser(userInfo).catch(error => this.handleError(error));
+					}
+				})
+				.catch(error => this.handleError(error));
+			console.log("setting current user to:", JSON.stringify(user));
 		});
 	}
-  // create user in firebase
-  createUser(userCredentials) {
+	// create user in firebase
+	createUser(userCredentials): Promise<any> {
 		// convert info to our model
 		let user = this.toUser(userCredentials);
 		// set it in the backend
-		console.log('creating user: ', user );
-		this.afs.doc(`/users/${user.id}`).set(user)
-		.then(() => this.setProfilePicture(user.id) );
-		// set current user in nativeStorage - pass the access token and email
-		localStorage.setItem('currentUser', JSON.stringify(user));
+		console.log("creating user: ", user);
+		return this.afs
+			.doc(`/users/${user.id}`)
+			.set(user)
+			.then(() => this.setProfilePicture(user.id))
+			.catch(error => this.handleError(error));
 	}
-	toUser(data): User{
-    let user = {
-      id: data.id,
-      firstName: data.first_name,
-      lastName: data.last_name,
-      contacts: [],
-      friendRequests: [],
-      blockedList: [],
-      profilePhoto: {
+	updateUser(id: string, userData: User): Promise<any> {
+		let user = this.toUser(userData);
+		return this.afs
+			.doc(`users/${id}`)
+			.update(user)
+			.then(() => this.setProfilePicture(id))
+			.catch(error => this.handleError(error));
+	}
+	toUser(data): User {
+		let user = {
+			id: data.id,
+			firstName: data.first_name,
+			lastName: data.last_name,
+			contacts: [],
+			friendRequests: [],
+			blockedList: [],
+			profilePhoto: {
 				imgUrl: data.picture.data.url
 			},
 			gender: data.gender,
-			photos: [{
-				imgUrl: data.picture.data.url
-			}]
-		}
-    return user;
-  }
-  setProfilePicture(uid: string): void{
-		console.log('setProfilePicture called');
+			photos: [
+				{
+					imgUrl: data.picture.data.url
+				}
+			]
+		};
+		return user;
+	}
+	setProfilePicture(uid: string): Promise<any> {
+		console.log("setProfilePicture called");
 		// set picture to the larger one
-		this.facebook.api(`${uid}/picture?type=large`,[])
-		.then(photo => {
-			console.log('photo from fb api: ', JSON.stringify(photo));
-			// set the returned user in the backend
-		this.afs.doc(`/users/${uid}/photoUrl`).set(photo.data.url + '?type=large');
-		});
+		return this.facebook
+			.api(`${uid}/picture?type=large`, [])
+			.then(photo => {
+				// set the returned user in the backend
+				this.afs
+					.doc(`/users/${uid}/photoUrl`)
+					.set(photo.data.url + "?type=large")
+					.catch(error => this.handleError(error));
+			})
+			.catch(error => this.handleError(error));
 	}
-
-  updateUser(userData: User){
-		let userId = userData.id;
-		let user = this.afs.doc(`users/${userId}`);
-		user.update(userData);
-  }
-  addImage(userId: string, image){
+	addImage(userId: string, image): Promise<any> {
 		let photos = this.afs.collection(`users/${userId}/photos`);
-    photos.add(image);
-  }
-  deleteImage(userId: string, imageUrl: string){
-		let image = this.afs.doc(`users/${userId}/photos/${imageUrl}`);
-    image.delete();
-  }
-  updateLastMessage(userId: string, contactRoomId: string, message: Message){
-		// the data in contacts list should be organised by room IDs
-    let lastMessage = this.afs.doc(`users/${userId}/contacts/${contactRoomId}/last-message`);
-    lastMessage.update(message);
+		return photos.add(image).catch(error => this.handleError(error));
 	}
-	acceptFriendRequest(id: string){
+	deleteImage(userId: string, imageUrl: string): Promise<any> {
+		let image = this.afs.doc(`users/${userId}/photos/${imageUrl}`);
+		return image.delete().catch(error => this.handleError(error));
+	}
+	updateLastMessage(
+		userId: string,
+		contactRoomId: string,
+		message: Message
+	): Promise<any> {
+		// the data in contacts list should be organised by room IDs
+		let lastMessage = this.afs.doc(
+			`users/${userId}/contacts/${contactRoomId}/last-message`
+		);
+		return lastMessage.update(message).catch(error => this.handleError(error));
+	}
+	acceptFriendRequest(id: string) {
 		/*
 		1. [ ] add to each others’ contacts list
 		2. [ ] create a new chatroom
 		3. [ ] add to relationships list
 		*/
-		console.log('acceptFriendRequest method in user service called');
+		console.log("acceptFriendRequest method in user service called");
 	}
-	rejectFriendRequest(id: string){
+	rejectFriendRequest(id: string) {
 		/*[ ] just set to null?
 		*/
-		console.log('rejectFriendRequest method in user service called');
+		console.log("rejectFriendRequest method in user service called");
 	}
-  like(id: string){
+	like(id: string) {
 		/*
 		1. [ ] if mutual - friendship
     1. [ ] in relationships collection
@@ -136,50 +148,50 @@ constructor(
     3. [ ] create a new chatroom
 		2. [ ] if not, request
 		*/
-		console.log('like method in user service called');
+		console.log("like method in user service called");
 	}
 	//method for cancelling sentrequest
-	unlike(id: string){
-				/*
+	unlike(id: string) {
+		/*
 		1. set the property in relationship to null
 		2. remove from users' requests list
 		3. [ ] add to relationships list
 		*/
-		console.log('unlike method in user service called');
+		console.log("unlike method in user service called");
 	}
-  addRequest(toId: string, requestedId: string){
+	addRequest(toId: string, requestedId: string) {
 		/*
 		1. [ ] add to the other users’ requests list
 		2. [ ] add to relationships collection
 		3. [ ] to the friendRequests list - to be able to cancel it
 		*/
-    console.log('added request from ', toId, ' to ', requestedId);
-  }
-  removeRequest(id: string){
-    // find a url
-    // set to true for currentUser
-    console.log('removeRequest method in user service called');
+		console.log("added request from ", toId, " to ", requestedId);
 	}
-	block(id: string){
+	removeRequest(id: string) {
+		// find a url
+		// set to true for currentUser
+		console.log("removeRequest method in user service called");
+	}
+	block(id: string) {
 		/*
 		1. [ ] add to user’s blocked list
 		2. [ ] set the relations collection
 		3. [ ] remove from contacts if he’s there
 		4. [ ] kick the user out of the chatroom and tell him he was kicked out
 		*/
-		console.log('block method in user service called');
+		console.log("block method in user service called");
 	}
-	unblock(id: string){
+	unblock(id: string) {
 		/*
 			1. [ ] set it back to null, without adding the false
 			2. [ ] remove from blocked list
 		*/
-		console.log('unblock method in user service called');
+		console.log("unblock method in user service called");
 	}
-  hasLiked(fromId: string, toId: string){
-    // check the relationship whether current user is set to true or not while the other is not
-  }
-  /*
+	hasLiked(fromId: string, toId: string) {
+		// check the relationship whether current user is set to true or not while the other is not
+	}
+	/*
   getPicture(){
     let base64Picture;
     let options = {
@@ -193,7 +205,7 @@ constructor(
         resolve(base64Picture);
         }, (error) => {
           reject(error);
-      });
+      }).catch(error => this.handleError(error));
     });
     return promise;
   }
@@ -203,8 +215,8 @@ constructor(
       let pictureRef = this.db.object(`/users/${uid}/picture`);
       this.getPicture().then(image => {
         pictureRef.set(image);
-      });
-    });
+      }).catch(error => this.handleError(error));
+    }).catch(error => this.handleError(error));
   }
   updateProfile(user){
   }
@@ -276,7 +288,7 @@ constructor(
           picture: '',
           time: firebase.database.ServerValue.TIMESTAMP
         })
-      });
+      }).catch(error => this.handleError(error));
     });
   }
   // remove a chat from the list
@@ -289,7 +301,7 @@ constructor(
       otherRef.remove(uid);
       //chats list
       this.db.list(`/chats/${uid},${id}`).remove();
-    });
+    }).catch(error => this.handleError(error));
   }
   /*
     getUid(): Promise<string>{
@@ -318,7 +330,7 @@ constructor(
         resolve(base64Picture);
         }, (error) => {
           reject(error);
-      });
+      }).catch(error => this.handleError(error));
     });
     return promise;
   }
@@ -328,8 +340,8 @@ constructor(
       let pictureRef = this.db.object(`/users/${uid}/picture`);
       this.getPicture().then(image => {
         pictureRef.set(image);
-      });
-    });
+      }).catch(error => this.handleError(error));
+    }).catch(error => this.handleError(error));
   }
   updateProfile(user){
   }
@@ -416,7 +428,7 @@ constructor(
           picture: '',
           time: firebase.database.ServerValue.TIMESTAMP
         })
-      });
+      }).catch(error => this.handleError(error));
     });
   }
   // remove a chat from the list
@@ -429,11 +441,11 @@ constructor(
       otherRef.remove(uid);
       //chats list
       this.db.list(`/chats/${uid},${id}`).remove();
-    });
+    }).catch(error => this.handleError(error));
   }
   */
 	private handleError(error: any): Promise<any> {
-		console.error('An error occurred', error); // for demo purposes only
+		console.error("An error occurred", error); // for demo purposes only
 		return Promise.reject(error.message || error);
 	}
 }

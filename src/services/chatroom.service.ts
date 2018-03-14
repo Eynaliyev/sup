@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
-import {AngularFireDatabase, AngularFireList, AngularFireObject} from 'angularfire2/database';
-import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from 'angularfire2/firestore';
+// import {Http} from '@angular/http';
+import {AngularFireDatabase} from 'angularfire2/database';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/observable/forkJoin';
@@ -12,18 +11,17 @@ import {Chatroom} from '../models/models';
 import {Language} from '../models/models';
 import {Participant} from '../models/models';
 import {UtilService} from '../shared/util.service';
-import {LANGUAGES} from './mock-languages';
 
 @Injectable()
 export class ChatroomService {
-  private messages: Message[];
-  private chatrooms: Chatroom[];
-  private languages: Language[];
+  // private messages: Message[];
+  // private chatrooms: Chatroom[];
+  // private languages: Language[];
 
 	constructor(
-    private http: Http,
+    // private http: Http,
 		private db: AngularFireDatabase,
-		private afs: AngularFirestore,
+		// private afs: AngularFirestore,
 		private utilService: UtilService
   )
   {  }
@@ -142,8 +140,5 @@ export class ChatroomService {
     // TO DO: implement actual paginated message getter function
     getMessages(chatroomId: string, start?, end?): Observable<any[]> {
       return this.db.list(`chatrooms/${chatroomId}/messages`).valueChanges();
-    }
-    getAvailableLanguages(): Observable<any[]>{
-      return this.afs.collection(`languages`).valueChanges();
     }
 }

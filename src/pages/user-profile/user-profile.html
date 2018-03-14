@@ -1,27 +1,27 @@
 <ion-content *ngIf="user">
-  <back-button></back-button>
-  <ion-fab *ngIf="tab == 'vote'" style="left: 27%;" left bottom>
-      <button ion-fab color="light" (click)="block(user.id)" class="menu-btn-border actn-btn">
-          <ion-icon style="font-size: 4rem;" name="md-close"></ion-icon>
-      </button>
-  </ion-fab>
-  <ion-fab *ngIf="currentUser && tab == 'vote'" style="right: 27%;" right bottom >
-      <button ion-fab (click)="like(user.id)" color="light" class="menu-btn-border actn-btn" *ngIf="!friend && !requested">
-          <ion-icon name="ios-heart-outline"></ion-icon>
-      </button>
-      <button ion-fab (click)="unlike(user.id)" color="light" class="menu-btn-border actn-btn" *ngIf="friend || requested">
-          <ion-icon name="ios-heart"></ion-icon>
-      </button>
-  </ion-fab>
-  <div [ngSwitch]="tab">
-      <div *ngSwitchCase="'vote'">
-					<ion-slides pager>
-							<ion-slide *ngFor="let img of currentUser.photos">
-								<img [src]="img.imgUrl" alt="">
-							</ion-slide>
-					</ion-slides>
-			</div>
-			<!--
+	<back-button></back-button>
+	<ion-fab *ngIf="tab == 'vote'" style="left: 27%;" left bottom>
+		<button ion-fab color="light" (click)="block(user.id)" class="menu-btn-border actn-btn">
+			<ion-icon style="font-size: 4rem;" name="md-close"></ion-icon>
+		</button>
+	</ion-fab>
+	<ion-fab *ngIf="currentUser && tab == 'vote'" style="right: 27%;" right bottom>
+		<button ion-fab (click)="like(user.id)" color="light" class="menu-btn-border actn-btn" *ngIf="!friend && !requested">
+			<ion-icon name="ios-heart-outline"></ion-icon>
+		</button>
+		<button ion-fab (click)="unlike(user.id)" color="light" class="menu-btn-border actn-btn" *ngIf="friend || requested">
+			<ion-icon name="ios-heart"></ion-icon>
+		</button>
+	</ion-fab>
+	<div [ngSwitch]="tab">
+		<div *ngSwitchCase="'vote'">
+			<ion-slides pager>
+				<ion-slide *ngFor="let img of currentUser.photos">
+					<img [src]="img.imgUrl" alt="">
+				</ion-slide>
+			</ion-slides>
+		</div>
+		<!--
       <div *ngSwitchCase="'photos'">
 					<ion-slides>
 							<ion-slide *ngFor="let img of currentUser.photos">
@@ -30,62 +30,64 @@
 					</ion-slides>
 			</div>
 			-->
-      <div *ngSwitchCase="'about'">
-          <profile-timeline [currentUser]="currentUser" [user]="user"></profile-timeline>
-			</div>
-			<!--
+		<div *ngSwitchCase="'about'">
+			<profile-timeline [currentUser]="currentUser" [user]="user"></profile-timeline>
+		</div>
+		<!--
       <div *ngSwitchCase="'profile'">
           <profile-posts></profile-posts>
 			</div>
 			-->
-  </div>
+	</div>
 </ion-content>
 <ion-footer *ngIf="user">
-  <div [ngSwitch]="tab">
-      <div *ngSwitchCase="'vote'">
-          <div [ngClass]="animateClass" [style.display]="getHeight(tab)" class="profile-info">
-              <span class="nameDetails">
-								<span class="light-text">{{user.firstName}} {{user.lastName}}</span>
-								<span *ngIf="user.birthday" class="usr-profile-age-label">{{user.birthday|age}}</span>
-							</span>
-						</div>
+	<div [ngSwitch]="tab">
+		<div *ngSwitchCase="'vote'">
+			<div [ngClass]="animateClass" [style.display]="getHeight(tab)" class="profile-info">
+				<span class="nameDetails">
+					<span class="light-text">{{user.firstName}} {{user.lastName}}</span>
+					<span *ngIf="user.birthday" class="usr-profile-age-label">{{user.birthday|age}}</span>
+				</span>
 			</div>
-			<!--
+		</div>
+		<!--
       <div *ngSwitchCase="'photos'">
           <div [ngClass]="animateClass" class="profile-info">
               <span class="nameDetails"><span class="light-text">Photos of {{user.firstName}}</span></span>
           </div>
 			</div>
 			-->
-      <div *ngSwitchCase="'about'">
-          <div [ngClass]="animateClass" class="profile-info">
-              <span class="nameDetails"><span class="light-text">About {{user.firstName}}</span></span>
-          </div>
-      </div>
-      <!--
+		<div *ngSwitchCase="'about'">
+			<div [ngClass]="animateClass" class="profile-info">
+				<span class="nameDetails">
+					<span class="light-text">About {{user.firstName}}</span>
+				</span>
+			</div>
+		</div>
+		<!--
       <div *ngSwitchCase="'profile'">
           <div [ngClass]="animateClass" class="profile-info">
               <span class="nameDetails"><span class="light-text">Posts from Alice</span></span>
           </div>
       </div>
       -->
-  </div>
-  <ion-segment [(ngModel)]="tab" color='dark'>
-      <ion-segment-button [@flyInTopSlow4]="0" style="background: #df69a1;color: white;height: 60px;padding-top: 10px;" value="vote">
-          <ion-icon name="ios-heart-outline" item-left></ion-icon>
-			</ion-segment-button>
-			<!--
+	</div>
+	<ion-segment [(ngModel)]="tab" color='dark'>
+		<ion-segment-button [@flyInTopSlow4]="0" id="vote-btn" value="vote">
+			<ion-icon name="ios-heart-outline" item-left></ion-icon>
+		</ion-segment-button>
+		<!--
       <ion-segment-button [@flyInTopSlow3]="0" style="background: #a75ada;color: white;height: 60px;padding-top: 10px;" value="photos">
           <ion-icon name="ios-camera-outline" item-left></ion-icon>
 			</ion-segment-button>
 		-->
-      <ion-segment-button [@flyInTopSlow2]="0" style="background: #8649c8;color: white;height: 60px;padding-top: 10px;" value="about">
-          <ion-icon name="ios-person-outline" item-left></ion-icon>
-      </ion-segment-button>
-      <!--
+		<ion-segment-button [@flyInTopSlow2]="0" id="about-btn" value="about">
+			<ion-icon name="ios-person-outline" item-left></ion-icon>
+		</ion-segment-button>
+		<!--
       <ion-segment-button [@flyInTopSlow1]="0" style="background: #ffd36a;color: white;height: 60px;padding-top: 10px;" value="profile">
           <ion-icon name="ios-paper-outline" item-left></ion-icon>
       </ion-segment-button>
     -->
-  </ion-segment>
+	</ion-segment>
 </ion-footer>

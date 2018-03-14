@@ -1,8 +1,18 @@
 page-user-profile {
-
 	ion-slides {
 		height: auto;
-
+		.vote-btn {
+			background: #df69a1;
+			color: white;
+			height: 60px;
+			padding-top: 10px;
+		}
+		.about-btn {
+			background: #8649c8;
+			color: white;
+			height: 60px;
+			padding-top: 10px;
+		}
 		.swiper-pagination {
 			top: 10px;
 

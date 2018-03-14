@@ -1,5 +1,6 @@
+import { AuthService } from './../../services/auth.service';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 
 /**
  * Generated class for the FilterPage page.
@@ -17,8 +18,12 @@ export class FilterPage {
   withoption = "girl";
   languages: any[];
 	dualValue2= {lower : 18, upper: 30};
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
-
+  constructor(
+		private navCtrl: NavController,
+		private authSrvc: AuthService) {}
+	ionViewCanEnter() {
+		return this.authSrvc.isLoggedIn();
+	}
   ionViewDidLoad() {
     console.log('ionViewDidLoad FilterPage');
   }
@@ -29,6 +34,4 @@ export class FilterPage {
   change(d){
  // 	console.log(d);
   }
-
-
 }

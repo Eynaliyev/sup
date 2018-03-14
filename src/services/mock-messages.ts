@@ -4,7 +4,7 @@ export const MESSAGES = [{
           id: '123',
           senderId: '123',
           roomId: '321013',
-          senderImage: 'assets/img/pic.png',
+          senderImage: 'assets/images/pic.png',
           senderName: 'Nicole',
           seen: ['321']
       }];

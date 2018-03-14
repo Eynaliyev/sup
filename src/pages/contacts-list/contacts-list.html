@@ -1,25 +1,27 @@
 <ion-content>
-  <menu-button></menu-button>
-  <ion-fab right top>
+	<menu-button></menu-button>
+	<ion-fab right top>
 		<img *ngIf="newRequests" class="notification" src="http://www.clker.com/cliparts/r/M/L/o/R/i/green-dot.svg.med.png">
-    <button ion-fab color="dark" (click)="viewRequests()" class="menu-btn-border">
-				<ion-icon name="ios-person-add-outline" style="font-size: 4rem;"></ion-icon>
-    </button>
-  </ion-fab>
-  <span class="pageHeader">Messages</span>
-  <ion-list class="venti-spacer" *ngIf="users">
-      <ion-item [ngClass]="animateClass" style="background-color: transparent;color: #cfcfcf !important;" *ngFor=" let user of users " (click)="openChat(user)">
-          <ion-thumbnail item-left>
-              <img [src]="user.profileImgUrl" class="profile-picture" default="assets/images/user.png">
-          </ion-thumbnail>
-          <h2 style="text-transform: capitalize;">{{user.name}}
-              <span style="text-transform: capitalize;">
-                <img *ngIf="user.lastMessage.seen.indexOf(currentUser.id) === -1" class="notification" src="http://www.clker.com/cliparts/r/M/L/o/R/i/green-dot.svg.med.png">
-              </span></h2>
-          <p>{{user.lastMessage.content}}</p>
-      </ion-item>
-  </ion-list>
-  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-      <ion-infinite-scroll-content></ion-infinite-scroll-content>
-  </ion-infinite-scroll>
+		<button ion-fab color="dark" (click)="viewRequests()" class="menu-btn-border">
+			<ion-icon name="ios-person-add-outline" style="font-size: 4rem;"></ion-icon>
+		</button>
+	</ion-fab>
+	<span class="pageHeader">Messages</span>
+	<ion-list class="venti-spacer" *ngIf="users">
+		<ion-item [ngClass]="animateClass" style="background-color: transparent;color: #cfcfcf !important;" *ngFor=" let user of users "
+		  (click)="openChat(user)">
+			<ion-thumbnail item-left>
+				<img [src]="user.profileImgUrl" class="profile-picture" default="assets/images/other-assets/user.png">
+			</ion-thumbnail>
+			<h2 style="text-transform: capitalize;">{{user.name}}
+				<span style="text-transform: capitalize;">
+					<img *ngIf="user.lastMessage.seen.indexOf(currentUser.id) === -1" class="notification" src="http://www.clker.com/cliparts/r/M/L/o/R/i/green-dot.svg.med.png">
+				</span>
+			</h2>
+			<p>{{user.lastMessage.content}}</p>
+		</ion-item>
+	</ion-list>
+	<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+		<ion-infinite-scroll-content></ion-infinite-scroll-content>
+	</ion-infinite-scroll>
 </ion-content>

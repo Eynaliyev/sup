@@ -1,4 +1,18 @@
 page-my-profile {
+	#photos-button {
+		background: #a75ada;
+	}
+	#about-button {
+		background: #8649c8;
+	}
+	ion-segment-button {
+		color: white;
+		height: 60px;
+		padding-top: 10px;
+		ion-icon {
+			color: white;
+		}
+	}
 
 	ion-slides {
 		height: auto;
@@ -11,11 +25,11 @@ page-my-profile {
 			}
 		}
 	}
-  .action-btn{
-    margin-top: -84px;
-  }
-  .img-btn{
-    width:76px;
-    height:76px;
-  }
+	.action-btn {
+		margin-top: -84px;
+	}
+	.img-btn {
+		width: 76px;
+		height: 76px;
+	}
 }

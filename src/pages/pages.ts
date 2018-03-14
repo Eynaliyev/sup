@@ -1,3 +1,4 @@
+export * from './prelaunch/prelaunch';
 export * from './chatroom/chatroom';
 export * from './contacts-list/contacts-list';
 export * from './filter/filter';

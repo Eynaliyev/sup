@@ -11,6 +11,7 @@ import { User } from "../models/models";
 import { Facebook } from "@ionic-native/facebook";
 import { AngularFirestore } from "angularfire2/firestore";
 import { ReplaySubject } from "rxjs/ReplaySubject";
+import { resolve } from "dns";
 //import { Camera } from 'ionic-native';
 @Injectable()
 export class UserService {
@@ -33,36 +34,45 @@ export class UserService {
 	setAccessToken(token): void {
 		this.access_token = token;
 	}
-	setCurrentUser(uid): void {
-		this.getUserById(uid).subscribe(user => {
-			console.log("res from getUserById", JSON.stringify(user));
-			let url = `https://graph.facebook.com/v2.12/me?access_token=${
-				this.access_token
-			}&fields=id,name,gender,locale,picture,email,first_name,last_name`;
-			this.http.get(url).subscribe(
-				userInfo => {
-					console.log("user info from fb api: ", JSON.stringify(userInfo));
-					let parsedData = JSON.parse(userInfo["_body"]);
-					let userData = this.toUser(parsedData);
-					// check if the user exists in backend
-					if (user) {
-						// if yes,
-						// next it via the subject to keep everything up to daye
-						// set the returned user in the backend
+	//should return promise that resolves once the data can be returned
+	setCurrentUser(usr): Promise<any> {
+		return new Promise<any>(resolve => {
+			let uid = usr["uid"];
+			this.getUserById(uid).subscribe(user => {
+				if (user) {
+					this.currentUser.next(user);
+					//graph request, for updating profile, setting it in the backend and nexting
+					this.fetchGraphData().then(parsedData => {
+						let userData = this.toUser(parsedData);
 						this.currentUser.next(userData);
 						this.updateUser(uid, parsedData).catch(error =>
 							this.handleError(error)
 						);
-					} else {
-						// set the returned user in the backend
+					});
+				} else {
+					//graph request, create new user with the return
+					this.fetchGraphData().then(parsedData => {
+						let userData = this.toUser(parsedData);
 						this.currentUser.next(userData);
 						this.createUser(parsedData).catch(error => this.handleError(error));
-					}
-				},
+					});
+				}
+			});
+		});
+	}
+	fetchGraphData(): Promise<any> {
+		let url = `https://graph.facebook.com/v2.12/me?access_token=${
+			this.access_token
+		}&fields=id,name,gender,locale,picture.type(large),email,first_name,last_name`;
+		return new Promise<any>(resolve => {
+			this.http.get(url).subscribe(userInfo => {
+				console.log("user info from fb api: ", JSON.stringify(userInfo));
+				let parsedData = JSON.parse(userInfo["_body"]);
+				resolve(parsedData);
+			}),
 				err => {
 					this.handleError(err);
-				}
-			);
+				};
 		});
 	}
 	// create user in firebase

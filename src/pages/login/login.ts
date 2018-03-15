@@ -37,11 +37,10 @@ export class LoginPage {
 						JSON.stringify(authData["user"]["providerData"][0]["uid"])
 					);
 					this.userSrvc.setAccessToken(authData["credential"].accessToken);
-					this.userSrvc.setCurrentUser(
-						authData["user"]["providerData"][0]["uid"]
-					);
-					//env.goToMeetSomebody(); - stop this for pre-launch
-					env.goToMeetSomebody();
+					//should be after the user has been set
+					this.userSrvc
+						.setCurrentUser(authData["user"]["providerData"][0])
+						.then(() => env.goToMeetSomebody());
 				});
 			},
 			error =>

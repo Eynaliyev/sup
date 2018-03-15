@@ -3,7 +3,7 @@
 
 	<ion-content id="side-menu21">
 		<ion-list class="tall-spacer">
-			<ion-item (click)="openPage(myProfile)" *ngIf="user">
+			<ion-item (click)="openPage(myProfile)" *ngIf="currentUser">
 				<ion-thumbnail item-left>
 					<img class="profile-picture" [src]="currentUser.profilePhoto.imgUrl" default="assets/images/other-assets/user.png">
 				</ion-thumbnail>
@@ -16,6 +16,7 @@
 		</ion-list>
 		<!--<span style="padding: 20px;color: #7a7a7a;">Featured Members</span>-->
 		<ion-grid style="padding:0px">
+			<!--
 			<ion-row style="padding: 3px;" *ngIf="currentUser">
 				<ion-col col-4 *ngFor=" let currentUser of featuredUsers " class="participant-col">
 					<ion-card class="menu-avatar">
@@ -23,7 +24,7 @@
 					</ion-card>
 					<span>{{currentUser.firstName}}</span>
 				</ion-col>
-			</ion-row>
+			</ion-row>-->
 			<ion-row style="text-align: center;">
 				<span class="promo-text">Get matched 2x faster</span>
 			</ion-row>

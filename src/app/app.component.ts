@@ -2,12 +2,11 @@ import { Component, ViewChild } from "@angular/core";
 import { Platform, MenuController, Nav } from "ionic-angular";
 //import { Storage } from '@ionic/storage';
 import { LoadingController } from "ionic-angular";
-import firebase from "firebase";
 
 // pages
 import { MyProfilePage } from "../pages/pages";
 import { ContactsListPage } from "../pages/pages";
-import { NotificationsListPage } from "../pages/pages";
+// import { NotificationsListPage } from "../pages/pages";
 import { VIPPage } from "../pages/pages";
 import { MeetSomebodyPage } from "../pages/pages";
 import { LoginPage } from "../pages/pages";
@@ -28,7 +27,7 @@ export class MyApp {
 	private pages: any[];
 	private activePage: any;
 	loader: any;
-	currentUser: User;
+	public currentUser: User;
 
 	myProfile = {
 		component: MyProfilePage
@@ -46,24 +45,6 @@ export class MyApp {
 			// Okay, so the platform is ready and our plugins are available.
 			// Here you can do any higher level native things you might need.
 			//this.presentLoading();
-			this.userSrvc.getCurrentUser().subscribe(
-				result => {
-					//getCurrentUser returns a subject so we need to check if there's actual value in it
-					if (result) {
-						console.log("current user :", result);
-						this.currentUser = result;
-						this.rootPage = MeetSomebodyPage;
-					} else {
-						this.rootPage = LoginPage;
-						//this.storage.set('introShown', true);
-					}
-					//this.loader.dismiss();
-				},
-				err => {
-					console.error(err);
-					//this.loader.dismiss();
-				}
-			);
 		});
 		this.pages = [
 			{
@@ -86,6 +67,25 @@ export class MyApp {
       { title: 'Settings', component: SettingsPage, icon: 'ios-settings-outline' }
       */
 		];
+	}
+	ngOnInit() {
+		this.userSrvc.getCurrentUser().subscribe(
+			result => {
+				//getCurrentUser returns a subject so we need to check if there's actual value in it
+				if (result) {
+					this.currentUser = result;
+					console.log("current user :", this.currentUser);
+					this.rootPage = MeetSomebodyPage;
+				} else {
+					this.rootPage = LoginPage;
+					//this.storage.set('introShown', true);
+				}
+			},
+			err => {
+				console.error(err);
+				//this.loader.dismiss();
+			}
+		);
 	}
 	openPage(page) {
 		// close the menu when clicking a link from the menu

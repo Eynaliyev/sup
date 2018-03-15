@@ -1,8 +1,6 @@
 import { Component, ViewChild } from "@angular/core";
 import { Platform, MenuController, Nav } from "ionic-angular";
 //import { Storage } from '@ionic/storage';
-import { LoadingController } from "ionic-angular";
-
 // pages
 import { MyProfilePage } from "../pages/pages";
 import { ContactsListPage } from "../pages/pages";
@@ -26,7 +24,6 @@ export class MyApp {
 	@ViewChild(Nav) nav: Nav;
 	private pages: any[];
 	private activePage: any;
-	loader: any;
 	public currentUser: User;
 
 	myProfile = {
@@ -36,7 +33,6 @@ export class MyApp {
 	constructor(
 		private platform: Platform,
 		private menu: MenuController,
-		private loadingCtrl: LoadingController,
 		private authSrvc: AuthService,
 		//private storage: Storage,
 		private userSrvc: UserService
@@ -44,7 +40,6 @@ export class MyApp {
 		platform.ready().then(() => {
 			// Okay, so the platform is ready and our plugins are available.
 			// Here you can do any higher level native things you might need.
-			//this.presentLoading();
 		});
 		this.pages = [
 			{
@@ -93,12 +88,6 @@ export class MyApp {
 		this.activePage = page;
 		// navigate to the new page if it is not the current page
 		this.nav.setRoot(page.component);
-	}
-	presentLoading() {
-		this.loader = this.loadingCtrl.create({
-			content: "Authenticating..."
-		});
-		this.loader.present();
 	}
 	viewVIP() {
 		this.navCtrl.push(VIPPage);

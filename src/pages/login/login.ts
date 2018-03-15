@@ -36,6 +36,7 @@ export class LoginPage {
 						"login successful: ",
 						JSON.stringify(authData["user"]["providerData"][0]["uid"])
 					);
+					this.userSrvc.setAccessToken(authData["credential"].accessToken);
 					this.userSrvc.setCurrentUser(
 						authData["user"]["providerData"][0]["uid"]
 					);

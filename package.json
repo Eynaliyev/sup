@@ -13,11 +13,11 @@
 		"ionic:build": "npm-run-all build generate:sourcemaps",
 		"ionic:build:prod": "npm-run-all build:prod generate:sourcemaps",
 		"ionic:build:prod:deploy": "npm-run-all ionic:build:prod firebase:deploy",
-		"ionic:serve": "ionic-app-scripts serve",
+		"ionic:serve": "npm-run-all generate:sourcemaps ionic-app-scripts serve ",
 		"ionic:serve:lab": "ionic-app-scripts serve --lab",
 		"lint": "ionic-app-scripts lint",
 		"security-check": "nsp check",
-		"start": "npm-run-all --parallel ionic:serve:lab test security-check",
+		"start": "npm-run-all ionic:serve:lab generate:sourcemaps",
 		"test": "karma start ./test-config/karma.conf.js"
 	},
 	"dependencies": {

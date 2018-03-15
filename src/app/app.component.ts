@@ -23,12 +23,12 @@ import { User } from "../models/models";
 })
 export class MyApp {
 	@ViewChild(Nav) navCtrl: Nav;
-	rootPage: any = LoginPage;
+	private rootPage: any = LoginPage;
 	@ViewChild(Nav) nav: Nav;
-	pages: any[];
-	activePage: any;
+	private pages: any[];
+	private activePage: any;
 	loader: any;
-	user: User;
+	currentUser: User;
 
 	myProfile = {
 		component: MyProfilePage
@@ -50,6 +50,8 @@ export class MyApp {
 				result => {
 					//getCurrentUser returns a subject so we need to check if there's actual value in it
 					if (result) {
+						console.log("current user :", result);
+						this.currentUser = result;
 						this.rootPage = MeetSomebodyPage;
 					} else {
 						this.rootPage = LoginPage;
@@ -84,15 +86,6 @@ export class MyApp {
       { title: 'Settings', component: SettingsPage, icon: 'ios-settings-outline' }
       */
 		];
-		this.userSrvc.getCurrentUser().subscribe(
-			user => {
-				console.log("current user :", user);
-				this.user = user;
-			},
-			err => {
-				console.error(err);
-			}
-		);
 	}
 	openPage(page) {
 		// close the menu when clicking a link from the menu

@@ -15,8 +15,13 @@ import { ReplaySubject } from "rxjs/ReplaySubject";
 @Injectable()
 export class UserService {
 	public currentUser: ReplaySubject<User> = new ReplaySubject<User>();
+	private access_token = ``;
 
-	constructor(private facebook: Facebook, private afs: AngularFirestore) {}
+	constructor(
+		private facebook: Facebook,
+		public http: Http,
+		private afs: AngularFirestore
+	) {}
 	// get a specific User by id - that conforms to the user model
 	getUserById(id: string): Observable<any> {
 		//Observable<User> {
@@ -25,32 +30,39 @@ export class UserService {
 	getCurrentUser(): ReplaySubject<User> {
 		return this.currentUser;
 	}
+	setAccessToken(token): void {
+		this.access_token = token;
+	}
 	setCurrentUser(uid): void {
 		this.getUserById(uid).subscribe(user => {
 			console.log("res from getUserById", JSON.stringify(user));
-			this.facebook
-				.api(
-					`${uid}?fields=id,name,gender,locale,picture,email,first_name,last_name`,
-					[]
-				)
-				.then(userInfo => {
+			let url = `https://graph.facebook.com/v2.12/me?access_token=${
+				this.access_token
+			}&fields=id,name,gender,locale,picture,email,first_name,last_name`;
+			this.http.get(url).subscribe(
+				userInfo => {
 					console.log("user info from fb api: ", JSON.stringify(userInfo));
+					let parsedData = JSON.parse(userInfo["_body"]);
+					let userData = this.toUser(parsedData);
 					// check if the user exists in backend
 					if (user) {
 						// if yes,
 						// next it via the subject to keep everything up to daye
 						// set the returned user in the backend
-						this.currentUser.next(user);
-						this.updateUser(uid, userInfo).catch(error =>
+						this.currentUser.next(userData);
+						this.updateUser(uid, parsedData).catch(error =>
 							this.handleError(error)
 						);
 					} else {
 						// set the returned user in the backend
-						this.currentUser.next(this.toUser(userInfo));
-						this.createUser(userInfo).catch(error => this.handleError(error));
+						this.currentUser.next(userData);
+						this.createUser(parsedData).catch(error => this.handleError(error));
 					}
-				})
-				.catch(error => this.handleError(error));
+				},
+				err => {
+					this.handleError(err);
+				}
+			);
 		});
 	}
 	// create user in firebase
@@ -132,12 +144,16 @@ export class UserService {
 		2. [ ] create a new chatroom
 		3. [ ] add to relationships list
 		*/
-		console.log("acceptFriendRequest method in user service called");
+		console.error(
+			"acceptFriendRequest method in user service called, but has not been implemented yet"
+		);
 	}
 	rejectFriendRequest(id: string) {
 		/*[ ] just set to null?
 		*/
-		console.log("rejectFriendRequest method in user service called");
+		console.error(
+			"rejectFriendRequest method in user service called, but has not been implemented yet"
+		);
 	}
 	like(id: string) {
 		/*
@@ -147,7 +163,9 @@ export class UserService {
     3. [ ] create a new chatroom
 		2. [ ] if not, request
 		*/
-		console.log("like method in user service called");
+		console.error(
+			"like method in user service called, but has not been implemented yet"
+		);
 	}
 	//method for cancelling sentrequest
 	unlike(id: string) {
@@ -156,7 +174,9 @@ export class UserService {
 		2. remove from users' requests list
 		3. [ ] add to relationships list
 		*/
-		console.log("unlike method in user service called");
+		console.error(
+			"unlike method in user service called, but has not been implemented yet"
+		);
 	}
 	addRequest(toId: string, requestedId: string) {
 		/*
@@ -164,12 +184,19 @@ export class UserService {
 		2. [ ] add to relationships collection
 		3. [ ] to the friendRequests list - to be able to cancel it
 		*/
-		console.log("added request from ", toId, " to ", requestedId);
+		console.error(
+			"added request from ",
+			toId,
+			" to ",
+			requestedId + ", but has not been implemented yet"
+		);
 	}
 	removeRequest(id: string) {
 		// find a url
 		// set to true for currentUser
-		console.log("removeRequest method in user service called");
+		console.error(
+			"removeRequest method in user service called, but has not been implemented yet"
+		);
 	}
 	block(id: string) {
 		/*
@@ -178,14 +205,18 @@ export class UserService {
 		3. [ ] remove from contacts if he’s there
 		4. [ ] kick the user out of the chatroom and tell him he was kicked out
 		*/
-		console.log("block method in user service called");
+		console.error(
+			"block method in user service called, but has not been implemented yet"
+		);
 	}
 	unblock(id: string) {
 		/*
 			1. [ ] set it back to null, without adding the false
 			2. [ ] remove from blocked list
 		*/
-		console.log("unblock method in user service called");
+		console.error(
+			"unblock method in user service called, but has not been implemented yet"
+		);
 	}
 	hasLiked(fromId: string, toId: string) {
 		// check the relationship whether current user is set to true or not while the other is not

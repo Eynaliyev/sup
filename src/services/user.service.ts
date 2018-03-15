@@ -65,14 +65,16 @@ export class UserService {
 			this.access_token
 		}&fields=id,name,gender,locale,picture.type(large),email,first_name,last_name`;
 		return new Promise<any>(resolve => {
-			this.http.get(url).subscribe(userInfo => {
-				console.log("user info from fb api: ", JSON.stringify(userInfo));
-				let parsedData = JSON.parse(userInfo["_body"]);
-				resolve(parsedData);
-			}),
+			this.http.get(url).subscribe(
+				userInfo => {
+					console.log("user info from fb api: ", JSON.stringify(userInfo));
+					let parsedData = JSON.parse(userInfo["_body"]);
+					resolve(parsedData);
+				},
 				err => {
 					this.handleError(err);
-				};
+				}
+			);
 		});
 	}
 	// create user in firebase

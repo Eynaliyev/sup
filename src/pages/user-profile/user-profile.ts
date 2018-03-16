@@ -46,15 +46,12 @@ export class UserProfilePage {
 		this.animateClass = { "zoom-in": true };
 	}
 	ionViewDidLoad() {
-		let id = this.navParams.get("user");
-		this.userSrvc
-			.getCurrentUser()
-			.switchMap(curUsr => {
-				this.currentUser = curUsr;
-				console.log("currentUser in userProfile: ", this.currentUser);
-				return this.userSrvc.getUserById(id);
-			})
-			.subscribe(userInfo => {
+		console.log(this.navParams.data);
+		this.userSrvc.getCurrentUser().subscribe(curUsr => {
+			let id = this.navParams.get("user");
+			this.currentUser = curUsr;
+			console.log("currentUser in userProfile: ", this.currentUser);
+			this.userSrvc.getUserById(id).subscribe(userInfo => {
 				console.log("user, id from getUserByID()", userInfo, id);
 				this.user = userInfo;
 				if (this.userSrvc.hasLiked(this.currentUser.id, userInfo.id)) {
@@ -67,10 +64,11 @@ export class UserProfilePage {
 					this.friend = true;
 				}
 			});
+		});
 		console.log("ionViewDidLoad UserProfilePage");
 	}
 	changeImage(image) {
-		console.log("changeImage called, but needs to be implemented");
+		console.log("changeImage called, but needs to be implements");
 	}
 	getHeight(tab) {
 		var height = "";

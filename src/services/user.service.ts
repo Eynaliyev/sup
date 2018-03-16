@@ -17,6 +17,7 @@ import { resolve } from "dns";
 export class UserService {
 	public currentUser: ReplaySubject<User> = new ReplaySubject<User>();
 	private access_token = ``;
+	private lastUserInfo: User;
 
 	constructor(
 		private facebook: Facebook,
@@ -40,10 +41,16 @@ export class UserService {
 			let uid = usr["uid"];
 			this.getUserById(uid).subscribe(user => {
 				if (user) {
-					this.currentUser.next(user);
-					//graph request, for updating profile, setting it in the backend and nexting
+					if (user != this.lastUserInfo) {
+						this.currentUser.next(user);
+						this.lastUserInfo = user;
+					}
 					this.fetchGraphData().then(parsedData => {
 						let userData = this.toUser(parsedData);
+						if (userData != this.lastUserInfo) {
+							this.currentUser.next(userData);
+							this.lastUserInfo = userData;
+						}
 						this.currentUser.next(userData);
 						this.updateUser(uid, parsedData).catch(error =>
 							this.handleError(error)
@@ -53,7 +60,10 @@ export class UserService {
 					//graph request, create new user with the return
 					this.fetchGraphData().then(parsedData => {
 						let userData = this.toUser(parsedData);
-						this.currentUser.next(userData);
+						if (userData != this.lastUserInfo) {
+							this.currentUser.next(userData);
+							this.lastUserInfo = userData;
+						}
 						this.createUser(parsedData).catch(error => this.handleError(error));
 					});
 				}

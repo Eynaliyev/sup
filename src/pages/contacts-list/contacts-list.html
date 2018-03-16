@@ -7,6 +7,7 @@
 		</button>
 	</ion-fab>
 	<span class="pageHeader">Messages</span>
+	<span *ngIf="users.length === 0" class="grande center-text">No contacts yet, try meeting some new people</span>
 	<ion-list class="venti-spacer" *ngIf="users">
 		<ion-item [ngClass]="animateClass" style="background-color: transparent;color: #cfcfcf !important;" *ngFor=" let user of users "
 		  (click)="openChat(user)">

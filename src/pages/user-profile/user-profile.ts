@@ -30,8 +30,6 @@ export class UserProfilePage {
 	tab: string = "vote";
 	backGround: any;
 	animateClass: any;
-	image: any;
-	items: any = [];
 	friend: boolean = false;
 	requested: boolean = false;
 	likeAlertPresented: boolean = false;
@@ -45,18 +43,21 @@ export class UserProfilePage {
 		private utilSrvc: UtilService,
 		public alertCtrl: AlertController
 	) {
-		console.log(this.navParams.data);
+		this.animateClass = { "zoom-in": true };
+	}
+	ionViewDidLoad() {
 		let id = this.navParams.get("user");
-		this.userSrvc.getCurrentUser().subscribe(user => {
-			this.currentUser = user;
-			console.log("currentUser in userProfile: ", this.currentUser);
-			this.userSrvc.getUserById(id).subscribe(user => {
-				console.log("user, id from getUserByID()", user, id);
-				this.user = user;
-				this.items = user.photos;
-				this.backGround = user.photos[0].imgUrl;
-				this.image = user.photos[0].imgUrl;
-				if (this.userSrvc.hasLiked(this.currentUser.id, user.id)) {
+		this.userSrvc
+			.getCurrentUser()
+			.switchMap(curUsr => {
+				this.currentUser = curUsr;
+				console.log("currentUser in userProfile: ", this.currentUser);
+				return this.userSrvc.getUserById(id);
+			})
+			.subscribe(userInfo => {
+				console.log("user, id from getUserByID()", userInfo, id);
+				this.user = userInfo;
+				if (this.userSrvc.hasLiked(this.currentUser.id, userInfo.id)) {
 					this.requested = true;
 				} else if (
 					this.currentUser.contacts.forEach(
@@ -65,21 +66,11 @@ export class UserProfilePage {
 				) {
 					this.friend = true;
 				}
-				console.log(
-					"image, background, user in user profile: ",
-					this.image,
-					this.backGround,
-					this.user
-				);
 			});
-		});
-		this.animateClass = { "zoom-in": true };
-	}
-	ionViewDidLoad() {
 		console.log("ionViewDidLoad UserProfilePage");
 	}
 	changeImage(image) {
-		this.image = image;
+		console.log("changeImage called, but needs to be implemented");
 	}
 	getHeight(tab) {
 		var height = "";

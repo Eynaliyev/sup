@@ -5,6 +5,10 @@ page-contacts-list {
             border-radius: 50%;
             border: 2px solid #683f99;
         }
-    }
+		}
+		ion-item{
+			background-color: transparent;
+			color: #cfcfcf !important;
+		}
 
 }

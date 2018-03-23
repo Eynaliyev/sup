@@ -1,6 +1,6 @@
 import { Component, ViewChild } from "@angular/core";
 import { Platform, MenuController, Nav } from "ionic-angular";
-//import { Storage } from '@ionic/storage';
+import { Storage } from "@ionic/storage";
 // pages
 import { MyProfilePage } from "../pages/pages";
 import { ContactsListPage } from "../pages/pages";
@@ -22,7 +22,7 @@ export class MyApp {
 	@ViewChild(Nav) navCtrl: Nav;
 	private rootPage: any = LoginPage;
 	@ViewChild(Nav) nav: Nav;
-	private pages: any[];
+	pages: Array<{ title: string; component: any; icon: string }>;
 	private activePage: any;
 	public currentUser: User;
 
@@ -34,13 +34,10 @@ export class MyApp {
 		private platform: Platform,
 		private menu: MenuController,
 		private authSrvc: AuthService,
-		//private storage: Storage,
+		private storage: Storage,
 		private userSrvc: UserService
 	) {
-		platform.ready().then(() => {
-			// Okay, so the platform is ready and our plugins are available.
-			// Here you can do any higher level native things you might need.
-		});
+		this.initializeApp();
 		this.pages = [
 			{
 				title: "Meet people Nearby",
@@ -62,6 +59,16 @@ export class MyApp {
       { title: 'Settings', component: SettingsPage, icon: 'ios-settings-outline' }
       */
 		];
+	}
+	initializeApp() {
+		this.platform
+			.ready()
+			.then(() => {
+				// Okay, so the platform is ready and our plugins are available.
+				// Here you can do any higher level native things you might need.
+				this.rootPage = "LoaderPage";
+			})
+			.catch(() => (this.rootPage = "LoaderPage"));
 	}
 	ngOnInit() {
 		this.userSrvc.getCurrentUser().subscribe(

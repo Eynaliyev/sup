@@ -335,13 +335,17 @@
   version "4.5.3"
   resolved "https://registry.yarnpkg.com/@ionic-native/core/-/core-4.5.3.tgz#bd0fd39e7257ded4c55c3062bb73c9741a2263bc"
 
+"@ionic-native/device@^4.6.0":
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/@ionic-native/device/-/device-4.6.0.tgz#36fbf1b236df16a98d80ac73f60cc9b29e9a1e9b"
+
 "@ionic-native/facebook@^4.3.2":
   version "4.5.3"
   resolved "https://registry.yarnpkg.com/@ionic-native/facebook/-/facebook-4.5.3.tgz#b57bed8659f58eaa600649c3a8dc254a091568de"
 
-"@ionic-native/file@^4.5.3":
-  version "4.5.3"
-  resolved "https://registry.yarnpkg.com/@ionic-native/file/-/file-4.5.3.tgz#a8af6b56a8ee4bcfdb241ff24b20a9eedb5230ef"
+"@ionic-native/file@^4.6.0":
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/@ionic-native/file/-/file-4.6.0.tgz#b47c894611612dd92344421ff5d4689e537eb86e"
 
 "@ionic-native/geolocation@^4.3.1":
   version "4.5.3"

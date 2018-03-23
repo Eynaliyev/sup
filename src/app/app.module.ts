@@ -51,6 +51,7 @@ import { AuthService } from "../services/services";
 import { NotificationService } from "../services/services";
 import { RequestService } from "../services/services";
 import { AngularFireDatabase } from "angularfire2/database";
+import { AlertService } from "../services/services";
 
 export const firebaseConfig = {
 	apiKey: "AIzaSyDI22hmtv2clf3WYdo2y04z_h-eCfbv_F4",
@@ -130,6 +131,7 @@ export const firebaseConfig = {
 		UtilService,
 		RequestService,
 		Geolocation,
+		AlertService,
 		{ provide: ErrorHandler, useClass: IonicErrorHandler }
 	]
 })

@@ -2,7 +2,6 @@ import { Component, ViewChild, NgZone } from "@angular/core";
 import {
 	Platform,
 	MenuController,
-	Nav,
 	NavController,
 	NavParams
 } from "ionic-angular";
@@ -114,7 +113,7 @@ export class MyApp {
 				// Check if user is loading the app for the very first time and show the IntroPage.
 				if (introShown) {
 					// Check if user is authenticated on Firebase or not.
-					this.auth
+					this.authSrvc
 						.getUser()
 						.then((user: firebase.User) => {
 							if (!user) {

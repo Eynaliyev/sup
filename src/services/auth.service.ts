@@ -2,14 +2,17 @@ import { Injectable } from "@angular/core";
 import { Http } from "@angular/http";
 import "rxjs/add/operator/map";
 import { Subscription } from "rxjs/Subscription";
-import { Environment } from "../../environment/environment";
+import { Environment } from "../environment/environment";
 import firebase from "firebase";
-import { Facebook } from "@ionic-native/facebook";
-import { UserService, FirestoreService } from "../services/services";
+import { UserService } from "../services/services";
 import { User } from "../models/models";
 import { AngularFireAuth } from "angularfire2/auth";
 import { Observable } from "rxjs/Observable";
-
+import {
+	AngularFirestore,
+	AngularFirestoreDocument,
+	AngularFirestoreCollection
+} from "angularfire2/firestore";
 /*
   Generated class for the AuthService provider.
   See https://angular.io/docs/ts/latest/guide/dependency-injection.html
@@ -22,13 +25,13 @@ export class AuthService {
 	private fsSubscription: Subscription;
 	private user: User;
 	private userDetails: firebase.User = null;
+	// to break the circular dependency injection - will refactor later - perhaps with inheritance
 
 	constructor(
 		public http: Http,
-		private facebook: Facebook,
 		private _firebaseAuth: AngularFireAuth,
 		public userService: UserService,
-		private firestore: FirestoreService
+		private afs: AngularFirestore
 	) {
 		console.log("Hello AuthService");
 	}
@@ -46,8 +49,7 @@ export class AuthService {
 				(user: firebase.User) => {
 					// User is logged in on Firebase.
 					if (user) {
-						this.firestore
-							.get("users/" + user.uid)
+						this.get("users/" + user.uid)
 							.then(ref => {
 								if (this.fsSubscription) {
 									this.fsSubscription.unsubscribe();
@@ -146,5 +148,10 @@ export class AuthService {
 	logout(): Promise<any> {
 		localStorage.removeItem("currentUser");
 		return firebase.auth().signOut();
+	}
+	public get(path: string): Promise<AngularFirestoreDocument<{}>> {
+		return new Promise(resolve => {
+			resolve(this.afs.doc(path));
+		});
 	}
 }

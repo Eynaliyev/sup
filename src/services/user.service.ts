@@ -110,20 +110,31 @@ export class UserService {
 	toUser(data): User {
 		let user = {
 			id: data.id,
+			email: data.email ? data.email : "",
 			firstName: data.first_name,
 			lastName: data.last_name,
-			contacts: [],
-			friendRequests: [],
-			blockedList: [],
-			profilePhoto: {
-				imgUrl: data.picture.data.url
-			},
-			gender: data.gender,
-			photos: [
-				{
-					imgUrl: data.picture.data.url
-				}
-			]
+			about: data.about ? data.about : "",
+			blockedList: data.blockedList ? data.blockedList : [],
+			contacts: data.contacts ? data.contacts : [],
+			requestsSent: data.requestsSent ? data.requestsSent : [],
+			requestsReceived: data.requestsReceived ? data.requestsReceived : [],
+			conversations: data.conversations ? data.conversations : [],
+			groups: data.groups ? data.groups : [],
+			pushToken: data.pushToken ? data.pushToken : [],
+			notifications: data.notifications ? data.notifications : [],
+			profilePhoto: data.picture.data.url
+				? {
+						imgUrl: data.picture.data.url
+				  }
+				: { imgUrl: "" },
+			gender: data.gender ? data.gender : "",
+			photos: data.picture.data.url
+				? [
+						{
+							imgUrl: data.picture.data.url
+						}
+				  ]
+				: [{ imgUrl: "" }]
 		};
 		return user;
 	}

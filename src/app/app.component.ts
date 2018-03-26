@@ -1,17 +1,28 @@
-import { Component, ViewChild } from "@angular/core";
-import { Platform, MenuController, Nav } from "ionic-angular";
+import { Component, ViewChild, NgZone } from "@angular/core";
+import {
+	Platform,
+	MenuController,
+	Nav,
+	NavController,
+	NavParams
+} from "ionic-angular";
 import { Storage } from "@ionic/storage";
 // pages
-import { MyProfilePage } from "../pages/pages";
-import { ContactsListPage } from "../pages/pages";
 // import { NotificationsListPage } from "../pages/pages";
-import { VIPPage } from "../pages/pages";
-import { MeetSomebodyPage } from "../pages/pages";
-import { LoginPage } from "../pages/pages";
+import {
+	LoginPage,
+	MeetSomebodyPage,
+	VIPPage,
+	ContactsListPage,
+	MyProfilePage
+} from "../pages/pages";
 //import { SettingsPage } from '../pages/pages';
 // providers
-import { UserService } from "../services/services";
-import { AuthService } from "../services/services";
+import {
+	UserService,
+	AuthService,
+	FirestoreService
+} from "../services/services";
 // models
 import { User } from "../models/models";
 
@@ -19,9 +30,7 @@ import { User } from "../models/models";
 	templateUrl: "app.component.html"
 })
 export class MyApp {
-	@ViewChild(Nav) navCtrl: Nav;
 	private rootPage: any = LoginPage;
-	@ViewChild(Nav) nav: Nav;
 	pages: Array<{ title: string; component: any; icon: string }>;
 	private activePage: any;
 	public currentUser: User;
@@ -34,7 +43,14 @@ export class MyApp {
 		private platform: Platform,
 		private menu: MenuController,
 		private authSrvc: AuthService,
+		private navCtrl: NavController,
+		private navParams: NavParams,
+		private firestore: FirestoreService,
+		//private splashScreen: SplashScreen,
 		private storage: Storage,
+		//private auth: AuthProvider,
+		//private firestore: FirestoreProvider,
+		private zone: NgZone,
 		private userSrvc: UserService
 	) {
 		this.initializeApp();
@@ -66,9 +82,9 @@ export class MyApp {
 			.then(() => {
 				// Okay, so the platform is ready and our plugins are available.
 				// Here you can do any higher level native things you might need.
-				this.rootPage = "LoaderPage";
+				this.loadPage();
 			})
-			.catch(() => (this.rootPage = "LoaderPage"));
+			.catch(() => this.loadPage());
 	}
 	ngOnInit() {
 		this.userSrvc.getCurrentUser().subscribe(
@@ -89,12 +105,59 @@ export class MyApp {
 			}
 		);
 	}
+	loadPage() {
+		// Show the splashScreen while the page to show to the user is still loading.
+		//this.splashScreen.show();
+		this.storage
+			.get("introShown")
+			.then((introShown: boolean) => {
+				// Check if user is loading the app for the very first time and show the IntroPage.
+				if (introShown) {
+					// Check if user is authenticated on Firebase or not.
+					this.auth
+						.getUser()
+						.then((user: firebase.User) => {
+							if (!user) {
+								// User is not authenticated, proceed to LoginPage.
+								this.navCtrl.setRoot("LoginPage");
+								//this.splashScreen.hide();
+							} else {
+								// Check if userData is already created on Firestore.
+								this.firestore
+									.exists("users/" + user.uid)
+									.then(exists => {
+										// No data yet, proceed to CreateProfilePage.
+										if (!exists) {
+											this.navCtrl.setRoot("CreateProfilePage");
+											//this.splashScreen.hide();
+										} else {
+											// Data exists, proceed to TabsPage.
+											this.zone.run(() => {
+												this.navCtrl.setRoot("TabsPage");
+											});
+											//this.splashScreen.hide();
+										}
+									})
+									.catch(() => {});
+							}
+						})
+						.catch(() => {});
+				} else {
+					// User is loading the app for the very first time, show IntroPage.
+					this.navCtrl.setRoot("IntroPage");
+					//this.splashScreen.hide();
+					this.storage.set("introShown", true);
+				}
+			})
+			.catch(() => {});
+	}
+
 	openPage(page) {
 		// close the menu when clicking a link from the menu
 		this.menu.close();
 		this.activePage = page;
 		// navigate to the new page if it is not the current page
-		this.nav.setRoot(page.component);
+		this.navCtrl.setRoot(page.component);
 	}
 	viewVIP() {
 		this.navCtrl.push(VIPPage);

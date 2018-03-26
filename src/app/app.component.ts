@@ -1,10 +1,5 @@
 import { Component, ViewChild, NgZone } from "@angular/core";
-import {
-	Platform,
-	MenuController,
-	NavController,
-	NavParams
-} from "ionic-angular";
+import { Platform, MenuController, Nav } from "ionic-angular";
 import { Storage } from "@ionic/storage";
 // pages
 // import { NotificationsListPage } from "../pages/pages";
@@ -13,7 +8,9 @@ import {
 	MeetSomebodyPage,
 	VIPPage,
 	ContactsListPage,
-	MyProfilePage
+	MyProfilePage,
+	IntroPage,
+	CreateProfilePage
 } from "../pages/pages";
 //import { SettingsPage } from '../pages/pages';
 // providers
@@ -29,6 +26,7 @@ import { User } from "../models/models";
 	templateUrl: "app.component.html"
 })
 export class MyApp {
+	@ViewChild(Nav) navCtrl: Nav;
 	private rootPage: any = LoginPage;
 	pages: Array<{ title: string; component: any; icon: string }>;
 	private activePage: any;
@@ -42,8 +40,6 @@ export class MyApp {
 		private platform: Platform,
 		private menu: MenuController,
 		private authSrvc: AuthService,
-		private navCtrl: NavController,
-		private navParams: NavParams,
 		private firestore: FirestoreService,
 		//private splashScreen: SplashScreen,
 		private storage: Storage,
@@ -86,6 +82,7 @@ export class MyApp {
 			.catch(() => this.loadPage());
 	}
 	ngOnInit() {
+		/*
 		this.userSrvc.getCurrentUser().subscribe(
 			result => {
 				//getCurrentUser returns a subject so we need to check if there's actual value in it
@@ -102,7 +99,7 @@ export class MyApp {
 				console.error(err);
 				//this.loader.dismiss();
 			}
-		);
+		);*/
 	}
 	loadPage() {
 		// Show the splashScreen while the page to show to the user is still loading.
@@ -118,7 +115,7 @@ export class MyApp {
 						.then((user: firebase.User) => {
 							if (!user) {
 								// User is not authenticated, proceed to LoginPage.
-								this.navCtrl.setRoot("LoginPage");
+								this.navCtrl.setRoot(LoginPage);
 								//this.splashScreen.hide();
 							} else {
 								// Check if userData is already created on Firestore.
@@ -127,12 +124,12 @@ export class MyApp {
 									.then(exists => {
 										// No data yet, proceed to CreateProfilePage.
 										if (!exists) {
-											this.navCtrl.setRoot("CreateProfilePage");
+											this.navCtrl.setRoot(CreateProfilePage);
 											//this.splashScreen.hide();
 										} else {
 											// Data exists, proceed to TabsPage.
 											this.zone.run(() => {
-												this.navCtrl.setRoot("TabsPage");
+												this.navCtrl.setRoot(MeetSomebodyPage);
 											});
 											//this.splashScreen.hide();
 										}

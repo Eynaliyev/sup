@@ -1,0 +1,35 @@
+<ion-content class="no-scroll">
+	<ion-slides pager="true" id="slides">
+		<ion-slide>
+			<img src="assets/images/app-screenshots/4.7-2.jpg" />
+			<h3>
+				<b>Meet new Peopl</b>
+			</h3>
+			<p>Near you</p>
+		</ion-slide>
+		<ion-slide>
+			<img src="assets/images/app-screenshots/4.7-1.jpg" />
+			<h3>
+				<b>No swyping</b>
+			</h3>
+			<p>Start chatting</p>
+		</ion-slide>
+		<ion-slide>
+			<img src="assets/images/logo/logo.png" />
+			<h3>
+				<b>{Adventure begins</b>
+			</h3>
+			<p>Who will you meet on Flychats?</p>
+		</ion-slide>
+	</ion-slides>
+	<div class="filler-left" *ngIf="!slides.isBeginning()" [style.top]="getSlidesPosition()"></div>
+	<div class="filler-right" *ngIf="!slides.isEnd()" [style.top]="getSlidesPosition()"></div>
+	<div class="buttons" text-center>
+		<button ion-button color="primary" (click)="navCtrl.setRoot('LoginPage')">
+			<b>{{ 'intro.button.login' | translate }}</b>
+		</button>
+		<button ion-button color="dark" (click)="navCtrl.setRoot('RegisterPage')">
+			<b>{{ 'intro.button.register' | translate }}</b>
+		</button>
+	</div>
+</ion-content>

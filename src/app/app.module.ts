@@ -26,6 +26,8 @@ import { WaitlistPage } from "../pages/pages";
 import { ParticipantsListPage } from "../pages/pages";
 import { NotificationsListPage } from "../pages/pages";
 import { RequestsListPage } from "../pages/pages";
+import { IntroPage } from "../pages/pages";
+import { CreateProfilePage } from "../pages/pages";
 // components
 import { GalleryComponent } from "../components/components";
 import { ChatBubbleComponent } from "../components/components";
@@ -53,7 +55,7 @@ import { RequestService } from "../services/services";
 import { AngularFireDatabase } from "angularfire2/database";
 import { AlertService } from "../services/services";
 import { FirestoreService } from "../services/services";
-import { Environment } from '../environment/environment';
+import { Environment } from "../environment/environment";
 
 @NgModule({
 	declarations: [
@@ -78,6 +80,8 @@ import { Environment } from '../environment/environment';
 		ParticipantsListPage,
 		NotificationsListPage,
 		RequestsListPage,
+		IntroPage,
+		CreateProfilePage,
 		DefaultImageDirective
 	],
 	imports: [
@@ -108,7 +112,9 @@ import { Environment } from '../environment/environment';
 		ParticipantsListPage,
 		NotificationsListPage,
 		RequestsListPage,
-		WaitlistPage
+		WaitlistPage,
+		IntroPage,
+		CreateProfilePage
 	],
 	providers: [
 		UserService,

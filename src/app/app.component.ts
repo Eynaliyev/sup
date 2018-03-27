@@ -127,9 +127,7 @@ export class MyApp {
 											//this.splashScreen.hide();
 										} else {
 											// Data exists, proceed to TabsPage.
-											this.zone.run(() => {
-												this.navCtrl.setRoot(MeetSomebodyPage);
-											});
+											this.navCtrl.setRoot(MeetSomebodyPage);
 											//this.splashScreen.hide();
 										}
 									})

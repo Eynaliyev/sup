@@ -8,7 +8,6 @@ import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 import { Message } from "../models/models";
 import { User } from "../models/models";
-import { Facebook } from "@ionic-native/facebook";
 import { AngularFirestore } from "angularfire2/firestore";
 import { ReplaySubject } from "rxjs/ReplaySubject";
 import { resolve } from "dns";
@@ -19,11 +18,7 @@ export class UserService {
 	private access_token = ``;
 	private lastUserInfo: User;
 
-	constructor(
-		private facebook: Facebook,
-		public http: Http,
-		private afs: AngularFirestore
-	) {}
+	constructor(public http: Http, private afs: AngularFirestore) {}
 	// get a specific User by id - that conforms to the user model
 	getUserById(id: string): Observable<any> {
 		//Observable<User> {
@@ -52,9 +47,9 @@ export class UserService {
 							this.lastUserInfo = userData;
 						}
 						this.currentUser.next(userData);
-						this.updateUser(uid, parsedData).catch(error =>
-							this.handleError(error)
-						);
+						this.updateUser(uid, parsedData)
+							.then(() => resolve(true))
+							.catch(error => this.handleError(error));
 					});
 				} else {
 					//graph request, create new user with the return
@@ -64,7 +59,9 @@ export class UserService {
 							this.currentUser.next(userData);
 							this.lastUserInfo = userData;
 						}
-						this.createUser(parsedData).catch(error => this.handleError(error));
+						this.createUser(parsedData)
+							.then(() => resolve(true))
+							.catch(error => this.handleError(error));
 					});
 				}
 			});
@@ -96,7 +93,7 @@ export class UserService {
 		return this.afs
 			.doc(`/users/${user.id}`)
 			.set(user)
-			.then(() => this.setProfilePicture(user.id))
+			.then(() => console.log("user set: ", user))
 			.catch(error => this.handleError(error));
 	}
 	updateUser(id: string, userData: User): Promise<any> {
@@ -104,7 +101,7 @@ export class UserService {
 		return this.afs
 			.doc(`users/${id}`)
 			.update(user)
-			.then(() => this.setProfilePicture(id))
+			.then(() => console.log("updating info: ", id))
 			.catch(error => this.handleError(error));
 	}
 	toUser(data): User {
@@ -137,7 +134,7 @@ export class UserService {
 				: [{ imgUrl: "" }]
 		};
 		return user;
-	}
+	} /*
 	setProfilePicture(uid: string): Promise<any> {
 		console.log("setProfilePicture called");
 		// set picture to the larger one
@@ -151,7 +148,7 @@ export class UserService {
 					.catch(error => this.handleError(error));
 			})
 			.catch(error => this.handleError(error));
-	}
+	}*/
 	addImage(userId: string, image): Promise<any> {
 		let photos = this.afs.collection(`users/${userId}/photos`);
 		return photos.add(image).catch(error => this.handleError(error));

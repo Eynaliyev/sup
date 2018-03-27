@@ -133,10 +133,10 @@ export class MyApp {
 											//this.splashScreen.hide();
 										}
 									})
-									.catch(() => {});
+									.catch(err => console.log(err));
 							}
 						})
-						.catch(() => {});
+						.catch(err => console.log(err));
 				} else {
 					// User is loading the app for the very first time, show IntroPage.
 					this.navCtrl.setRoot("IntroPage");
@@ -144,7 +144,7 @@ export class MyApp {
 					this.storage.set("introShown", true);
 				}
 			})
-			.catch(() => {});
+			.catch(err => console.log(err));
 	}
 
 	openPage(page) {
@@ -159,7 +159,10 @@ export class MyApp {
 	}
 	logout() {
 		//add actual logging out and locaStorage clearing
-		this.authSrvc.logout().then(res => this.navCtrl.setRoot(LoginPage));
+		this.authSrvc
+			.logout()
+			.then(res => this.navCtrl.setRoot(LoginPage))
+			.catch(err => console.log(err));
 	}
 	checkActive(page) {
 		return page == this.activePage;

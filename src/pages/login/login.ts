@@ -1,11 +1,11 @@
-import { PrelaunchPage } from "./../prelaunch/prelaunch";
-import { WaitlistPage } from "./../waitlist/waitlist";
-import { UserService } from "./../../services/user.service";
+import { WaitlistPage, MeetSomebodyPage, PrelaunchPage } from "../pages";
+import {
+	UserService,
+	AuthService,
+	UtilService
+} from "./../../services/services";
 import { Component } from "@angular/core";
 import { NavController, LoadingController } from "ionic-angular";
-import { MeetSomebodyPage } from "../meet-somebody/meet-somebody";
-import { AuthService } from "../../services/services";
-import { UtilService } from "../../shared/util.service";
 @Component({
 	selector: "page-login",
 	templateUrl: "login.html"

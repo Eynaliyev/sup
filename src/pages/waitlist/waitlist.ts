@@ -39,10 +39,7 @@ export class WaitlistPage {
 			this.chatroomSrvc
 				.joinChatroom(location, languages, user.gender)
 				.subscribe(chatroom => {
-					let view = this.navCtrl.getActive();
-					if (view.component.name === "WaitlistPage") {
-						this.goToChatroom(chatroom.id);
-					}
+					this.goToChatroom(chatroom.id);
 				});
 		});
 	}
@@ -54,7 +51,7 @@ export class WaitlistPage {
 		this.app.getRootNav().push(FilterPage);
 	}
 	goToChatroom(chatroomId: string) {
-		this.navCtrl.push(ChatroomPage, { room: `${chatroomId}` });
+		this.navCtrl.setRoot(ChatroomPage, { room: `${chatroomId}` });
 	}
 	back() {
 		this.navCtrl.pop();

@@ -36,8 +36,14 @@ export class AuthService {
 		console.log("Hello AuthService");
 	}
 	// Get the userData from Firestore of the logged in user on Firebase.
-	public getUserData(): User {
-		return this.user;
+	public getUserData(): Promise<User> {
+		return new Promise(resolve => {
+			if (this.user) {
+				resolve(this.user);
+			} else {
+				return this.getUser();
+			}
+		});
 	}
 	// Get the authenticated user on Firebase and update the userData variable.
 	public getUser(): Promise<firebase.User> {

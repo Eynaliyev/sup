@@ -31,7 +31,7 @@ export class ContactsListPage {
 	ngAfterViewInit() {
 		return new Promise(resolve => {
 			let env = this;
-			this.userService.getCurrentUser().subscribe(
+			this.authSrvc.getUserData().then(
 				user => {
 					this.currentUser = user;
 					// setting contacts

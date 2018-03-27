@@ -1,4 +1,3 @@
-import { UserService } from "./../../services/user.service";
 import { Component } from "@angular/core";
 import {
 	NavController,
@@ -9,7 +8,11 @@ import {
 import { FilterPage } from "../pages";
 import { VIPPage } from "../pages";
 import { ChatroomPage } from "../pages";
-import { ChatroomService } from "../../services/services";
+import {
+	ChatroomService,
+	UserService,
+	AuthService
+} from "../../services/services";
 import { Chatroom } from "../../models/models";
 import { User } from "@firebase/auth-types";
 @Component({
@@ -23,6 +26,7 @@ export class WaitlistPage {
 		public chatroomSrvc: ChatroomService,
 		public navParams: NavParams,
 		public userSrvc: UserService,
+		public authSrv: AuthService,
 		public app: App
 	) {}
 	ionViewDidLoad() {
@@ -35,7 +39,7 @@ export class WaitlistPage {
 		// get languages property
 		let languages = this.navParams.get("languages");
 		// join a chatroom
-		this.userSrvc.getCurrentUser().subscribe(user => {
+		this.authSrv.getUserData().then(user => {
 			this.chatroomSrvc
 				.joinChatroom(location, languages, user.gender)
 				.subscribe(chatroom => {

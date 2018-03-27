@@ -1,3 +1,4 @@
+import { AuthService } from "./../../services/auth.service";
 import { LANGUAGES } from "./../../services/languages-list";
 import { Component } from "@angular/core";
 import { NavController, LoadingController, App } from "ionic-angular";
@@ -23,11 +24,12 @@ export class MeetSomebodyPage {
 		public loadingCtrl: LoadingController,
 		public chatroomSrvc: ChatroomService,
 		public userSrvc: UserService,
+		public authSrvc: AuthService,
 		public geolocation: Geolocation,
 		public app: App
 	) {
 		this.languages = LANGUAGES;
-		this.userSrvc.getCurrentUser().subscribe(user => (this.currentUser = user));
+		this.authSrvc.getUserData().then(user => (this.currentUser = user));
 		this.geolocation.getCurrentPosition().then(location => {
 			this.currentLocation = location;
 			console.log("user's locations: ", location);

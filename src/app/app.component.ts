@@ -82,7 +82,7 @@ export class MyApp {
 	}
 	ngOnInit() {
 		/*
-		this.userSrvc.getCurrentUser().subscribe(
+		this.authSrvc.getUserData().then(
 			result => {
 				//getCurrentUser returns a subject so we need to check if there's actual value in it
 				if (result) {

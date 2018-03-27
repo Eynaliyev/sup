@@ -50,18 +50,15 @@ export class ChatroomPage {
 		// get chatroom id from the nav params
 		this.chatroomId = this.navParams.get("room");
 		console.log("Chatroom page loaded with id:", this.chatroomId);
-		this.userService
-			.getCurrentUser()
-			.switchMap(user => {
-				this.currentUser = user;
-				this.newMessage.senderId = this.currentUser.id;
-				this.newMessage.senderName = this.currentUser.firstName + " ";
-				this.newMessage.senderImage = this.currentUser.profilePhoto.imgUrl;
-				this.newMessage.seen.push(this.currentUser.id);
-				console.log("currentUser: ", this.currentUser);
-				return this.chatroomService.getChatroomById(this.chatroomId);
-			})
-			.subscribe(
+		this.authSrvc.getUserData().then(user => {
+			this.currentUser = user;
+			this.newMessage.senderId = this.currentUser.id;
+			this.newMessage.senderName = this.currentUser.firstName + " ";
+			this.newMessage.senderImage = this.currentUser.profilePhoto.imgUrl;
+			this.newMessage.seen.push(this.currentUser.id);
+			console.log("currentUser: ", this.currentUser);
+
+			this.chatroomService.getChatroomById(this.chatroomId).subscribe(
 				chatroom => {
 					console.log("chatroom loaded from firebase: ", chatroom);
 					this.chatroom = chatroom;
@@ -84,6 +81,7 @@ export class ChatroomPage {
 					console.error(err);
 				}
 			);
+		});
 	}
 	ionViewCanEnter() {
 		return this.authSrvc.isLoggedIn();

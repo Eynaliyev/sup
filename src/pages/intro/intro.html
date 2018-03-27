@@ -17,7 +17,7 @@
 		<ion-slide>
 			<img src="assets/images/logo/logo.png" />
 			<h3>
-				<b>{Adventure begins</b>
+				<b>Adventure begins</b>
 			</h3>
 			<p>Who will you meet on Flychats?</p>
 		</ion-slide>
@@ -26,10 +26,7 @@
 	<div class="filler-right" *ngIf="!slides.isEnd()" [style.top]="getSlidesPosition()"></div>
 	<div class="buttons" text-center>
 		<button ion-button color="primary" (click)="navCtrl.setRoot('LoginPage')">
-			<b>{{ 'intro.button.login' | translate }}</b>
-		</button>
-		<button ion-button color="dark" (click)="navCtrl.setRoot('RegisterPage')">
-			<b>{{ 'intro.button.register' | translate }}</b>
+			<b>Login with Facebook</b>
 		</button>
 	</div>
 </ion-content>

@@ -9,8 +9,7 @@ import {
 	VIPPage,
 	ContactsListPage,
 	MyProfilePage,
-	IntroPage,
-	CreateProfilePage
+	IntroPage
 } from "../pages/pages";
 //import { SettingsPage } from '../pages/pages';
 // providers
@@ -124,7 +123,7 @@ export class MyApp {
 									.then(exists => {
 										// No data yet, proceed to CreateProfilePage.
 										if (!exists) {
-											this.navCtrl.setRoot(CreateProfilePage);
+											this.navCtrl.setRoot(LoginPage);
 											//this.splashScreen.hide();
 										} else {
 											// Data exists, proceed to TabsPage.

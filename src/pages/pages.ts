@@ -13,5 +13,4 @@ export * from "./waitlist/waitlist";
 export * from "./participants-list/participants-list";
 export * from "./notifications-list/notifications-list";
 export * from "./requests-list/requests-list";
-export * from "./create-profile/create-profile";
 export * from "./intro/intro";

@@ -8,7 +8,6 @@ import {
 	Platform
 } from "ionic-angular";
 import { ViewChild } from "@angular/core";
-import { Device } from "@ionic-native/device";
 
 @IonicPage()
 @Component({
@@ -22,7 +21,6 @@ export class IntroPage {
 		private navCtrl: NavController,
 		private navParams: NavParams,
 		private menuCtrl: MenuController,
-		private device: Device,
 		private platform: Platform
 	) {}
 

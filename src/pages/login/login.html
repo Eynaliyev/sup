@@ -1,31 +1,15 @@
-
-<ion-slides pager="true">
-
-  <ion-slide>
-			<div class="intro-img-screenshot">
-				<img src="assets/images/app-screenshots/4.7-2.jpg"/>
-		</div>
-  </ion-slide>
-  <ion-slide>
-		<div class="intro-img-screenshot">
-				<img src="assets/images/app-screenshots/4.7-1.jpg"/>
-		</div>
-  </ion-slide>
-
-  <ion-slide>
-		<div id="intro-logo">
-				<img src="assets/images/logo/logo.png"/>
-		</div>
-		<h3 text-center id="login-heading1" class="light-text grande">
-				adventure begins...
-		</h3>
-			<button id="login-button1" ion-button (click)="facebookLogin()" block style="color:#FFFFFF;">
-					Log in with facebook
-			</button>
-        <!--
-          <button id="login-button2" ion-button clear color="royal" block href-inappbrowser="/signup">
-            Or create an account
-          </button>
-        -->
-  </ion-slide>
-</ion-slides>
+<ion-content class="no-scroll">
+	<div class="logo" text-center>
+		<img src="assets/images/logo/logo.png" tappable (click)="navCtrl.setRoot('IntroPage')" />
+	</div>
+	<div class="form">
+		<ion-list>
+			<div text-center>
+				<button ion-button color="dark" (click)="facebookLogin()">
+					<ion-icon name="icon-facebook"></ion-icon>
+					<b>Log in with facebook</b>
+				</button>
+			</div>
+		</ion-list>
+	</div>
+</ion-content>

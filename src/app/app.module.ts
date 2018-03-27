@@ -26,8 +26,6 @@ import { WaitlistPage } from "../pages/pages";
 import { ParticipantsListPage } from "../pages/pages";
 import { NotificationsListPage } from "../pages/pages";
 import { RequestsListPage } from "../pages/pages";
-import { IntroPage } from "../pages/pages";
-import { CreateProfilePage } from "../pages/pages";
 // components
 import { GalleryComponent } from "../components/components";
 import { ChatBubbleComponent } from "../components/components";
@@ -80,8 +78,6 @@ import { Environment } from "../environment/environment";
 		ParticipantsListPage,
 		NotificationsListPage,
 		RequestsListPage,
-		IntroPage,
-		CreateProfilePage,
 		DefaultImageDirective
 	],
 	imports: [
@@ -112,9 +108,7 @@ import { Environment } from "../environment/environment";
 		ParticipantsListPage,
 		NotificationsListPage,
 		RequestsListPage,
-		WaitlistPage,
-		IntroPage,
-		CreateProfilePage
+		WaitlistPage
 	],
 	providers: [
 		UserService,

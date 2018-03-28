@@ -5,35 +5,36 @@
   Ionic pages and navigation.
 -->
 <ion-content>
-  <back-button></back-button>
-  <span class="pageHeader">Purchase VIP</span>
-    <div class="header-img light-text lower">
-      <h2 class="vip-explainer" text-center>Skip the waitlist <br> get placed into a room 10x faster</h2>
-    </div>
-      <ion-grid class="action-btn light-text" color="gray">
-        <ion-row>
-          <ion-col text-center>
-            <div class="plan" (click)="select('yearly')" [class.active]="selected == 'yearly'">
-              <h1>12</h1>
-              <h3>months</h3>
-              <h3>$4.58/mo</h3>
-            </div>
-          </ion-col>
-          <ion-col text-center>
-            <div class="plan" (click)="select('half-year')" [class.active]="selected == 'half-year'">
-              <h1>6</h1>
-              <h3>months</h3>
-              <h3>$5.83/mo</h3>
-            </div>
-          </ion-col>
-          <ion-col text-center>
-            <div class="plan" (click)="select('monthly')" [class.active]="selected == 'monthly'">
-              <h1>12</h1>
-              <h3>months</h3>
-              <h3>$9.99/mo</h3>
-            </div>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-      <button ion-button block color="favorite" (click)="buyVIP()">Purchase VIP</button>
-  </ion-content>
+	<back-button></back-button>
+	<span class="pageHeader">Purchase VIP</span>
+	<div class="header-img light-text lower">
+		<h2 text-center>Skip the waitlist
+			<br> get placed into a room 10x faster</h2>
+	</div>
+	<ion-grid class="action-btn light-text" color="gray">
+		<ion-row>
+			<ion-col text-center>
+				<div class="plan" (click)="select('yearly')" [class.active]="selected == 'yearly'">
+					<h1>12</h1>
+					<h3>months</h3>
+					<h3>$4.58/mo</h3>
+				</div>
+			</ion-col>
+			<ion-col text-center>
+				<div class="plan" (click)="select('half-year')" [class.active]="selected == 'half-year'">
+					<h1>6</h1>
+					<h3>months</h3>
+					<h3>$5.83/mo</h3>
+				</div>
+			</ion-col>
+			<ion-col text-center>
+				<div class="plan" (click)="select('monthly')" [class.active]="selected == 'monthly'">
+					<h1>12</h1>
+					<h3>months</h3>
+					<h3>$9.99/mo</h3>
+				</div>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+	<button ion-button block color="favorite" (click)="buyVIP()">Purchase VIP</button>
+</ion-content>

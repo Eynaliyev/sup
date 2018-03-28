@@ -5,9 +5,7 @@ import {
 	App,
 	NavParams
 } from "ionic-angular";
-import { FilterPage } from "../pages";
-import { VIPPage } from "../pages";
-import { ChatroomPage } from "../pages";
+import { FilterPage, VIPPage, ChatroomPage } from "../pages";
 import {
 	ChatroomService,
 	UserService,
@@ -42,7 +40,7 @@ export class WaitlistPage {
 		this.authSrv.getUserData().then(user => {
 			this.chatroomSrvc
 				.joinChatroom(location, languages, user.gender)
-				.subscribe(chatroom => {
+				.then(chatroom => {
 					this.goToChatroom(chatroom.id);
 				});
 		});
@@ -55,7 +53,7 @@ export class WaitlistPage {
 		this.app.getRootNav().push(FilterPage);
 	}
 	goToChatroom(chatroomId: string) {
-		this.navCtrl.setRoot(ChatroomPage, { room: `${chatroomId}` });
+		this.navCtrl.push(ChatroomPage, { room: `${chatroomId}` });
 	}
 	back() {
 		this.navCtrl.pop();

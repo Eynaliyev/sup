@@ -9,6 +9,7 @@ import {
 	VIPPage,
 	ContactsListPage,
 	MyProfilePage,
+	TabsPage,
 	IntroPage
 } from "../pages/pages";
 //import { SettingsPage } from '../pages/pages';
@@ -26,14 +27,9 @@ import { User } from "../models/models";
 })
 export class MyApp {
 	@ViewChild(Nav) navCtrl: Nav;
-	private rootPage: any = LoginPage;
+	private rootPage: any;
 	pages: Array<{ title: string; component: any; icon: string }>;
-	private activePage: any;
 	public currentUser: User;
-
-	myProfile = {
-		component: MyProfilePage
-	};
 
 	constructor(
 		private platform: Platform,
@@ -48,27 +44,6 @@ export class MyApp {
 		private userSrvc: UserService
 	) {
 		this.initializeApp();
-		this.pages = [
-			{
-				title: "Meet people Nearby",
-				component: MeetSomebodyPage,
-				icon: "ios-locate-outline"
-			},
-			{
-				title: "Contacts",
-				component: ContactsListPage,
-				icon: "ios-chatboxes-outline"
-			},
-			//{ title: 'Notifications', component: NotificationsListPage, icon: 'ios-notifications-outline' },
-			{
-				title: "Edit Profile",
-				component: MyProfilePage,
-				icon: "ios-contacts-outline"
-			}
-			/*
-      { title: 'Settings', component: SettingsPage, icon: 'ios-settings-outline' }
-      */
-		];
 	}
 	initializeApp() {
 		this.platform
@@ -76,9 +51,9 @@ export class MyApp {
 			.then(() => {
 				// Okay, so the platform is ready and our plugins are available.
 				// Here you can do any higher level native things you might need.
-				this.loadPage();
+				this.rootPage = "LoaderPage";
 			})
-			.catch(() => this.loadPage());
+			.catch(() => (this.rootPage = "LoaderPage"));
 	}
 	ngOnInit() {
 		/*
@@ -100,55 +75,9 @@ export class MyApp {
 			}
 		);*/
 	}
-	loadPage() {
-		// Show the splashScreen while the page to show to the user is still loading.
-		//this.splashScreen.show();
-		this.storage
-			.get("introShown")
-			.then((introShown: boolean) => {
-				// Check if user is loading the app for the very first time and show the IntroPage.
-				if (introShown) {
-					// Check if user is authenticated on Firebase or not.
-					this.authSrvc
-						.getUser()
-						.then((user: firebase.User) => {
-							if (!user) {
-								// User is not authenticated, proceed to LoginPage.
-								this.navCtrl.setRoot(LoginPage);
-								//this.splashScreen.hide();
-							} else {
-								// Check if userData is already created on Firestore.
-								this.firestore
-									.exists("users/" + user.uid)
-									.then(exists => {
-										// No data yet, proceed to CreateProfilePage.
-										if (!exists) {
-											this.navCtrl.setRoot(LoginPage);
-											//this.splashScreen.hide();
-										} else {
-											// Data exists, proceed to TabsPage.
-											this.navCtrl.setRoot(MeetSomebodyPage);
-											//this.splashScreen.hide();
-										}
-									})
-									.catch(err => console.log(err));
-							}
-						})
-						.catch(err => console.log(err));
-				} else {
-					// User is loading the app for the very first time, show IntroPage.
-					this.navCtrl.setRoot("IntroPage");
-					//this.splashScreen.hide();
-					this.storage.set("introShown", true);
-				}
-			})
-			.catch(err => console.log(err));
-	}
+	loadPage() {}
 
 	openPage(page) {
-		// close the menu when clicking a link from the menu
-		this.menu.close();
-		this.activePage = page;
 		// navigate to the new page if it is not the current page
 		this.navCtrl.setRoot(page.component);
 	}
@@ -161,8 +90,5 @@ export class MyApp {
 			.logout()
 			.then(res => this.navCtrl.setRoot(LoginPage))
 			.catch(err => console.log(err));
-	}
-	checkActive(page) {
-		return page == this.activePage;
 	}
 }

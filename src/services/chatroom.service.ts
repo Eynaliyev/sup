@@ -40,7 +40,10 @@ export class ChatroomService {
 		}
 		// TO DO:
 		// 1. [ ] get all rooms
-		return this.afs.collection(`chatrooms`).valueChanges();
+		return this.afs
+			.collection(`chatrooms`)
+			.valueChanges()
+			.take(1);
 		// .filter(room => room[otherGender].length < 2)
 		// .filter(relevantRooms => releaseEvents.language === language);
 		// 2. [ ] filter out rooms with less than 3 participants of opposite gender
@@ -55,6 +58,7 @@ export class ChatroomService {
 		return this.db
 			.object(`chatrooms/${id}`)
 			.valueChanges()
+			.take(1)
 			.map(chatroom => this.toChatroom(chatroom));
 	}
 	toChatroom(obj: any): Chatroom {

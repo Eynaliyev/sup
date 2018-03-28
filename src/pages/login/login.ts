@@ -1,4 +1,5 @@
-import { WaitlistPage, MeetSomebodyPage, PrelaunchPage } from "../pages";
+import { TabsPage } from "./../tabs/tabs";
+import { WaitlistPage, PrelaunchPage } from "../pages";
 import {
 	UserService,
 	AuthService,
@@ -22,8 +23,8 @@ export class LoginPage {
 	ionViewDidLoad() {
 		console.log("ionViewDidLoad LoginPage");
 	}
-	goToMeetSomebody() {
-		this.navCtrl.setRoot(MeetSomebodyPage);
+	goHome() {
+		this.navCtrl.setRoot(TabsPage);
 	}
 	goToPrelaunchPage() {
 		this.navCtrl.setRoot(PrelaunchPage);
@@ -37,7 +38,7 @@ export class LoginPage {
 					//should be after the user has been set
 					this.userSrvc
 						.setCurrentUser(authData["user"]["providerData"][0])
-						.then(() => env.goToMeetSomebody());
+						.then(() => env.goHome());
 				});
 			},
 			error =>

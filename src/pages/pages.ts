@@ -14,3 +14,4 @@ export * from "./participants-list/participants-list";
 export * from "./notifications-list/notifications-list";
 export * from "./requests-list/requests-list";
 export * from "./intro/intro";
+export * from "./tabs/tabs";

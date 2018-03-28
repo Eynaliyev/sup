@@ -1,21 +1,21 @@
+import { MeetSomebodyPage, ContactsListPage, MyProfilePage } from "./../pages";
 import { Component, ViewChild } from "@angular/core";
-import { IonicPage, NavController, NavParams, Tabs, App } from "ionic-angular";
+import { NavController, NavParams, Tabs, App } from "ionic-angular";
 import { FirestoreService, AuthService } from "../../services/services";
 //import { TranslateProvider, NotificationProvider } from '../../services/services';
 import { User, Conversation, Chatroom } from "../../models/models";
 import { Subscription } from "rxjs/Subscription";
 
-@IonicPage()
 @Component({
 	selector: "page-tabs",
 	templateUrl: "tabs.html"
 })
 export class TabsPage {
 	@ViewChild("tabs") tabs: Tabs;
-	tab1Root: string = "ChatsPage";
-	tab2Root: string = "GroupsPage";
-	tab3Root: string = "ContactsPage";
-	tab4Root: string = "UpdateProfilePage";
+	tab1Root = MeetSomebodyPage;
+	tab2Root = ContactsListPage;
+	//tab3Root:  = GroupsPage;
+	tab4Root = MyProfilePage;
 
 	private user: User;
 	private subscriptions: Subscription[];
@@ -34,6 +34,7 @@ export class TabsPage {
 	) {}
 
 	ionViewDidLoad() {
+		console.log("Tabs page loaded");
 		this.subscriptions = [];
 		this.userConversations = new Map<string, any>();
 		this.userGroups = new Map<string, any>();
@@ -64,7 +65,7 @@ export class TabsPage {
 							});
 					})
 					.catch(() => {});
-
+				/*
 				//Subscribe to userConversations on Firestore and sync.
 				let conversationSubscription = this.firestore
 					.getUserConversations(currentUserId)
@@ -136,7 +137,7 @@ export class TabsPage {
 							});
 						}
 					});
-				this.subscriptions.push(groupSubscription);
+				this.subscriptions.push(groupSubscription);*/
 			});
 	}
 
@@ -150,7 +151,7 @@ export class TabsPage {
 			this.groups = null;
 		}
 	}
-
+	/*
 	// Add or update the conversation object.
 	private addOrUpdateConversation(conversation: Conversation): void {
 		if (this.conversations) {
@@ -257,5 +258,5 @@ export class TabsPage {
 			}
 		}
 		return null;
-	}
+	}*/
 }

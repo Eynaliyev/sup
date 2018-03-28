@@ -1,3 +1,4 @@
+<!--
 <ion-menu [content]="mainContent">
 
 
@@ -13,10 +14,10 @@
 				<ion-icon name="{{p.icon}}" item-left></ion-icon>
 				{{p.title}}
 			</button>
-		</ion-list>
-		<!--<span style="padding: 20px;color: #7a7a7a;">Featured Members</span>-->
-		<ion-grid style="padding:0px">
-			<!--
+		</ion-list>-->
+<!--<span style="padding: 20px;color: #7a7a7a;">Featured Members</span>-->
+<ion-grid style="padding:0px">
+	<!--
 			<ion-row style="padding: 3px;" *ngIf="currentUser">
 				<ion-col col-4 *ngFor=" let currentUser of featuredUsers " class="participant-col">
 					<ion-card class="menu-avatar">
@@ -25,7 +26,7 @@
 					<span>{{currentUser.firstName}}</span>
 				</ion-col>
 			</ion-row>-->
-			<ion-row style="text-align: center;">
+	<!--<ion-row style="text-align: center;">
 				<span class="promo-text">Get matched 2x faster</span>
 			</ion-row>
 			<ion-row style="padding: 20px;">
@@ -38,6 +39,6 @@
 			</ion-row>
 		</ion-grid>
 	</ion-content>
-</ion-menu>
+</ion-menu>-->
 
-<ion-nav #mainContent [root]="rootPage"></ion-nav>
+	<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

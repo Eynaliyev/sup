@@ -23,7 +23,7 @@ export class MyProfilePage {
 		private userSrvc: UserService,
 		private authSrvc: AuthService
 	) {
-		this.userSrvc.getCurrentUser().subscribe(user => {
+		this.authSrvc.getUserData().then(user => {
 			console.log("current user in myProfilePage: ", user);
 			this.currentUser = user;
 			this.photos = user.photos;

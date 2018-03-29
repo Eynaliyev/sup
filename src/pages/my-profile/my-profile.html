@@ -4,20 +4,20 @@
 
 	<!--image slide-->
 	<!--
-  <div class="rlt tall-spacer" *ngIf="currentTab == 'photos' && currentUser">
-		<ion-slides pager>
-				<ion-slide *ngFor="let img of currentUser.photos">
-					<img [src]="img.imgUrl" alt="">
-				</ion-slide>
-		</ion-slides>
-  </div>-->
+		<div class="rlt tall-spacer" *ngIf="currentTab == 'photos' && currentUser">
+			<ion-slides pager>
+					<ion-slide *ngFor="let img of currentUser.photos">
+						<img [src]="img.imgUrl" alt="">
+					</ion-slide>
+			</ion-slides>
+		</div>-->
 	<div *ngIf="currentTab == 'about' && currentUser" class="venti-spacer">
 		<!--
-		<ion-slides pager>
-			<ion-slide *ngFor="let img of photos">
-				<img [src]="img.imgUrl" alt="">
-			</ion-slide>
-		</ion-slides>-->
+			<ion-slides pager>
+				<ion-slide *ngFor="let img of photos">
+					<img [src]="img.imgUrl" alt="">
+				</ion-slide>
+			</ion-slides>-->
 		<ion-card>
 			<img [src]="currentUser.profilePhoto.imgUrl" />
 			<div class="card-title">{{currentUser.firstName}} {{currentUser.lastName}}</div>
@@ -40,17 +40,17 @@
 				</div>
 			</ion-item>
 			<!--<ion-item>
-				<ion-label *ngIf="!currentUser.languages">Languages I speak:</ion-label>
-				<ion-label *ngIf="currentUser.languages" class="alert">Change Languages:</ion-label>
-					<ion-select [(ngModel)]="currentUser.languages" multiple="true">
-					<ion-option value="English">English</ion-option>
-					<ion-option value="Spanish">Spanish</ion-option>
-					<ion-option value="German">German</ion-option>
-					<ion-option value="French">French</ion-option>
-					<ion-option value="Italian">Italian</ion-option>
-					<ion-option value="Mandarin">Mandarin</ion-option>
-				</ion-select>
-			</ion-item>-->
+					<ion-label *ngIf="!currentUser.languages">Languages I speak:</ion-label>
+					<ion-label *ngIf="currentUser.languages" class="alert">Change Languages:</ion-label>
+						<ion-select [(ngModel)]="currentUser.languages" multiple="true">
+						<ion-option value="English">English</ion-option>
+						<ion-option value="Spanish">Spanish</ion-option>
+						<ion-option value="German">German</ion-option>
+						<ion-option value="French">French</ion-option>
+						<ion-option value="Italian">Italian</ion-option>
+						<ion-option value="Mandarin">Mandarin</ion-option>
+					</ion-select>
+				</ion-item>-->
 			<ion-item color="none" id="myProfile-list-item43">
 				<ion-icon name="pin" item-left></ion-icon>
 				{{currentUser.currentLocation}}
@@ -70,12 +70,12 @@
 	</div>
 </ion-content>
 <!--<ion-footer>
-	<ion-segment [(ngModel)]="currentTab" (ionChange)="changeTab(currentTab)" color='dark'>
-		<ion-segment-button id="photos-button" value="photos">
-      <ion-icon name="ios-camera-outline" item-left></ion-icon>
-    </ion-segment-button>
-		<ion-segment-button id="about-button" value="about">
-			<ion-icon name="ios-person" item-left></ion-icon>
-		</ion-segment-button>
-	</ion-segment>
-</ion-footer>-->
+		<ion-segment [(ngModel)]="currentTab" (ionChange)="changeTab(currentTab)" color='dark'>
+			<ion-segment-button id="photos-button" value="photos">
+				<ion-icon name="ios-camera-outline" item-left></ion-icon>
+			</ion-segment-button>
+			<ion-segment-button id="about-button" value="about">
+				<ion-icon name="ios-person" item-left></ion-icon>
+			</ion-segment-button>
+		</ion-segment>
+	</ion-footer>-->

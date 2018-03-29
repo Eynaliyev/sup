@@ -1,3 +1,4 @@
+import { AuthService } from "./../../services/auth.service";
 import { Component } from "@angular/core";
 import { NavController, NavParams } from "ionic-angular";
 import { UserService } from "../../services/services";
@@ -41,13 +42,14 @@ export class UserProfilePage {
 		private navParams: NavParams,
 		private userSrvc: UserService,
 		private utilSrvc: UtilService,
+		public authSrvc: AuthService,
 		public alertCtrl: AlertController
 	) {
 		this.animateClass = { "zoom-in": true };
 	}
 	ionViewDidLoad() {
 		console.log(this.navParams.data);
-		this.userSrvc.getCurrentUser().subscribe(curUsr => {
+		this.authSrvc.getUserData().then(curUsr => {
 			let id = this.navParams.get("user");
 			this.currentUser = curUsr;
 			console.log("currentUser in userProfile: ", this.currentUser);

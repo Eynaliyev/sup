@@ -34,8 +34,9 @@
 		"@firebase/webchannel-wrapper": "^0.2.3",
 		"@ionic-native/battery-status": "^4.5.3",
 		"@ionic-native/core": "^4.5.3",
+		"@ionic-native/device": "^4.6.0",
 		"@ionic-native/facebook": "^4.3.2",
-		"@ionic-native/file": "^4.5.3",
+		"@ionic-native/file": "^4.6.0",
 		"@ionic-native/geolocation": "^4.3.1",
 		"@ionic-native/google-analytics": "^4.5.3",
 		"@ionic-native/native-storage": "^4.5.3",
@@ -121,6 +122,8 @@
 			"cordova-plugin-google-analytics": {},
 			"cordova-plugin-battery-status": {}
 		},
-		"platforms": ["ios"]
+		"platforms": [
+			"ios"
+		]
 	}
 }

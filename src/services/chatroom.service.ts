@@ -81,7 +81,7 @@ export class ChatroomService {
 						console.log("available chatrooms: ", chatrooms);
 						resolve(chatrooms[0]);
 					} else {
-						this.createChatroom(location, language).then(() => {
+						this.createChatroom(location, language, gender).then(() => {
 							console.log("createChatroom completed");
 							this.getAvailableChatrooms(location, language, gender).subscribe(
 								chatrooms => {
@@ -98,9 +98,8 @@ export class ChatroomService {
 			);
 		}).catch(() => {});
 	}
-	createChatroom(location, language: Language) {
+	createChatroom(location, language: Language, gender: string) {
 		console.log("createChatroom called ");
-		let gender = JSON.parse(localStorage.getItem("currentUser")).gender;
 		let thisGender;
 		if (gender === "female") {
 			thisGender = "femaleParticipants";

@@ -1,52 +1,52 @@
 <!--
   Generated template for the VIP page.
-
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
 <ion-content no-bounce padding id="page3">
-  <back-button></back-button>
-  <span class="pageHeader">VIP</span>
-  <div style="margin-top: 80px;">
-    <p class="grande light-text" text-center>Skip the line!</p>
-    <p class="tall light-text" text-center>three ways to skip the line</p>
-    <p class="short light-text" text-center>2. watch an add and skip ahead 1 time</p>
-      <button ion-button block margin-bottom color="royal" class="watch-ad" (click)="watchAd()">Watch Ad</button>
-    <p class="short light-text" text-center>2. invite a friend - and you both become VIP for a week for FREE</p>
-      <button ion-button block margin-bottom (click)="invite()">Invite a friend</button>
-    <p class="short light-text" text-center>3. - purchase VIP - starting from $0.99 a month</p>
-    <button ion-button block color="favorite" (click)="viewPurchasePage()">Purchase VIP</button>
+	<back-button></back-button>
+	<span class="pageHeader">VIP</span>
+	<div style="margin-top: 80px;">
+		<p class="grande" text-center>Skip the line!</p>
+		<p class="tall light-text" text-center>three ways to skip the line</p>
+		<p class="short light-text" text-center>2. watch an add and skip ahead 1 time</p>
+		<button ion-button block margin-bottom color="royal" class="watch-ad" (click)="watchAd()">Watch Ad</button>
+		<p class="short light-text" text-center>2. invite a friend - and you both become VIP for a week for FREE</p>
+		<button ion-button block margin-bottom (click)="invite()">Invite a friend</button>
+		<p class="short light-text" text-center>3. - purchase VIP - starting from $0.99 a month</p>
+		<button ion-button block color="favorite" (click)="viewPurchasePage()">Purchase VIP</button>
 
-    <div *ngIf="purchaseSelected">
-      <div class="header-img">
-        <p class="grande light-text" class="vip-explainer">Skip the waitlist <br> get placed into a room 10x faster</p>
-      </div>
-        <ion-grid class="action-btn">
-          <ion-row>
-            <ion-col text-center>
-              <div class="plan" (click)="select('yearly')" [class.active]="selected == 'yearly'">
-                <h1>12</h1>
-                <p class="tall light-text">months</p>
-                <p class="tall light-text">$4.58/mo</p>
-              </div>
-            </ion-col>
-            <ion-col text-center>
-              <div class="plan" (click)="select('half-year')" [class.active]="selected == 'half-year'">
-                <h1>6</h1>
-                <p class="tall light-text">months</p>
-                <p class="tall light-text">$5.83/mo</p>
-              </div>
-            </ion-col>
-            <ion-col text-center>
-              <div class="plan" (click)="select('monthly')" [class.active]="selected == 'monthly'">
-                <h1>12</h1>
-                <p class="tall light-text">months</p>
-                <p class="tall light-text">$9.99/mo</p>
-              </div>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-        <button ion-button block color="gold" (click)="buyVIP()">Purchase VIP</button>
-    </div>
-  </div>
+		<div *ngIf="purchaseSelected">
+			<div class="header-img">
+				<p class="grande">Skip the waitlist
+					<br> get placed into a room 10x faster</p>
+			</div>
+			<ion-grid class="action-btn">
+				<ion-row>
+					<ion-col text-center>
+						<div class="plan" (click)="select('yearly')" [class.active]="selected == 'yearly'">
+							<h1>12</h1>
+							<p class="tall light-text">months</p>
+							<p class="tall light-text">$4.58/mo</p>
+						</div>
+					</ion-col>
+					<ion-col text-center>
+						<div class="plan" (click)="select('half-year')" [class.active]="selected == 'half-year'">
+							<h1>6</h1>
+							<p class="tall light-text">months</p>
+							<p class="tall light-text">$5.83/mo</p>
+						</div>
+					</ion-col>
+					<ion-col text-center>
+						<div class="plan" (click)="select('monthly')" [class.active]="selected == 'monthly'">
+							<h1>12</h1>
+							<p class="tall light-text">months</p>
+							<p class="tall light-text">$9.99/mo</p>
+						</div>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+			<button ion-button block color="gold" (click)="buyVIP()">Purchase VIP</button>
+		</div>
+	</div>
 </ion-content>

@@ -61,11 +61,12 @@
 			}
 		}
 		&.right {
-			background-color: color($colors, chat-bubble);
+			background-color: color($colors, universal);
 			float: right;
+			color: white;
 
 			&:before {
-				background-color: color($colors, chat-bubble);
+				background-color: color($colors, universal);
 				right: 10px;
 				-webkit-transform: rotate(118deg) skew(-5deg);
 			}

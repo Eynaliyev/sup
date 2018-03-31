@@ -43,13 +43,11 @@ export class UserService {
 					}
 					this.fetchGraphData().then(parsedData => {
 						let userData = this.toUser(parsedData);
-						if (userData != this.lastUserInfo) {
+						if (JSON.stringify(userData) !== JSON.stringify(this.lastUserInfo)) {
 							this.currentUser.next(userData);
 							localStorage.setItem("currentUser", JSON.stringify(userData));
 							this.lastUserInfo = userData;
 						}
-						this.currentUser.next(userData);
-						localStorage.setItem("currentUser", JSON.stringify(userData));
 						this.updateUser(uid, parsedData)
 							.then(() => resolve(true))
 							.catch(error => this.handleError(error));
@@ -58,8 +56,9 @@ export class UserService {
 					//graph request, create new user with the return
 					this.fetchGraphData().then(parsedData => {
 						let userData = this.toUser(parsedData);
-						if (userData != this.lastUserInfo) {
+						if (JSON.stringify(userData) !== JSON.stringify(this.lastUserInfo)) {
 							this.currentUser.next(userData);
+							localStorage.setItem("currentUser", JSON.stringify(userData));
 							this.lastUserInfo = userData;
 						}
 						this.createUser(parsedData)

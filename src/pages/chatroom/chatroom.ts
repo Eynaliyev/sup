@@ -52,6 +52,7 @@ export class ChatroomPage {
 		console.log("Chatroom page loaded with id:", this.chatroomId);
 		this.userService
 			.getCurrentUser()
+			.take(2)
 			.switchMap(user => {
 				this.currentUser = user;
 				this.newMessage.senderId = this.currentUser.id;

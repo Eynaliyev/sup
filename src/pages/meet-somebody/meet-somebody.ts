@@ -26,7 +26,7 @@ export class MeetSomebodyPage {
 		public geolocation: Geolocation,
     public app: App) {
       this.languages = LANGUAGES;
-			this.userSrvc.getCurrentUser().subscribe(user => this.currentUser = user);
+			this.userSrvc.getCurrentUser().take(2).subscribe(user => this.currentUser = user);
 			this.geolocation.getCurrentPosition().then(location => {
 				this.currentLocation = location;
 				console.log("user's locations: ", location);

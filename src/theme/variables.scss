@@ -41,7 +41,8 @@ $colors: (
 	white: #ffffff,
 	chat-bg: #edecec,
 	bee-gold: #ffcf00,
-	chat-bubble: #c4ebf7
+	chat-bubble: #c4ebf7,
+	universal: #ffa731
 );
 
 // App iOS Variables
@@ -79,6 +80,9 @@ $colors: (
 @import "noto-sans";
 ion-fab {
 	top: 21px !important;
+}
+.universal-btn {
+	color: white;
 }
 .user-photo-bckg {
 	background-size: cover;

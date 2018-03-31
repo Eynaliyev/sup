@@ -85,9 +85,10 @@ export class ChatroomPage {
 				}
 			);
 	}
+	/*
 	ionViewCanEnter() {
 		return this.authSrvc.isLoggedIn();
-	}
+	}*/
 	ionViewDidLoad() {}
 	ngAfterViewInit() {
 		return new Promise(resolve => {

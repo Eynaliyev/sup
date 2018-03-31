@@ -37,8 +37,8 @@ export class WaitlistPage {
 		// join a chatroom
 		this.userSrvc.getCurrentUser().subscribe(user => {
 			this.chatroomSrvc
-				.joinChatroom(location, languages, user.gender)
-				.then(chatroom => {
+				.joinChatroom(location, languages)
+				.subscribe(chatroom => {
 					let view = this.navCtrl.getActive();
 					if (view.component.name === "WaitlistPage") {
 						this.goToChatroom(chatroom.id);

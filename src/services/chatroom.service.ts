@@ -3,7 +3,6 @@ import { Injectable } from "@angular/core";
 import { AngularFireDatabase } from "angularfire2/database";
 import {
 	AngularFirestore,
-	AngularFirestoreDocument,
 	AngularFirestoreCollection
 } from "angularfire2/firestore";
 import { Observable } from "rxjs/Observable";
@@ -25,12 +24,9 @@ export class ChatroomService {
 		private afs: AngularFirestore,
 		private utilService: UtilService
 	) {}
-	getAvailableChatrooms(
-		location,
-		language: Language,
-		gender: string
-	): Observable<any[]> {
+	getAvailableChatrooms(location, language: Language): Observable<any[]> {
 		console.log("getAvailableChatrooms called");
+		let gender = JSON.parse(localStorage.getItem("currentUser")).gender;
 		let otherGender;
 		if (gender === "male") {
 			otherGender = "femaleParticipants";
@@ -39,10 +35,7 @@ export class ChatroomService {
 		}
 		// TO DO:
 		// 1. [ ] get all rooms
-		return this.afs
-			.collection(`chatrooms`)
-			.valueChanges()
-			.take(1);
+		return this.db.list(`chatrooms`).valueChanges();
 		// .filter(room => room[otherGender].length < 2)
 		// .filter(relevantRooms => releaseEvents.language === language);
 		// 2. [ ] filter out rooms with less than 3 participants of opposite gender
@@ -57,13 +50,12 @@ export class ChatroomService {
 		return this.db
 			.object(`chatrooms/${id}`)
 			.valueChanges()
-			.take(1)
 			.map(chatroom => this.toChatroom(chatroom));
 	}
 	toChatroom(obj: any): Chatroom {
 		return obj;
 	}
-	joinChatroom(location, language: Language, gender: string): Promise<any> {
+	joinChatroom(location, language: Language): Observable<any> {
 		console.log("joinChatroom called");
 		// perhaps should be a cloud function?
 		// find available rooms
@@ -74,19 +66,19 @@ export class ChatroomService {
 		// get chatroom details by the id?
 		// get messages for the room - first 15 for example
 		// return the chatroom details
-		return new Promise(resolve => {
-			this.getAvailableChatrooms(location, language, gender).subscribe(
+		return new Observable(observer => {
+			this.getAvailableChatrooms(location, language).subscribe(
 				chatrooms => {
 					if (chatrooms && chatrooms.length !== 0) {
 						console.log("available chatrooms: ", chatrooms);
-						resolve(chatrooms[0]);
+						observer.next(chatrooms[0]);
 					} else {
-						this.createChatroom(location, language, gender).then(() => {
+						this.createChatroom(location, language).then(() => {
 							console.log("createChatroom completed");
-							this.getAvailableChatrooms(location, language, gender).subscribe(
+							this.getAvailableChatrooms(location, language).subscribe(
 								chatrooms => {
 									console.log("available chatrooms: ", chatrooms);
-									resolve(chatrooms[0]);
+									observer.next(chatrooms[0]);
 								}
 							);
 						});
@@ -96,10 +88,11 @@ export class ChatroomService {
 					console.error(err);
 				}
 			);
-		}).catch(() => {});
+		});
 	}
-	createChatroom(location, language: Language, gender: string) {
+	createChatroom(location, language: Language) {
 		console.log("createChatroom called ");
+		let gender = JSON.parse(localStorage.getItem("currentUser")).gender;
 		let thisGender;
 		if (gender === "female") {
 			thisGender = "femaleParticipants";

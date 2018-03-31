@@ -1,30 +1,32 @@
-<ion-slides pager="true">
-
-	<ion-slide>
-		<div class="intro-img-screenshot">
-			<img src="assets/images/app-screenshots/0-badass.png" />
-		</div>
-	</ion-slide>
-	<ion-slide>
-		<div class="intro-img-screenshot">
-			<img src="assets/images/app-screenshots/0-meet-bckg.jpg" />
-		</div>
-	</ion-slide>
-
-	<ion-slide>
-		<div id="intro-logo">
-			<img src="assets/images/logo/logo.png" />
-		</div>
-		<h3 text-center id="login-heading1" class="light-text grande">
-			adventure begins...
-		</h3>
-		<button id="login-button1" ion-button (click)="facebookLogin()" block>
-			Log in with facebook
-		</button>
-		<!--
+<ion-content class="no-scroll">
+	<ion-slides pager="true" id="slides">
+		<ion-slide>
+			<div class="intro-img-screenshot">
+				<img src="assets/images/app-screenshots/0-badass.png" />
+			</div>
+		</ion-slide>
+		<ion-slide>
+			<div class="intro-img-screenshot">
+				<img src="assets/images/app-screenshots/0-meet-bckg.jpg" />
+			</div>
+		</ion-slide>
+		<ion-slide>
+			<div id="intro-logo">
+				<img src="assets/images/logo/logo.png" />
+			</div>
+			<h3 text-center id="login-heading1" class="light-text grande">
+				adventure begins...
+			</h3>
+			<!--
           <button id="login-button2" ion-button clear color="royal" block href-inappbrowser="/signup">
             Or create an account
           </button>
         -->
-	</ion-slide>
-</ion-slides>
+		</ion-slide>
+	</ion-slides>
+	<div class="buttons" text-center>
+		<button ion-button color="primary" (click)="facebookLogin()">
+			<b>Login with Facebook</b>
+		</button>
+	</div>
+</ion-content>

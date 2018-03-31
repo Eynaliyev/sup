@@ -30,10 +30,10 @@ export class MyProfilePage {
 			this.backGround = user.photos[0].imgUrl;
 			this.image = user.photos[0].imgUrl;
 		});
-	}
+	} /*
 	ionViewCanEnter() {
 		return this.authSrvc.isLoggedIn();
-	}
+	}*/
 	ionViewDidLoad() {
 		console.log("ionViewDidLoad MyProfilePage");
 	}

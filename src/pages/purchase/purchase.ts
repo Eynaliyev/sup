@@ -21,10 +21,11 @@ export class PurchasePage {
 		private navParams: NavParams,
 		private authSrvc: AuthService,
     private vipSrvc: VipService
-	) { }
+  ) { }
+  /*
 	ionViewCanEnter() {
 		return this.authSrvc.isLoggedIn();
-	}
+	}*/
   select(btn){
   	this.selected = btn;
     console.log(btn);

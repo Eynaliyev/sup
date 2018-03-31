@@ -20,10 +20,10 @@ export class NotificationsListPage {
 	) {
 		console.log("NotificationsListPage initialized");
 		this.animateClass = { "zoom-in": true };
-	}
+	} /*
 	ionViewCanEnter() {
 		return this.authSrvc.isLoggedIn();
-	}
+	}*/
 	ionViewWillEnter() {}
 	ngAfterViewInit() {
 		return new Promise(resolve => {

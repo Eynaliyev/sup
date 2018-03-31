@@ -1,12 +1,12 @@
 <menu-button></menu-button>
 <ion-content>
 	<ion-fab top center>
-		<button ion-fab (click)="openParticipantsList()" color="dark" class="menu-btn-border">
+		<button ion-fab (click)="openParticipantsList()" color="primary" class="menu-btn-border">
 			<ion-icon name="people"></ion-icon>
 		</button>
 	</ion-fab>
 	<ion-fab right top>
-		<button ion-fab (click)="exit()" color="dark" class="menu-btn-border">
+		<button ion-fab (click)="exit()" color="primary" class="menu-btn-border">
 			<ion-icon name="exit"></ion-icon>
 		</button>
 	</ion-fab>
@@ -24,7 +24,7 @@
 	<ion-toolbar class="no-border" color="white">
 		<ion-buttons start>
 			<button ion-button>
-				<ion-icon name="camera" color="dark"></ion-icon>
+				<ion-icon name="camera" color="primary"></ion-icon>
 			</button>
 		</ion-buttons>
 		<ion-input [(ngModel)]="newMessage.content" placeholder="Write your message"></ion-input>

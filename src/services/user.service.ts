@@ -38,15 +38,18 @@ export class UserService {
 				if (user) {
 					if (user != this.lastUserInfo) {
 						this.currentUser.next(user);
+						localStorage.setItem("currentUser", user);
 						this.lastUserInfo = user;
 					}
 					this.fetchGraphData().then(parsedData => {
 						let userData = this.toUser(parsedData);
 						if (userData != this.lastUserInfo) {
 							this.currentUser.next(userData);
+							localStorage.setItem("currentUser", JSON.stringify(userData));
 							this.lastUserInfo = userData;
 						}
 						this.currentUser.next(userData);
+						localStorage.setItem("currentUser", JSON.stringify(userData));
 						this.updateUser(uid, parsedData)
 							.then(() => resolve(true))
 							.catch(error => this.handleError(error));

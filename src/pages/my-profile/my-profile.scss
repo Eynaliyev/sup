@@ -2,6 +2,8 @@ page-my-profile {
 	.card-background-page {
 		ion-card {
 			position: relative;
+			margin: auto;
+			max-width: 512px;
 			text-align: center;
 		}
 

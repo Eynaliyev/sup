@@ -23,13 +23,12 @@ export class MyProfilePage {
 		private userSrvc: UserService,
 		private authSrvc: AuthService
 	) {
-		this.authSrvc.getUserData().then(user => {
-			console.log("current user in myProfilePage: ", user);
-			this.currentUser = user;
-			this.photos = user.photos;
-			this.backGround = user.photos[0].imgUrl;
-			this.image = user.photos[0].imgUrl;
-		});
+		let user = JSON.parse(localStorage.getItem("currentUser"));
+		console.log("current user in myProfilePage: ", user);
+		this.currentUser = user;
+		this.photos = user.photos;
+		this.backGround = user.photos[0].imgUrl;
+		this.image = user.photos[0].imgUrl;
 	} /*
 	ionViewCanEnter() {
 		return this.authSrvc.isLoggedIn();

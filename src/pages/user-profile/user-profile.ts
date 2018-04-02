@@ -49,24 +49,30 @@ export class UserProfilePage {
 	}
 	ionViewDidLoad() {
 		console.log(this.navParams.data);
-		this.authSrvc.getUserData().then(curUsr => {
-			let id = this.navParams.get("user");
-			this.currentUser = curUsr;
-			console.log("currentUser in userProfile: ", this.currentUser);
-			this.userSrvc.getUserById(id).subscribe(userInfo => {
-				console.log("user, id from getUserByID()", userInfo, id);
-				this.user = userInfo;
-				if (this.userSrvc.hasLiked(this.currentUser.id, userInfo.id)) {
-					this.requested = true;
-				} else if (
-					this.currentUser.contacts.forEach(
-						contact => contact.id === this.user.id
-					)
-				) {
-					this.friend = true;
-				}
-			});
-		});
+		this.authSrvc
+			.getUserData()
+			.then(curUsr => {
+				let id = this.navParams.get("user");
+				this.currentUser = curUsr;
+				console.log("currentUser in userProfile: ", this.currentUser);
+				this.userSrvc.getUserById(id).subscribe(
+					userInfo => {
+						console.log("user, id from getUserByID()", userInfo, id);
+						this.user = userInfo;
+						if (this.userSrvc.hasLiked(this.currentUser.id, userInfo.id)) {
+							this.requested = true;
+						} else if (
+							this.currentUser.contacts.forEach(
+								contact => contact.id === this.user.id
+							)
+						) {
+							this.friend = true;
+						}
+					},
+					err => console.log(err)
+				);
+			})
+			.catch(err => console.log(err));
 		console.log("ionViewDidLoad UserProfilePage");
 	}
 	changeImage(image) {

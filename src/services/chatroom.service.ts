@@ -123,12 +123,20 @@ export class ChatroomService {
 		console.log("creating chatroom: ", chatroom, user);
 		return this.db.object(`chatrooms/${randomId}`).set(chatroom);
 	}
-	leaveChatroom(chatroomId: string, userId: string) {
+	leaveChatroom(chatroomId: string, userId: string): Promise<any> {
 		// remove the user from participants list
 		let participant = this.db.object(
 			`chatrooms/${chatroomId}/participants/${userId}`
 		);
-		participant.remove();
+		return new Promise(resolve => {
+			participant
+				.remove()
+				.then(() => {
+					resolve(true);
+				})
+				.catch(err => console.log(err));
+		});
+
 		// publish a 'left the room  type of message' - a cloud function?
 		// remove the chatroom id from local storage
 	}

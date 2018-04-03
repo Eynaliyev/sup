@@ -1,3 +1,4 @@
+import { AuthService } from "./../../services/auth.service";
 import { Component } from "@angular/core";
 import { NavController, NavParams } from "ionic-angular";
 import { UserService } from "../../services/services";
@@ -30,8 +31,6 @@ export class UserProfilePage {
 	tab: string = "vote";
 	backGround: any;
 	animateClass: any;
-	image: any;
-	items: any = [];
 	friend: boolean = false;
 	requested: boolean = false;
 	likeAlertPresented: boolean = false;
@@ -43,43 +42,41 @@ export class UserProfilePage {
 		private navParams: NavParams,
 		private userSrvc: UserService,
 		private utilSrvc: UtilService,
+		public authSrvc: AuthService,
 		public alertCtrl: AlertController
 	) {
-		console.log(this.navParams.data);
-		let id = this.navParams.get("user");
-		this.userSrvc.getCurrentUser().subscribe(user => {
-			this.currentUser = user;
-			console.log("currentUser in userProfile: ", this.currentUser);
-			this.userSrvc.getUserById(id).subscribe(user => {
-				console.log("user, id from getUserByID()", user, id);
-				this.user = user;
-				this.items = user.photos;
-				this.backGround = user.photos[0].imgUrl;
-				this.image = user.photos[0].imgUrl;
-				if (this.userSrvc.hasLiked(this.currentUser.id, user.id)) {
-					this.requested = true;
-				} else if (
-					this.currentUser.contacts.forEach(
-						contact => contact.id === this.user.id
-					)
-				) {
-					this.friend = true;
-				}
-				console.log(
-					"image, background, user in user profile: ",
-					this.image,
-					this.backGround,
-					this.user
-				);
-			});
-		});
 		this.animateClass = { "zoom-in": true };
 	}
 	ionViewDidLoad() {
+		console.log(this.navParams.data);
+		this.authSrvc
+			.getUserData()
+			.then(curUsr => {
+				let id = this.navParams.get("user");
+				this.currentUser = curUsr;
+				console.log("currentUser in userProfile: ", this.currentUser);
+				this.userSrvc.getUserById(id).subscribe(
+					userInfo => {
+						console.log("user, id from getUserByID()", userInfo, id);
+						this.user = userInfo;
+						if (this.userSrvc.hasLiked(this.currentUser.id, userInfo.id)) {
+							this.requested = true;
+						} else if (
+							this.currentUser.contacts.forEach(
+								contact => contact.id === this.user.id
+							)
+						) {
+							this.friend = true;
+						}
+					},
+					err => console.log(err)
+				);
+			})
+			.catch(err => console.log(err));
 		console.log("ionViewDidLoad UserProfilePage");
 	}
 	changeImage(image) {
-		this.image = image;
+		console.log("changeImage called, but needs to be implements");
 	}
 	getHeight(tab) {
 		var height = "";

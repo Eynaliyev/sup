@@ -1,37 +1,94 @@
 page-login {
-    ion-slide {
-				background-color: black;
-				#login-heading {
-					color:#9B9999;text-align:center;
-				}
-				#login-button1 {
-					line-height: 42px;
-					background-color: #4267b2;
-					border-color: #4267b2;
-					margin-left:auto;
-					margin-right:auto;
-					font-size: 14px;
-					width: 252px;
-					font-family: system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
-				}
-				#intro-logo img{
-					height: auto !important;
-					display:block;
-					width:100%;
-					height:auto;
-					margin-left:auto;
-					margin-right:auto;
-				}
-				.intro-img-screenshot{
-					height: auto !important;
-					margin-left:auto;
-					margin-right:auto;
-					display:block;
+	background-image: url("../assets/images/background/light-bckg1.png");
+	background-position: initial initial;
+	background-repeat: initial initial;
+	button.swiper-pagination-bullet {
+		margin-left: 0.8vw !important;
+		margin-right: 0.8vw !important;
+		margin-bottom: 2vh !important;
+		border: solid 1px color($colors, gray) !important;
+		width: 8px !important;
+		height: 8px !important;
+	}
 
-				}
-				img {
-					height: 70vh !important;
-					width: auto !important;
-				}
-      }
+	button.swiper-pagination-bullet-active {
+		background: color($colors, light) !important;
+	}
+	ion-slides {
+		height: 80vh !important;
+		width: 88vw;
+		margin-top: 10px;
+		margin-left: auto;
+		margin-right: auto;
+		ion-slide {
+			#login-heading {
+				color: #9b9999;
+				text-align: center;
+			}
+			#login-button1 {
+				line-height: 42px;
+				background-color: #4267b2;
+				border-color: #4267b2;
+				color: #ffffff;
+				margin-left: auto;
+				margin-right: auto;
+				font-size: 14px;
+				width: 252px;
+				font-family: system-ui, -apple-system, BlinkMacSystemFont,
+					".SFNSText-Regular", sans-serif;
+			}
+			#intro-logo img {
+				height: auto !important;
+				display: block;
+				width: 100%;
+				height: auto;
+				margin-left: auto;
+				margin-right: auto;
+			}
+			.intro-img-screenshot {
+				height: auto !important;
+				margin-left: auto;
+				margin-right: auto;
+				display: block;
+			}
+			h3 {
+				font-size: 3.2rem;
+				letter-spacing: -0.1rem;
+			}
+			p {
+				color: color($colors, gray);
+				margin-left: auto;
+				margin-right: auto;
+				width: 70vw;
+				font-size: 1.2rem;
+			}
+		}
+	}
+	div.filler-left,
+	div.filler-right {
+		width: 2.5vw;
+		height: 72.5vh;
+		background: color($colors, light);
+		position: absolute;
+	}
+
+	div.filler-left {
+		left: 0;
+	}
+
+	div.filler-right {
+		right: 0;
+	}
+
+	div.buttons {
+		margin-top: 2vh;
+		button {
+			color: color($colors, light);
+			font-size: 2.2rem;
+			width: 88vw;
+			height: 6.5vh;
+			border-radius: 0 !important;
+			margin-bottom: 1vh;
+		}
+	}
 }

@@ -51,15 +51,9 @@ import { AuthService } from "../services/services";
 import { NotificationService } from "../services/services";
 import { RequestService } from "../services/services";
 import { AngularFireDatabase } from "angularfire2/database";
-
-export const firebaseConfig = {
-	apiKey: "AIzaSyDI22hmtv2clf3WYdo2y04z_h-eCfbv_F4",
-	authDomain: "huggable-9e981.firebaseapp.com",
-	databaseURL: "https://huggable-9e981.firebaseio.com",
-	projectId: "huggable-9e981",
-	storageBucket: "huggable-9e981.appspot.com",
-	messagingSenderId: "272489685620"
-};
+import { AlertService } from "../services/services";
+import { FirestoreService } from "../services/services";
+import { Environment } from "../environment/environment";
 
 @NgModule({
 	declarations: [
@@ -91,8 +85,8 @@ export const firebaseConfig = {
 		HttpModule,
 		BrowserAnimationsModule,
 		PipeModule.forRoot(),
-		IonicModule.forRoot(MyApp),
-		AngularFireModule.initializeApp(firebaseConfig),
+		IonicModule.forRoot(MyApp, Environment.config),
+		AngularFireModule.initializeApp(Environment.firebase),
 		AngularFireDatabaseModule,
 		AngularFirestoreModule.enablePersistence(),
 		AngularFireAuthModule,
@@ -130,6 +124,8 @@ export const firebaseConfig = {
 		UtilService,
 		RequestService,
 		Geolocation,
+		AlertService,
+		FirestoreService,
 		{ provide: ErrorHandler, useClass: IonicErrorHandler }
 	]
 })

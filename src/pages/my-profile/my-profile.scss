@@ -1,17 +1,41 @@
 page-my-profile {
-	#photos-button {
-		background: #a75ada;
+	.card-background-page {
+		ion-card {
+			position: relative;
+			margin: auto;
+			max-width: 512px;
+			text-align: center;
+		}
+
+		.card-title {
+			position: absolute;
+			top: 36%;
+			font-size: 2em;
+			width: 100%;
+			font-weight: bold;
+			color: #fff;
+		}
+
+		.card-subtitle {
+			font-size: 1em;
+			position: absolute;
+			top: 52%;
+			width: 100%;
+			color: #fff;
+		}
 	}
-	#about-button {
-		background: #8649c8;
+	#photos-btn {
+		background: universal;
+		color: white;
+	}
+	#about-btn {
+		background: universal;
+		color: white;
 	}
 	ion-segment-button {
 		color: white;
 		height: 60px;
 		padding-top: 10px;
-		ion-icon {
-			color: white;
-		}
 	}
 
 	ion-slides {

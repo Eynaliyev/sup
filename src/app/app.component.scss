@@ -13,117 +13,130 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 .scroll-content {
-  background-image: url('../assets/images/background-0.jpg');
-  background-position: initial initial;
-  background-repeat: initial initial;
+	background-image: url("../assets/images/background/bckg.gif");
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+.skip-line {
+	background-color: universal !important;
+	color: white;
 }
 .activeHighlight {
-    border-left: 2px solid #f53d3d;
-    color: #f53d3d;
+	border-left: 2px solid #f53d3d;
+	color: #f53d3d;
 }
 .toolbar-background-md {
-    border-color: #000000;
-    background: rgba(0, 0, 0, 0.5);
+	border-color: #000000;
+	background: rgba(0, 0, 0, 0.5);
 }
 .toolbar-title-md {
-    padding: 0 12px;
-    font-size: 2rem;
-    font-weight: 500;
-    color: #ccc;
+	padding: 0 12px;
+	font-size: 2rem;
+	font-weight: 500;
+	color: #ccc;
 }
 .bar-button-default-md,
 .bar-button-clear-md-default,
 .bar-button-md-default {
-    color: #ccc;
-    background-color: transparent;
+	color: #ccc;
+	background-color: transparent;
 }
 .header-background-image {
-    background-image: url(../assets/images/background/16.jpg);
-    height: 200px;
-    background-size: cover;
-    background-position: center;
-    border-bottom: 1px solid #fff;
+	background-image: url(../assets/images/background/16.jpg);
+	height: 200px;
+	background-size: cover;
+	background-position: center;
+	border-bottom: 1px solid #fff;
 }
 .header-background-image::before {
-    content: "";
-    display: block;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
-    position: absolute;
-    pointer-events: none;
-    mix-blend-mode: multiply;
-    background-color: #2f3974 !important;
+	content: "";
+	display: block;
+	height: 100%;
+	width: 100%;
+	top: 0;
+	left: 0;
+	position: absolute;
+	pointer-events: none;
+	mix-blend-mode: multiply;
+	background-color: #2f3974 !important;
 }
 .zoom-in {
-    -webkit-animation: zoomIn 500ms;
-    -moz-animation: zoomIn 500ms;
-    -o-animation: zoomIn 500ms;
-    animation: zoomIn 500ms;
+	-webkit-animation: zoomIn 500ms;
+	-moz-animation: zoomIn 500ms;
+	-o-animation: zoomIn 500ms;
+	animation: zoomIn 500ms;
 }
 .menu-title {
-    text-align: center;
-    color: #d12829 !important;
-    font-weight: bold;
+	text-align: center;
+	color: #d12829 !important;
+	font-weight: bold;
 }
 
 // Spiner View
 .spinner-view {
-    img {
-        width: 100px;
-        height: 100px;
-        margin: 0 auto;
-    }
+	img {
+		width: 100px;
+		height: 100px;
+		margin: 0 auto;
+	}
 }
 // Settings Style Main Meni
 .header-background-image {
-    background-image: url('../assets/images/background/16.jpg');
-    height: 200px;
-    background-size: cover;
-    background-position: center;
-    ion-thumbnail {
-        padding-top: 40px;
-        img {
-            margin: 0 auto;
-            position: relative;
-            z-index: 9;
-            max-width: 80px;
-        }
-    }
-    [item-title] {
-        position: relative;
-        z-index: 9;
-    }
+	background-image: url("../assets/images/background/16.jpg");
+	height: 200px;
+	background-size: cover;
+	background-position: center;
+	ion-thumbnail {
+		padding-top: 40px;
+		img {
+			margin: 0 auto;
+			position: relative;
+			z-index: 9;
+			max-width: 80px;
+		}
+	}
+	[item-title] {
+		position: relative;
+		z-index: 9;
+	}
 }
 // Settings Main  Menu
 .main-menu {
-    h2 {
-        color: theme-colors('textColors', 'primary');
-        font-weight: 300 !important;
-    }
-    ion-icon {
-        color: theme-colors('textColors', 'primary');
-        float: left;
-        padding-left: 30px;
-        margin-right: 10px;
-    }
+	h2 {
+		color: theme-colors("textColors", "primary");
+		font-weight: 300 !important;
+	}
+	ion-icon {
+		color: theme-colors("textColors", "primary");
+		float: left;
+		padding-left: 30px;
+		margin-right: 10px;
+	}
 }
 // Settings Submenu
 .submenu {
-    h2 {
-        color: theme-colors('textColors', 'primary');
-        font-weight: 300 !important;
-    }
-    ion-label {
-        padding-left: 30px !important;
-    }
+	h2 {
+		color: theme-colors("textColors", "primary");
+		font-weight: 300 !important;
+	}
+	ion-label {
+		padding-left: 30px !important;
+	}
 }
 .pageHeader {
-    position: absolute;
-    top: 42px;
-    left: 80px;
-    //color: #ccc;
-    font-size: 18px;
-    text-transform: capitalize;
+	position: absolute;
+	color: #d0d0d0;
+	top: 42px;
+	left: 80px;
+	//color: #ccc;
+	font-size: 18px;
+	text-transform: capitalize;
+}
+.center-text {
+	margin: auto;
+	font-size: 2em;
+}
+.center-image {
+	margin: auto;
 }

@@ -1,14 +1,13 @@
 <ion-content padding>
-    <menu-button></menu-button>
-    <!-- will be useful when we have multiple filters
+	<menu-button></menu-button>
+	<!-- will be useful when we have multiple filters
       <ion-fab right top>
-        <button ion-fab color="dark" (click)="viewFilter()" class="menu-btn-border">
+        <button ion-fab color="primary" (click)="viewFilter()" class="menu-btn-border">
             <ion-icon name="md-settings"></ion-icon>
         </button>
     </ion-fab>-->
-    <span class="pageHeader">Meet somebody</span>
-		<div class="venti-spacer"></div>
-		<!--
+	<span class="pageHeader">Meet people</span>
+	<!--
     <ion-list class="lower" *ngIf="languages">
       <ion-item>
           <ion-label stacked>Languages I want to speak in: </ion-label>
@@ -17,12 +16,15 @@
           </ion-select>
       </ion-item>
     </ion-list>-->
-    <div class="logo light-text" text-center></div>
-    <div class="circle" (click)="goToWaitlist()">
-        <div class="circle__inner">
-            <div class="circle__wrapper">
-                <div class="circle__content call-to-action">Let's meet some people</div>
-            </div>
-        </div>
-    </div>
+	<ion-list>
+		<ion-row>
+			<div class="meet-ppl-btn center-text" (click)="goToWaitlist()">
+				<img src="../assets/images/logo/logo.png" alt="">
+			</div>
+		</ion-row>
+		<!--<ion-row>
+			<img class="center-image" src="../assets/icons/up-icon.png" alt="" />
+		</ion-row>-->
+		<button ion-button class="meet-btn center-text" color="primary" (click)="goToWaitlist()" block>Let's meet some people</button>
+	</ion-list>
 </ion-content>

@@ -8,15 +8,17 @@ import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 import { Message } from "../models/models";
 import { User } from "../models/models";
-import { Facebook } from "@ionic-native/facebook";
 import { AngularFirestore } from "angularfire2/firestore";
 import { ReplaySubject } from "rxjs/ReplaySubject";
+import { resolve } from "dns";
 //import { Camera } from 'ionic-native';
 @Injectable()
 export class UserService {
 	public currentUser: ReplaySubject<User> = new ReplaySubject<User>();
+	private access_token = ``;
+	private lastUserInfo: User;
 
-	constructor(private facebook: Facebook, private afs: AngularFirestore) {}
+	constructor(public http: Http, private afs: AngularFirestore) {}
 	// get a specific User by id - that conforms to the user model
 	getUserById(id: string): Observable<any> {
 		//Observable<User> {
@@ -25,32 +27,63 @@ export class UserService {
 	getCurrentUser(): ReplaySubject<User> {
 		return this.currentUser;
 	}
-	setCurrentUser(uid): void {
-		this.getUserById(uid).subscribe(user => {
-			console.log("res from getUserById", JSON.stringify(user));
-			this.facebook
-				.api(
-					`${uid}?fields=id,name,gender,locale,picture,email,first_name,last_name`,
-					[]
-				)
-				.then(userInfo => {
-					console.log("user info from fb api: ", JSON.stringify(userInfo));
-					// check if the user exists in backend
-					if (user) {
-						// if yes,
-						// next it via the subject to keep everything up to daye
-						// set the returned user in the backend
+	setAccessToken(token): void {
+		this.access_token = token;
+	}
+	//should return promise that resolves once the data can be returned
+	setCurrentUser(usr): Promise<any> {
+		return new Promise<any>(resolve => {
+			let uid = usr["uid"];
+			this.getUserById(uid).subscribe(user => {
+				if (user) {
+					if (user != this.lastUserInfo) {
 						this.currentUser.next(user);
-						this.updateUser(uid, userInfo).catch(error =>
-							this.handleError(error)
-						);
-					} else {
-						// set the returned user in the backend
-						this.currentUser.next(this.toUser(userInfo));
-						this.createUser(userInfo).catch(error => this.handleError(error));
+						localStorage.setItem("currentUser", user);
+						this.lastUserInfo = user;
 					}
-				})
-				.catch(error => this.handleError(error));
+					this.fetchGraphData().then(parsedData => {
+						let userData = this.toUser(parsedData);
+						if (JSON.stringify(userData) !== JSON.stringify(this.lastUserInfo)) {
+							this.currentUser.next(userData);
+							localStorage.setItem("currentUser", JSON.stringify(userData));
+							this.lastUserInfo = userData;
+						}
+						this.updateUser(uid, parsedData)
+							.then(() => resolve(true))
+							.catch(error => this.handleError(error));
+					});
+				} else {
+					//graph request, create new user with the return
+					this.fetchGraphData().then(parsedData => {
+						let userData = this.toUser(parsedData);
+						if (JSON.stringify(userData) !== JSON.stringify(this.lastUserInfo)) {
+							this.currentUser.next(userData);
+							localStorage.setItem("currentUser", JSON.stringify(userData));
+							this.lastUserInfo = userData;
+						}
+						this.createUser(parsedData)
+							.then(() => resolve(true))
+							.catch(error => this.handleError(error));
+					});
+				}
+			});
+		});
+	}
+	fetchGraphData(): Promise<any> {
+		let url = `https://graph.facebook.com/v2.12/me?access_token=${
+			this.access_token
+		}&fields=id,name,gender,locale,picture.type(large),email,first_name,last_name`;
+		return new Promise<any>(resolve => {
+			this.http.get(url).subscribe(
+				userInfo => {
+					console.log("user info from fb api: ", JSON.stringify(userInfo));
+					let parsedData = JSON.parse(userInfo["_body"]);
+					resolve(parsedData);
+				},
+				err => {
+					this.handleError(err);
+				}
+			);
 		});
 	}
 	// create user in firebase
@@ -62,7 +95,7 @@ export class UserService {
 		return this.afs
 			.doc(`/users/${user.id}`)
 			.set(user)
-			.then(() => this.setProfilePicture(user.id))
+			.then(() => console.log("user set: ", user))
 			.catch(error => this.handleError(error));
 	}
 	updateUser(id: string, userData: User): Promise<any> {
@@ -70,29 +103,40 @@ export class UserService {
 		return this.afs
 			.doc(`users/${id}`)
 			.update(user)
-			.then(() => this.setProfilePicture(id))
+			.then(() => console.log("updating info: ", id))
 			.catch(error => this.handleError(error));
 	}
 	toUser(data): User {
 		let user = {
 			id: data.id,
+			email: data.email ? data.email : "",
 			firstName: data.first_name,
 			lastName: data.last_name,
-			contacts: [],
-			friendRequests: [],
-			blockedList: [],
-			profilePhoto: {
-				imgUrl: data.picture.data.url
-			},
-			gender: data.gender,
-			photos: [
-				{
-					imgUrl: data.picture.data.url
-				}
-			]
+			about: data.about ? data.about : "",
+			blockedList: data.blockedList ? data.blockedList : [],
+			contacts: data.contacts ? data.contacts : [],
+			requestsSent: data.requestsSent ? data.requestsSent : [],
+			requestsReceived: data.requestsReceived ? data.requestsReceived : [],
+			conversations: data.conversations ? data.conversations : [],
+			groups: data.groups ? data.groups : [],
+			pushToken: data.pushToken ? data.pushToken : [],
+			notifications: data.notifications ? data.notifications : [],
+			profilePhoto: data.picture.data.url
+				? {
+						imgUrl: data.picture.data.url
+				  }
+				: { imgUrl: "" },
+			gender: data.gender ? data.gender : "",
+			photos: data.picture.data.url
+				? [
+						{
+							imgUrl: data.picture.data.url
+						}
+				  ]
+				: [{ imgUrl: "" }]
 		};
 		return user;
-	}
+	} /*
 	setProfilePicture(uid: string): Promise<any> {
 		console.log("setProfilePicture called");
 		// set picture to the larger one
@@ -106,7 +150,7 @@ export class UserService {
 					.catch(error => this.handleError(error));
 			})
 			.catch(error => this.handleError(error));
-	}
+	}*/
 	addImage(userId: string, image): Promise<any> {
 		let photos = this.afs.collection(`users/${userId}/photos`);
 		return photos.add(image).catch(error => this.handleError(error));
@@ -132,12 +176,16 @@ export class UserService {
 		2. [ ] create a new chatroom
 		3. [ ] add to relationships list
 		*/
-		console.log("acceptFriendRequest method in user service called");
+		console.error(
+			"acceptFriendRequest method in user service called, but has not been implemented yet"
+		);
 	}
 	rejectFriendRequest(id: string) {
 		/*[ ] just set to null?
 		*/
-		console.log("rejectFriendRequest method in user service called");
+		console.error(
+			"rejectFriendRequest method in user service called, but has not been implemented yet"
+		);
 	}
 	like(id: string) {
 		/*
@@ -147,7 +195,9 @@ export class UserService {
     3. [ ] create a new chatroom
 		2. [ ] if not, request
 		*/
-		console.log("like method in user service called");
+		console.error(
+			"like method in user service called, but has not been implemented yet"
+		);
 	}
 	//method for cancelling sentrequest
 	unlike(id: string) {
@@ -156,7 +206,9 @@ export class UserService {
 		2. remove from users' requests list
 		3. [ ] add to relationships list
 		*/
-		console.log("unlike method in user service called");
+		console.error(
+			"unlike method in user service called, but has not been implemented yet"
+		);
 	}
 	addRequest(toId: string, requestedId: string) {
 		/*
@@ -164,12 +216,19 @@ export class UserService {
 		2. [ ] add to relationships collection
 		3. [ ] to the friendRequests list - to be able to cancel it
 		*/
-		console.log("added request from ", toId, " to ", requestedId);
+		console.error(
+			"added request from ",
+			toId,
+			" to ",
+			requestedId + ", but has not been implemented yet"
+		);
 	}
 	removeRequest(id: string) {
 		// find a url
 		// set to true for currentUser
-		console.log("removeRequest method in user service called");
+		console.error(
+			"removeRequest method in user service called, but has not been implemented yet"
+		);
 	}
 	block(id: string) {
 		/*
@@ -178,14 +237,18 @@ export class UserService {
 		3. [ ] remove from contacts if he’s there
 		4. [ ] kick the user out of the chatroom and tell him he was kicked out
 		*/
-		console.log("block method in user service called");
+		console.error(
+			"block method in user service called, but has not been implemented yet"
+		);
 	}
 	unblock(id: string) {
 		/*
 			1. [ ] set it back to null, without adding the false
 			2. [ ] remove from blocked list
 		*/
-		console.log("unblock method in user service called");
+		console.error(
+			"unblock method in user service called, but has not been implemented yet"
+		);
 	}
 	hasLiked(fromId: string, toId: string) {
 		// check the relationship whether current user is set to true or not while the other is not

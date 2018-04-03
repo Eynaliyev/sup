@@ -11,6 +11,7 @@ import { UtilService } from "../../shared/util.service";
 	templateUrl: "login.html"
 })
 export class LoginPage {
+	loader: any;
 	constructor(
 		public navCtrl: NavController,
 		public loadingCtrl: LoadingController,
@@ -31,27 +32,29 @@ export class LoginPage {
 		var env = this;
 		this.authSrvc.signInWithFacebook().then(
 			authData => {
-				loading.dismiss().then(() => {
-					console.log(
-						"login successful: ",
-						JSON.stringify(authData["user"]["providerData"][0]["uid"])
-					);
-					this.userSrvc.setCurrentUser(
-						authData["user"]["providerData"][0]["uid"]
-					);
-					//env.goToMeetSomebody(); - stop this for pre-launch
-					env.goToMeetSomebody();
+				this.loader.dismiss().then(() => {
+					this.userSrvc.setAccessToken(authData["credential"].accessToken);
+					//should be after the user has been set
+					this.userSrvc
+						.setCurrentUser(authData["user"]["providerData"][0])
+						.then(() => env.goToMeetSomebody());
 				});
 			},
 			error =>
-				loading.dismiss().then(() => {
+				this.loader.dismiss().then(() => {
+					console.error("login failed: ", error);
 					this.utilService.doAlert(error.message, {
 						text: "Ok",
 						role: "cancel"
 					});
 				})
 		);
-		let loading = this.loadingCtrl.create();
-		loading.present();
+		this.presentLoading();
+	}
+	presentLoading() {
+		this.loader = this.loadingCtrl.create({
+			content: "Authenticating..."
+		});
+		this.loader.present();
 	}
 }

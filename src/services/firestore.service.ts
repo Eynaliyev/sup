@@ -39,7 +39,7 @@ export class FirestoreService {
 	public getUsers(): AngularFirestoreCollection<User> {
 		return this.afs.collection("users", ref => ref.orderBy("firstName"));
 	}
-
+/*
 	// Get all conversations on Firestore.
 	public getConversations(): AngularFirestoreCollection<{}> {
 		return this.afs.collection("conversations");
@@ -130,5 +130,5 @@ export class FirestoreService {
 				});
 			})
 			.catch(() => {});
-	}
+	}*/
 }

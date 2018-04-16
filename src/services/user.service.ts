@@ -72,7 +72,7 @@ export class UserService {
 	fetchGraphData(): Promise<any> {
 		let url = `https://graph.facebook.com/v2.12/me?access_token=${
 			this.access_token
-		}&fields=id,name,gender,locale,picture.type(large),email,first_name,last_name`;
+		}&fields=id,name,gender,locale,picture.type(large),email,first_name,last_name,birthday`;
 		return new Promise<any>(resolve => {
 			this.http.get(url).subscribe(
 				userInfo => {
@@ -109,6 +109,7 @@ export class UserService {
 	toUser(data): User {
 		let user = {
 			id: data.id,
+			birthday: data.birthday? data.birthday : '',
 			email: data.email ? data.email : "",
 			firstName: data.first_name,
 			lastName: data.last_name,

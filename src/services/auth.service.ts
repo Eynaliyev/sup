@@ -121,9 +121,12 @@ export class AuthService {
 		//check for platform if web return a promise,
 		if (document.URL.includes("https://") || document.URL.includes("http://")) {
 			console.log("we're in the browser");
-			return this._firebaseAuth.auth.signInWithPopup(
-				new firebase.auth.FacebookAuthProvider()
-			);
+			let provider = new firebase.auth.FacebookAuthProvider();
+			provider.addScope("email");
+			provider.addScope("public_profile");
+			provider.addScope("user_birthday");
+
+			return this._firebaseAuth.auth.signInWithPopup(provider);
 		} else {
 			// code for handling fb login when deployed to device with cordova
 			console.log(

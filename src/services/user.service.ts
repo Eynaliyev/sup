@@ -8,7 +8,10 @@ import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 import { Message } from "../models/models";
 import { User } from "../models/models";
-import { AngularFirestore } from "angularfire2/firestore";
+import {
+	AngularFirestore,
+	AngularFirestoreDocument
+} from "angularfire2/firestore";
 import { ReplaySubject } from "rxjs/ReplaySubject";
 import { resolve } from "dns";
 //import { Camera } from 'ionic-native';
@@ -16,7 +19,6 @@ import { resolve } from "dns";
 export class UserService {
 	public currentUser: ReplaySubject<User> = new ReplaySubject<User>();
 	private access_token = ``;
-	private lastUserInfo: User;
 
 	constructor(public http: Http, private afs: AngularFirestore) {}
 	// get a specific User by id - that conforms to the user model
@@ -36,31 +38,14 @@ export class UserService {
 			let uid = usr["uid"];
 			this.getUserById(uid).subscribe(user => {
 				if (user) {
-					if (user != this.lastUserInfo) {
-						this.currentUser.next(user);
-						localStorage.setItem("currentUser", user);
-						this.lastUserInfo = user;
-					}
-					this.fetchGraphData().then(parsedData => {
-						let userData = this.toUser(parsedData);
-						if (JSON.stringify(userData) !== JSON.stringify(this.lastUserInfo)) {
-							this.currentUser.next(userData);
-							localStorage.setItem("currentUser", JSON.stringify(userData));
-							this.lastUserInfo = userData;
-						}
-						this.updateUser(uid, parsedData)
-							.then(() => resolve(true))
-							.catch(error => this.handleError(error));
-					});
+					this.currentUser.next(user);
+					localStorage.setItem("currentUser", user);
 				} else {
 					//graph request, create new user with the return
 					this.fetchGraphData().then(parsedData => {
 						let userData = this.toUser(parsedData);
-						if (JSON.stringify(userData) !== JSON.stringify(this.lastUserInfo)) {
-							this.currentUser.next(userData);
-							localStorage.setItem("currentUser", JSON.stringify(userData));
-							this.lastUserInfo = userData;
-						}
+						this.currentUser.next(userData);
+						localStorage.setItem("currentUser", JSON.stringify(userData));
 						this.createUser(parsedData)
 							.then(() => resolve(true))
 							.catch(error => this.handleError(error));
@@ -98,18 +83,19 @@ export class UserService {
 			.then(() => console.log("user set: ", user))
 			.catch(error => this.handleError(error));
 	}
-	updateUser(id: string, userData: User): Promise<any> {
-		let user = this.toUser(userData);
+	updateUser(userData: User): Promise<any> {
+		localStorage.setItem("currentUser", JSON.stringify(userData));
+		this.currentUser.next(userData);
 		return this.afs
-			.doc(`users/${id}`)
-			.update(user)
-			.then(() => console.log("updating info: ", id))
+			.doc(`users/${userData.id}`)
+			.set(userData, { merge: true })
+			.then(() => console.log("updating info: ", userData.id))
 			.catch(error => this.handleError(error));
 	}
 	toUser(data): User {
 		let user = {
 			id: data.id,
-			birthday: data.birthday? data.birthday : '',
+			birthday: data.birthday ? data.birthday : "",
 			email: data.email ? data.email : "",
 			firstName: data.first_name,
 			lastName: data.last_name,

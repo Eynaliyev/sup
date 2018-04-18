@@ -103,7 +103,7 @@
 		"@ngrx/store": "^5.1.0",
 		"@ngrx/store-devtools": "^5.1.0",
 		"ajv": "^6.1.1",
-		"angularfire2": "^5.0.0-rc.6",
+		"angularfire2": "^5.0.0-rc.6.0",
 		"com-badrit-base64": "^0.2.0",
 		"com-intel-security-cordova-plugin": "^2.0.3",
 		"com-sarriaroman-photoviewer": "^1.1.16",

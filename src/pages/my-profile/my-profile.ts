@@ -15,6 +15,7 @@ export class MyProfilePage {
 	image: any;
 	photos: any = [];
 	backGround: any;
+	profilePhoto: string;
 
 	@ViewChild(Slides) slides: Slides;
 
@@ -23,12 +24,20 @@ export class MyProfilePage {
 		private userSrvc: UserService,
 		private authSrvc: AuthService
 	) {
-		let user = JSON.parse(localStorage.getItem("currentUser"));
-		console.log("current user in myProfilePage: ", user);
-		this.currentUser = user;
-		this.photos = user.photos;
-		this.backGround = user.photos[0].imgUrl;
-		this.image = user.photos[0].imgUrl;
+		this.userSrvc
+			.getCurrentUser()
+			.take(2)
+			.subscribe(
+				result => {
+					this.currentUser = result;
+				},
+				err => {
+					console.error(err);
+					//this.loader.dismiss();
+				}
+			);
+		console.log("current user in myProfilePage: ", this.currentUser);
+		this.profilePhoto = this.currentUser.profilePhoto.imgUrl;
 	} /*
 	ionViewCanEnter() {
 		return this.authSrvc.isLoggedIn();
@@ -38,7 +47,7 @@ export class MyProfilePage {
 	}
 	updateProfile() {
 		//console.log('update profile with: ', this.currentUser);
-		this.userSrvc.updateUser(this.currentUser.id, this.currentUser);
+		this.userSrvc.updateUser(this.currentUser);
 	}
 	changeTab(tab) {
 		this.currentTab = tab;

@@ -19,7 +19,7 @@
 				</ion-slide>
 			</ion-slides>-->
 		<ion-card>
-			<img [src]="currentUser.profilePhoto.imgUrl" />
+			<img [src]="profilePhoto" />
 			<div class="card-title">{{currentUser.firstName}} {{currentUser.lastName}}</div>
 			<div class="card-subtitle">{{currentUser.location}}</div>
 		</ion-card>
@@ -34,7 +34,7 @@
 				<div id="meetSomebody-markdown2" class="show-list-numbers-and-dots">
 					<p style="margin-top:0px;color:#000000;">
 						<strong>
-							{{currentUser.languages}}
+							  {{currentUser.languages}}
 						</strong>
 					</p>
 				</div>
@@ -51,10 +51,6 @@
 						<ion-option value="Mandarin">Mandarin</ion-option>
 					</ion-select>
 				</ion-item>-->
-			<ion-item color="none" id="myProfile-list-item43">
-				<ion-icon name="pin" item-left></ion-icon>
-				{{currentUser.currentLocation}}
-			</ion-item>
 			<ion-item color="none" id="myProfile-list-item44">
 				Age: {{currentUser.birthday | age}}
 			</ion-item>

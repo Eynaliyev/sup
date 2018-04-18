@@ -875,9 +875,9 @@ angular2-template-loader@^0.6.2:
   dependencies:
     loader-utils "^0.2.15"
 
-angularfire2@^5.0.0-rc.6:
-  version "5.0.0-rc.6"
-  resolved "https://registry.yarnpkg.com/angularfire2/-/angularfire2-5.0.0-rc.6.tgz#99dfecaf7fd9e6979e3c09f4dcf7e6768a8f91d1"
+angularfire2@^5.0.0-rc.6.0:
+  version "5.0.0-rc.6.0"
+  resolved "https://registry.yarnpkg.com/angularfire2/-/angularfire2-5.0.0-rc.6.0.tgz#74e0a69dc317a646c45faf29949e5b06e1107b8c"
 
 ansi-align@^1.1.0:
   version "1.1.0"

@@ -12,13 +12,26 @@
 				</span>
 			</h2>
 			<ion-fab class="right btn-top-align">
-				<button ion-fab color="light" (click)="unlike(request.senderId)" class="menu-btn-border">
+				<button ion-fab color="light" (click)="reject(request.senderId)" class="menu-btn-border">
 					<ion-icon name="md-close"></ion-icon>
 				</button>
 			</ion-fab>
 			<ion-fab class="right btn-top-align" style="margin-right: 76px;">
-				<button ion-fab (click)="like(request.senderId)" color="light" class="menu-btn-border">
+				<button ion-fab (click)="accept(request.senderId)" color="light" class="menu-btn-border">
 					<ion-icon name="ios-heart-outline"></ion-icon>
+				</button>
+			</ion-fab>
+		</ion-item>
+	</ion-list>
+	<span class="" (click)="toggleSentListVisibility()">Sent Requests</span>
+	<ion-list class="venti-spacer" *ngIf="sentListVisible">
+		<ion-item [ngClass]="animateClass" style="background-color: transparent;color: #cfcfcf !important;" *ngFor="let sentUser of user.requestsSent">
+			<ion-thumbnail item-left *ngIf="sentUser.imgUrl">
+				<img [src]="sentUser.imgUrl" class="profile-picture" default="assets/images/other-assets/profile.png">
+			</ion-thumbnail>
+			<ion-fab class="right btn-top-align">
+				<button ion-fab color="light" (click)="removeRequest(sentUser.id)" class="menu-btn-border">
+					<ion-icon name="md-close"></ion-icon>
 				</button>
 			</ion-fab>
 		</ion-item>

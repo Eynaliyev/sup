@@ -162,6 +162,11 @@ export class UserService {
 		1. [ ] add to each others’ contacts list
 		2. [ ] create a new chatroom
 		3. [ ] add to relationships list
+				1. [ ] if mutual - friendship
+    1. [ ] in relationships collection
+    2. [ ] in contacts list
+    3. [ ] create a new chatroom
+		2. [ ] if not, request
 		*/
 		console.error(
 			"acceptFriendRequest method in user service called, but has not been implemented yet"
@@ -169,35 +174,16 @@ export class UserService {
 	}
 	rejectFriendRequest(id: string) {
 		/*[ ] just set to null?
+				1. set the property in relationship to null
+		2. remove from users' requests list
+		3. [ ] add to relationships list
 		*/
 		console.error(
 			"rejectFriendRequest method in user service called, but has not been implemented yet"
 		);
 	}
-	like(id: string) {
-		/*
-		1. [ ] if mutual - friendship
-    1. [ ] in relationships collection
-    2. [ ] in contacts list
-    3. [ ] create a new chatroom
-		2. [ ] if not, request
-		*/
-		console.error(
-			"like method in user service called, but has not been implemented yet"
-		);
-	}
-	//method for cancelling sentrequest
-	unlike(id: string) {
-		/*
-		1. set the property in relationship to null
-		2. remove from users' requests list
-		3. [ ] add to relationships list
-		*/
-		console.error(
-			"unlike method in user service called, but has not been implemented yet"
-		);
-	}
-	addRequest(toId: string, requestedId: string) {
+
+	sendRequest(toId: string, requestedId: string) {
 		/*
 		1. [ ] add to the other users’ requests list
 		2. [ ] add to relationships collection

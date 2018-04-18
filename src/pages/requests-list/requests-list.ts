@@ -1,4 +1,4 @@
-import { AuthService } from './../../services/auth.service';
+import { AuthService } from "./../../services/auth.service";
 import { Component } from "@angular/core";
 import { NavController } from "ionic-angular";
 import { UserService } from "../../services/services";
@@ -20,6 +20,7 @@ export class RequestsListPage {
 	blockAlertPresented: boolean = false;
 	unblockAlertPresented: boolean = false;
 	blockedListVisible: boolean = false;
+	sentListVisible: boolean = false;
 
 	constructor(
 		public navCtrl: NavController,
@@ -67,7 +68,7 @@ export class RequestsListPage {
 		console.log("toggled BlockListVisibility: ", this.currentUser.blockedList);
 		this.blockedListVisible != this.blockedListVisible;
 	}
-	like(id: string) {
+	accept(id: string) {
 		if (!this.likeAlertPresented) {
 			// alert
 			const alert = this.alertCtrl.create({
@@ -82,10 +83,10 @@ export class RequestsListPage {
 						}
 					},
 					{
-						text: "Like",
+						text: "Accept",
 						handler: () => {
 							console.log("Buy clicked");
-							this.userSrvc.like(id);
+							this.userSrvc.acceptFriendRequest(id);
 						}
 					}
 				]
@@ -93,11 +94,11 @@ export class RequestsListPage {
 			alert.present();
 			this.likeAlertPresented = true;
 		} else {
-			this.userSrvc.like(id);
+			this.userSrvc.acceptFriendRequest(id);
 		}
 	}
 	// should remove request from requests list, while keeping it as pending in the other person
-	unlike(id: string) {
+	reject(id: string) {
 		if (!this.unlikeAlertPresented) {
 			// alert
 			// check if it's just a request or a friendship
@@ -117,7 +118,7 @@ export class RequestsListPage {
 						text: "Remove",
 						handler: () => {
 							console.log("Request cancelled");
-							this.userSrvc.removeRequest(id);
+							this.userSrvc.rejectFriendRequest(id);
 						}
 					}
 				]
@@ -125,8 +126,11 @@ export class RequestsListPage {
 			alert.present();
 			this.unlikeAlertPresented = true;
 		} else {
-			this.userSrvc.removeRequest(id);
+			this.userSrvc.rejectFriendRequest(id);
 		}
+	}
+	removeRequest(id) {
+		this.userSrvc.removeRequest(id);
 	}
 	unblock(id: string) {
 		if (!this.unblockAlertPresented) {
@@ -155,7 +159,7 @@ export class RequestsListPage {
 			alert.present();
 			this.unlikeAlertPresented = true;
 		} else {
-			this.userSrvc.removeRequest(id);
+			this.userSrvc.unblock(id);
 		}
 	}
 }

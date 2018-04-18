@@ -87,7 +87,7 @@ export class UserProfilePage {
 		if (!this.likeAlertPresented) {
 			// alert
 			const alert = this.alertCtrl.create({
-				title: "Confirm Like",
+				title: "Confirm Request",
 				message: "Do you want to add this person to contacts?",
 				buttons: [
 					{
@@ -98,10 +98,10 @@ export class UserProfilePage {
 						}
 					},
 					{
-						text: "Like",
+						text: "Send Request",
 						handler: () => {
-							console.log("Buy clicked");
-							this.userSrvc.like(id);
+							console.log("Send Request clicked");
+							this.userSrvc.sendRequest(id);
 						}
 					}
 				]
@@ -109,7 +109,7 @@ export class UserProfilePage {
 			alert.present();
 			this.likeAlertPresented = true;
 		} else {
-			this.userSrvc.like(id);
+			this.userSrvc.sendRequest(id);
 		}
 	}
 	block(id: string) {
@@ -129,7 +129,7 @@ export class UserProfilePage {
 					{
 						text: "Block",
 						handler: () => {
-							console.log("Request cancelled");
+							console.log("Block clicked");
 							this.userSrvc.block(id);
 						}
 					}
@@ -169,7 +169,7 @@ export class UserProfilePage {
 					{
 						text: "Remove",
 						handler: () => {
-							console.log("Request cancelled");
+							console.log("Remove clicked");
 							this.userSrvc.removeRequest(id);
 						}
 					}

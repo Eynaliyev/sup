@@ -158,54 +158,52 @@ export class UserService {
 		return lastMessage.update(message).catch(error => this.handleError(error));
 	}
 	acceptFriendRequest(id: string) {
-		/*
+		/* make sure this is async method that returns
+		a success or failure that prompts a relevant
+		alert in the caller's UI
 		1. [ ] add to each others’ contacts list
 		2. [ ] create a new chatroom
-		3. [ ] add to relationships list
-				1. [ ] if mutual - friendship
-    1. [ ] in relationships collection
-    2. [ ] in contacts list
-    3. [ ] create a new chatroom
-		2. [ ] if not, request
+		3. [ ] add to relationships list/collection
+		4. [ ] remove from this user's receivedrequests list
+    5. [ ] remove from the other user's sent requests list
 		*/
 		console.error(
 			"acceptFriendRequest method in user service called, but has not been implemented yet"
 		);
 	}
 	rejectFriendRequest(id: string) {
-		/*[ ] just set to null?
-				1. set the property in relationship to null
-		2. remove from users' requests list
-		3. [ ] add to relationships list
+		/*
+		1. [ ] remove from this user's receivedrequests list
+    2. [ ] remove from the other user's sent requests list
 		*/
 		console.error(
 			"rejectFriendRequest method in user service called, but has not been implemented yet"
 		);
 	}
 
-	sendRequest(toId: string, requestedId: string) {
+	sendRequest(toId: string) {
 		/*
-		1. [ ] add to the other users’ requests list
-		2. [ ] add to relationships collection
-		3. [ ] to the friendRequests list - to be able to cancel it
+		1. [ ] add to the other users’ receivedRequests list
+		2. [ ] add to this user's requestsSent list
 		*/
 		console.error(
 			"added request from ",
 			toId,
 			" to ",
-			requestedId + ", but has not been implemented yet"
+			+", but has not been implemented yet"
 		);
 	}
 	removeRequest(id: string) {
-		// find a url
-		// set to true for currentUser
+		/*
+		1. [ ] remove from this user's receivedrequests list
+		2. [ ] remove from the other user's sent requests list
+		*/
 		console.error(
 			"removeRequest method in user service called, but has not been implemented yet"
 		);
 	}
 	block(id: string) {
 		/*
-		1. [ ] add to user’s blocked list
 		2. [ ] set the relations collection
 		3. [ ] remove from contacts if he’s there
 		4. [ ] kick the user out of the chatroom and tell him he was kicked out

@@ -44,7 +44,6 @@ import { Geolocation } from "@ionic-native/geolocation";
 //import { Camera } from '@ionic-native/camera';
 import { Facebook } from "@ionic-native/facebook";
 import { ChatroomService } from "../services/services";
-import { UtilService } from "../shared/util.service";
 import { VipService } from "../services/services";
 import { UserService } from "../services/services";
 import { AuthService } from "../services/services";
@@ -116,12 +115,10 @@ import { Environment } from "../environment/environment";
 		//Camera,
 		Facebook,
 		AuthService,
-		UtilService,
 		UserService,
 		ChatroomService,
 		AngularFireDatabase,
 		VipService,
-		UtilService,
 		RequestService,
 		Geolocation,
 		AlertService,

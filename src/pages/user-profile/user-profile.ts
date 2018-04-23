@@ -1,7 +1,7 @@
 import { AuthService } from "./../../services/auth.service";
 import { Component } from "@angular/core";
 import { NavController, NavParams } from "ionic-angular";
-import { UserService } from "../../services/services";
+import { UserService, RequestService } from "../../services/services";
 import { User } from "../../models/models";
 import { UtilService } from "../../shared/util.service";
 import { AlertController } from "ionic-angular";
@@ -43,6 +43,7 @@ export class UserProfilePage {
 		private userSrvc: UserService,
 		private utilSrvc: UtilService,
 		public authSrvc: AuthService,
+		private requestSrvc: RequestService,
 		public alertCtrl: AlertController
 	) {
 		this.animateClass = { "zoom-in": true };
@@ -59,7 +60,7 @@ export class UserProfilePage {
 					userInfo => {
 						console.log("user, id from getUserByID()", userInfo, id);
 						this.user = userInfo;
-						if (this.userSrvc.hasLiked(this.currentUser.id, userInfo.id)) {
+						if (this.requestSrvc.hasLiked(this.currentUser.id, userInfo.id)) {
 							this.requested = true;
 						} else if (
 							this.currentUser.contacts.forEach(
@@ -101,7 +102,7 @@ export class UserProfilePage {
 						text: "Send Request",
 						handler: () => {
 							console.log("Send Request clicked");
-							this.userSrvc.sendRequest(id);
+							this.requestSrvc.sendRequest(this.currentUser.id, id);
 						}
 					}
 				]
@@ -109,7 +110,7 @@ export class UserProfilePage {
 			alert.present();
 			this.likeAlertPresented = true;
 		} else {
-			this.userSrvc.sendRequest(id);
+			this.requestSrvc.sendRequest(this.currentUser.id, id);
 		}
 	}
 	block(id: string) {
@@ -130,7 +131,7 @@ export class UserProfilePage {
 						text: "Block",
 						handler: () => {
 							console.log("Block clicked");
-							this.userSrvc.block(id);
+							this.requestSrvc.block(id);
 						}
 					}
 				]
@@ -138,7 +139,7 @@ export class UserProfilePage {
 			alert.present();
 			this.blockAlertPresented = true;
 		} else {
-			this.userSrvc.block(id);
+			this.requestSrvc.block(id);
 		}
 	}
 	unlike(id: string) {
@@ -170,7 +171,7 @@ export class UserProfilePage {
 						text: "Remove",
 						handler: () => {
 							console.log("Remove clicked");
-							this.userSrvc.removeRequest(id);
+							this.requestSrvc.removeRequest(id);
 						}
 					}
 				]
@@ -178,7 +179,7 @@ export class UserProfilePage {
 			alert.present();
 			this.unlikeAlertPresented = true;
 		} else {
-			this.userSrvc.removeRequest(id);
+			this.requestSrvc.removeRequest(id);
 		}
 	}
 }

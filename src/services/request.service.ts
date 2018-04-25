@@ -115,15 +115,6 @@ export class RequestService {
 				});
 		});
 	}
-	rejectFriendRequest(id: string) {
-		/*
-		1. [ ] remove from this user's receivedrequests list
-    2. [ ] remove from the other user's sent requests list
-		*/
-		console.error(
-			"rejectFriendRequest method in user service called, but has not been implemented yet"
-		);
-	}
 
 	sendRequest(from: string, to: string) {
 		let newRequest: Request = {
@@ -199,7 +190,7 @@ export class RequestService {
 		});
 	}
 	// Cancel a contact request given the sender and receiver userId.
-	public cancelRequest(from: string, to: string): Promise<any> {
+	cancelRequest(from: string, to: string): Promise<any> {
 		return new Promise((resolve, reject) => {
 			this.get("users/" + from)
 				.then(ref => {

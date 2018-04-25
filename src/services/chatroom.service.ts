@@ -11,7 +11,6 @@ import "rxjs/add/observable/forkJoin";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 import { Message, Chatroom, Language, Participant } from "../models/models";
-import { UtilService } from "../shared/util.service";
 
 @Injectable()
 export class ChatroomService {
@@ -21,8 +20,7 @@ export class ChatroomService {
 	constructor(
 		// private http: Http,
 		private db: AngularFireDatabase,
-		private afs: AngularFirestore,
-		private utilService: UtilService
+		private afs: AngularFirestore
 	) {}
 	getAvailableChatrooms(location, language: Language): Observable<any[]> {
 		console.log("getAvailableChatrooms called");
@@ -90,9 +88,11 @@ export class ChatroomService {
 			);
 		});
 	}
-	createChatroom(location, language: Language, id?: string) {
+	//creates a group chatroom
+	createChatroom(location, language: Language) {
 		console.log("createChatroom called ");
-		let gender = JSON.parse(localStorage.getItem("currentUser")).gender;
+		let user = JSON.parse(localStorage.getItem("currentUser"));
+		let gender = user.gender;
 		let thisGender;
 		if (gender === "female") {
 			thisGender = "femaleParticipants";
@@ -100,7 +100,6 @@ export class ChatroomService {
 			thisGender = "maleParticipants";
 		}
 		let randomId;
-		id ? (randomId = id) : (randomId = this.utilService.guid());
 		let chatroom = {
 			id: randomId,
 			femaleParticipants: [],
@@ -108,9 +107,9 @@ export class ChatroomService {
 			language: language,
 			messages: [],
 			blocked: [],
-			warnings: []
+			warnings: [],
+			privateConversation: false
 		};
-		let user = JSON.parse(localStorage.getItem("currentUser"));
 		let name = user.firstName + " " + user.lastName;
 		console.log(name, user, thisGender, chatroom[thisGender]);
 		let participant: Participant = {

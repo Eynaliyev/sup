@@ -6,21 +6,30 @@ import "rxjs/add/operator/toPromise";
 import "rxjs/add/observable/forkJoin";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
-import { Message } from "../models/models";
+import { Message, Chatroom } from "../models/models";
 import { User } from "../models/models";
 import {
 	AngularFirestore,
-	AngularFirestoreDocument
+	AngularFirestoreDocument,
+	AngularFirestoreCollection
 } from "angularfire2/firestore";
+import { AngularFireDatabase } from "angularfire2/database";
+
 import { ReplaySubject } from "rxjs/ReplaySubject";
-import { resolve } from "dns";
+import { UtilService } from "./services";
 //import { Camera } from 'ionic-native';
+
 @Injectable()
 export class UserService {
 	public currentUser: ReplaySubject<User> = new ReplaySubject<User>();
 	private access_token = ``;
+	private utilSrvc: UtilService;
 
-	constructor(public http: Http, private afs: AngularFirestore) {}
+	constructor(
+		public http: Http,
+		private afs: AngularFirestore,
+		private db: AngularFireDatabase
+	) {}
 	// get a specific User by id - that conforms to the user model
 	getUserById(id: string): Observable<any> {
 		//Observable<User> {
@@ -156,6 +165,26 @@ export class UserService {
 			`users/${userId}/contacts/${contactRoomId}/last-message`
 		);
 		return lastMessage.update(message).catch(error => this.handleError(error));
+	}
+	//creates an individual room for the two users
+	createConversation(fromId: string, toId: string) {
+		let roomId = this.utilSrvc.uniqueRelId(fromId, toId);
+		let dbRef = this.db.object(`chatrooms/${roomId}`);
+		let fromGender = JSON.parse(localStorage.getItem("currentUser")).gender;
+		let conversation: Chatroom = {
+			id: roomId,
+			femaleParticipants: [],
+			maleParticipants: [],
+			messages: [],
+			blocked: [],
+			warnings: [],
+			privateConversation: true
+		};
+		return dbRef.set(conversation);
+	}
+	removeConversation(id) {
+		let dbRef = this.db.object(`conversations/${id}`);
+		return dbRef.remove();
 	}
 	/*
   getPicture(){

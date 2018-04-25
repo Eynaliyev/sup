@@ -13,9 +13,10 @@ export class Chatroom {
 		public id: string,
 		public femaleParticipants: Participant[],
 		public maleParticipants: Participant[],
-		public language: Language,
 		public messages: Message[],
+		public language?: Language,
 		public blocked?: Participant[],
-		public warnings?: Participant[]
+		public warnings?: Participant[],
+		public privateConversation?: boolean
 	) {}
 }

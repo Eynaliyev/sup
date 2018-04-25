@@ -1,5 +1,5 @@
 import { AngularFirestoreCollection } from "angularfire2/firestore";
-import { Message, UserConversation, UserGroup, Request } from "./models";
+import { Message, UserGroup, Request } from "./models";
 interface VipStatus {
 	vip: boolean;
 	expiryDate: Date;
@@ -42,7 +42,6 @@ export class User {
 		public blockedList: BlockedUser[],
 		public requestsSent: Request[], //userIds whom you sent a contact request
 		public requestsReceived: Request[], //userIds who sent you a contact request
-		public conversations: AngularFirestoreCollection<UserConversation>,
 		public groups: AngularFirestoreCollection<UserGroup>,
 		public pushToken: string,
 		public notifications: boolean,

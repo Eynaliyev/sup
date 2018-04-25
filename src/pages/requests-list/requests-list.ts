@@ -120,7 +120,7 @@ export class RequestsListPage {
 						text: "Remove",
 						handler: () => {
 							console.log("Request cancelled");
-							this.requestsSrvc.rejectFriendRequest(this.currentUser.id, id);
+							this.requestsSrvc.cancelRequest(this.currentUser.id, id);
 						}
 					}
 				]
@@ -128,11 +128,11 @@ export class RequestsListPage {
 			alert.present();
 			this.unlikeAlertPresented = true;
 		} else {
-			this.requestsSrvc.rejectFriendRequest(this.currentUser.id, id);
+			this.requestsSrvc.cancelRequest(this.currentUser.id, id);
 		}
 	}
 	removeRequest(id) {
-		this.requestsSrvc.rejectFriendRequest(this.currentUser.id, id);
+		this.requestsSrvc.cancelRequest(this.currentUser.id, id);
 	}
 	unblock(id: string) {
 		if (!this.unblockAlertPresented) {

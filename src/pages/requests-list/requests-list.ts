@@ -88,7 +88,7 @@ export class RequestsListPage {
 						text: "Accept",
 						handler: () => {
 							console.log("Buy clicked");
-							this.requestsSrvc.acceptFriendRequest(id);
+							this.requestsSrvc.acceptFriendRequest(this.currentUser.id, id);
 						}
 					}
 				]
@@ -96,7 +96,7 @@ export class RequestsListPage {
 			alert.present();
 			this.likeAlertPresented = true;
 		} else {
-			this.requestsSrvc.acceptFriendRequest(id);
+			this.requestsSrvc.acceptFriendRequest(this.currentUser.id, id);
 		}
 	}
 	// should remove request from requests list, while keeping it as pending in the other person
@@ -120,7 +120,7 @@ export class RequestsListPage {
 						text: "Remove",
 						handler: () => {
 							console.log("Request cancelled");
-							this.requestsSrvc.rejectFriendRequest(id);
+							this.requestsSrvc.rejectFriendRequest(this.currentUser.id, id);
 						}
 					}
 				]
@@ -128,11 +128,11 @@ export class RequestsListPage {
 			alert.present();
 			this.unlikeAlertPresented = true;
 		} else {
-			this.requestsSrvc.rejectFriendRequest(id);
+			this.requestsSrvc.rejectFriendRequest(this.currentUser.id, id);
 		}
 	}
 	removeRequest(id) {
-		this.requestsSrvc.removeRequest(id);
+		this.requestsSrvc.rejectFriendRequest(this.currentUser.id, id);
 	}
 	unblock(id: string) {
 		if (!this.unblockAlertPresented) {

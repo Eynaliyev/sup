@@ -171,7 +171,7 @@ export class UserProfilePage {
 						text: "Remove",
 						handler: () => {
 							console.log("Remove clicked");
-							this.requestSrvc.removeRequest(id);
+							this.requestSrvc.rejectFriendRequest(this.currentUser.id, id);
 						}
 					}
 				]
@@ -179,7 +179,7 @@ export class UserProfilePage {
 			alert.present();
 			this.unlikeAlertPresented = true;
 		} else {
-			this.requestSrvc.removeRequest(id);
+			this.requestSrvc.rejectFriendRequest(this.currentUser.id, id);
 		}
 	}
 }

@@ -14,22 +14,18 @@ export interface Language {
 }
 interface BlockedUser {
 	id: string;
-	name: string;
-	imgUrl: string;
 	date: Date;
 }
 interface Interest {
 	id: string;
 	name: string;
-	imgUrl: string;
+	imgUrl?: string;
 }
 export interface Contact {
 	id: string;
-	name: string;
-	profileImgUrl: string;
-	roomId: string;
-	lastMessage: Message;
+	dateAdded: Date;
 }
+
 interface SocialProfile {
 	networkName: string;
 	id: string;

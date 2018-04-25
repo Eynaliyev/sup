@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
-import { User, Request } from "../models/models";
+import { User, Request, Contact } from "../models/models";
 import {
 	AngularFirestore,
 	AngularFirestoreDocument,
@@ -27,19 +27,93 @@ export class RequestService {
 	updateRequestSeen(requestId: string, userId: string) {
 		//add the id to the seen in the backend
 	}
-	acceptFriendRequest(id: string) {
+	acceptFriendRequest(from: string, to: string): Promise<any> {
 		/* make sure this is async method that returns
 		a success or failure that prompts a relevant
 		alert in the caller's UI
-		1. [ ] add to each others’ contacts list
-		2. [ ] create a new chatroom
+		1. [ ] create a new chatroom
 		3. [ ] add to relationships list/collection
-		4. [ ] remove from this user's receivedrequests list
-    5. [ ] remove from the other user's sent requests list
 		*/
-		console.error(
-			"acceptFriendRequest method in user service called, but has not been implemented yet"
-		);
+		// Accept a contact request given the sender and receiver userId.
+		return new Promise((resolve, reject) => {
+			let newToContact: Contact = {
+				id: to,
+				dateAdded: new Date()
+			};
+			let newFromContact: Contact = {
+				id: from,
+				dateAdded: new Date()
+			};
+			this.cancelRequest(from, to)
+				.then(() => {
+					this.get("users/" + from)
+						.then(ref => {
+							ref
+								.valueChanges()
+								.take(1)
+								.subscribe((user: User) => {
+									if (!user.contacts) {
+										user.contacts = [newToContact];
+									} else {
+										if (
+											this.utilSrvc.finInstance(user.contacts, newToContact) ==
+											-1
+										) {
+											user.contacts.push(newToContact);
+										}
+									}
+									ref
+										.update({
+											contacts: user.contacts
+										})
+										.then(() => {
+											this.get("users/" + to)
+												.then(ref => {
+													ref
+														.valueChanges()
+														.take(1)
+														.subscribe((user: User) => {
+															if (!user.contacts) {
+																user.contacts = [newFromContact];
+															} else {
+																if (
+																	this.utilSrvc.finInstance(
+																		user.contacts,
+																		newFromContact
+																	) == -1
+																) {
+																	user.contacts.push(newFromContact);
+																}
+															}
+															ref
+																.update({
+																	contacts: user.contacts
+																})
+																.then(() => {
+																	resolve();
+																})
+																.catch(() => {
+																	reject();
+																});
+														});
+												})
+												.catch(() => {
+													reject();
+												});
+										})
+										.catch(() => {
+											reject();
+										});
+								});
+						})
+						.catch(() => {
+							reject();
+						});
+				})
+				.catch(() => {
+					reject();
+				});
+		});
 	}
 	rejectFriendRequest(id: string) {
 		/*
@@ -52,7 +126,7 @@ export class RequestService {
 	}
 
 	sendRequest(from: string, to: string) {
-		let newRequest = {
+		let newRequest: Request = {
 			id: this.utilSrvc.uniqueRelId(from, to),
 			date: new Date(),
 			seen: [],
@@ -124,14 +198,71 @@ export class RequestService {
 				});
 		});
 	}
-	removeRequest(id: string) {
-		/*
-		1. [ ] remove from this user's receivedrequests list
-		2. [ ] remove from the other user's sent requests list
-		*/
-		console.error(
-			"removeRequest method in user service called, but has not been implemented yet"
-		);
+	// Cancel a contact request given the sender and receiver userId.
+	public cancelRequest(from: string, to: string): Promise<any> {
+		return new Promise((resolve, reject) => {
+			this.get("users/" + from)
+				.then(ref => {
+					ref
+						.valueChanges()
+						.take(1)
+						.subscribe((user: User) => {
+							if (user.requestsSent) {
+								let indexTo = user.requestsSent.findIndex(
+									i => i.toUserId === to
+								);
+								user.requestsSent.splice(indexTo, 1);
+								if (user.requestsSent.length == 0) {
+									user.requestsSent = null;
+								}
+								ref
+									.update({
+										requestsSent: user.requestsSent
+									})
+									.then(() => {
+										this.get("users/" + to)
+											.then(ref => {
+												ref
+													.valueChanges()
+													.take(1)
+													.subscribe((user: User) => {
+														if (user.requestsReceived) {
+															let indexTo = user.requestsReceived.findIndex(
+																i => i.senderId === from
+															);
+															user.requestsReceived.splice(indexTo, 1);
+															if (user.requestsReceived.length == 0) {
+																user.requestsReceived = null;
+															}
+															ref
+																.update({
+																	requestsReceived: user.requestsReceived
+																})
+																.then(() => {
+																	resolve();
+																})
+																.catch(() => {
+																	reject();
+																});
+														}
+													});
+											})
+											.catch(() => {
+												reject();
+											});
+									})
+									.catch(() => {
+										reject();
+									});
+							} else {
+								reject();
+							}
+						});
+				})
+				.catch(() => {
+					reject();
+				});
+		});
 	}
 	block(id: string) {
 		/*

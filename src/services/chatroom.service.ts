@@ -90,7 +90,7 @@ export class ChatroomService {
 			);
 		});
 	}
-	createChatroom(location, language: Language) {
+	createChatroom(location, language: Language, id?: string) {
 		console.log("createChatroom called ");
 		let gender = JSON.parse(localStorage.getItem("currentUser")).gender;
 		let thisGender;
@@ -99,7 +99,8 @@ export class ChatroomService {
 		} else {
 			thisGender = "maleParticipants";
 		}
-		let randomId = this.utilService.guid();
+		let randomId;
+		id ? (randomId = id) : (randomId = this.utilService.guid());
 		let chatroom = {
 			id: randomId,
 			femaleParticipants: [],

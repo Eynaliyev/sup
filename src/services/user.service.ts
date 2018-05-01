@@ -47,7 +47,7 @@ export class UserService {
 			this.getUserById(uid).subscribe(user => {
 				if (user) {
 					this.currentUser.next(user);
-					localStorage.setItem("currentUser", user);
+					localStorage.setItem("currentUser", JSON.stringify(user));
 				} else {
 					//graph request, create new user with the return
 					this.fetchGraphData().then(parsedData => {

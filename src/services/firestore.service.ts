@@ -5,7 +5,7 @@ import {
 	AngularFirestoreCollection
 } from "angularfire2/firestore";
 import "rxjs/add/operator/take";
-import { User, Conversation } from "../models/models";
+import { User } from "../models/models";
 
 @Injectable()
 export class FirestoreService {
@@ -39,7 +39,7 @@ export class FirestoreService {
 	public getUsers(): AngularFirestoreCollection<User> {
 		return this.afs.collection("users", ref => ref.orderBy("firstName"));
 	}
-/*
+	/*
 	// Get all conversations on Firestore.
 	public getConversations(): AngularFirestoreCollection<{}> {
 		return this.afs.collection("conversations");

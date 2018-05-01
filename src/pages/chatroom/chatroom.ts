@@ -23,11 +23,12 @@ export class ChatroomPage {
 	currentUser: User;
 	bckgImgNum = Math.floor(Math.random() * 50);
 	backgroundImage;
+	private utilSrvc: UtilService;
 
 	newMessage: Message = {
 		content: "",
 		date: new Date(),
-		id: this.utilService.guid(),
+		id: this.utilSrvc.guid(),
 		senderId: "",
 		roomId: "",
 		senderName: "",
@@ -39,7 +40,6 @@ export class ChatroomPage {
 		private navParams: NavParams,
 		private userService: UserService,
 		private chatroomService: ChatroomService,
-		private utilService: UtilService,
 		private alertCtrl: AlertController,
 		private authSrvc: AuthService
 	) {
@@ -98,7 +98,7 @@ export class ChatroomPage {
 				newMessages => {
 					console.log("newMessages: ", newMessages);
 					// add position property
-					let updatedMessages = this.utilService.addMessagePosition(
+					let updatedMessages = this.utilSrvc.addMessagePosition(
 						newMessages,
 						this.currentUser.id
 					);
@@ -106,7 +106,7 @@ export class ChatroomPage {
 					// set the seen property
 					//let res = this.updateSeen(updatedMessages, this.currentUser.id);
 					// add time passed since the mssage was sent
-					//res = this.utilService.addMessageTimeSince(res);
+					//res = this.utilSrvc.addMessageTimeSince(res);
 					// To Do : add sender name based on participants ID, or nothing
 					env.messages = [];
 					for (let i = 0; i < updatedMessages.length; i++) {
@@ -151,7 +151,7 @@ export class ChatroomPage {
 			newMessages => {
 				// add position property
 				console.log("newMessages: ", newMessages);
-				let updatedMessages = this.utilService.addMessagePosition(
+				let updatedMessages = this.utilSrvc.addMessagePosition(
 					newMessages,
 					this.currentUser.id
 				);

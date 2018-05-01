@@ -16,11 +16,11 @@ import { AlertController } from "ionic-angular";
 	templateUrl: "vip.html"
 })
 export class VIPPage {
+	private utilSrvc: UtilService;
 	constructor(
 		public navCtrl: NavController,
 		public vipSrvc: VipService,
-		private alertCtrl: AlertController,
-		private utilSrvc: UtilService
+		private alertCtrl: AlertController
 	) {}
 
 	ionViewDidLoad() {

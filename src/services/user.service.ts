@@ -24,7 +24,6 @@ export class UserService {
 	public currentUser: ReplaySubject<User> = new ReplaySubject<User>();
 	private access_token = ``;
 	private utilSrvc: UtilService;
-
 	constructor(
 		public http: Http,
 		private afs: AngularFirestore,

@@ -26,6 +26,7 @@ import {
 	]
 })
 export class UserProfilePage {
+	private utilSrvc: UtilService;
 	user: User;
 	currentUser: User;
 	tab: string = "vote";
@@ -41,7 +42,6 @@ export class UserProfilePage {
 		private navCtrl: NavController,
 		private navParams: NavParams,
 		private userSrvc: UserService,
-		private utilSrvc: UtilService,
 		public authSrvc: AuthService,
 		private requestSrvc: RequestService,
 		public alertCtrl: AlertController

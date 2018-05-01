@@ -11,11 +11,11 @@ import { UtilService } from "../../shared/util.service";
 	templateUrl: "login.html"
 })
 export class LoginPage {
+	private utilSrvc: UtilService;
 	loader: any;
 	constructor(
 		public navCtrl: NavController,
 		public loadingCtrl: LoadingController,
-		public utilService: UtilService,
 		public authSrvc: AuthService,
 		public userSrvc: UserService
 	) {}
@@ -43,7 +43,7 @@ export class LoginPage {
 			error =>
 				this.loader.dismiss().then(() => {
 					console.error("login failed: ", error);
-					this.utilService.doAlert(error.message, {
+					this.utilSrvc.doAlert(error.message, {
 						text: "Ok",
 						role: "cancel"
 					});

@@ -24,6 +24,7 @@ interface Interest {
 export interface Contact {
 	id: string;
 	dateAdded: Date;
+	lastMessage: Message;
 }
 
 interface SocialProfile {

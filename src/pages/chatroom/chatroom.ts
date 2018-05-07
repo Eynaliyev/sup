@@ -1,3 +1,4 @@
+import { UtilService } from "./../../shared/util.service";
 import { Component } from "@angular/core";
 import { NavController, NavParams } from "ionic-angular";
 import { UserService, AuthService } from "../../services/services";
@@ -7,7 +8,6 @@ import { Message } from "../../models/message.model";
 import { Chatroom } from "../../models/chatroom.model";
 import { UserProfilePage } from "../pages";
 import { MeetSomebodyPage } from "../pages";
-import { UtilService } from "../../shared/util.service";
 import { ParticipantsListPage } from "../pages";
 import { AlertController } from "ionic-angular";
 
@@ -21,14 +21,14 @@ export class ChatroomPage {
 	chatroomId: string;
 	chatroom: Chatroom;
 	currentUser: User;
-	bckgImgNum = Math.floor(Math.random() * 50);
 	backgroundImage;
-	private utilSrvc: UtilService;
+	bckgImgNum = Math.floor(Math.random() * 50);
+	uniqueId = this.utilSrvc.guid();
 
 	newMessage: Message = {
 		content: "",
 		date: new Date(),
-		id: this.utilSrvc.guid(),
+		id: this.uniqueId,
 		senderId: "",
 		roomId: "",
 		senderName: "",
@@ -41,7 +41,8 @@ export class ChatroomPage {
 		private userService: UserService,
 		private chatroomService: ChatroomService,
 		private alertCtrl: AlertController,
-		private authSrvc: AuthService
+		private authSrvc: AuthService,
+		private utilSrvc: UtilService
 	) {
 		let photoUrl = `../assets/images/background-${this.bckgImgNum}.jpg`;
 		this.backgroundImage = `{'background-image': url('${photoUrl}')}`;

@@ -11,13 +11,13 @@ import { UtilService } from "../../shared/util.service";
 	templateUrl: "login.html"
 })
 export class LoginPage {
-	private utilSrvc: UtilService;
 	loader: any;
 	constructor(
 		public navCtrl: NavController,
 		public loadingCtrl: LoadingController,
 		public authSrvc: AuthService,
-		public userSrvc: UserService
+		public userSrvc: UserService,
+		private utilSrvc: UtilService
 	) {}
 	ionViewDidLoad() {
 		console.log("ionViewDidLoad LoginPage");

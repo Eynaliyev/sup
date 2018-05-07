@@ -16,14 +16,13 @@ import {
 import { AngularFireDatabase } from "angularfire2/database";
 
 import { ReplaySubject } from "rxjs/ReplaySubject";
-import { UtilService } from "./services";
 //import { Camera } from 'ionic-native';
 
 @Injectable()
 export class UserService {
 	public currentUser: ReplaySubject<User> = new ReplaySubject<User>();
 	private access_token = ``;
-	private utilSrvc: UtilService;
+
 	constructor(
 		public http: Http,
 		private afs: AngularFirestore,
@@ -167,7 +166,7 @@ export class UserService {
 	}
 	//creates an individual room for the two users
 	createConversation(fromId: string, toId: string) {
-		let roomId = this.utilSrvc.uniqueRelId(fromId, toId);
+		let roomId = this.uniqueRelId(fromId, toId);
 		let dbRef = this.db.object(`chatrooms/${roomId}`);
 		let fromGender = JSON.parse(localStorage.getItem("currentUser")).gender;
 		let conversation: Chatroom = {
@@ -184,6 +183,35 @@ export class UserService {
 	removeConversation(id) {
 		let dbRef = this.db.object(`conversations/${id}`);
 		return dbRef.remove();
+	}
+	guid() {
+		function s4() {
+			return Math.floor((1 + Math.random()) * 0x10000)
+				.toString(16)
+				.substring(1);
+		}
+		return (
+			s4() +
+			s4() +
+			"-" +
+			s4() +
+			"-" +
+			s4() +
+			"-" +
+			s4() +
+			"-" +
+			s4() +
+			s4() +
+			s4()
+		);
+	}
+	// generats a uniqueId for a relationship e.g. sent request and etc
+	uniqueRelId(from: string, to: string): string {
+		if (from <= to) {
+			return from.concat(to);
+		} else {
+			return to.concat(from);
+		}
 	}
 	/*
   getPicture(){

@@ -6,12 +6,10 @@ import {
 	AngularFirestoreDocument,
 	AngularFirestoreCollection
 } from "angularfire2/firestore";
-import { UtilService } from "./services";
 
 @Injectable()
 export class RequestService {
 	private requests: Request[];
-	private utilSrvc: UtilService;
 	constructor(private afs: AngularFirestore) {
 		this.requests = [];
 	}
@@ -28,6 +26,8 @@ export class RequestService {
 		//add the id to the seen in the backend
 	}
 	acceptFriendRequest(from: string, to: string): Promise<any> {
+		let messageId = this.guid();
+		let roomId = this.uniqueRelId(from, to);
 		/* make sure this is async method that returns
 		a success or failure that prompts a relevant
 		alert in the caller's UI
@@ -38,11 +38,31 @@ export class RequestService {
 		return new Promise((resolve, reject) => {
 			let newToContact: Contact = {
 				id: to,
-				dateAdded: new Date()
+				dateAdded: new Date(),
+				lastMessage: {
+					content: "Wuf Wuf! We're friends now!",
+					date: new Date(),
+					id: messageId,
+					senderId: "0",
+					roomId: roomId,
+					senderName: "Wuf Wuf",
+					senderImage: "assets/images/logo/logo.png",
+					seen: []
+				}
 			};
 			let newFromContact: Contact = {
 				id: from,
-				dateAdded: new Date()
+				dateAdded: new Date(),
+				lastMessage: {
+					content: "Wuf Wuf! We're friends now!",
+					date: new Date(),
+					id: messageId,
+					senderId: "0",
+					roomId: roomId,
+					senderName: "Wuf Wuf",
+					senderImage: "assets/images/logo/logo.png",
+					seen: []
+				}
 			};
 			this.cancelRequest(from, to)
 				.then(() => {
@@ -55,10 +75,7 @@ export class RequestService {
 									if (!user.contacts) {
 										user.contacts = [newToContact];
 									} else {
-										if (
-											this.utilSrvc.finInstance(user.contacts, newToContact) ==
-											-1
-										) {
+										if (this.finInstance(user.contacts, newToContact) == -1) {
 											user.contacts.push(newToContact);
 										}
 									}
@@ -77,7 +94,7 @@ export class RequestService {
 																user.contacts = [newFromContact];
 															} else {
 																if (
-																	this.utilSrvc.finInstance(
+																	this.finInstance(
 																		user.contacts,
 																		newFromContact
 																	) == -1
@@ -118,7 +135,7 @@ export class RequestService {
 
 	sendRequest(from: string, to: string) {
 		let newRequest: Request = {
-			id: this.utilSrvc.uniqueRelId(from, to),
+			id: this.uniqueRelId(from, to),
 			date: new Date(),
 			seen: [],
 			senderId: from,
@@ -134,9 +151,7 @@ export class RequestService {
 							if (!user.requestsSent) {
 								user.requestsSent = [newRequest];
 							} else {
-								if (
-									this.utilSrvc.finInstance(user.requestsSent, newRequest) == -1
-								) {
+								if (this.finInstance(user.requestsSent, newRequest) == -1) {
 									user.requestsSent.push(newRequest);
 								}
 							}
@@ -155,7 +170,7 @@ export class RequestService {
 														user.requestsReceived = [newRequest];
 													} else {
 														if (
-															this.utilSrvc.finInstance(
+															this.finInstance(
 																user.requestsReceived,
 																newRequest
 															) == -1
@@ -276,5 +291,45 @@ export class RequestService {
 	}
 	hasLiked(fromId: string, toId: string) {
 		// check the relationship whether current user is set to true or not while the other is not
+	}
+	guid() {
+		function s4() {
+			return Math.floor((1 + Math.random()) * 0x10000)
+				.toString(16)
+				.substring(1);
+		}
+		return (
+			s4() +
+			s4() +
+			"-" +
+			s4() +
+			"-" +
+			s4() +
+			"-" +
+			s4() +
+			"-" +
+			s4() +
+			s4() +
+			s4()
+		);
+	}
+	// generats a uniqueId for a relationship e.g. sent request and etc
+	uniqueRelId(from: string, to: string): string {
+		if (from <= to) {
+			return from.concat(to);
+		} else {
+			return to.concat(from);
+		}
+	}
+	finInstance(array: Array<any>, object): number {
+		array.forEach((ins, index) => {
+			if (this.deepEqual(ins, object)) {
+				return index;
+			}
+		});
+		return -1;
+	}
+	deepEqual(obj1, obj2) {
+		JSON.stringify(obj1) === JSON.stringify(obj2);
 	}
 }

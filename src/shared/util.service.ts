@@ -8,6 +8,7 @@ import { Message } from "../models/models";
   See https://angular.io/docs/ts/latest/guide/dependency-injection.html
   for more info on providers and Angular 2 DI.
 */
+@Injectable()
 export class UtilService {
 	constructor(public http: Http, public alertCtrl: AlertController) {
 		console.log("Hello UtilService Provider");

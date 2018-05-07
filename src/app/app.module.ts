@@ -41,6 +41,7 @@ import { PipeModule } from "../shared/pipe.module";
 import { ErrorHandler } from "@angular/core";
 import { IonicErrorHandler } from "ionic-angular";
 import { Geolocation } from "@ionic-native/geolocation";
+import { UtilService } from "./../shared/util.service";
 //import { Camera } from '@ionic-native/camera';
 import { Facebook } from "@ionic-native/facebook";
 import { ChatroomService } from "../services/services";
@@ -123,6 +124,7 @@ import { Environment } from "../environment/environment";
 		Geolocation,
 		AlertService,
 		FirestoreService,
+		UtilService,
 		{ provide: ErrorHandler, useClass: IonicErrorHandler }
 	]
 })

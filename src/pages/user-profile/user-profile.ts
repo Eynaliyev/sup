@@ -26,7 +26,6 @@ import {
 	]
 })
 export class UserProfilePage {
-	private utilSrvc: UtilService;
 	user: User;
 	currentUser: User;
 	tab: string = "vote";
@@ -44,7 +43,8 @@ export class UserProfilePage {
 		private userSrvc: UserService,
 		public authSrvc: AuthService,
 		private requestSrvc: RequestService,
-		public alertCtrl: AlertController
+		public alertCtrl: AlertController,
+		private utilSrvc: UtilService
 	) {
 		this.animateClass = { "zoom-in": true };
 	}

@@ -12,15 +12,17 @@ page-meet-somebody {
 			.meet-ppl-btn {
 				height: 80vh !important;
 				width: 88vw;
-				margin-top: 21vw;
 				margin-left: auto;
 				margin-right: auto;
 				text-align: center;
 			}
 		}
 		.meet-btn {
-			margin-top: -42vw;
 			background-color: universal !important;
+		}
+
+		button {
+			bottom: 72px;
 		}
 	}
 	/*

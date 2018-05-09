@@ -230,7 +230,7 @@
 			"ionic-plugin-deploy": {},
 			"cordova-plugin-facebook4": {
 				"APP_ID": "158451481343120",
-				"APP_NAME": "FlyChats"
+				"APP_NAME": "WufChat"
 			},
 			"cordova-plugin-nativestorage": {},
 			"cordova-plugin-google-analytics": {},
@@ -296,8 +296,6 @@
 			"cordova-plugin-firebase-analytics": {},
 			"nl.x-services.plugins.videocaptureplus": {}
 		},
-		"platforms": [
-			"ios"
-		]
+		"platforms": ["ios"]
 	}
 }

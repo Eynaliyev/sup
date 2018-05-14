@@ -15,7 +15,7 @@ page-login {
 		background: color($colors, light) !important;
 	}
 	ion-slides {
-		height: 80vh !important;
+		height: 100%;
 		width: 88vw;
 		margin-top: 10px;
 		margin-left: auto;
@@ -40,12 +40,13 @@ page-login {
 			#intro-logo img {
 				height: auto !important;
 				display: block;
-				width: 100%;
+				max-width: 400px;
 				height: auto;
 				margin-left: auto;
 				margin-right: auto;
 			}
 			.intro-img-screenshot {
+				max-width: 400px;
 				height: auto !important;
 				margin-left: auto;
 				margin-right: auto;
@@ -81,12 +82,13 @@ page-login {
 	}
 
 	div.buttons {
-		margin-top: 2vh;
+		position: fixed;
+		text-align: center;
+		bottom: 72px;
+		z-index: 100;
 		button {
 			color: color($colors, light);
-			font-size: 2.2rem;
 			width: 88vw;
-			height: 6.5vh;
 			border-radius: 0 !important;
 			margin-bottom: 1vh;
 		}

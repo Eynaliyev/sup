@@ -166,6 +166,8 @@
 		"cordova-sqlite-storage": "^2.3.0",
 		"cordova.plugins.diagnostic": "^4.0.4",
 		"firebase": "^4.12.1",
+		"firebase-admin": "^5.12.1",
+		"firebase-functions": "^1.0.2",
 		"firebase-tools": "^3.17.6",
 		"g": "^2.0.1",
 		"global": "^4.3.2",
@@ -296,6 +298,8 @@
 			"cordova-plugin-firebase-analytics": {},
 			"nl.x-services.plugins.videocaptureplus": {}
 		},
-		"platforms": ["ios"]
+		"platforms": [
+			"ios"
+		]
 	}
 }

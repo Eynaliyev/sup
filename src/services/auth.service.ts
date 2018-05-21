@@ -36,6 +36,11 @@ export class AuthService {
 	}
 	// Get the userData from Firestore of the logged in user on Firebase.
 	public getUserData(): Promise<User> {
+		this.http
+			.get("https://us-central1-huggable-9e981.cloudfunctions.net/test")
+			.subscribe(data => {
+				console.log("data", data);
+			});
 		return new Promise(resolve => {
 			if (this.user) {
 				resolve(this.user);

@@ -1,6 +1,6 @@
 import { UtilService } from "./../../shared/util.service";
-import { Component } from "@angular/core";
-import { NavController, NavParams } from "ionic-angular";
+import { Component, ViewChild } from "@angular/core";
+import { NavController, NavParams, Content } from "ionic-angular";
 import { UserService, AuthService } from "../../services/services";
 import { ChatroomService } from "../../services/services";
 import { User } from "../../models/user.model";
@@ -16,6 +16,7 @@ import { AlertController } from "ionic-angular";
 	templateUrl: "chatroom.html"
 })
 export class ChatroomPage {
+	@ViewChild(Content) content: Content;
 	users: any[] = [];
 	messages: any[] = [];
 	chatroomId: string;
@@ -67,7 +68,12 @@ export class ChatroomPage {
 				chatroom => {
 					console.log("chatroom loaded from firebase: ", chatroom);
 					this.chatroom = chatroom;
-					if (this.chatroom.maleParticipants && chatroom.femaleParticipants) {
+					if (!this.chatroom.maleParticipants && !chatroom.femaleParticipants) {
+						console.error("something wrong - no participants in the room");
+					} else if (
+						this.chatroom.maleParticipants &&
+						chatroom.femaleParticipants
+					) {
 						console.log("both male and female participants exist");
 						this.users = chatroom.maleParticipants.concat(
 							this.chatroom.femaleParticipants
@@ -91,7 +97,45 @@ export class ChatroomPage {
 	ionViewCanEnter() {
 		return this.authSrvc.isLoggedIn();
 	}*/
-	ionViewDidLoad() {}
+	//scrolls to bottom whenever the page has loaded
+	autoScroller: MutationObserver;
+
+	ngOnInit() {
+		this.autoScroller = this.autoScroll();
+	}
+
+	ngOnDestroy() {
+		this.autoScroller.disconnect();
+	}
+
+	autoScroll(): MutationObserver {
+		const autoScroller = new MutationObserver(this.scrollDown.bind(this));
+
+		autoScroller.observe(this.messagesList, {
+			childList: true,
+			subtree: true
+		});
+
+		return autoScroller;
+	}
+
+	scrollDown(): void {
+		this.scroller.scrollTop = this.scroller.scrollHeight;
+		this.messageEditor.focus();
+	}
+
+	private get messageEditor(): HTMLInputElement {
+		return <HTMLInputElement>document.querySelector("ion-input");
+	}
+
+	private get messagesList(): Element {
+		return document.querySelector(".messages");
+	}
+
+	private get scroller(): Element {
+		return this.messagesList.querySelector(".scroll-content");
+	}
+
 	ngAfterViewInit() {
 		return new Promise(resolve => {
 			let env = this;
@@ -175,7 +219,7 @@ export class ChatroomPage {
 			this.navCtrl.push(ParticipantsListPage, { participants: this.users });
 		} else {
 			const alert = this.alertCtrl.create({
-				title: "Sorry...",
+				title: "Wuf Wuf! Sorry Wuf",
 				message: "Can't access the particiapnts list.",
 				buttons: [
 					{

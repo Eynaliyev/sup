@@ -65,11 +65,11 @@ exports.joinChatroom = functions.database.ref(`waitlist/{userId}`)
 				//})
 				// count numbers of people of different genders
 				waitlist.forEach(user => {
-					user.gender == 'male' ? genderCount++ : oppositeGender++
+					user.gender == 'male' ? genderCount++ : oppositeGenderCount++
 				})
 				// create a new room if we have more than 3 people on the waitlist of both genders
 				if(oppositeGenderCount > 3 && genderCount > 3){
-					createNewRoom(waitlist);
+					exports.createNewRoom(waitlist);
 				} else {
 					//otherwise add the next user from the waitlist
 					//- a transaction so that we do not have conflicts when multiple chatrooms open up simultaneously

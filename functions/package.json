@@ -11,6 +11,9 @@
 	},
 	"main": "lib/index.js",
 	"dependencies": {
+		"@firebase/database": "^0.3.2",
+		"@firebase/firestore": "^0.5.3",
+		"firebase": "^5.0.3",
 		"firebase-admin": "^5.12.1",
 		"firebase-functions": "^1.0.2"
 	},

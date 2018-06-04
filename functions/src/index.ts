@@ -18,7 +18,7 @@ admin.initializeApp();
 exports.test = functions.https.onRequest((req, res) => {
 	res.send("Firebase Cloud Function test passed");
 });
-
+/*
 exports.joinChatroom = functions.database.ref(`waitlist/{userId}`)
     .onCreate((snapshot, context) => {
 			//getting the opposite gender
@@ -27,19 +27,19 @@ exports.joinChatroom = functions.database.ref(`waitlist/{userId}`)
 				const area;
 				const user;
 				// checking for nearest chatrooms
-				/*const userCoords = {
-					lat: event.data.latitude,
-					long: event.data.longitude
-				}
-				const chatrooms = getAvailableChatrooms(userCoords, 50)
-				.subcribe(res => res);
+				// const userCoords = {
+				// 	lat: event.data.latitude,
+				// 	long: event.data.longitude
+				// }
+				// const chatrooms = getAvailableChatrooms(userCoords, 50)
+				// .subcribe(res => res);
 
 
-				const messageValue = event.data.val();
+				// const messageValue = event.data.val();
 
-        const lowerCaseBody = messageValue.body.toLowerCase();
+        // const lowerCaseBody = messageValue.body.toLowerCase();
 
-				return event.data.ref.child('lowerCase').set(lowerCaseBody);*/
+				// return event.data.ref.child('lowerCase').set(lowerCaseBody);
 				const chatrooms = getLocations(area).slice(5);
 				//adds you to waitlist on all of them
 				chatrooms.array.forEach(element => {
@@ -79,15 +79,15 @@ exports.joinChatroom = functions.database.ref(`waitlist/{userId}`)
 		});
 		exports.personLeft = functions.database.ref(`waitlist/{userId}`)
     .onWrite((snapshot, context) => {
-		/*
-			leave chatroom
-			remov ethe user, if no users left, destroy the chatroom,
-			if 1 user left, add him to the waitlist with premium on.
 
-			otherwise add the next premium if there's one, or normal one from waitlist
-			recompute centroid
+			// leave chatroom
+			// remov ethe user, if no users left, destroy the chatroom,
+			// if 1 user left, add him to the waitlist with premium on.
 
-			*/
+			// otherwise add the next premium if there's one, or normal one from waitlist
+			// recompute centroid
+
+
 		});
 
 		exports.getAvailableChatrooms = function(userCoords, radius){
@@ -124,21 +124,21 @@ exports.joinChatroom = functions.database.ref(`waitlist/{userId}`)
 		}
 
 
-		/**
- * Get locations within a bounding box defined by a center point and distance from from the center point to the side of the box;
- *
- * @param {Object} area an object that represents the bounding box
- *    around a point in which locations should be retrieved
- * @param {Object} area.center an object containing the latitude and
- *    longitude of the center point of the bounding box
- * @param {number} area.center.latitude the latitude of the center point
- * @param {number} area.center.longitude the longitude of the center point
- * @param {number} area.radius (in kilometers) the radius of a circle
- *    that is inscribed in the bounding box;
- *    This could also be described as half of the bounding box's side length.
- * @return {Promise} a Promise that fulfills with an array of all the
- *    retrieved locations
- */
+//
+//  * Get locations within a bounding box defined by a center point and distance from from the center point to the side of the box;
+//  *
+//  * @param {Object} area an object that represents the bounding box
+//  *    around a point in which locations should be retrieved
+//  * @param {Object} area.center an object containing the latitude and
+//  *    longitude of the center point of the bounding box
+//  * @param {number} area.center.latitude the latitude of the center point
+//  * @param {number} area.center.longitude the longitude of the center point
+//  * @param {number} area.radius (in kilometers) the radius of a circle
+//  *    that is inscribed in the bounding box;
+//  *    This could also be described as half of the bounding box's side length.
+//  * @return {Promise} a Promise that fulfills with an array of all the
+//  *    retrieved locations
+//
 function getLocations(area) {
   // calculate the SW and NE corners of the bounding box to query for
   const box = utils.boundingBoxCoordinates(area.center, area.radius);
@@ -169,15 +169,15 @@ function getLocations(area) {
     });
 }
 
-/**
- * Calculates the distance, in kilometers, between two locations, via the
- * Haversine formula. Note that this is approximate due to the fact that
- * the Earth's radius varies between 6356.752 km and 6378.137 km.
- *
- * @param {Object} location1 The first location given as .latitude and .longitude
- * @param {Object} location2 The second location given as .latitude and .longitude
- * @return {number} The distance, in kilometers, between the inputted locations.
- */
+//
+//  * Calculates the distance, in kilometers, between two locations, via the
+//  * Haversine formula. Note that this is approximate due to the fact that
+//  * the Earth's radius varies between 6356.752 km and 6378.137 km.
+//  *
+//  * @param {Object} location1 The first location given as .latitude and .longitude
+//  * @param {Object} location2 The second location given as .latitude and .longitude
+//  * @return {number} The distance, in kilometers, between the inputted locations.
+//
 distance(location1, location2) {
   const radius = 6371; // Earth's radius in kilometers
   const latDelta = degreesToRadians(location2.latitude - location1.latitude);
@@ -191,13 +191,13 @@ distance(location1, location2) {
 
   return radius * c;
 }
-/**
- * Calculates the SW and NE corners of a bounding box around a center point for a given radius;
- *
- * @param {Object} center The center given as .latitude and .longitude
- * @param {number} radius The radius of the box (in kilometers)
- * @return {Object} The SW and NE corners given as .swCorner and .neCorner
- */
+//
+//  * Calculates the SW and NE corners of a bounding box around a center point for a given radius;
+//  *
+//  * @param {Object} center The center given as .latitude and .longitude
+//  * @param {number} radius The radius of the box (in kilometers)
+//  * @return {Object} The SW and NE corners given as .swCorner and .neCorner
+//
 boundingBoxCoordinates(center, radius) {
   const KM_PER_DEGREE_LATITUDE = 110.574;
   const latDegrees = radius / KM_PER_DEGREE_LATITUDE;
@@ -218,13 +218,13 @@ boundingBoxCoordinates(center, radius) {
     },
   };
 }
-/**
- * Calculates the number of degrees a given distance is at a given latitude.
- *
- * @param {number} distance The distance to convert.
- * @param {number} latitude The latitude at which to calculate.
- * @return {number} The number of degrees the distance corresponds to.
- */
+//
+//  * Calculates the number of degrees a given distance is at a given latitude.
+//  *
+//  * @param {number} distance The distance to convert.
+//  * @param {number} latitude The latitude at which to calculate.
+//  * @return {number} The number of degrees the distance corresponds to.
+//
 function metersToLongitudeDegrees(distance, latitude) {
   const EARTH_EQ_RADIUS = 6378137.0;
   // this is a super, fancy magic number that the GeoFire lib can explain (maybe)
@@ -240,12 +240,12 @@ function metersToLongitudeDegrees(distance, latitude) {
   // else
   return Math.min(360, distance / deltaDeg);
 }
-/**
- * Wraps the longitude to [-180,180].
- *
- * @param {number} longitude The longitude to wrap.
- * @return {number} longitude The resulting longitude.
- */
+//
+//  * Wraps the longitude to [-180,180].
+//  *
+//  * @param {number} longitude The longitude to wrap.
+//  * @return {number} longitude The resulting longitude.
+//
 function wrapLongitude(longitude) {
   if (longitude <= 180 && longitude >= -180) {
     return longitude;
@@ -260,3 +260,4 @@ function wrapLongitude(longitude) {
 function degreesToRadians(degrees) {
 	return (degrees * Math.PI)/180;
 }
+*/

@@ -1,4 +1,13 @@
-import { async, TestBed } from "@angular/core/testing";
+import { Injectable, Injector } from "@angular/core";
+import { async, fakeAsync, tick, TestBed } from "@angular/core/testing";
+import {
+	BaseRequestOptions,
+	ConnectionBackend,
+	Http,
+	RequestOptions
+} from "@angular/http";
+import { Response, ResponseOptions } from "@angular/http";
+import { MockBackend, MockConnection } from "@angular/http/testing";
 import { IonicModule, Platform } from "ionic-angular";
 import { UserService, AuthService } from "../services/services";
 import { MenuController } from "ionic-angular";
@@ -30,12 +39,12 @@ describe("MyApp Component", () => {
 		fixture = TestBed.createComponent(MyApp);
 		component = fixture.componentInstance;
 	});
-
-	it("should be created", () => {
+	
+	xit("should be created", () => {
 		expect(component instanceof MyApp).toBe(true);
 	});
-	/*
-	it('should have three pages', () => {
+	
+	xit('should have three pages', () => {
 		expect(component.pages.length).toBe(3);
-	});*/
+	});
 });

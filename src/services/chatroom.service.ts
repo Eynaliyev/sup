@@ -2,8 +2,7 @@ import { Injectable } from "@angular/core";
 // import {Http} from '@angular/http';
 import { AngularFireDatabase } from "angularfire2/database";
 import {
-	AngularFirestore,
-	AngularFirestoreCollection
+	AngularFirestore
 } from "angularfire2/firestore";
 import { Observable } from "rxjs/Observable";
 import "rxjs/add/operator/toPromise";
@@ -19,8 +18,7 @@ export class ChatroomService {
 	// private languages: Language[];
 	constructor(
 		// private http: Http,
-		private db: AngularFireDatabase,
-		private afs: AngularFirestore
+		private db: AngularFireDatabase
 	) {}
 	getAvailableChatrooms(location, language: Language): Observable<any[]> {
 		console.log("getAvailableChatrooms called");

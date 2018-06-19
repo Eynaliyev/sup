@@ -35,14 +35,14 @@ describe("ChatroomService", () => {
 		component = fixture.componentInstance;
 
 		service = de.injector.get(ChatroomService);
-		spy = spyOn(service, "getContent").and.returnValue(
+		spy = spyOn(service, "getAvailableChatrooms").and.returnValue(
 			of("You have been warned")
 		);
 
 		fixture.detectChanges();*/
 	});
 
-	xit("should call getContent one time and update the view", () => {
+	xit("should call getAvailableChatrooms one time and update the view", () => {
 		expect(spy).toHaveBeenCalled();
 		expect(spy.calls.all().length).toEqual(1);
 

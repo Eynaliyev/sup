@@ -10,7 +10,6 @@ page-login {
 		width: 8px !important;
 		height: 8px !important;
 	}
-
 	button.swiper-pagination-bullet-active {
 		background: color($colors, light) !important;
 	}
@@ -38,8 +37,7 @@ page-login {
 				margin-right: auto;
 				font-size: 14px;
 				width: 252px;
-				font-family: system-ui, -apple-system, BlinkMacSystemFont,
-					".SFNSText-Regular", sans-serif;
+				font-family: system-ui, -apple-system, BlinkMacSystemFont, ".SFNSText-Regular", sans-serif;
 			}
 			#intro-logo img {
 				height: auto !important;
@@ -76,23 +74,21 @@ page-login {
 		background: color($colors, light);
 		position: absolute;
 	}
-
 	div.filler-left {
 		left: 0;
 	}
-
 	div.filler-right {
 		right: 0;
 	}
-
 	div.buttons {
-		position: fixed;
 		text-align: center;
 		bottom: 72px;
 		z-index: 100;
 		button {
-			color: color($colors, light);
-			width: 88vw;
+			width: 75vw;
+			z-index: 100;
+			position: relative;
+			top: -11vw;
 			border-radius: 0 !important;
 			margin-bottom: 1vh;
 		}

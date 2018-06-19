@@ -147,7 +147,7 @@ export class AuthService {
 		}
 	}
 	signInWithGoogle() {
-		return this._firebaseAuth.auth.signInWithPopup(
+		return this._firebaseAuth.auth.signInWithRedirect(
 			new firebase.auth.GoogleAuthProvider()
 		);
 	}

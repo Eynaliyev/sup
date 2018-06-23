@@ -1,18 +1,18 @@
 page-waitlist {
 	ion-list {
-		margin-top: 33% !important;
-		position: relative;
+		margin: auto;
+		width: 100%;
+		top: 23%;
+		position: fixed;
 		.running-dog {
 			margin: auto;
 		}
 		.universal-btn {
 			text-align: center;
-			bottom: 72px;
-			z-index: 100;
 			width: 75vw;
+			margin: auto;
 			z-index: 100;
 			position: relative;
-			top: -11vw;
 			border-radius: 0 !important;
 			margin-bottom: 1vh;
 		}

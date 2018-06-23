@@ -38,14 +38,14 @@ export class WaitlistPage {
 		this.userSrvc.getCurrentUser()
 		.take(2)
 		.subscribe(user => {
-		this.chatroomSrvc
-			.joinChatroom(location, languages)
-			.subscribe(chatroom => {
-				let view = this.navCtrl.getActive();
-				if (view.component.name === "WaitlistPage") {
-					this.goToChatroom(chatroom.id);
-				}
-			});
+		// this.chatroomSrvc
+		// 	.joinChatroom(location, languages)
+		// 	.subscribe(chatroom => {
+		// 		let view = this.navCtrl.getActive();
+		// 		if (view.component.name === "WaitlistPage") {
+		// 			//this.goToChatroom(chatroom.id);
+		// 		}
+		// 	});
 		});
 	}
 	viewVIP() {
@@ -56,7 +56,7 @@ export class WaitlistPage {
 		this.app.getRootNav().push(FilterPage);
 	}
 	goToChatroom(chatroomId: string) {
-		this.navCtrl.push(ChatroomPage, { room: `${chatroomId}` });
+		//this.navCtrl.push(ChatroomPage, { room: `${chatroomId}` });
 	}
 	back() {
 		this.navCtrl.pop();

@@ -44,7 +44,7 @@ describe("LoginPage", () => {
 		authService = de.injector.get(AuthService);
 		userService = de.injector.get(UserService);
 		/*
-		spy = spyOn(chatroomService, "ionViewDidLoad").and.returnValue(
+		spy = spyOn(chatroomService, "facebookLogin").and.returnValue(
 			of("You have been warned")
 		);
 		spy = spyOn(userService, "getContent").and.returnValue(
@@ -54,7 +54,7 @@ describe("LoginPage", () => {
 		fixture.detectChanges();
 	});
 
-	xit("should call ionViewDidLoad one time and update the view", () => {
+	xit("should call facebookLogin one time and update the view", () => {
 		expect(spy).toHaveBeenCalled();
 		expect(spy.calls.all().length).toEqual(1);
 

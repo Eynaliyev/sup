@@ -1,4 +1,18 @@
 page-login {
+	@media screen and (max-width: 769px) {
+		ion-slide {
+			top: -11vw;
+		}
+		button {
+			top: -21vw
+		}
+	}
+	@media screen and (min-width: 769px) {
+		button {
+			top: -11vw;
+		}
+	}
+	@media screen and (max-width: 426px) {}
 	background-image: url("../assets/images/background/light-bckg1.png");
 	background-position: initial initial;
 	background-repeat: initial initial;
@@ -88,7 +102,6 @@ page-login {
 			width: 75vw;
 			z-index: 100;
 			position: relative;
-			top: -11vw;
 			border-radius: 0 !important;
 			margin-bottom: 1vh;
 		}

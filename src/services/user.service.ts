@@ -47,6 +47,7 @@ export class UserService {
 				if (user) {
 					this.currentUser.next(user);
 					localStorage.setItem("currentUser", JSON.stringify(user));
+					resolve(true);
 				} else {
 					//graph request, create new user with the return
 					this.fetchGraphData().then(parsedData => {

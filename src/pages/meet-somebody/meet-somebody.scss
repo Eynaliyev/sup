@@ -5,6 +5,11 @@ page-meet-somebody {
 	*:after {
 		box-sizing: inherit;
 	}
+	@media screen and (max-width: 500px) {
+		.meet-btn {
+			font-size: 21px
+		}
+	}
 	ion-list {
 		margin-top: 7% !important;
 		position: relative;

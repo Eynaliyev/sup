@@ -86,61 +86,7 @@ export class ChatroomPage {
 						this.users = chatroom.femaleParticipants;
 					}
 					this.newMessage.roomId = this.chatroom.id;
-					console.log("participants in the room: ", this.users);
-				},
-				err => {
-					console.error(err);
-				}
-			);
-	}
-	/*
-	ionViewCanEnter() {
-		return this.authSrvc.isLoggedIn();
-	}*/
-	//scrolls to bottom whenever the page has loaded
-	autoScroller: MutationObserver;
-
-	ngOnInit() {
-		this.autoScroller = this.autoScroll();
-	}
-
-	ngOnDestroy() {
-		this.autoScroller.disconnect();
-	}
-
-	autoScroll(): MutationObserver {
-		const autoScroller = new MutationObserver(this.scrollDown.bind(this));
-
-		autoScroller.observe(this.messagesList, {
-			childList: true,
-			subtree: true
-		});
-
-		return autoScroller;
-	}
-
-	scrollDown(): void {
-		this.scroller.scrollTop = this.scroller.scrollHeight;
-		this.messageEditor.focus();
-	}
-
-	private get messageEditor(): HTMLInputElement {
-		return <HTMLInputElement>document.querySelector("ion-input");
-	}
-
-	private get messagesList(): Element {
-		return document.querySelector(".messages");
-	}
-
-	private get scroller(): Element {
-		return this.messagesList.querySelector(".scroll-content");
-	}
-
-	ngAfterViewInit() {
-		return new Promise(resolve => {
-			let env = this;
-			this.chatroomService.getMessages(this.chatroomId, 10).subscribe(
-				newMessages => {
+					let newMessages = this.chatroom.messages;
 					console.log("newMessages: ", newMessages);
 					// add position property
 					let updatedMessages = this.utilSrvc.addMessagePosition(
@@ -153,29 +99,28 @@ export class ChatroomPage {
 					// add time passed since the mssage was sent
 					//res = this.utilSrvc.addMessageTimeSince(res);
 					// To Do : add sender name based on participants ID, or nothing
-					env.messages = [];
 					for (let i = 0; i < updatedMessages.length; i++) {
 						setTimeout(function() {
-							env.messages.push(updatedMessages[i]);
+							this.messages.push(updatedMessages[i]);
 						}, 100 * i);
 					}
-					resolve(true);
+					this.content.scrollToBottom(300); //300ms animation speed
+					console.log("participants in the room: ", this.users);
 				},
 				err => {
 					console.error(err);
 				}
 			);
-		});
 	}
+	/*
+	ionViewCanEnter() {
+		return this.authSrvc.isLoggedIn();
+	}*/
+
+	ngAfterViewInit() {}
 	exit() {
 		this.chatroomService.leaveChatroom(this.chatroomId, this.currentUser.id);
 		this.navCtrl.setRoot(MeetSomebodyPage);
-	}
-	doRefresh(infiniteScroll) {
-		//Begin async operation
-		this.ngAfterViewInit().then(() => {
-			infiniteScroll.complete();
-		});
 	}
 	goToUser(id) {
 		this.navCtrl.push(UserProfilePage, { user: id });

@@ -22,7 +22,8 @@ export class ChatroomService {
 	) {}
 	getAvailableChatrooms(location, language: Language): Observable<any[]> {
 		console.log("getAvailableChatrooms called");
-		let gender = JSON.parse(localStorage.getItem("currentUser")).gender;
+		//let gender = JSON.parse(localStorage.getItem("currentUser")).gender;
+		let gender = 'male';
 		let otherGender;
 		if (gender === "male") {
 			otherGender = "femaleParticipants";

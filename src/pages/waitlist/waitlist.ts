@@ -43,7 +43,7 @@ export class WaitlistPage {
 			.subscribe(chatroom => {
 				let view = this.navCtrl.getActive();
 				if (view.component.name === "WaitlistPage") {
-					//this.goToChatroom(chatroom.id);
+					this.goToChatroom(chatroom.id);
 				}
 			});
 		});

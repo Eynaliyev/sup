@@ -1,8 +1,6 @@
 page-login {
+	overflow-y: hidden;
 	@media screen and (max-width: 769px) {
-		ion-slide {
-			top: -11vw;
-		}
 		button {
 			top: -21vw
 		}
@@ -10,6 +8,11 @@ page-login {
 	@media screen and (min-width: 769px) {
 		button {
 			top: -11vw;
+		}
+	}
+	@media screen and (max-height: 813) {
+		ion-slide {
+			top: 21px;
 		}
 	}
 	@media screen and (max-width: 426px) {}

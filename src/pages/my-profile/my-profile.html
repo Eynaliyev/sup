@@ -21,7 +21,7 @@
 		<ion-card>
 			<img [src]="profilePhoto" />
 			<div class="card-title">{{currentUser.firstName}} {{currentUser.lastName}}</div>
-			<div class="card-subtitle">{{currentUser.location}}</div>
+			<div class="card-subtitle">{{currentUser.currentLocation}}</div>
 		</ion-card>
 		<ion-list>
 			<ion-item id="myProfile-textarea1">
@@ -34,7 +34,7 @@
 				<div id="meetSomebody-markdown2" class="show-list-numbers-and-dots">
 					<p style="margin-top:0px;color:#000000;">
 						<strong>
-							  {{currentUser.languages}}
+							{{currentUser.languages}}
 						</strong>
 					</p>
 				</div>

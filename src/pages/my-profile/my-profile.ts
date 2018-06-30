@@ -15,6 +15,7 @@ export class MyProfilePage {
 	image: any;
 	photos: any = [];
 	backGround: any;
+	languages: any[];
 	profilePhoto: string;
 
 	@ViewChild(Slides) slides: Slides;

@@ -131,7 +131,7 @@ export class AuthService {
 			provider.addScope("public_profile");
 			provider.addScope("user_birthday");
 
-			return this._firebaseAuth.auth.signInWithPopup(provider);
+			return this._firebaseAuth.auth.signInWithRedirect(provider);
 		} else {
 			// code for handling fb login when deployed to device with cordova
 			console.log(

@@ -22,7 +22,7 @@ export class MyApp {
 	@ViewChild(Nav) navCtrl: Nav;
 	private rootPage: any = LoginPage;
 	@ViewChild(Nav) nav: Nav;
-	private pages: any[];
+	public pages: any[] = [];
 	private activePage: any;
 	public currentUser: User;
 
@@ -37,10 +37,6 @@ export class MyApp {
 		//private storage: Storage,
 		private userSrvc: UserService
 	) {
-		platform.ready().then(() => {
-			// Okay, so the platform is ready and our plugins are available.
-			// Here you can do any higher level native things you might need.
-		});
 		this.pages = [
 			{
 				title: "Meet people Nearby",
@@ -62,25 +58,32 @@ export class MyApp {
       { title: 'Settings', component: SettingsPage, icon: 'ios-settings-outline' }
       */
 		];
+		platform.ready().then(() => {
+			// Okay, so the platform is ready and our plugins are available.
+			// Here you can do any higher level native things you might need.
+		});
 	}
 	ngOnInit() {
-		this.userSrvc.getCurrentUser().take(2).subscribe(
-			result => {
-				//getCurrentUser returns a subject so we need to check if there's actual value in it
-				if (result) {
-					this.currentUser = result;
-					console.log("current user :", this.currentUser);
-					this.rootPage = MeetSomebodyPage;
-				} else {
-					this.rootPage = LoginPage;
-					//this.storage.set('introShown', true);
+		this.userSrvc
+			.getCurrentUser()
+			.take(2)
+			.subscribe(
+				result => {
+					//getCurrentUser returns a subject so we need to check if there's actual value in it
+					if (result) {
+						this.currentUser = result;
+						console.log("current user :", this.currentUser);
+						this.rootPage = MeetSomebodyPage;
+					} else {
+						this.rootPage = LoginPage;
+						//this.storage.set('introShown', true);
+					}
+				},
+				err => {
+					console.error(err);
+					//this.loader.dismiss();
 				}
-			},
-			err => {
-				console.error(err);
-				//this.loader.dismiss();
-			}
-		);
+			);
 	}
 	openPage(page) {
 		// close the menu when clicking a link from the menu

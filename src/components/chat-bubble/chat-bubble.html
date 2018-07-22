@@ -5,13 +5,13 @@
 		</span>
 		<span>{{message.date | date}}</span>
 	</div>
-	<img class="profile-picture {{message.position}}" default="assets/images/other-assets/profile.png" [src]="message.senderImage"
+	<img class="profile-picture {{message.position}}" [src]="message.senderImage" onError="this.src='assets/images/other-assets/profile.png';"
 	  (click)="goToUser(message.senderId)">
 	<div class="light-text {{message.position}}">
 	</div>
 	<div class="chat-bubble {{message.position}}">
 		<div class="message">
-			<img src="{{ message.image }}" class="block" *ngIf="message.image" alt="" />
+			<img [src]="message.image" class="block" *ngIf="message.image" alt="">
 			<span id="message-content">{{message.content}}</span>
 		</div>
 	</div>

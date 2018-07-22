@@ -19,7 +19,7 @@
 				</ion-slide>
 			</ion-slides>-->
 		<ion-card>
-			<img [src]="profilePhoto" />
+			<img [src]="profilePhoto" onError="this.src='assets/images/other-assets/profile.png';">
 			<div class="card-title">{{currentUser.firstName}} {{currentUser.lastName}}</div>
 			<div class="card-subtitle">{{currentUser.currentLocation}}</div>
 		</ion-card>
@@ -57,11 +57,11 @@
 			<!--			<ion-item color="none" id="myProfile-list-item45">
 				University: {{currentUser.universityName}}
 			</ion-item>-->
-			<ion-row class="tall-spacer">
+			<!--<ion-row class="tall-spacer">
 				<button id="update-btn" ion-button color="universal" block (click)="updateProfile()">
 					Update Profile
 				</button>
-			</ion-row>
+			</ion-row>-->
 		</ion-list>
 	</div>
 </ion-content>

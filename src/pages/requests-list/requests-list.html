@@ -4,7 +4,7 @@
 	<ion-list class="venti-spacer" *ngIf="requests">
 		<ion-item [ngClass]="animateClass" class="" style="background-color: transparent;" *ngFor="let request of requests">
 			<ion-thumbnail item-left *ngIf="request.senderImage">
-				<img [src]="request.senderImage" class="profile-picture" default="assets/images/other-assets/profile.png">
+				<img [src]="request.senderImage" class="profile-picture" onError="this.src='assets/images/other-assets/profile.png';">
 			</ion-thumbnail>
 			<h2 style="text-transform: capitalize;">{{request.content}}
 				<span style="text-transform: capitalize;">
@@ -23,11 +23,11 @@
 			</ion-fab>
 		</ion-item>
 	</ion-list>
-	<span class="" (click)="toggleSentListVisibility()">Sent Requests</span>
+	<div class="grande center-text vert-center " (click)="toggleSentListVisibility()">Sent Requests</div>
 	<ion-list class="venti-spacer" *ngIf="sentListVisible">
 		<ion-item [ngClass]="animateClass" style="background-color: transparent;color: #cfcfcf !important;" *ngFor="let sentUser of user.requestsSent">
 			<ion-thumbnail item-left *ngIf="sentUser.imgUrl">
-				<img [src]="sentUser.imgUrl" class="profile-picture" default="assets/images/other-assets/profile.png">
+				<img [src]="sentUser.imgUrl" class="profile-picture" onError="this.src='assets/images/other-assets/profile.png';">
 			</ion-thumbnail>
 			<ion-fab class="right btn-top-align">
 				<button ion-fab color="light" (click)="removeRequest(sentUser.id)" class="menu-btn-border">
@@ -36,11 +36,11 @@
 			</ion-fab>
 		</ion-item>
 	</ion-list>
-	<span class="" (click)="toggleBlockListVisibility()">Blocked List</span>
+	<div class="grande center-text vert-center " (click)="toggleBlockListVisibility()">Blocked List</div>
 	<ion-list class="venti-spacer" *ngIf="blockedListVisible">
 		<ion-item [ngClass]="animateClass" style="background-color: transparent;color: #cfcfcf !important;" *ngFor="let blockedUser of user.blockedList">
 			<ion-thumbnail item-left *ngIf="blockedUser.imgUrl">
-				<img [src]="blockedUser.imgUrl" class="profile-picture" default="assets/images/other-assets/profile.png">
+				<img [src]="blockedUser.imgUrl" class="profile-picture" onError="this.src='assets/images/other-assets/profile.png';">
 			</ion-thumbnail>
 			<ion-fab class="right btn-top-align">
 				<button ion-fab color="light" (click)="unblock(blockedUser.id)" class="menu-btn-border">

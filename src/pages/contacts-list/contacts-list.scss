@@ -10,4 +10,11 @@ page-contacts-list {
 		background-color: transparent;
 		color: #cfcfcf !important;
 	}
+	.no-contact-msg {
+		color: white;
+		position: fixed;
+		width: 100%;
+		text-align: center;
+		top: 33%;
+	}
 }

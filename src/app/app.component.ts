@@ -20,7 +20,7 @@ import { User } from "../models/models";
 })
 export class MyApp {
 	@ViewChild(Nav) navCtrl: Nav;
-	private rootPage: any = LoginPage;
+	public rootPage: any = LoginPage;
 	@ViewChild(Nav) nav: Nav;
 	public pages: any[] = [];
 	private activePage: any;

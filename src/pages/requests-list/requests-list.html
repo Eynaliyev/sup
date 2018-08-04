@@ -23,7 +23,8 @@
 			</ion-fab>
 		</ion-item>
 	</ion-list>
-	<div class="grande center-text vert-center " (click)="toggleSentListVisibility()">Sent Requests</div>
+	<div class="grande center-text vert-center white-centered" (click)="toggleSentListVisibility()">Sent Requests</div>
+	<div *ngIf="user.requestsSent.length === 0" class="tall center-text white-centered">No sent requests</div>
 	<ion-list class="venti-spacer" *ngIf="sentListVisible">
 		<ion-item [ngClass]="animateClass" style="background-color: transparent;color: #cfcfcf !important;" *ngFor="let sentUser of user.requestsSent">
 			<ion-thumbnail item-left *ngIf="sentUser.imgUrl">
@@ -36,7 +37,8 @@
 			</ion-fab>
 		</ion-item>
 	</ion-list>
-	<div class="grande center-text vert-center " (click)="toggleBlockListVisibility()">Blocked List</div>
+	<div class="grande center-text vert-center white-centered" (click)="toggleBlockListVisibility()">Blocked List</div>
+	<div *ngIf="user.blockedList.length == 0" class="tall center-textwhite-centered">No blocked contacts</div>
 	<ion-list class="venti-spacer" *ngIf="blockedListVisible">
 		<ion-item [ngClass]="animateClass" style="background-color: transparent;color: #cfcfcf !important;" *ngFor="let blockedUser of user.blockedList">
 			<ion-thumbnail item-left *ngIf="blockedUser.imgUrl">

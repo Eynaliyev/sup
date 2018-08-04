@@ -11,8 +11,7 @@ export interface Participant {
 export class Chatroom {
 	constructor(
 		public id: string,
-		public femaleParticipants: Participant[],
-		public maleParticipants: Participant[],
+		public participants: Participant[],
 		public messages: Message[],
 		public language?: Language,
 		public blocked?: Participant[],

@@ -3,18 +3,15 @@ import { Message, UserGroup, Request } from "./models";
 interface VipStatus {
 	vip: boolean;
 	expiryDate: Date;
+	dateAdded: Date;
+	type: string;
 }
 interface Photo {
 	imgUrl: string;
-	title?: string;
 }
 export interface Language {
 	id: string;
 	name: string;
-}
-interface BlockedUser {
-	id: string;
-	date: Date;
 }
 interface Interest {
 	id: string;
@@ -26,7 +23,6 @@ export interface Contact {
 	dateAdded: Date;
 	lastMessage: Message;
 }
-
 interface SocialProfile {
 	networkName: string;
 	id: string;
@@ -34,34 +30,26 @@ interface SocialProfile {
 
 export class User {
 	constructor(
-		public id: string,
+		public about: string,
+		public birthday: string,
+		public contacts: Contact[],
+		public currentCoords: number[],
+		public currentLocation: string,
 		public email: string,
 		public firstName: string,
+		public gender: string,
+		public id: string,
+		public languages: Language[],
 		public lastName: string,
-		public about: string,
-		public contacts: Contact[],
-		public blockedList: BlockedUser[],
-		public requestsSent: Request[], //userIds whom you sent a contact request
-		public requestsReceived: Request[], //userIds who sent you a contact request
-		public groups: AngularFirestoreCollection<UserGroup>,
-		public pushToken: string,
-		public notifications: boolean,
-		public relationshipStatus?: string,
-		public universityName?: string,
-		public birthday?: string,
-		public gender?: string,
 		public company?: string,
-		public profession?: string,
-		public currentLocation?: string,
-		public currentCoords?: number[],
-		public currentRoomId?: string,
-		public socialProfiles?: SocialProfile[],
-		public profilePhoto?: Photo,
-		public photos?: Photo[],
 		public interests?: Interest[],
-		public warning?: string,
-		public languages?: Language[],
+		public profession?: string,
+		public profilePhoto?: Photo,
+		public relationshipStatus?: string,
 		public reputationScore?: number,
-		public vipStatus?: VipStatus
+		public socialProfiles?: SocialProfile[],
+		public universityName?: string,
+		public vipStatus?: VipStatus,
+		public warning?: string
 	) {}
 }

@@ -1,5 +1,5 @@
 import { AngularFirestoreCollection } from "angularfire2/firestore";
-import { Message, UserGroup, Request } from "./models";
+import { Message, Request } from "./models";
 interface VipStatus {
 	vip: boolean;
 	expiryDate: Date;
@@ -47,6 +47,7 @@ export class User {
 		public profilePhoto?: Photo,
 		public relationshipStatus?: string,
 		public reputationScore?: number,
+		public requests?: Request[],
 		public socialProfiles?: SocialProfile[],
 		public universityName?: string,
 		public vipStatus?: VipStatus,

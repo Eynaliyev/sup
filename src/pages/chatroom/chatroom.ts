@@ -16,7 +16,8 @@ import { AlertController } from "ionic-angular";
 	templateUrl: "chatroom.html"
 })
 export class ChatroomPage {
-	@ViewChild(Content) content: Content;
+	@ViewChild(Content)
+	content: Content;
 	users: any[] = [];
 	messages: any[] = [];
 	chatroomId: string;
@@ -30,10 +31,12 @@ export class ChatroomPage {
 		content: "",
 		date: new Date(),
 		id: this.uniqueId,
-		senderId: "",
+		sender: {
+			id: "",
+			name: "",
+			imageUrl: ""
+		},
 		roomId: "",
-		senderName: "",
-		senderImage: "",
 		seen: []
 	};
 	constructor(
@@ -57,9 +60,9 @@ export class ChatroomPage {
 			.take(2)
 			.switchMap(user => {
 				this.currentUser = user;
-				this.newMessage.senderId = this.currentUser.id;
-				this.newMessage.senderName = this.currentUser.firstName + " ";
-				this.newMessage.senderImage = this.currentUser.profilePhoto.imgUrl;
+				this.newMessage.sender.id = this.currentUser.id;
+				this.newMessage.sender.name = this.currentUser.firstName + " ";
+				this.newMessage.sender.imageUrl = this.currentUser.profilePhoto.imgUrl;
 				this.newMessage.seen.push(this.currentUser.id);
 				console.log("currentUser: ", this.currentUser);
 				return this.chatroomService.getChatroomById(this.chatroomId);
@@ -68,23 +71,7 @@ export class ChatroomPage {
 				chatroom => {
 					console.log("chatroom loaded from firebase: ", chatroom);
 					this.chatroom = chatroom;
-					if (!this.chatroom.maleParticipants && !chatroom.femaleParticipants) {
-						console.error("something wrong - no participants in the room");
-					} else if (
-						this.chatroom.maleParticipants &&
-						chatroom.femaleParticipants
-					) {
-						console.log("both male and female participants exist");
-						this.users = chatroom.maleParticipants.concat(
-							this.chatroom.femaleParticipants
-						);
-					} else if (this.chatroom.maleParticipants) {
-						console.log("only male participants exist");
-						this.users = chatroom.maleParticipants;
-					} else {
-						console.log("only female participants exist");
-						this.users = chatroom.femaleParticipants;
-					}
+					this.users = chatroom.participants; // TO DO: get all participants' info
 					this.newMessage.roomId = this.chatroom.id;
 					let newMessages = this.chatroom.messages;
 					console.log("newMessages: ", newMessages);

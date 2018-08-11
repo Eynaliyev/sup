@@ -15,7 +15,6 @@ export class Chatroom {
 		public messages: Message[],
 		public language?: Language,
 		public blocked?: Participant[],
-		public warnings?: Participant[],
-		public privateConversation?: boolean
+		public warnings?: Participant[]
 	) {}
 }

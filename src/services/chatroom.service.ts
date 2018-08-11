@@ -30,6 +30,7 @@ export class ChatroomService {
 		return obj;
 	}
 	joinChatroom(location, language: Language): Observable<any> {
+		//switch to using whatever we had
 		console.log("joinChatroom called");
 		//let gender = JSON.parse(localStorage.getItem("currentUser")).gender;
 		let gender = "male";

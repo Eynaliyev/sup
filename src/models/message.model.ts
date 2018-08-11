@@ -1,10 +1,14 @@
+export interface Sender {
+	id: string;
+	name: string;
+	imageUrl: string;
+}
+
 export class Message {
 	content: string;
 	date: Date;
 	id: string;
-	senderId: string;
 	roomId: string;
-	senderName: string;
-	senderImage: string;
+	sender: Sender;
 	seen: Array<string>;
 }

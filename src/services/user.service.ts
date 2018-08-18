@@ -7,7 +7,7 @@ import "rxjs/add/observable/forkJoin";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 import { Message, Chatroom } from "../models/models";
-import { User, Photo } from "../models/models";
+import { User, Photo, Contact, Request } from "../models/models";
 import {
 	AngularFirestore,
 	AngularFirestoreDocument,
@@ -31,7 +31,37 @@ export class UserService {
 	// get a specific User by id - that conforms to the user model
 	getUserById(id: string): Observable<any> {
 		//Observable<User> {
-		return this.afs.doc(`users/${id}`).valueChanges();
+		// gathering of info
+		// relationships
+		let relationshipsPromise = this.afs
+			.collection(`relationships`)
+			.doc(`${id}`)
+			.collection(`user-id`)
+			.ref.get();
+		// other user info
+		let userPromise = this.afs.doc(`/users/${id}`).ref.get();
+		let result: any = {};
+		let user = {};
+		let relationships = [];
+		return new Observable(observer => {
+			userPromise
+				.then((res: any) => {
+					user = res;
+					return relationshipsPromise;
+				})
+				.then(snapshot => {
+					snapshot.forEach(doc => {
+						relationships.push(doc);
+					});
+					//setting the other info
+					result["relationships"] = relationships;
+					//returning the end result
+					observer.next(result);
+				})
+				.catch(err => {
+					console.log("Error getting documents", err);
+				});
+		});
 	}
 	getCurrentUser(): ReplaySubject<User> {
 		return this.currentUser;
@@ -101,74 +131,76 @@ export class UserService {
 	}
 	// converts the backend user into the viewmodel of the user
 	toUser(data): User {
-		let relationshipsPromise = this.afs
-			.collection(`relationships/${data.id}/user-id`)
-			.valueChanges()
-			.toPromise();
-		let photosPromise = this.afs
-			.doc(`/users/${data.id}`)
-			.valueChanges()
-			.toPromise();
+		let contacts = data.relationships.filter(
+			el => el["relationshipType"] === "Friendship"
+		);
+		contacts = contacts.map((el: any) => this.relationshipToContact(el));
+		let requests = data.relationships.filter(
+			el =>
+				el["relationshipType"] === "RequestSent" ||
+				el["relationshipType"] === "RequestReceived" ||
+				el["relationshipType"] === "BlockSent"
+		);
+		requests = requests.map(el => this.relationshipToRequest(el));
 		let user = {
 			about: data.about ? data.about : "",
 			birthday: data.birthday ? data.birthday : "",
-			contacts: data.contacts ? data.contacts : [],
-			conversations: data.conversations ? data.conversations : [],
+			contacts: contacts ? contacts : [],
+			currentCoords: data.currentCoords ? data.currentCoords : [],
 			email: data.email ? data.email : "",
-			firstName: data.first_name,
+			firstName: data.first_name ? data.first_name : "",
 			gender: data.gender ? data.gender : "",
-			id: data.id,
-			lastName: data.last_name,
-			notifications: data.notifications ? data.notifications : [],
-			photos: data.picture.data.url
-				? [
-						{
-							imgUrl: data.picture.data.url
-						}
-				  ]
+			id: data.id ? data.id : "",
+			languages: data.languages ? data.languages : [],
+			lastName: data.lastName ? data.lastName : "",
+			company: data.company ? data.company : "",
+			currentLocation: data.currentLocation ? data.currentLocation : [],
+			interests: data.interests ? data.interests : [],
+			photos: data.photos
+				? data.photos.forEach(photo => {
+						photo = {
+							imgUrl: photo.imgUrl
+						};
+				  })
 				: [{ imgUrl: "" }],
-			profilePhoto: data.picture.data.url
+			profilePhoto: data.data.profilePhoto
 				? {
-						imgUrl: data.picture.data.url
+						imgUrl: data.profilePhoto.imgUrl
 				  }
 				: { imgUrl: "" },
-			pushToken: data.pushToken ? data.pushToken : [],
-			requests: data.requests ? data.requests : []
+			relationshipStatus: data.relationshipStatus
+				? data.relationshipStatus
+				: [],
+			reputationScore: data.reputationScore ? data.reputationScore : 0,
+			requests: requests ? requests : [],
+			socialProfiles: data.socialProfiles ? data.socialProfiles : [],
+			universityName: data.universityName ? data.universityName : "",
+			vipStatus: data.vipStatus ? data.vipStatus : {},
+			warning: data.warning ? data.warning : ""
 		};
-		photosPromise.then(el => {
-			el['photos'].forEach(el => {
-				user.photos.push({
-					imgUrl: el.photoUrl
-				});
-			});
-			return relationshipsPromise
-		}).then(relationships => {
-			relationships.map(el => el as any);
-			let contacts = relationships.filter(
-				el => el['relationshipType'] === "Friendship"
-			);
-			user.contacts = contacts.map(el => {
-				id:,
-				createdAt: ,
-				lastMessage:
-			});
-			let requests = relationships.filter(
-				el =>
-					el['relationshipType'] === "RequestSent" ||
-					el['relationshipType'] === "RequestReceived" ||
-					el['relationshipType'] === "BlockSent"
-			);
-			user.requests = requests.map(el => {
-
-			})
-		});
-
-
-
-
-
 		return user;
-	} /*
+	}
+	relationshipToContact(data: any): Contact {
+		let contact: Contact = {
+			id: data.id,
+			createdAt: data.createdAt,
+			lastMessage: data.lastMessage
+		};
+		return contact;
+	}
+	relationshipToRequest(data: any): Request {
+		//let senderId = data.relationshipType === this.currentUser.id ? this.currentUser.id :
+		let request: Request = {
+			id: data.id,
+			createdAt: data.createdAt,
+			seen: [],
+			senderId: data.relationshipType,
+			toUserId: data.toUserId,
+			requestType: data.relationshipType
+		};
+		return request;
+	}
+	/*
 	setProfilePicture(uid: string): Promise<any> {
 		console.log("setProfilePicture called");
 		// set picture to the larger one

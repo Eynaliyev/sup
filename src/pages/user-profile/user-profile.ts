@@ -49,7 +49,7 @@ export class UserProfilePage {
 		this.animateClass = { "zoom-in": true };
 	}
 	ionViewDidLoad() {
-		console.log(this.navParams.data);
+		//console.log(this.navParams.data);
 		this.authSrvc
 			.getUserData()
 			.then(curUsr => {

@@ -19,7 +19,61 @@ exports.test = functions.https.onRequest((req, res) => {
 	res.send("Firebase Cloud Function test passed");
 });
 //cloud function for creating user
+exports.createProfile = functions.auth
+	.user()
+	.onCreate((userRecord, context) => {
+		return admin
+			.database()
+			.ref(`/userProfile/${userRecord.uid}`)
+			.set({
+				email: userRecord.email,
+				rest: userRecord
+			});
+	});
+/*
+	// gathering of info
+	let relationshipsPromise = this.afs
+	.collection(`relationships`)
+	.doc(`${data.id}`)
+	.collection(`user-id`).ref.get()
+	.then(snapshot => {
+		snapshot.forEach(doc => {
+			console.log(doc.id, '=>', doc.data());
+		});
+	})
+	.catch(err => {
+		console.log('Error getting documents', err);
+	});
+let photosPromise = this.afs
+	.doc(`/users/${data.id}`)
+	.valueChanges()
+	.toPromise();
 
+	photosPromise
+	.then((el: any) => {
+		el["photos"].forEach(el => {
+			user.photos.push({
+				imgUrl: el.photoUrl
+			});
+		});
+		return relationshipsPromise;
+	})
+	.then(relationships => {
+		relationships.map((el: any) => el as any);
+		let contacts = relationships.filter(
+			el => el["relationshipType"] === "Friendship"
+		);
+		user.contacts = contacts.map((el: any) =>
+			this.relationshipToContact(el)
+		);
+		let requests = relationships.filter(
+			el =>
+				el["relationshipType"] === "RequestSent" ||
+				el["relationshipType"] === "RequestReceived" ||
+				el["relationshipType"] === "BlockSent"
+		);
+		user.requests = requests.map(el => this.relationshipToRequest(el));
+	});*/
 /*
 exports.joinChatroom = functions.database.ref(`waitlist/{userId}`)
     .onCreate((snapshot, context) => {

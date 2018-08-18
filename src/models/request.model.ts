@@ -8,7 +8,7 @@ enum RequestType {
 
 export class Request {
 	id: string;
-	date: Date;
+	createdAt: Date;
 	seen: Array<string>;
 	senderId: string;
 	toUserId: string;

@@ -58,24 +58,6 @@ export class FirestoreService {
 		return this.afs.doc("users/" + userId + "/conversations/" + partnerId);
 	}
 
-	// Get all groups on Firestore.
-	public getGroups(): AngularFirestoreCollection<{}> {
-		return this.afs.collection("groups");
-	}
-
-	// Get all groups of user on Firestore.
-	public getUserGroups(userId: string): AngularFirestoreCollection<{}> {
-		return this.afs.collection("users/" + userId + "/groups");
-	}
-
-	// Get group info of a user with the groupId on Firestore.
-	public getUserGroup(
-		userId: string,
-		groupId: string
-	): AngularFirestoreDocument<{}> {
-		return this.afs.doc("users/" + userId + "/groups/" + groupId);
-	}
-
 	// Get userData of a user given the username. Return the userData promise.
 	public getUserByUsername(username: string): Promise<User> {
 		return new Promise(resolve => {

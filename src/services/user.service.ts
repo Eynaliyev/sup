@@ -7,7 +7,7 @@ import "rxjs/add/observable/forkJoin";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 import { Message, Chatroom } from "../models/models";
-import { User } from "../models/models";
+import { User, Photo } from "../models/models";
 import {
 	AngularFirestore,
 	AngularFirestoreDocument,
@@ -45,16 +45,15 @@ export class UserService {
 			let uid = usr["uid"];
 			this.getUserById(uid).subscribe(user => {
 				if (user) {
-					this.currentUser.next(user);
+					let parsedUser = this.toUser(user);
+					this.currentUser.next(parsedUser);
 					localStorage.setItem("currentUser", JSON.stringify(user));
 					resolve(true);
 				} else {
 					//graph request, create new user with the return
 					this.fetchGraphData().then(parsedData => {
 						let userData = this.toUser(parsedData);
-						this.currentUser.next(userData);
-						localStorage.setItem("currentUser", JSON.stringify(userData));
-						this.createUser(parsedData)
+						this.createUser(userData)
 							.then(() => resolve(true))
 							.catch(error => this.handleError(error));
 					});
@@ -100,36 +99,74 @@ export class UserService {
 			.then(() => console.log("updating info: ", userData.id))
 			.catch(error => this.handleError(error));
 	}
+	// converts the backend user into the viewmodel of the user
 	toUser(data): User {
+		let relationshipsPromise = this.afs
+			.collection(`relationships/${data.id}/user-id`)
+			.valueChanges()
+			.toPromise();
+		let photosPromise = this.afs
+			.doc(`/users/${data.id}`)
+			.valueChanges()
+			.toPromise();
 		let user = {
-			id: data.id,
+			about: data.about ? data.about : "",
 			birthday: data.birthday ? data.birthday : "",
+			contacts: data.contacts ? data.contacts : [],
+			conversations: data.conversations ? data.conversations : [],
 			email: data.email ? data.email : "",
 			firstName: data.first_name,
-			lastName: data.last_name,
-			about: data.about ? data.about : "",
-			blockedList: data.blockedList ? data.blockedList : [],
-			contacts: data.contacts ? data.contacts : [],
-			requestsSent: data.requestsSent ? data.requestsSent : [],
-			requestsReceived: data.requestsReceived ? data.requestsReceived : [],
-			conversations: data.conversations ? data.conversations : [],
-			groups: data.groups ? data.groups : [],
-			pushToken: data.pushToken ? data.pushToken : [],
-			notifications: data.notifications ? data.notifications : [],
-			profilePhoto: data.picture.data.url
-				? {
-						imgUrl: data.picture.data.url
-				  }
-				: { imgUrl: "" },
 			gender: data.gender ? data.gender : "",
+			id: data.id,
+			lastName: data.last_name,
+			notifications: data.notifications ? data.notifications : [],
 			photos: data.picture.data.url
 				? [
 						{
 							imgUrl: data.picture.data.url
 						}
 				  ]
-				: [{ imgUrl: "" }]
+				: [{ imgUrl: "" }],
+			profilePhoto: data.picture.data.url
+				? {
+						imgUrl: data.picture.data.url
+				  }
+				: { imgUrl: "" },
+			pushToken: data.pushToken ? data.pushToken : [],
+			requests: data.requests ? data.requests : []
 		};
+		photosPromise.then(el => {
+			el['photos'].forEach(el => {
+				user.photos.push({
+					imgUrl: el.photoUrl
+				});
+			});
+			return relationshipsPromise
+		}).then(relationships => {
+			relationships.map(el => el as any);
+			let contacts = relationships.filter(
+				el => el['relationshipType'] === "Friendship"
+			);
+			user.contacts = contacts.map(el => {
+				id:,
+				createdAt: ,
+				lastMessage:
+			});
+			let requests = relationships.filter(
+				el =>
+					el['relationshipType'] === "RequestSent" ||
+					el['relationshipType'] === "RequestReceived" ||
+					el['relationshipType'] === "BlockSent"
+			);
+			user.requests = requests.map(el => {
+
+			})
+		});
+
+
+
+
+
 		return user;
 	} /*
 	setProfilePicture(uid: string): Promise<any> {
@@ -154,36 +191,30 @@ export class UserService {
 		let image = this.afs.doc(`users/${userId}/photos/${imageUrl}`);
 		return image.delete().catch(error => this.handleError(error));
 	}
-	updateLastMessage(
-		userId: string,
-		contactRoomId: string,
-		message: Message
-	): Promise<any> {
-		// the data in contacts list should be organised by room IDs
-		let lastMessage = this.afs.doc(
-			`users/${userId}/contacts/${contactRoomId}/last-message`
-		);
-		return lastMessage.update(message).catch(error => this.handleError(error));
-	}
 	//creates an individual room for the two users
 	createConversation(fromId: string, toId: string) {
 		let roomId = this.uniqueRelId(fromId, toId);
-		let dbRef = this.db.object(`chatrooms/${roomId}`);
-		let fromGender = JSON.parse(localStorage.getItem("currentUser")).gender;
-		let conversation: Chatroom = {
-			id: roomId,
-			femaleParticipants: [],
-			maleParticipants: [],
-			messages: [],
-			blocked: [],
-			warnings: [],
-			privateConversation: true
+		let dbRef = this.afs.doc(`chatrooms/${roomId}`);
+		this.getUserById(toId).subscribe(user => {
+			let conversation: any = {
+				createdAt: new Date(),
+				participants: [this.currentUser, user]
+			};
+			this.sendWelcomeConversationMessage(roomId);
+			return dbRef.set(conversation);
+		});
+	}
+	sendWelcomeConversationMessage(roomId) {
+		let defaultMessage = {
+			content: "you are now connected!",
+			createdAt: new Date(),
+			senderId: 1111
 		};
-		return dbRef.set(conversation);
+		this.db.list(`messages/${roomId}`).push(defaultMessage);
 	}
 	removeConversation(id) {
-		let dbRef = this.db.object(`conversations/${id}`);
-		return dbRef.remove();
+		let dbRef = this.afs.doc(`chatrooms/${id}`);
+		return dbRef.delete();
 	}
 	guid() {
 		function s4() {

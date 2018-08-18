@@ -130,12 +130,18 @@ export class AuthService {
 			provider.addScope("email");
 			provider.addScope("public_profile");
 			provider.addScope("user_birthday");
-
-			return this._firebaseAuth.auth.signInWithPopup(provider);
+			if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+				// some code..
+				console.log("we're on mobile")
+				return this._firebaseAuth.auth.signInWithRedirect(provider);
+			} else {
+				console.log("we're on desktop")
+				return this._firebaseAuth.auth.signInWithPopup(provider);
+			}
 		} else {
 			// code for handling fb login when deployed to device with cordova
 			console.log(
-				"we're on the device"
+				"we're on the device natively"
 			); /*
 			return this.facebook.login(['email', 'public_profile']).then( (response) => {
 				const facebookCredential = firebase.auth.FacebookAuthProvider

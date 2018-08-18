@@ -14,10 +14,12 @@ admin.initializeApp();
 // when the user is logged in / or looking to join a room -
 // do not allow if not returned the location
 // when creating chatroom save in the separate list in firestore
-
+// test function to tst that firebase functions are set up properly
 exports.test = functions.https.onRequest((req, res) => {
 	res.send("Firebase Cloud Function test passed");
 });
+//cloud function for creating user
+
 /*
 exports.joinChatroom = functions.database.ref(`waitlist/{userId}`)
     .onCreate((snapshot, context) => {

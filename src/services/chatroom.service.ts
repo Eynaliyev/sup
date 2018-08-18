@@ -1,28 +1,26 @@
 import { Injectable } from "@angular/core";
 // import {Http} from '@angular/http';
 import { AngularFireDatabase } from "angularfire2/database";
-import { AngularFirestore } from "angularfire2/firestore";
 import { Observable } from "rxjs/Observable";
 import "rxjs/add/operator/toPromise";
 import "rxjs/add/observable/forkJoin";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 import { Message, Chatroom, Language, Participant } from "../models/models";
+import {
+	AngularFirestore,
+	AngularFirestoreDocument,
+	AngularFirestoreCollection
+} from "angularfire2/firestore";
 
 @Injectable()
 export class ChatroomService {
-	// private messages: Message[];
-	// private chatrooms: Chatroom[];
-	// private languages: Language[];
-	constructor(
-		// private http: Http,
-		private db: AngularFireDatabase
-	) {}
+	constructor(private afs: AngularFirestore, private db: AngularFireDatabase) {}
 
 	getChatroomById(id: string): Observable<Chatroom> {
 		// get full detailed data of the required chatroom
-		return this.db
-			.object(`chatrooms/${id}`)
+		return this.afs
+			.doc(`chatrooms/${id}`)
 			.valueChanges()
 			.map(chatroom => this.toChatroom(chatroom));
 	}
@@ -43,8 +41,8 @@ export class ChatroomService {
 		// TO DO:
 		// 1. [ ] get all rooms
 		return new Observable(observer => {
-			this.db
-				.list(`chatrooms`)
+			this.afs
+				.doc(`chatrooms`)
 				.valueChanges()
 				.subscribe(chatrooms => {
 					observer.next(chatrooms[0]);
@@ -53,12 +51,12 @@ export class ChatroomService {
 	}
 	leaveChatroom(chatroomId: string, userId: string): Promise<any> {
 		// remove the user from participants list
-		let participant = this.db.object(
+		let participant = this.afs.doc(
 			`chatrooms/${chatroomId}/participants/${userId}`
 		);
 		return new Promise(resolve => {
 			participant
-				.remove()
+				.delete()
 				.then(() => {
 					resolve(true);
 				})
@@ -76,18 +74,16 @@ export class ChatroomService {
 			"with user id: ",
 			userId
 		);
-		let messageSeen = this.db.list(
-			`chatrooms/${chatroomId}/messages/${messageId}/seen`
-		);
+		let messageSeen = this.db.list(`messages/${chatroomId}/${messageId}/seen`);
 		messageSeen.push(userId);
 	}
 	sendMessage(chatroomId: string, message: Message) {
 		console.log("sending message: ", message);
-		let messageRef = this.db.list(`chatrooms/${chatroomId}/messages`);
+		let messageRef = this.db.list(`messages/${chatroomId}`);
 		messageRef.push(message);
 	}
 	// TO DO: implement actual paginated message getter function
 	getMessages(chatroomId: string, start?, end?): Observable<any[]> {
-		return this.db.list(`chatrooms/${chatroomId}/messages`).valueChanges();
+		return this.db.list(`messages/${chatroomId}`).valueChanges();
 	}
 }

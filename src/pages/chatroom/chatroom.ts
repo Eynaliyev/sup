@@ -169,18 +169,6 @@ export class ChatroomPage {
 	sendMessage() {
 		this.newMessage.date = new Date();
 		this.chatroomService.sendMessage(this.chatroomId, this.newMessage);
-		// if the chatroom is in contacts
-		if (
-			this.currentUser.contacts
-				.map(contact => contact.id)
-				.indexOf(this.chatroomId) !== -1
-		) {
-			this.userService.updateLastMessage(
-				this.currentUser.id,
-				this.chatroomId,
-				this.newMessage
-			);
-		}
 		this.newMessage.content = "";
 	}
 }

@@ -6,7 +6,7 @@ interface VipStatus {
 	dateAdded: Date;
 	type: string;
 }
-interface Photo {
+export interface Photo {
 	imgUrl: string;
 }
 export interface Language {
@@ -20,7 +20,7 @@ interface Interest {
 }
 export interface Contact {
 	id: string;
-	dateAdded: Date;
+	createdAt: Date;
 	lastMessage: Message;
 }
 interface SocialProfile {
@@ -43,6 +43,7 @@ export class User {
 		public lastName: string,
 		public company?: string,
 		public interests?: Interest[],
+		public photos?: Photo[],
 		public profession?: string,
 		public profilePhoto?: Photo,
 		public relationshipStatus?: string,

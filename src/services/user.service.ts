@@ -48,8 +48,7 @@ export class UserService {
 				} else {
 					//graph request, create new user with the return
 					this.fetchGraphData().then(parsedData => {
-						let userData = this.toUser(parsedData);
-						this.createUser(userData)
+						this.createUser(parsedData)
 							.then(() => resolve(true))
 							.catch(error => this.handleError(error));
 					});
@@ -74,10 +73,47 @@ export class UserService {
 			);
 		});
 	}
+	mapFbtoModel(data) {
+		let res = {
+			about: data.about ? data.about : "",
+			birthday: data.birthday ? data.birthday : "",
+			currentCoords: data.currentCoords ? data.currentCoords : [],
+			email: data.email ? data.email : "",
+			firstName: data.first_name ? data.first_name : "",
+			gender: data.gender ? data.gender : "",
+			id: data.id ? data.id : "",
+			languages: data.locale ? [data.locale] : [],
+			lastName: data.last_name ? data.last_name : "",
+			company: data.company ? data.company : "",
+			currentLocation: data.currentLocation ? data.currentLocation : [],
+			interests: data.interests ? data.interests : [],
+			photos: data.photos
+				? data.photos.forEach(photo => {
+						photo = {
+							imgUrl: photo.imgUrl
+						};
+				  })
+				: [{ imgUrl: "" }],
+			profilePhoto: data.picture.data.url
+				? {
+						imgUrl: data.picture.data.url
+				  }
+				: { imgUrl: "" },
+			relationshipStatus: data.relationshipStatus
+				? data.relationshipStatus
+				: [],
+			reputationScore: data.reputationScore ? data.reputationScore : 0,
+			socialProfiles: data.socialProfiles ? data.socialProfiles : [],
+			universityName: data.universityName ? data.universityName : "",
+			vipStatus: data.vipStatus ? data.vipStatus : {},
+			warning: data.warning ? data.warning : ""
+		};
+		return res;
+	}
 	// create user in firebase
 	createUser(userCredentials): Promise<any> {
 		// convert info to our model
-		let user = this.toUser(userCredentials);
+		let user = this.mapFbtoModel(userCredentials);
 		// set it in the backend
 		console.log("creating user: ", user);
 		return this.afs
@@ -102,7 +138,7 @@ export class UserService {
 			birthday: data.birthday ? data.birthday : "",
 			currentCoords: data.currentCoords ? data.currentCoords : [],
 			email: data.email ? data.email : "",
-			firstName: data.first_name ? data.first_name : "",
+			firstName: data.firstName ? data.firstName : "",
 			gender: data.gender ? data.gender : "",
 			id: data.id ? data.id : "",
 			languages: data.languages ? data.languages : [],
@@ -117,7 +153,7 @@ export class UserService {
 						};
 				  })
 				: [{ imgUrl: "" }],
-			profilePhoto: data.data.profilePhoto
+			profilePhoto: data.profilePhoto
 				? {
 						imgUrl: data.profilePhoto.imgUrl
 				  }

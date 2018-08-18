@@ -38,9 +38,9 @@
 		</ion-item>
 	</ion-list>
 	<div class="grande center-text vert-center white-centered" (click)="toggleBlockListVisibility()">Blocked List</div>
-	<div *ngIf="user.blockedList.length == 0" class="tall center-textwhite-centered">No blocked contacts</div>
+	<div *ngIf="blockedList.length == 0" class="tall center-textwhite-centered">No blocked contacts</div>
 	<ion-list class="venti-spacer" *ngIf="blockedListVisible">
-		<ion-item [ngClass]="animateClass" style="background-color: transparent;color: #cfcfcf !important;" *ngFor="let blockedUser of user.blockedList">
+		<ion-item [ngClass]="animateClass" style="background-color: transparent;color: #cfcfcf !important;" *ngFor="let blockedUser of blockedList">
 			<ion-thumbnail item-left *ngIf="blockedUser.imgUrl">
 				<img [src]="blockedUser.imgUrl" class="profile-picture" onError="this.src='assets/images/other-assets/profile.png';">
 			</ion-thumbnail>

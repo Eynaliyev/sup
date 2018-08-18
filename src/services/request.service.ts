@@ -13,14 +13,36 @@ export class RequestService {
 	constructor(private afs: AngularFirestore) {
 		this.requests = [];
 	}
-	// Get an object from Firestore by its path. For eg: firestore.get('users/' + userId) to get a user object.
-	public get(path: string): Promise<AngularFirestoreDocument<{}>> {
-		return new Promise(resolve => {
-			resolve(this.afs.doc(path));
+	getReceivedRequests(id: string): Observable<Request[]> {
+		let result = [];
+		return new Observable(observer => {
+			this.afs
+				.collection("relationships/")
+				.doc(`${id}`)
+				.collection("/user-id")
+				.valueChanges()
+				.subscribe(relationships => {
+					relationships.forEach(relationship => {
+						if (relationship["relationshipType"] === "RequestReceived") {
+							result.push(this.relationshipToRequest(relationship));
+						}
+					});
+					observer.next(result);
+				});
 		});
 	}
-	getReceivedRequests(id: string): AngularFirestoreCollection<Request> {
-		return this.afs.collection("users/" + id + "/requestsReceived");
+	relationshipToRequest(data: any): Request {
+		//let senderId = data.relationshipType === this.currentUser.id ? this.currentUser.id :
+		let request: Request = {
+			id: data.id,
+			createdAt: data.createdAt,
+			seen: [],
+			senderId: data.relationshipType,
+			toUserId: data.toUserId,
+			requestType: data.relationshipType,
+			imgUrl: data.imgUrl
+		};
+		return request;
 	}
 	updateRequestSeen(requestId: string, userId: string) {
 		//add the id to the seen in the backend
@@ -28,6 +50,7 @@ export class RequestService {
 	acceptFriendRequest(from: string, to: string): Promise<any> {
 		let messageId = this.guid();
 		let roomId = this.uniqueRelId(from, to);
+		//should add to this user's contacts in relationships and cloud function should do the rest
 		/* make sure this is async method that returns
 		a success or failure that prompts a relevant
 		alert in the caller's UI
@@ -36,31 +59,35 @@ export class RequestService {
 		*/
 		// Accept a contact request given the sender and receiver userId.
 		return new Promise((resolve, reject) => {
-			let newToContact: Contact = {
+			/*let newToContact: Contact = {
 				id: to,
-				dateAdded: new Date(),
+				createdAt: new Date(),
 				lastMessage: {
 					content: "Wuf Wuf! We're friends now!",
-					date: new Date(),
+					createdAt: new Date(),
 					id: messageId,
-					senderId: "0",
 					roomId: roomId,
-					senderName: "Wuf Wuf",
-					senderImage: "assets/images/logo/logo.png",
+					sender: {
+						id: "0",
+						name: "Wuf Wuf",
+						imageUrl: "assets/images/logo/logo.png"
+					},
 					seen: []
 				}
 			};
 			let newFromContact: Contact = {
 				id: from,
-				dateAdded: new Date(),
+				createdAt: new Date(),
 				lastMessage: {
 					content: "Wuf Wuf! We're friends now!",
-					date: new Date(),
+					createdAt: new Date(),
 					id: messageId,
-					senderId: "0",
 					roomId: roomId,
-					senderName: "Wuf Wuf",
-					senderImage: "assets/images/logo/logo.png",
+					sender: {
+						id: "0",
+						name: "Wuf Wuf",
+						imageUrl: "assets/images/logo/logo.png"
+					},
 					seen: []
 				}
 			};
@@ -129,20 +156,21 @@ export class RequestService {
 				})
 				.catch(() => {
 					reject();
-				});
+				});*/
 		});
 	}
 
 	sendRequest(from: string, to: string) {
 		let newRequest: Request = {
 			id: this.uniqueRelId(from, to),
-			date: new Date(),
+			createdAt: new Date(),
 			seen: [],
 			senderId: from,
-			toUserId: to
+			toUserId: to,
+			imgUrl: ""
 		};
 		return new Promise((resolve, reject) => {
-			this.get("users/" + from)
+			/*this.get("users/" + from)
 				.then(ref => {
 					ref
 						.valueChanges()
@@ -201,13 +229,13 @@ export class RequestService {
 				})
 				.catch(() => {
 					reject();
-				});
+				});*/
 		});
 	}
 	// Cancel a contact request given the sender and receiver userId.
 	cancelRequest(from: string, to: string): Promise<any> {
 		return new Promise((resolve, reject) => {
-			this.get("users/" + from)
+			/*this.get("users/" + from)
 				.then(ref => {
 					ref
 						.valueChanges()
@@ -267,7 +295,7 @@ export class RequestService {
 				})
 				.catch(() => {
 					reject();
-				});
+				});*/
 		});
 	}
 	block(id: string) {

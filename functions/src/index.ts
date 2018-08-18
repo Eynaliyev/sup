@@ -18,18 +18,6 @@ admin.initializeApp();
 exports.test = functions.https.onRequest((req, res) => {
 	res.send("Firebase Cloud Function test passed");
 });
-//cloud function for creating user
-exports.createProfile = functions.auth
-	.user()
-	.onCreate((userRecord, context) => {
-		return admin
-			.database()
-			.ref(`/userProfile/${userRecord.uid}`)
-			.set({
-				email: userRecord.email,
-				rest: userRecord
-			});
-	});
 /*
 	// gathering of info
 	let relationshipsPromise = this.afs

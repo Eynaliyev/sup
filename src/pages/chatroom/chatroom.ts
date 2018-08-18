@@ -1,7 +1,7 @@
 import { UtilService } from "./../../shared/util.service";
 import { Component, ViewChild } from "@angular/core";
 import { NavController, NavParams, Content } from "ionic-angular";
-import { UserService, AuthService } from "../../services/services";
+import { UserService } from "../../services/services";
 import { ChatroomService } from "../../services/services";
 import { User } from "../../models/user.model";
 import { Message } from "../../models/message.model";
@@ -29,7 +29,7 @@ export class ChatroomPage {
 
 	newMessage: Message = {
 		content: "",
-		date: new Date(),
+		createdAt: new Date(),
 		id: this.uniqueId,
 		sender: {
 			id: "",
@@ -45,7 +45,6 @@ export class ChatroomPage {
 		private userService: UserService,
 		private chatroomService: ChatroomService,
 		private alertCtrl: AlertController,
-		private authSrvc: AuthService,
 		private utilSrvc: UtilService
 	) {
 		let photoUrl = `../assets/images/background-${this.bckgImgNum}.jpg`;
@@ -167,7 +166,7 @@ export class ChatroomPage {
 		}
 	}
 	sendMessage() {
-		this.newMessage.date = new Date();
+		this.newMessage.createdAt = new Date();
 		this.chatroomService.sendMessage(this.chatroomId, this.newMessage);
 		this.newMessage.content = "";
 	}

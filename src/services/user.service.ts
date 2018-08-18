@@ -32,36 +32,7 @@ export class UserService {
 	getUserById(id: string): Observable<any> {
 		//Observable<User> {
 		// gathering of info
-		// relationships
-		let relationshipsPromise = this.afs
-			.collection(`relationships`)
-			.doc(`${id}`)
-			.collection(`user-id`)
-			.ref.get();
-		// other user info
-		let userPromise = this.afs.doc(`/users/${id}`).ref.get();
-		let result: any = {};
-		let user = {};
-		let relationships = [];
-		return new Observable(observer => {
-			userPromise
-				.then((res: any) => {
-					user = res;
-					return relationshipsPromise;
-				})
-				.then(snapshot => {
-					snapshot.forEach(doc => {
-						relationships.push(doc);
-					});
-					//setting the other info
-					result["relationships"] = relationships;
-					//returning the end result
-					observer.next(result);
-				})
-				.catch(err => {
-					console.log("Error getting documents", err);
-				});
-		});
+		return this.afs.doc(`/users/${id}`).valueChanges();
 	}
 	getCurrentUser(): ReplaySubject<User> {
 		return this.currentUser;
@@ -131,21 +102,9 @@ export class UserService {
 	}
 	// converts the backend user into the viewmodel of the user
 	toUser(data): User {
-		let contacts = data.relationships.filter(
-			el => el["relationshipType"] === "Friendship"
-		);
-		contacts = contacts.map((el: any) => this.relationshipToContact(el));
-		let requests = data.relationships.filter(
-			el =>
-				el["relationshipType"] === "RequestSent" ||
-				el["relationshipType"] === "RequestReceived" ||
-				el["relationshipType"] === "BlockSent"
-		);
-		requests = requests.map(el => this.relationshipToRequest(el));
 		let user = {
 			about: data.about ? data.about : "",
 			birthday: data.birthday ? data.birthday : "",
-			contacts: contacts ? contacts : [],
 			currentCoords: data.currentCoords ? data.currentCoords : [],
 			email: data.email ? data.email : "",
 			firstName: data.first_name ? data.first_name : "",
@@ -172,7 +131,6 @@ export class UserService {
 				? data.relationshipStatus
 				: [],
 			reputationScore: data.reputationScore ? data.reputationScore : 0,
-			requests: requests ? requests : [],
 			socialProfiles: data.socialProfiles ? data.socialProfiles : [],
 			universityName: data.universityName ? data.universityName : "",
 			vipStatus: data.vipStatus ? data.vipStatus : {},
@@ -180,26 +138,7 @@ export class UserService {
 		};
 		return user;
 	}
-	relationshipToContact(data: any): Contact {
-		let contact: Contact = {
-			id: data.id,
-			createdAt: data.createdAt,
-			lastMessage: data.lastMessage
-		};
-		return contact;
-	}
-	relationshipToRequest(data: any): Request {
-		//let senderId = data.relationshipType === this.currentUser.id ? this.currentUser.id :
-		let request: Request = {
-			id: data.id,
-			createdAt: data.createdAt,
-			seen: [],
-			senderId: data.relationshipType,
-			toUserId: data.toUserId,
-			requestType: data.relationshipType
-		};
-		return request;
-	}
+
 	/*
 	setProfilePicture(uid: string): Promise<any> {
 		console.log("setProfilePicture called");

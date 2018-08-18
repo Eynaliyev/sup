@@ -6,7 +6,7 @@ export interface Sender {
 
 export class Message {
 	content: string;
-	date: Date;
+	createdAt: Date;
 	id: string;
 	roomId: string;
 	sender: Sender;

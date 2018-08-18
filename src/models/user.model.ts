@@ -18,11 +18,6 @@ interface Interest {
 	name: string;
 	imgUrl?: string;
 }
-export interface Contact {
-	id: string;
-	createdAt: Date;
-	lastMessage: Message;
-}
 interface SocialProfile {
 	networkName: string;
 	id: string;
@@ -32,7 +27,6 @@ export class User {
 	constructor(
 		public about: string,
 		public birthday: string,
-		public contacts: Contact[],
 		public currentCoords: number[],
 		public email: string,
 		public firstName: string,
@@ -48,7 +42,6 @@ export class User {
 		public profilePhoto?: Photo,
 		public relationshipStatus?: string,
 		public reputationScore?: number,
-		public requests?: Request[],
 		public socialProfiles?: SocialProfile[],
 		public universityName?: string,
 		public vipStatus?: VipStatus,

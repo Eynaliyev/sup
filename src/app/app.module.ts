@@ -50,6 +50,7 @@ import { UserService } from "../services/services";
 import { AuthService } from "../services/services";
 import { NotificationService } from "../services/services";
 import { RequestService } from "../services/services";
+import { ContactService } from "../services/services";
 import { AngularFireDatabase } from "angularfire2/database";
 import { AlertService } from "../services/services";
 import { FirestoreService } from "../services/services";
@@ -116,6 +117,7 @@ import { Environment } from "../environment/environment";
 		//Camera,
 		Facebook,
 		AuthService,
+		ContactService,
 		UserService,
 		ChatroomService,
 		AngularFireDatabase,

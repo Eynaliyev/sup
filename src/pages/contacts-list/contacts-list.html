@@ -7,11 +7,11 @@
 		</button>
 	</ion-fab>
 	<span class="pageHeader">Messages</span>
-	<div *ngIf="users.length === 0" class="grande center-text vert-center no-contact-msg">No contacts yet, try meeting some new people</div>
-	<ion-list class="venti-spacer" *ngIf="users">
-		<ion-item [ngClass]="animateClass" *ngFor=" let user of users " (click)="openChat(user)">
+	<div *ngIf="contacts.length === 0" class="grande center-text vert-center no-contact-msg">No contacts yet, try meeting some new people</div>
+	<ion-list class="venti-spacer" *ngIf="contacts">
+		<ion-item [ngClass]="animateClass" *ngFor=" let user of contacts " (click)="openChat(user)">
 			<ion-thumbnail item-left>
-				<img [src]="user.profileImgUrl" class="profile-picture" onError="this.src='assets/images/other-assets/profile.png';">
+				<img [src]="user.imgUrl" class="profile-picture" onError="this.src='assets/images/other-assets/profile.png';">
 			</ion-thumbnail>
 			<h2 style="text-transform: capitalize;">{{user.name}}
 				<span style="text-transform: capitalize;">

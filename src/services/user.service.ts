@@ -6,13 +6,8 @@ import "rxjs/add/operator/toPromise";
 import "rxjs/add/observable/forkJoin";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
-import { Message, Chatroom } from "../models/models";
-import { User, Photo, Contact, Request } from "../models/models";
-import {
-	AngularFirestore,
-	AngularFirestoreDocument,
-	AngularFirestoreCollection
-} from "angularfire2/firestore";
+import { User } from "../models/models";
+import { AngularFirestore } from "angularfire2/firestore";
 import { AngularFireDatabase } from "angularfire2/database";
 
 import { ReplaySubject } from "rxjs/ReplaySubject";

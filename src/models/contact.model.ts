@@ -5,4 +5,5 @@ export interface Contact {
 	createdAt: Date;
 	imgUrl: string;
 	lastMessage: Message;
+	name: string;
 }

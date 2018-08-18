@@ -1,4 +1,8 @@
-import { AuthService } from "./../../services/auth.service";
+import {
+	AuthService,
+	ContactService,
+	RequestService
+} from "../../services/services";
 import { Component } from "@angular/core";
 import { NavController } from "ionic-angular";
 import { ChatroomPage } from "../pages";
@@ -10,13 +14,19 @@ import { Contact, Request } from "../../models/models";
 	templateUrl: "contacts-list.html"
 })
 export class ContactsListPage {
-	users: Contact[] = [];
+	contacts: Contact[] = [];
 	animateClass: any;
 	currentUser: User;
 	newRequests: boolean = false;
 	requestsReceived: Request[] = [];
+	allRequests: Request[] = [];
 
-	constructor(private navCtrl: NavController, private authSrvc: AuthService) {
+	constructor(
+		private navCtrl: NavController,
+		public authSrvc: AuthService,
+		public contactSrvc: ContactService,
+		public requestSrvc: RequestService
+	) {
 		console.log("ContactsListPage initialized");
 		this.animateClass = { "zoom-in": true };
 	} /*
@@ -29,12 +39,18 @@ export class ContactsListPage {
 			let env = this;
 			this.authSrvc.getUserData().then(
 				user => {
-					this.requestsReceived = user.requests.filter(
-						el => el["relationshipType"] === "RequestReceived"
-					);
 					this.currentUser = user;
+					this.contactSrvc.getContacts(user.id).subscribe(contacts => {
+						this.contacts = contacts;
+					});
+					this.requestSrvc.getReceivedRequests(user.id).subscribe(requests => {
+						this.allRequests = requests;
+						this.requestsReceived = requests.filter(
+							el => el.requestType === "RequestReceived"
+						);
+					});
 					// setting contacts
-					let contacts = user.contacts.sort((first, second) => {
+					let contacts = this.contacts.sort((first, second) => {
 						return (
 							second.lastMessage.createdAt.getTime() -
 							first.lastMessage.createdAt.getTime()
@@ -42,8 +58,8 @@ export class ContactsListPage {
 					});
 					for (let i = 0; i < contacts.length; i++) {
 						setTimeout(function() {
-							env.users.push(contacts[i]);
-							console.log("contacts in contactsList: ", env.users);
+							env.contacts.push(contacts[i]);
+							console.log("contacts in contactsList: ", env.contacts);
 						}, 100 * i);
 					}
 					// checking for new requests
@@ -68,7 +84,7 @@ export class ContactsListPage {
 		});
 	}
 	viewRequests() {
-		this.navCtrl.push(RequestsListPage);
+		this.navCtrl.push(RequestsListPage, { requests: this.allRequests });
 	}
 	openChat(user) {
 		this.navCtrl.push(ChatroomPage, { room: user.roomId });

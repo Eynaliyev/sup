@@ -1,6 +1,6 @@
 import { AuthService } from "./../../services/auth.service";
 import { Component } from "@angular/core";
-import { NavController } from "ionic-angular";
+import { NavController, NavParams } from "ionic-angular";
 import { UserService } from "../../services/services";
 import { RequestService } from "../../services/services";
 import { User, Request } from "../../models/models";
@@ -20,9 +20,11 @@ export class RequestsListPage {
 	unblockAlertPresented: boolean = false;
 	blockedListVisible: boolean = false;
 	sentListVisible: boolean = false;
+	blockedList: Request[] = [];
 
 	constructor(
 		public navCtrl: NavController,
+		private navParams: NavParams,
 		private requestsSrvc: RequestService,
 		private userSrvc: UserService,
 		public authSrvc: AuthService,
@@ -37,26 +39,21 @@ export class RequestsListPage {
 			let env = this;
 			this.authSrvc.getUserData().then(user => {
 				this.currentUser = user;
-				this.requestsSrvc
-					.getReceivedRequests(user.id)
-					.valueChanges()
-					.subscribe(requests => {
-						let res = requests.sort((first, second) => {
-							return second.date.getTime() - first.date.getTime();
-						});
-						for (let i = 0; i < res.length; i++) {
-							setTimeout(function() {
-								env.requests.push(res[i]);
-							}, 100 * i);
-						}
-						// make sure the requests are seen
-						for (let i = 0; i < this.requests.length; i++) {
-							this.requestsSrvc.updateRequestSeen(
-								this.requests[i].id,
-								this.currentUser.id
-							);
-						}
-					});
+				let res = this.navParams.get("requests").sort((first, second) => {
+					return second.createdAt.getTime() - first.date.getTime();
+				});
+				for (let i = 0; i < res.length; i++) {
+					setTimeout(function() {
+						env.requests.push(res[i]);
+					}, 100 * i);
+				}
+				// make sure the requests are seen
+				for (let i = 0; i < this.requests.length; i++) {
+					this.requestsSrvc.updateRequestSeen(
+						this.requests[i].id,
+						this.currentUser.id
+					);
+				}
 			});
 		});
 	}
@@ -67,7 +64,7 @@ export class RequestsListPage {
 		});
 	}
 	toggleBlockListVisibility() {
-		console.log("toggled BlockListVisibility: ", this.currentUser.blockedList);
+		console.log("toggled BlockListVisibility: ", this.blockedList);
 		this.blockedListVisible != this.blockedListVisible;
 	}
 	accept(id: string) {

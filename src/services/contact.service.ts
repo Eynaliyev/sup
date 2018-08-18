@@ -14,11 +14,6 @@ export class ContactService {
 		this.contacts = [];
 	}
 	// Get an object from Firestore by its path. For eg: firestore.get('users/' + userId) to get a user object.
-	public get(path: string): Promise<AngularFirestoreDocument<{}>> {
-		return new Promise(resolve => {
-			resolve(this.afs.doc(path));
-		});
-	}
 	getContacts(id: string): Observable<Contact[]> {
 		let result = [];
 		return new Observable(observer => {
@@ -42,7 +37,8 @@ export class ContactService {
 			id: data.id,
 			createdAt: data.createdAt,
 			lastMessage: data.lastMessage,
-			imgUrl: data.imgUrl
+			imgUrl: data.imgUrl,
+			name: data.name
 		};
 		return contact;
 	}

@@ -40,7 +40,8 @@ export class RequestService {
 			senderId: data.relationshipType,
 			toUserId: data.toUserId,
 			requestType: data.relationshipType,
-			imgUrl: data.imgUrl
+			imgUrl: data.imgUrl,
+			name: data.name
 		};
 		return request;
 	}
@@ -167,7 +168,8 @@ export class RequestService {
 			seen: [],
 			senderId: from,
 			toUserId: to,
-			imgUrl: ""
+			imgUrl: "",
+			name: ""
 		};
 		return new Promise((resolve, reject) => {
 			/*this.get("users/" + from)

@@ -42,4 +42,12 @@ export class ContactService {
 		};
 		return contact;
 	}
+	isFriend(otherUsr) {
+		this.contacts.forEach(contact => {
+			if (contact.id === otherUsr.id) {
+				return true;
+			}
+			return false;
+		});
+	}
 }

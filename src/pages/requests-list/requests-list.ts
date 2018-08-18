@@ -21,6 +21,8 @@ export class RequestsListPage {
 	blockedListVisible: boolean = false;
 	sentListVisible: boolean = false;
 	blockedList: Request[] = [];
+	public requestsSent: Request[] = [];
+	public requestsReceived: Request[] = [];
 
 	constructor(
 		public navCtrl: NavController,
@@ -47,6 +49,12 @@ export class RequestsListPage {
 						env.requests.push(res[i]);
 					}, 100 * i);
 				}
+				this.requestsSent = this.requests.filter(
+					el => el.requestType === "RequestSent"
+				);
+				this.requestsReceived = this.requests.filter(
+					el => el.requestType === "RequestReceived"
+				);
 				// make sure the requests are seen
 				for (let i = 0; i < this.requests.length; i++) {
 					this.requestsSrvc.updateRequestSeen(
@@ -66,6 +74,10 @@ export class RequestsListPage {
 	toggleBlockListVisibility() {
 		console.log("toggled BlockListVisibility: ", this.blockedList);
 		this.blockedListVisible != this.blockedListVisible;
+	}
+	toggleSentListVisibility() {
+		console.log("toggled SentListVisibility: ", this.requestsSent);
+		this.sentListVisible != this.sentListVisible;
 	}
 	accept(id: string) {
 		if (!this.likeAlertPresented) {

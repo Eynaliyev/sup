@@ -1,8 +1,12 @@
 import { AuthService } from "./../../services/auth.service";
 import { Component } from "@angular/core";
 import { NavController, NavParams } from "ionic-angular";
-import { UserService, RequestService } from "../../services/services";
-import { User } from "../../models/models";
+import {
+	UserService,
+	RequestService,
+	ContactService
+} from "../../services/services";
+import { User, Contact } from "../../models/models";
 import { UtilService } from "../../shared/util.service";
 import { AlertController } from "ionic-angular";
 import {
@@ -36,12 +40,14 @@ export class UserProfilePage {
 	likeAlertPresented: boolean = false;
 	unlikeAlertPresented: boolean = false;
 	blockAlertPresented: boolean = false;
+	contacts: Contact[] = [];
 
 	constructor(
 		private navCtrl: NavController,
 		private navParams: NavParams,
 		private userSrvc: UserService,
 		public authSrvc: AuthService,
+		public contactSrvc: ContactService,
 		private requestSrvc: RequestService,
 		public alertCtrl: AlertController,
 		private utilSrvc: UtilService
@@ -62,11 +68,7 @@ export class UserProfilePage {
 						this.user = userInfo;
 						if (this.requestSrvc.hasLiked(this.currentUser.id, userInfo.id)) {
 							this.requested = true;
-						} else if (
-							this.currentUser.contacts.forEach(
-								contact => contact.id === this.user.id
-							)
-						) {
+						} else if (this.contactSrvc.isFriend(userInfo.id)) {
 							this.friend = true;
 						}
 					},
@@ -75,6 +77,9 @@ export class UserProfilePage {
 			})
 			.catch(err => console.log(err));
 		console.log("ionViewDidLoad UserProfilePage");
+		this.contactSrvc
+			.getContacts(this.currentUser.id)
+			.subscribe(contacts => (this.contacts = contacts));
 	}
 	changeImage(image) {
 		console.log("changeImage called, but needs to be implements");
@@ -146,11 +151,7 @@ export class UserProfilePage {
 		if (!this.unlikeAlertPresented) {
 			// alert
 			let message = "Are you sure?";
-			if (
-				this.currentUser.contacts.forEach(
-					contact => contact.id === this.user.id
-				)
-			) {
+			if (this.contacts.forEach(contact => contact.id === this.user.id)) {
 				message = "Do you want to cancel your friend request?";
 			} else {
 				message = "Do you want to remove user from your contacts list?";

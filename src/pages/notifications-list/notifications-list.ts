@@ -34,7 +34,7 @@ export class NotificationsListPage {
 					.getNotifications(user.id)
 					.subscribe(notifications => {
 						let res = notifications.sort((first, second) => {
-							return second.date.getTime() - first.date.getTime();
+							return second.createdAt.getTime() - first.createdAt.getTime();
 						});
 						for (let i = 0; i < res.length; i++) {
 							setTimeout(function() {

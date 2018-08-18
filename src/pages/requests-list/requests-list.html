@@ -1,12 +1,12 @@
 <ion-content>
 	<back-button></back-button>
 	<span class="pageHeader">Friend Requests</span>
-	<ion-list class="venti-spacer" *ngIf="requests">
-		<ion-item [ngClass]="animateClass" class="" style="background-color: transparent;" *ngFor="let request of requests">
-			<ion-thumbnail item-left *ngIf="request.senderImage">
-				<img [src]="request.senderImage" class="profile-picture" onError="this.src='assets/images/other-assets/profile.png';">
+	<ion-list class="venti-spacer" *ngIf="requestsReceived">
+		<ion-item [ngClass]="animateClass" class="" style="background-color: transparent;" *ngFor="let request of requestsReceived">
+			<ion-thumbnail item-left *ngIf="request.imgUrl">
+				<img [src]="request.imgUrl" class="profile-picture" onError="this.src='assets/images/other-assets/profile.png';">
 			</ion-thumbnail>
-			<h2 style="text-transform: capitalize;">{{request.content}}
+			<h2 style="text-transform: capitalize;">{{request.name}}
 				<span style="text-transform: capitalize;">
 					<img *ngIf="request.seen.indexOf(currentUser.id) === -1" class="notification" src="http://www.clker.com/cliparts/r/M/L/o/R/i/green-dot.svg.med.png">
 				</span>
@@ -24,9 +24,9 @@
 		</ion-item>
 	</ion-list>
 	<div class="grande center-text vert-center white-centered" (click)="toggleSentListVisibility()">Sent Requests</div>
-	<div *ngIf="user.requestsSent.length === 0" class="tall center-text white-centered">No sent requests</div>
+	<div *ngIf="requestsSent.length === 0" class="tall center-text white-centered">No sent requests</div>
 	<ion-list class="venti-spacer" *ngIf="sentListVisible">
-		<ion-item [ngClass]="animateClass" style="background-color: transparent;color: #cfcfcf !important;" *ngFor="let sentUser of user.requestsSent">
+		<ion-item [ngClass]="animateClass" style="background-color: transparent;color: #cfcfcf !important;" *ngFor="let sentUser of requestsSent">
 			<ion-thumbnail item-left *ngIf="sentUser.imgUrl">
 				<img [src]="sentUser.imgUrl" class="profile-picture" onError="this.src='assets/images/other-assets/profile.png';">
 			</ion-thumbnail>

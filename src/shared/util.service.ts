@@ -95,7 +95,7 @@ export class UtilService {
 		let res = [];
 		for (var i = 0; i < messages.length; i++) {
 			res.push(messages[i]);
-			res[i].time = this.timeSince(messages[i].date);
+			res[i].time = this.timeSince(messages[i].createdAt);
 		}
 		return res;
 	}

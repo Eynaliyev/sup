@@ -14,4 +14,5 @@ export class Request {
 	toUserId: string;
 	requestType?: RequestType;
 	imgUrl: string;
+	name: string;
 }

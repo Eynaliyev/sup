@@ -37,8 +37,9 @@ export class ContactsListPage {
 	ngAfterViewInit() {
 		return new Promise(resolve => {
 			let env = this;
-			this.authSrvc.getUserData().then(
-				user => {
+			this.authSrvc
+				.getUserData()
+				.then(user => {
 					this.currentUser = user;
 					this.contactSrvc.getContacts(user.id).subscribe(contacts => {
 						this.contacts = contacts;
@@ -70,18 +71,21 @@ export class ContactsListPage {
 							this.newRequests = true;
 						}
 					}
-				},
-				err => {
-					console.error(err);
-				}
-			);
+				})
+				.catch(err => {
+					console.log("Error:", err);
+				});
 		});
 	}
 	doInfinite(infiniteScroll) {
 		//Begin async operation
-		this.ngAfterViewInit().then(() => {
-			infiniteScroll.complete();
-		});
+		this.ngAfterViewInit()
+			.then(() => {
+				infiniteScroll.complete();
+			})
+			.catch(err => {
+				console.log("Error:", err);
+			});
 	}
 	viewRequests() {
 		this.navCtrl.push(RequestsListPage, { requests: this.allRequests });

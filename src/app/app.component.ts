@@ -19,9 +19,11 @@ import { User } from "../models/models";
 	templateUrl: "app.component.html"
 })
 export class MyApp {
-	@ViewChild(Nav) navCtrl: Nav;
+	@ViewChild(Nav)
+	navCtrl: Nav;
 	public rootPage: any = LoginPage;
-	@ViewChild(Nav) nav: Nav;
+	@ViewChild(Nav)
+	nav: Nav;
 	public pages: any[] = [];
 	private activePage: any;
 	public currentUser: User;
@@ -58,10 +60,15 @@ export class MyApp {
       { title: 'Settings', component: SettingsPage, icon: 'ios-settings-outline' }
       */
 		];
-		platform.ready().then(() => {
-			// Okay, so the platform is ready and our plugins are available.
-			// Here you can do any higher level native things you might need.
-		});
+		platform
+			.ready()
+			.then(() => {
+				// Okay, so the platform is ready and our plugins are available.
+				// Here you can do any higher level native things you might need.
+			})
+			.catch(err => {
+				console.log("Error:", err);
+			});
 	}
 	ngOnInit() {
 		this.userSrvc
@@ -97,7 +104,12 @@ export class MyApp {
 	}
 	logout() {
 		//add actual logging out and locaStorage clearing
-		this.authSrvc.logout().then(res => this.navCtrl.setRoot(LoginPage));
+		this.authSrvc
+			.logout()
+			.then(() => this.navCtrl.setRoot(LoginPage))
+			.catch(err => {
+				console.log("Error:", err);
+			});
 	}
 	checkActive(page) {
 		return page == this.activePage;

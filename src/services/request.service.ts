@@ -1,11 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
-import { User, Request, Contact } from "../models/models";
-import {
-	AngularFirestore,
-	AngularFirestoreDocument,
-	AngularFirestoreCollection
-} from "angularfire2/firestore";
+import { Request } from "../models/models";
+import { AngularFirestore } from "angularfire2/firestore";
 
 @Injectable()
 export class RequestService {
@@ -17,9 +13,9 @@ export class RequestService {
 		let result = [];
 		return new Observable(observer => {
 			this.afs
-				.collection("relationships/")
+				.collection("requestsReceived")
 				.doc(`${id}`)
-				.collection("/user-id")
+				.collection("from-id")
 				.valueChanges()
 				.subscribe(relationships => {
 					relationships.forEach(relationship => {
@@ -49,15 +45,12 @@ export class RequestService {
 		//add the id to the seen in the backend
 	}
 	acceptFriendRequest(from: string, to: string): Promise<any> {
-		let messageId = this.guid();
-		let roomId = this.uniqueRelId(from, to);
-		//should add to this user's contacts in relationships and cloud function should do the rest
-		/* make sure this is async method that returns
-		a success or failure that prompts a relevant
-		alert in the caller's UI
-		1. [ ] create a new chatroom
-		3. [ ] add to relationships list/collection
-		*/
+		// 1. create friendships from with this user id
+		// 2. the cloud function creates the second one
+		// 3. the cloud function removes the request
+		// 4. the cloud function creates the conversation
+		// 5. the cloud function creates the message with the default one
+
 		// Accept a contact request given the sender and receiver userId.
 		return new Promise((resolve, reject) => {
 			/*let newToContact: Contact = {

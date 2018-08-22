@@ -1,17 +1,13 @@
 import { Injectable } from "@angular/core";
 // import {Http} from '@angular/http';
 import { AngularFireDatabase } from "angularfire2/database";
+import { AngularFirestore } from "angularfire2/firestore";
 import { Observable } from "rxjs/Observable";
 import "rxjs/add/operator/toPromise";
 import "rxjs/add/observable/forkJoin";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
-import { Message, Chatroom, Language, Participant } from "../models/models";
-import {
-	AngularFirestore,
-	AngularFirestoreDocument,
-	AngularFirestoreCollection
-} from "angularfire2/firestore";
+import { Message, Chatroom, Language } from "../models/models";
 
 @Injectable()
 export class ChatroomService {
@@ -20,7 +16,8 @@ export class ChatroomService {
 	getChatroomById(id: string): Observable<Chatroom> {
 		// get full detailed data of the required chatroom
 		return this.afs
-			.doc(`chatrooms/${id}`)
+			.collection("chatrooms")
+			.doc(`${id}`)
 			.valueChanges()
 			.map(chatroom => this.toChatroom(chatroom));
 	}
@@ -42,18 +39,20 @@ export class ChatroomService {
 		// 1. [ ] get all rooms
 		return new Observable(observer => {
 			this.afs
-				.doc(`chatrooms`)
+				.collection(`chatrooms`)
 				.valueChanges()
-				.subscribe(chatrooms => {
-					observer.next(chatrooms[0]);
+				.subscribe((chatrooms: any) => {
+					observer.next(chatrooms[0].id);
 				});
 		});
 	}
 	leaveChatroom(chatroomId: string, userId: string): Promise<any> {
 		// remove the user from participants list
-		let participant = this.afs.doc(
-			`chatrooms/${chatroomId}/participants/${userId}`
-		);
+		let participant = this.afs
+			.collection("chatrooms")
+			.doc(`${chatroomId}`)
+			.collection("participants")
+			.doc(`${userId}`);
 		return new Promise(resolve => {
 			participant
 				.delete()

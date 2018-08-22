@@ -28,31 +28,40 @@ export class NotificationsListPage {
 	ngAfterViewInit() {
 		return new Promise(resolve => {
 			let env = this;
-			this.authSrvc.getUserData().then(user => {
-				this.currentUser = user;
-				this.notificationSrvc
-					.getNotifications(user.id)
-					.subscribe(notifications => {
-						let res = notifications.sort((first, second) => {
-							return second.createdAt.getTime() - first.createdAt.getTime();
+			this.authSrvc
+				.getUserData()
+				.then(user => {
+					this.currentUser = user;
+					this.notificationSrvc
+						.getNotifications(user.id)
+						.subscribe(notifications => {
+							let res = notifications.sort((first, second) => {
+								return second.createdAt.getTime() - first.createdAt.getTime();
+							});
+							for (let i = 0; i < res.length; i++) {
+								setTimeout(function() {
+									env.notifications.push(res[i]);
+									console.log(
+										"notifications in notificationsList: ",
+										env.notifications
+									);
+								}, 100 * i);
+							}
 						});
-						for (let i = 0; i < res.length; i++) {
-							setTimeout(function() {
-								env.notifications.push(res[i]);
-								console.log(
-									"notifications in notificationsList: ",
-									env.notifications
-								);
-							}, 100 * i);
-						}
-					});
-			});
+				})
+				.catch(err => {
+					console.log("Error:", err);
+				});
 		});
 	}
 	doInfinite(infiniteScroll) {
 		//Begin async operation
-		this.ngAfterViewInit().then(() => {
-			infiniteScroll.complete();
-		});
+		this.ngAfterViewInit()
+			.then(() => {
+				infiniteScroll.complete();
+			})
+			.catch(err => {
+				console.log("Error:", err);
+			});
 	}
 }

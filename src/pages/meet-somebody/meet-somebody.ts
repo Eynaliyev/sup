@@ -30,6 +30,8 @@ export class MeetSomebodyPage {
 			this.geolocation.getCurrentPosition().then(location => {
 				this.currentLocation = location;
 				console.log("user's locations: ", location);
+			}).catch(err => {
+				console.log('Error:', err);
 			});
   }
   ionViewDidLoad() {

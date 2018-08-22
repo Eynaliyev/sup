@@ -39,37 +39,46 @@ export class RequestsListPage {
 	ngAfterViewInit() {
 		return new Promise(resolve => {
 			let env = this;
-			this.authSrvc.getUserData().then(user => {
-				this.currentUser = user;
-				let res = this.navParams.get("requests").sort((first, second) => {
-					return second.createdAt.getTime() - first.date.getTime();
-				});
-				for (let i = 0; i < res.length; i++) {
-					setTimeout(function() {
-						env.requests.push(res[i]);
-					}, 100 * i);
-				}
-				this.requestsSent = this.requests.filter(
-					el => el.requestType === "RequestSent"
-				);
-				this.requestsReceived = this.requests.filter(
-					el => el.requestType === "RequestReceived"
-				);
-				// make sure the requests are seen
-				for (let i = 0; i < this.requests.length; i++) {
-					this.requestsSrvc.updateRequestSeen(
-						this.requests[i].id,
-						this.currentUser.id
+			this.authSrvc
+				.getUserData()
+				.then(user => {
+					this.currentUser = user;
+					let res = this.navParams.get("requests").sort((first, second) => {
+						return second.createdAt.getTime() - first.date.getTime();
+					});
+					for (let i = 0; i < res.length; i++) {
+						setTimeout(function() {
+							env.requests.push(res[i]);
+						}, 100 * i);
+					}
+					this.requestsSent = this.requests.filter(
+						el => el.requestType === "RequestSent"
 					);
-				}
-			});
+					this.requestsReceived = this.requests.filter(
+						el => el.requestType === "RequestReceived"
+					);
+					// make sure the requests are seen
+					for (let i = 0; i < this.requests.length; i++) {
+						this.requestsSrvc.updateRequestSeen(
+							this.requests[i].id,
+							this.currentUser.id
+						);
+					}
+				})
+				.catch(err => {
+					console.log("Error:", err);
+				});
 		});
 	}
 	doInfinite(infiniteScroll) {
 		//Begin async operation
-		this.ngAfterViewInit().then(() => {
-			infiniteScroll.complete();
-		});
+		this.ngAfterViewInit()
+			.then(() => {
+				infiniteScroll.complete();
+			})
+			.catch(err => {
+				console.log("Error:", err);
+			});
 	}
 	toggleBlockListVisibility() {
 		console.log("toggled BlockListVisibility: ", this.blockedList);

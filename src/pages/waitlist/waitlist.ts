@@ -35,18 +35,19 @@ export class WaitlistPage {
 		// get languages property
 		let languages = this.navParams.get("languages");
 		// join a chatroom
-		this.userSrvc.getCurrentUser()
-		.take(2)
-		.subscribe(user => {
-		this.chatroomSrvc
-			.joinChatroom(location, languages)
-			.subscribe(chatroom => {
-				let view = this.navCtrl.getActive();
-				if (view.component.name === "WaitlistPage") {
-					this.goToChatroom(chatroom.id);
-				}
+		this.userSrvc
+			.getCurrentUser()
+			.take(2)
+			.subscribe(user => {
+				this.chatroomSrvc
+					.joinChatroom(location, languages)
+					.subscribe(chatroomId => {
+						let view = this.navCtrl.getActive();
+						if (view.component.name === "WaitlistPage") {
+							this.goToChatroom(chatroomId);
+						}
+					});
 			});
-		});
 	}
 	viewVIP() {
 		this.navCtrl.push(VIPPage);

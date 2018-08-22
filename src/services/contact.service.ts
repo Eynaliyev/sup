@@ -1,11 +1,7 @@
 import { Observable } from "rxjs/Observable";
 import { Injectable } from "@angular/core";
-import { User, Request, Contact } from "../models/models";
-import {
-	AngularFirestore,
-	AngularFirestoreDocument,
-	AngularFirestoreCollection
-} from "angularfire2/firestore";
+import { Contact } from "../models/models";
+import { AngularFirestore } from "angularfire2/firestore";
 
 @Injectable()
 export class ContactService {
@@ -18,9 +14,9 @@ export class ContactService {
 		let result = [];
 		return new Observable(observer => {
 			this.afs
-				.collection("relationships/")
-				.doc("${id}")
-				.collection("user-id")
+				.collection("friendships")
+				.doc(`${id}`)
+				.collection("to-id")
 				.valueChanges()
 				.subscribe(relationships => {
 					relationships.forEach(relationship => {

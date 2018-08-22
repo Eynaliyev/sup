@@ -47,11 +47,15 @@ export class UserService {
 					resolve(true);
 				} else {
 					//graph request, create new user with the return
-					this.fetchGraphData().then(parsedData => {
-						this.createUser(parsedData)
-							.then(() => resolve(true))
-							.catch(error => this.handleError(error));
-					});
+					this.fetchGraphData()
+						.then(parsedData => {
+							this.createUser(parsedData)
+								.then(() => resolve(true))
+								.catch(error => this.handleError(error));
+						})
+						.catch(err => {
+							console.log("Error:", err);
+						});
 				}
 			});
 		});

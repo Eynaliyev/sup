@@ -1,7 +1,7 @@
 export interface Sender {
 	id: string;
-	name: string;
-	imageUrl: string;
+	name?: string;
+	imageUrl?: string;
 }
 
 export class Message {

@@ -32,22 +32,35 @@ export class LoginPage {
 		var env = this;
 		this.authSrvc.signInWithFacebook().then(
 			authData => {
-				this.loader.dismiss().then(() => {
-					this.userSrvc.setAccessToken(authData["credential"].accessToken);
-					//should be after the user has been set
-					this.userSrvc
-						.setCurrentUser(authData["user"]["providerData"][0])
-						.then(() => env.goToMeetSomebody());
-				});
+				this.loader
+					.dismiss()
+					.then(() => {
+						this.userSrvc.setAccessToken(authData["credential"].accessToken);
+						//should be after the user has been set
+						this.userSrvc
+							.setCurrentUser(authData["user"]["providerData"][0])
+							.then(() => env.goToMeetSomebody())
+							.catch(err => {
+								console.log("Error:", err);
+							});
+					})
+					.catch(err => {
+						console.log("Error:", err);
+					});
 			},
 			error =>
-				this.loader.dismiss().then(() => {
-					console.error("login failed: ", error);
-					this.utilSrvc.doAlert(error.message, {
-						text: "Ok",
-						role: "cancel"
-					});
-				})
+				this.loader
+					.dismiss()
+					.then(() => {
+						console.error("login failed: ", error);
+						this.utilSrvc.doAlert(error.message, {
+							text: "Ok",
+							role: "cancel"
+						});
+					})
+					.catch(err => {
+						console.log("Error:", err);
+					})
 		);
 		this.presentLoading();
 	}

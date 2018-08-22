@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
-import { Request } from "../models/models";
+import { Request, User } from "../models/models";
 import { AngularFirestore } from "angularfire2/firestore";
 
 @Injectable()
@@ -154,78 +154,21 @@ export class RequestService {
 		});
 	}
 
-	sendRequest(from: string, to: string) {
+	sendRequest(from: User, toId: string) {
 		let newRequest: Request = {
-			id: this.uniqueRelId(from, to),
 			createdAt: new Date(),
 			seen: [],
-			senderId: from,
-			toUserId: to,
-			imgUrl: "",
-			name: ""
+			senderId: from.id,
+			imgUrl: from.profilePhoto.imgUrl,
+			firstName: from.firstName,
+			lastName: from.lastName
 		};
-		return new Promise((resolve, reject) => {
-			/*this.get("users/" + from)
-				.then(ref => {
-					ref
-						.valueChanges()
-						.take(1)
-						.subscribe((user: User) => {
-							if (!user.requestsSent) {
-								user.requestsSent = [newRequest];
-							} else {
-								if (this.finInstance(user.requestsSent, newRequest) == -1) {
-									user.requestsSent.push(newRequest);
-								}
-							}
-							ref
-								.update({
-									requestsSent: user.requestsSent
-								})
-								.then(() => {
-									this.get("users/" + to)
-										.then(ref => {
-											ref
-												.valueChanges()
-												.take(1)
-												.subscribe((user: User) => {
-													if (!user.requestsReceived) {
-														user.requestsReceived = [newRequest];
-													} else {
-														if (
-															this.finInstance(
-																user.requestsReceived,
-																newRequest
-															) == -1
-														) {
-															user.requestsReceived.push(newRequest);
-														}
-													}
-													ref
-														.update({
-															requestsReceived: user.requestsReceived
-														})
-														.then(() => {
-															resolve();
-														})
-														.catch(() => {
-															reject();
-														});
-												});
-										})
-										.catch(() => {
-											reject();
-										});
-								})
-								.catch(() => {
-									reject();
-								});
-						});
-				})
-				.catch(() => {
-					reject();
-				});*/
-		});
+		this.afs
+			.collection("requests_sent")
+			.doc(from.id)
+			.collection("to_id")
+			.doc(toId)
+			.set(newRequest);
 	}
 	// Cancel a contact request given the sender and receiver userId.
 	cancelRequest(from: string, to: string): Promise<any> {

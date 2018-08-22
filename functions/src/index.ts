@@ -18,6 +18,12 @@ admin.initializeApp();
 exports.test = functions.https.onRequest((req, res) => {
 	res.send("Firebase Cloud Function test passed");
 });
+exports.createRequest = functions.firestore
+	.document("requests_sent/{userId}")
+	.onCreate((snap, context) => {
+		const newValue = snap.data();
+		const doc = admin.firestore().collection("requests_received").add(newValue);
+	});
 /*
 	// gathering of info
 	let relationshipsPromise = this.afs

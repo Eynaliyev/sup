@@ -15,7 +15,23 @@ export class RequestService {
 			this.afs
 				.collection("requests_received")
 				.doc(`${id}`)
-				.collection("from-id")
+				.collection("from_id")
+				.valueChanges()
+				.subscribe(requests => {
+					requests.forEach(request => {
+						result.push(request);
+					});
+					observer.next(result);
+				});
+		});
+	}
+	getSentRequests(id: string): Observable<Request[]> {
+		let result = [];
+		return new Observable(observer => {
+			this.afs
+				.collection("sent")
+				.doc(`${id}`)
+				.collection("to_id")
 				.valueChanges()
 				.subscribe(requests => {
 					requests.forEach(request => {

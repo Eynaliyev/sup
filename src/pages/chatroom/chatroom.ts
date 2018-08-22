@@ -59,6 +59,7 @@ export class ChatroomPage {
 			.getCurrentUser()
 			.take(2)
 			.switchMap(user => {
+				this.chatroom.id = this.navParams.get("room");
 				this.currentUser = user;
 				this.newMessage.sender.id = this.currentUser.id;
 				this.newMessage.sender.name = this.currentUser.firstName + " ";
@@ -68,7 +69,6 @@ export class ChatroomPage {
 				return this.chatroomService.getChatroomById(this.chatroom.id);
 			})
 			.subscribe(chatroom => {
-				this.chatroom.id = this.navParams.get("room");
 				console.log("chatroom loaded from firebase: ", this.chatroom);
 				this.users = this.chatroom.participants; // TO DO: get all participants' info
 				console.log("Chatroom page loaded with chatroom:", this.chatroom);

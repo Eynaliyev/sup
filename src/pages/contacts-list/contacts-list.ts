@@ -19,6 +19,7 @@ export class ContactsListPage {
 	currentUser: User;
 	newRequests: boolean = false;
 	requestsReceived: Request[] = [];
+	requestsSent: Request[] = [];
 	allRequests: Request[] = [];
 
 	constructor(
@@ -44,11 +45,13 @@ export class ContactsListPage {
 					this.contactSrvc.getContacts(user.id).subscribe(contacts => {
 						this.contacts = contacts;
 					});
+					this.requestSrvc.getSentRequests(user.id).subscribe(requests => {
+						this.allRequests = this.allRequests.concat(requests);
+						this.requestsSent = requests;
+					});
 					this.requestSrvc.getReceivedRequests(user.id).subscribe(requests => {
 						this.allRequests = requests;
-						this.requestsReceived = requests.filter(
-							el => el.requestType === "RequestReceived"
-						);
+						this.requestsReceived = requests;
 					});
 					// setting contacts
 					let contacts = this.contacts.sort((first, second) => {

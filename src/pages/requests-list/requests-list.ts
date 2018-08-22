@@ -43,7 +43,7 @@ export class RequestsListPage {
 				.getUserData()
 				.then(user => {
 					this.currentUser = user;
-					let res = this.navParams.get("requests").sort((first, second) => {
+					/*let res = this.navParams.get("requests").sort((first, second) => {
 						return second.createdAt.getTime() - first.date.getTime();
 					});
 					for (let i = 0; i < res.length; i++) {
@@ -63,7 +63,7 @@ export class RequestsListPage {
 							this.requests[i].id,
 							this.currentUser.id
 						);
-					}
+					}*/
 				})
 				.catch(err => {
 					console.log("Error:", err);

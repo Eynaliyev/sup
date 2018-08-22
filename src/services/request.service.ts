@@ -13,33 +13,17 @@ export class RequestService {
 		let result = [];
 		return new Observable(observer => {
 			this.afs
-				.collection("requestsReceived")
+				.collection("requests_received")
 				.doc(`${id}`)
 				.collection("from-id")
 				.valueChanges()
-				.subscribe(relationships => {
-					relationships.forEach(relationship => {
-						if (relationship["relationshipType"] === "RequestReceived") {
-							result.push(this.relationshipToRequest(relationship));
-						}
+				.subscribe(requests => {
+					requests.forEach(request => {
+						result.push(request);
 					});
 					observer.next(result);
 				});
 		});
-	}
-	relationshipToRequest(data: any): Request {
-		//let senderId = data.relationshipType === this.currentUser.id ? this.currentUser.id :
-		let request: Request = {
-			id: data.id,
-			createdAt: data.createdAt,
-			seen: [],
-			senderId: data.relationshipType,
-			toUserId: data.toUserId,
-			requestType: data.relationshipType,
-			imgUrl: data.imgUrl,
-			name: data.name
-		};
-		return request;
 	}
 	updateRequestSeen(requestId: string, userId: string) {
 		//add the id to the seen in the backend

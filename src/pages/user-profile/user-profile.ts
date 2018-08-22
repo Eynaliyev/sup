@@ -115,7 +115,7 @@ export class UserProfilePage {
 			alert.present();
 			this.likeAlertPresented = true;
 		} else {
-			this.requestSrvc.sendRequest(this.currentUser.id, id);
+			this.requestSrvc.sendRequest(this.currentUser, id);
 		}
 	}
 	block(id: string) {

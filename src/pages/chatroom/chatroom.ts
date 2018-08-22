@@ -31,8 +31,9 @@ export class ChatroomPage {
 		id: this.uniqueId,
 		sender: {
 			id: "",
-			name: "",
-			imageUrl: ""
+			firstName: "",
+			lastName: "",
+			imgUrl: ""
 		},
 		roomId: "",
 		seen: []
@@ -52,8 +53,9 @@ export class ChatroomPage {
 			.map(user => {
 				this.currentUser = user;
 				this.newMessage.sender.id = this.currentUser.id;
-				this.newMessage.sender.name = this.currentUser.firstName + " ";
-				this.newMessage.sender.imageUrl = this.currentUser.profilePhoto.imgUrl;
+				this.newMessage.sender.firstName = this.currentUser.firstName;
+				this.newMessage.sender.lastName = this.currentUser.lastName;
+				this.newMessage.sender.imgUrl = this.currentUser.profilePhoto.imgUrl;
 				this.newMessage.seen.push(this.currentUser.id);
 				return this.chatroomService.getChatroomById(this.chatroom.id);
 			})

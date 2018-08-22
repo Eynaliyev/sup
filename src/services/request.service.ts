@@ -158,10 +158,12 @@ export class RequestService {
 		let newRequest: Request = {
 			createdAt: new Date(),
 			seen: [],
-			senderId: from.id,
-			imgUrl: from.profilePhoto.imgUrl,
-			firstName: from.firstName,
-			lastName: from.lastName
+			sender: {
+				id: from.id,
+				firstName: from.firstName,
+				lastName: from.lastName,
+				imgUrl: from.profilePhoto.imgUrl
+			}
 		};
 		this.afs
 			.collection("requests_sent")

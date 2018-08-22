@@ -22,7 +22,6 @@ export class ChatroomPage {
 	messages: any[] = [];
 	chatroom: Chatroom;
 	currentUser: User;
-	backgroundImage;
 	bckgImgNum = Math.floor(Math.random() * 50);
 	uniqueId = this.utilSrvc.guid();
 
@@ -46,26 +45,16 @@ export class ChatroomPage {
 		private alertCtrl: AlertController,
 		private utilSrvc: UtilService
 	) {
-		let photoUrl = `../assets/images/background-${this.bckgImgNum}.jpg`;
-		this.backgroundImage = `{'background-image': url('${photoUrl}')}`;
-		// get chatroom id
-		// on page loaded - load message history - paginated
-		/*
-				.subscribe(chatroom => {
-				// get chatroom id from the nav params
-
-				*/
+		this.chatroom.id = this.navParams.get("room");
 		this.userService
 			.getCurrentUser()
 			.take(2)
-			.switchMap(user => {
-				this.chatroom.id = this.navParams.get("room");
+			.map(user => {
 				this.currentUser = user;
 				this.newMessage.sender.id = this.currentUser.id;
 				this.newMessage.sender.name = this.currentUser.firstName + " ";
 				this.newMessage.sender.imageUrl = this.currentUser.profilePhoto.imgUrl;
 				this.newMessage.seen.push(this.currentUser.id);
-				console.log("currentUser: ", this.currentUser);
 				return this.chatroomService.getChatroomById(this.chatroom.id);
 			})
 			.subscribe(chatroom => {

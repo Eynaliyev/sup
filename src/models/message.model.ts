@@ -1,8 +1,4 @@
-export interface Sender {
-	id: string;
-	name?: string;
-	imageUrl?: string;
-}
+import{ Sender } from './models';
 
 export class Message {
 	content: string;

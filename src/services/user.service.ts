@@ -39,25 +39,30 @@ export class UserService {
 	setCurrentUser(usr): Promise<any> {
 		return new Promise<any>(resolve => {
 			let uid = usr["uid"];
-			this.getUserById(uid).subscribe(user => {
-				if (user) {
-					let parsedUser = this.toUser(user);
-					this.currentUser.next(parsedUser);
-					localStorage.setItem("currentUser", JSON.stringify(user));
-					resolve(true);
-				} else {
-					//graph request, create new user with the return
-					this.fetchGraphData()
-						.then(parsedData => {
-							this.createUser(parsedData)
-								.then(() => resolve(true))
-								.catch(error => this.handleError(error));
-						})
-						.catch(err => {
-							console.log("Error:", err);
-						});
+			this.getUserById(uid).subscribe(
+				user => {
+					if (user) {
+						let parsedUser = this.toUser(user);
+						this.currentUser.next(parsedUser);
+						localStorage.setItem("currentUser", JSON.stringify(user));
+						resolve(true);
+					} else {
+						//graph request, create new user with the return
+						this.fetchGraphData()
+							.then(parsedData => {
+								this.createUser(parsedData)
+									.then(() => resolve(true))
+									.catch(error => this.handleError(error));
+							})
+							.catch(err => {
+								console.log("Error:", err);
+							});
+					}
+				},
+				error => {
+					this.handleError(error);
 				}
-			});
+			);
 		});
 	}
 	fetchGraphData(): Promise<any> {
@@ -505,7 +510,7 @@ export class UserService {
   }
   */
 	private handleError(error: any): Promise<any> {
-		console.error("An error occurred", error); // for demo purposes only
+		console.error("Error: ", error); // for demo purposes only
 		return Promise.reject(error.message || error);
 	}
 }

@@ -18,14 +18,19 @@ export class ContactService {
 				.doc(`${id}`)
 				.collection("to-id")
 				.valueChanges()
-				.subscribe(relationships => {
-					relationships.forEach(relationship => {
-						if (relationship["relationshipType"] === "Friendship") {
-							result.push(this.relationshipToContact(relationship));
-						}
-					});
-					observer.next(result);
-				});
+				.subscribe(
+					relationships => {
+						relationships.forEach(relationship => {
+							if (relationship["relationshipType"] === "Friendship") {
+								result.push(this.relationshipToContact(relationship));
+							}
+						});
+						observer.next(result);
+					},
+					error => {
+						throw new Error("Error: Getting document:"); // throw an Error
+					}
+				);
 		});
 	}
 	relationshipToContact(data: any): Contact {

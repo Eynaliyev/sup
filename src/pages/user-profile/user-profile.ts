@@ -75,7 +75,9 @@ export class UserProfilePage {
 							this.friend = true;
 						}
 					},
-					err => console.log(err)
+					error => {
+						throw new Error("Error: " + error); // throw an Error
+					}
 				);
 			})
 			.catch(err => console.log(err));

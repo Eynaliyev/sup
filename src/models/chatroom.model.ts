@@ -4,8 +4,8 @@ import { Language } from "./models";
 export interface Participant {
 	id: string;
 	name: string;
-	votes: number;
 	profileImgUrl: string;
+	votes?: number;
 }
 
 export class Chatroom {

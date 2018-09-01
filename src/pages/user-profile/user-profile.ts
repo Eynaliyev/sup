@@ -61,6 +61,9 @@ export class UserProfilePage {
 			.then(curUsr => {
 				let id = this.navParams.get("user");
 				this.currentUser = curUsr;
+				this.contactSrvc
+					.getContacts(id)
+					.subscribe(contacts => (this.contacts = contacts));
 				console.log("currentUser in userProfile: ", this.currentUser);
 				this.userSrvc.getUserById(id).subscribe(
 					userInfo => {
@@ -77,9 +80,6 @@ export class UserProfilePage {
 			})
 			.catch(err => console.log(err));
 		console.log("ionViewDidLoad UserProfilePage");
-		this.contactSrvc
-			.getContacts(this.currentUser.id)
-			.subscribe(contacts => (this.contacts = contacts));
 	}
 	changeImage(image) {
 		console.log("changeImage called, but needs to be implements");

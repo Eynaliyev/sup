@@ -1,8 +1,9 @@
 {
   "name": "MyPeeps",
-  "app_id": "a6de38e4",
-  "type": "ionic-angular",
   "integrations": {
     "cordova": {}
-  }
+  },
+  "type": "ionic-angular",
+  "pro_id": "a6de38e4",
+  "app_id": ""
 }

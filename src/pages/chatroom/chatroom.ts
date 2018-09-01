@@ -21,6 +21,7 @@ export class ChatroomPage {
 	users: any[] = [];
 	messages: any[] = [];
 	chatroom: Chatroom;
+	chatroomId: string = "";
 	currentUser: User;
 	bckgImgNum = Math.floor(Math.random() * 50);
 	uniqueId = this.utilSrvc.guid();
@@ -29,13 +30,13 @@ export class ChatroomPage {
 		content: "",
 		createdAt: new Date(),
 		id: this.uniqueId,
+		roomId: "",
 		sender: {
 			id: "",
 			firstName: "",
 			lastName: "",
 			imgUrl: ""
 		},
-		roomId: "",
 		seen: []
 	};
 	constructor(
@@ -45,62 +46,62 @@ export class ChatroomPage {
 		private chatroomService: ChatroomService,
 		private alertCtrl: AlertController,
 		private utilSrvc: UtilService
-	) {
-		this.chatroom.id = this.navParams.get("room");
+	) {}
+	/*
+	ionViewCanEnter() {
+		return this.authSrvc.isLoggedIn();
+	}*/
+	ionViewDidLoad() {
+		this.chatroomId = this.navParams.get("room");
+		this.newMessage.roomId = this.chatroomId;
 		this.userService
 			.getCurrentUser()
 			.take(2)
-			.map(user => {
+			.switchMap(user => {
 				this.currentUser = user;
 				this.newMessage.sender.id = this.currentUser.id;
 				this.newMessage.sender.firstName = this.currentUser.firstName;
 				this.newMessage.sender.lastName = this.currentUser.lastName;
 				this.newMessage.sender.imgUrl = this.currentUser.profilePhoto.imgUrl;
 				this.newMessage.seen.push(this.currentUser.id);
-				return this.chatroomService.getChatroomById(this.chatroom.id);
+				return this.chatroomService.getChatroomById(this.chatroomId);
 			})
 			.subscribe(chatroom => {
+				this.chatroom = chatroom;
 				console.log("chatroom loaded from firebase: ", this.chatroom);
 				this.users = this.chatroom.participants; // TO DO: get all participants' info
-				console.log("Chatroom page loaded with chatroom:", this.chatroom);
-				this.newMessage.roomId = this.chatroom.id;
-				return this.chatroomService.getMessages(this.chatroom.id).subscribe(
-					messages => {
-						let newMessages = messages;
-						console.log("newMessages: ", newMessages);
-						// add position property
-						let updatedMessages = this.utilSrvc.addMessagePosition(
-							newMessages,
-							this.currentUser.id
-						);
-						console.log("updatedMessages: ", updatedMessages);
-						// set the seen property
-						//let res = this.updateSeen(updatedMessages, this.currentUser.id);
-						// add time passed since the mssage was sent
-						//res = this.utilSrvc.addMessageTimeSince(res);
-						// To Do : add sender name based on participants ID, or nothing
-						for (let i = 0; i < updatedMessages.length; i++) {
-							setTimeout(function() {
-								this.messages.push(updatedMessages[i]);
-							}, 100 * i);
-						}
-						this.content.scrollToBottom(300); //300ms animation speed
-						console.log("participants in the room: ", this.users);
-					},
-					err => {
-						console.error(err);
-					}
-				);
 			});
+		this.chatroomService.getMessages(this.chatroomId).subscribe(
+			messages => {
+				let newMessages = messages;
+				console.log("newMessages: ", newMessages);
+				// add position property
+				let updatedMessages = this.utilSrvc.addMessagePosition(
+					newMessages,
+					this.currentUser.id
+				);
+				console.log("updatedMessages: ", updatedMessages);
+				// set the seen property
+				//let res = this.updateSeen(updatedMessages, this.currentUser.id);
+				// add time passed since the mssage was sent
+				//res = this.utilSrvc.addMessageTimeSince(res);
+				// To Do : add sender name based on participants ID, or nothing
+				for (let i = 0; i < updatedMessages.length; i++) {
+					setTimeout(function() {
+						this.messages.push(updatedMessages[i]);
+					}, 100 * i);
+				}
+				this.content.scrollToBottom(300); //300ms animation speed
+				console.log("participants in the room: ", this.users);
+			},
+			err => {
+				console.error(err);
+			}
+		);
 	}
-	/*
-	ionViewCanEnter() {
-		return this.authSrvc.isLoggedIn();
-	}*/
-
 	ngAfterViewInit() {}
 	exit() {
-		this.chatroomService.leaveChatroom(this.chatroom.id, this.currentUser.id);
+		this.chatroomService.leaveChatroom(this.chatroomId, this.currentUser.id);
 		this.navCtrl.setRoot(MeetSomebodyPage);
 	}
 	goToUser(id) {
@@ -110,7 +111,7 @@ export class ChatroomPage {
 		let result = [];
 		messages.forEach(message => {
 			if (message.seen.indexOf(id) === -1) {
-				this.chatroomService.updateSeen(this.chatroom.id, message.id, id);
+				this.chatroomService.updateSeen(this.chatroomId, message.id, id);
 			}
 			result.push(message);
 		});

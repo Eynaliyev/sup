@@ -7,17 +7,17 @@
 				<ion-thumbnail item-left>
 					<img class="profile-picture" [src]="currentUser.profilePhoto.imgUrl" onError="this.src='assets/images/other-assets/profile.png';">
 				</ion-thumbnail>
-				<h2 style="text-transform: capitalize;">{{currentUser.firstName}} {{currentUser.lastName}}</h2>
+				<h2>{{currentUser.firstName}} {{currentUser.lastName}}</h2>
 			</ion-item>
 			<button ion-item *ngFor="let p of pages" (click)="openPage(p)" [class.activeHighlight]=checkActive(p)>
 				<ion-icon name="{{p.icon}}" item-left></ion-icon>
 				{{p.title}}
 			</button>
 		</ion-list>
-		<!--<span style="padding: 20px;color: #7a7a7a;">Featured Members</span>-->
-		<ion-grid style="padding:0px">
+		<!--<span >Featured Members</span>-->
+		<ion-grid>
 			<!--
-			<ion-row style="padding: 3px;" *ngIf="currentUser">
+			<ion-row>
 				<ion-col col-4 *ngFor=" let currentUser of featuredUsers " class="participant-col">
 					<ion-card class="menu-avatar">
 						<img [src]="currentUser.profileImgUrl" />
@@ -25,13 +25,13 @@
 					<span>{{currentUser.firstName}}</span>
 				</ion-col>
 			</ion-row>-->
-			<ion-row style="text-align: center;">
+			<ion-row>
 				<span class="promo-text">Get matched 2x faster</span>
 			</ion-row>
-			<ion-row style="padding: 20px;">
+			<ion-row>
 				<button menuToggle ion-button color="universal" class="skip-line" (click)="viewVIP()" block>Skip the line</button>
 			</ion-row>
-			<ion-row style="padding: 0 20px 0 20px;">
+			<ion-row>
 				<button menuToggle ion-button (click)="logout()" block>
 					Logout
 				</button>

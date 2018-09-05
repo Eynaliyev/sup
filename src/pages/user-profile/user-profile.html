@@ -1,11 +1,11 @@
 <ion-content *ngIf="user">
 	<back-button></back-button>
-	<ion-fab *ngIf="tab == 'vote'" style="left: 27%;" left bottom>
+	<ion-fab *ngIf="tab == 'vote'" left bottom>
 		<button ion-fab color="light" (click)="block(user.id)" class="menu-btn-border actn-btn">
-			<ion-icon style="font-size: 4rem;" name="md-close"></ion-icon>
+			<ion-icon name="md-close"></ion-icon>
 		</button>
 	</ion-fab>
-	<ion-fab *ngIf="user && tab == 'vote'" style="right: 27%;" right bottom>
+	<ion-fab *ngIf="user && tab == 'vote'" right bottom>
 		<button ion-fab (click)="like(user.id)" color="light" class="menu-btn-border actn-btn" *ngIf="!friend && !requested">
 			<ion-icon name="ios-heart-outline"></ion-icon>
 		</button>
@@ -35,7 +35,7 @@
 			</ion-item>
 			<ion-item id="meetSomebody-list-item-container1" *ngIf="languages">
 				<div id="meetSomebody-markdown2" class="show-list-numbers-and-dots">
-					<p style="margin-top:0px;color:#000000;">
+					<p>
 						<strong>
 							{{user.languages}}
 						</strong>

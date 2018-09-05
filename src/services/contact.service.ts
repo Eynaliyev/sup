@@ -16,7 +16,7 @@ export class ContactService {
 			this.afs
 				.collection("friendships")
 				.doc(`${id}`)
-				.collection("to-id")
+				.collection("user-id")
 				.valueChanges()
 				.subscribe(
 					relationships => {

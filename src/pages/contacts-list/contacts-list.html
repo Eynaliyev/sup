@@ -3,18 +3,19 @@
 	<ion-fab right top>
 		<img *ngIf="newRequests" class="notification" src="http://www.clker.com/cliparts/r/M/L/o/R/i/green-dot.svg.med.png">
 		<button ion-fab color="primary" (click)="viewRequests()" class="menu-btn-border">
-			<ion-icon name="ios-person-add-outline" style="font-size: 4rem;"></ion-icon>
+			<ion-icon name="ios-person-add-outline"></ion-icon>
 		</button>
 	</ion-fab>
 	<span class="pageHeader">Messages</span>
-	<div *ngIf="contacts.length === 0" class="grande center-text vert-center no-contact-msg">No contacts yet, try meeting some new people</div>
+	<div *ngIf="contacts.length === 0" class="grande center-text vert-center no-contact-msg">No contacts yet, try meeting
+		some new people</div>
 	<ion-list class="venti-spacer" *ngIf="contacts">
 		<ion-item [ngClass]="animateClass" *ngFor=" let user of contacts " (click)="openChat(user)">
 			<ion-thumbnail item-left>
 				<img [src]="user.imgUrl" class="profile-picture" onError="this.src='assets/images/other-assets/profile.png';">
 			</ion-thumbnail>
-			<h2 style="text-transform: capitalize;">{{user.name}}
-				<span style="text-transform: capitalize;">
+			<h2>{{user.name}}
+				<span>
 					<img *ngIf="user.lastMessage.seen.indexOf(currentUser.id) === -1" class="notification" src="http://www.clker.com/cliparts/r/M/L/o/R/i/green-dot.svg.med.png">
 				</span>
 			</h2>

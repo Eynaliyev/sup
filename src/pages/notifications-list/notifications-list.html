@@ -2,12 +2,12 @@
 	<menu-button></menu-button>
 	<span class="pageHeader">Notifications</span>
 	<ion-list class="venti-spacer" *ngIf="notifications">
-		<ion-item [ngClass]="animateClass" style="background-color: transparent;color: #cfcfcf !important;" *ngFor=" let notification of notifications">
+		<ion-item [ngClass]="animateClass" *ngFor=" let notification of notifications">
 			<ion-thumbnail item-left *ngIf="notification.senderImage">
 				<img [src]="notification.senderImage" class="profile-picture" onError="this.src='assets/images/other-assets/profile.png';">
 			</ion-thumbnail>
-			<h2 style="text-transform: capitalize;">{{notification.content}}
-				<span style="text-transform: capitalize;">
+			<h2>{{notification.content}}
+				<span>
 					<img *ngIf="notification.seen.indexOf(currentUser.id) === -1" class="notification" src="http://www.clker.com/cliparts/r/M/L/o/R/i/green-dot.svg.med.png">
 				</span>
 			</h2>

@@ -68,7 +68,6 @@ export class ChatroomPage {
 			})
 			.subscribe(chatroom => {
 				this.chatroom = chatroom;
-				console.log("chatroom loaded from firebase: ", this.chatroom);
 				this.users = this.chatroom.participants; // TO DO: get all participants' info
 			});
 		this.chatroomService.getMessages(this.chatroomId).subscribe(
@@ -80,19 +79,7 @@ export class ChatroomPage {
 					newMessages,
 					this.currentUser.id
 				);
-				console.log("updatedMessages: ", updatedMessages);
-				// set the seen property
-				//let res = this.updateSeen(updatedMessages, this.currentUser.id);
-				// add time passed since the mssage was sent
-				//res = this.utilSrvc.addMessageTimeSince(res);
-				// To Do : add sender name based on participants ID, or nothing
-				for (let i = 0; i < updatedMessages.length; i++) {
-					setTimeout(function() {
-						this.messages.push(updatedMessages[i]);
-					}, 100 * i);
-				}
-				this.content.scrollToBottom(300); //300ms animation speed
-				console.log("participants in the room: ", this.users);
+				this.messages = updatedMessages
 			},
 			err => {
 				console.error(err);
@@ -122,12 +109,10 @@ export class ChatroomPage {
 		this.chatroomService.getMessages(this.chatroom.id, 10).subscribe(
 			newMessages => {
 				// add position property
-				console.log("newMessages: ", newMessages);
 				let updatedMessages = this.utilSrvc.addMessagePosition(
 					newMessages,
 					this.currentUser.id
 				);
-				console.log("updatedMessages: ", updatedMessages);
 				// set the seen property
 				let res = this.updateSeen(updatedMessages, this.currentUser.id);
 				for (let i = 0; i < res.length; i++) {

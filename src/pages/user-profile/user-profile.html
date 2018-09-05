@@ -14,7 +14,7 @@
 		</button>
 	</ion-fab>
 
-	<div *ngIf="currentTab == 'about' && user" class="venti-spacer">
+	<div *ngIf="user" class="venti-spacer">
 		<!--
 				<ion-slides pager>
 					<ion-slide *ngFor="let img of photos">
@@ -24,7 +24,7 @@
 		<ion-card>
 			<img [src]="user.profilePhoto.imgUrl" onError="this.src='assets/images/other-assets/profile.png';">
 			<div class="card-title">{{user.firstName}} {{user.lastName}}</div>
-			<div class="card-subtitle">{{user.location}}</div>
+			<div class="card-subtitle">{{user.currentLocation}}</div>
 		</ion-card>
 		<ion-list>
 			<ion-item id="myProfile-textarea1">
@@ -33,7 +33,7 @@
 				</ion-label>
 				<ion-textarea [(ngModel)]="user.about" placeholder="{{user.about}}"></ion-textarea>
 			</ion-item>
-			<ion-item id="meetSomebody-list-item-container1" *ngIf="languages">
+			<ion-item id="meetSomebody-list-item-container1" *ngIf="user.languages">
 				<div id="meetSomebody-markdown2" class="show-list-numbers-and-dots">
 					<p>
 						<strong>
@@ -59,15 +59,15 @@
 				{{user.currentLocation}}
 			</ion-item>
 			<ion-item color="none" id="myProfile-list-item44">
-				Age: {{user.age}}
+				Age: {{user.birthday | age}}
 			</ion-item>
 			<ion-item color="none" id="myProfile-list-item45">
 				University: {{user.universityName}}
 			</ion-item>
 			<ion-row class="tall-spacer">
-				<button ion-button color="royal" block (click)="updateProfile()">
+				<!--<button ion-button color="royal" block (click)="updateProfile()">
 					Update Profile
-				</button>
+				</button>-->
 			</ion-row>
 		</ion-list>
 	</div>

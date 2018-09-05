@@ -26,7 +26,7 @@
 	<div class="grande center-text vert-center white-centered" (click)="toggleSentListVisibility()">Sent Requests</div>
 	<div *ngIf="requestsSent.length === 0" class="tall center-text white-centered">No sent requests</div>
 	<ion-list class="venti-spacer" *ngIf="sentListVisible">
-		<ion-item [ngClass]="animateClass" ngFor="let sentUser of requestsSent">
+		<ion-item [ngClass]="animateClass" *ngFor="let sentUser of requestsSent">
 			<ion-thumbnail item-left *ngIf="sentUser.sender.imgUrl">
 				<img [src]="sentUser.sender.imgUrl" class="profile-picture" onError="this.src='assets/images/other-assets/profile.png';">
 			</ion-thumbnail>

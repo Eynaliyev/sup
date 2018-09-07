@@ -1,5 +1,5 @@
 import { UtilService } from "./../../shared/util.service";
-import { Component, ViewChild } from "@angular/core";
+import { Component, ViewChild, ViewEncapsulation } from "@angular/core";
 import { NavController, NavParams, Content } from "ionic-angular";
 import { UserService } from "../../services/services";
 import { ChatroomService } from "../../services/services";
@@ -14,7 +14,8 @@ import * as moment from "moment";
 
 @Component({
 	selector: "page-chatroom",
-	templateUrl: "chatroom.html"
+	templateUrl: "chatroom.html",
+	encapsulation: ViewEncapsulation.None
 })
 export class ChatroomPage {
 	@ViewChild(Content)
@@ -81,13 +82,19 @@ export class ChatroomPage {
 					this.currentUser.id
 				);
 				this.messages = updatedMessages;
+				this.scrollToBottom(); // <- when the new item is pushed, scroll to the bottom to show it
 			},
 			err => {
 				console.error(err);
 			}
 		);
 	}
-	ngAfterViewInit() {}
+	scrollToBottom() {
+		// use the content's dimension to obtain the current height of the scroll
+		let dimension = this.content.getContentDimensions();
+		// scroll to it (you can also set the duration in ms by passing a third parameter to the scrollTo(x,y,duration) method.
+		this.content.scrollTo(0, dimension.scrollHeight);
+	}
 	exit() {
 		this.chatroomService.leaveChatroom(this.chatroomId, this.currentUser.id);
 		this.navCtrl.setRoot(MeetSomebodyPage);

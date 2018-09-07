@@ -3,6 +3,8 @@ import { Http } from "@angular/http";
 import "rxjs/add/operator/map";
 import { AlertController } from "ionic-angular";
 import { Message } from "../models/models";
+import * as moment from "moment";
+
 /*
   Generated class for the UtilService provider.
   See https://angular.io/docs/ts/latest/guide/dependency-injection.html
@@ -101,8 +103,7 @@ export class UtilService {
 	}
 	//a dummy method for ocming up with different dates
 	createDate(n) {
-		let time = new Date().getTime() - n;
-		let date = new Date(time);
+		let date = moment().format("DD/MM/YYYY, hh:mm:ss");
 		return date;
 	}
 	presentFakedoorAlert(action: string) {

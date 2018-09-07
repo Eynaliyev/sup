@@ -1,6 +1,6 @@
 export class Notification {
 	content: string;
-	createdAt: Date;
+	createdAt: string;
 	id: string;
 	senderId: string;
 	seen: Array<string>;

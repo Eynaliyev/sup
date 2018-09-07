@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 import { Request, User } from "../models/models";
 import { AngularFirestore } from "angularfire2/firestore";
+import * as moment from "moment";
 
 @Injectable()
 export class RequestService {
@@ -55,10 +56,10 @@ export class RequestService {
 		return new Promise((resolve, reject) => {
 			/*let newToContact: Contact = {
 				id: to,
-				createdAt: new Date(),
+				createdAt:  moment().format("DD/MM/YYYY, hh:mm:ss"),
 				lastMessage: {
 					content: "Wuf Wuf! We're friends now!",
-					createdAt: new Date(),
+					createdAt:  moment().format("DD/MM/YYYY, hh:mm:ss"),
 					id: messageId,
 					roomId: roomId,
 					sender: {
@@ -71,10 +72,10 @@ export class RequestService {
 			};
 			let newFromContact: Contact = {
 				id: from,
-				createdAt: new Date(),
+				createdAt:  moment().format("DD/MM/YYYY, hh:mm:ss"),
 				lastMessage: {
 					content: "Wuf Wuf! We're friends now!",
-					createdAt: new Date(),
+					createdAt:  moment().format("DD/MM/YYYY, hh:mm:ss"),
 					id: messageId,
 					roomId: roomId,
 					sender: {
@@ -156,7 +157,7 @@ export class RequestService {
 
 	sendRequest(from: User, toId: string) {
 		let newRequest: Request = {
-			createdAt: new Date(),
+			createdAt: moment().format("DD/MM/YYYY, hh:mm:ss"),
 			seen: [],
 			sender: {
 				id: from.id,

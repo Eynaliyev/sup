@@ -10,6 +10,7 @@ import { UserProfilePage } from "../pages";
 import { MeetSomebodyPage } from "../pages";
 import { ParticipantsListPage } from "../pages";
 import { AlertController } from "ionic-angular";
+import * as moment from "moment";
 
 @Component({
 	selector: "page-chatroom",
@@ -28,7 +29,7 @@ export class ChatroomPage {
 
 	newMessage: Message = {
 		content: "",
-		createdAt: new Date(),
+		createdAt: moment().format("DD/MM/YYYY, hh:mm:ss"),
 		id: this.uniqueId,
 		roomId: "",
 		sender: {
@@ -79,7 +80,7 @@ export class ChatroomPage {
 					newMessages,
 					this.currentUser.id
 				);
-				this.messages = updatedMessages
+				this.messages = updatedMessages;
 			},
 			err => {
 				console.error(err);
@@ -147,7 +148,6 @@ export class ChatroomPage {
 		}
 	}
 	sendMessage() {
-		this.newMessage.createdAt = new Date();
 		this.chatroomService.sendMessage(this.chatroom.id, this.newMessage);
 		this.newMessage.content = "";
 	}

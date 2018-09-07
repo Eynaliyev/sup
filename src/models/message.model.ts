@@ -2,7 +2,7 @@ import{ Sender } from './models';
 
 export class Message {
 	content: string;
-	createdAt: Date;
+	createdAt: string;
 	id: string;
 	roomId: string;
 	sender: Sender;

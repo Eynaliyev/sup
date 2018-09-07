@@ -9,9 +9,10 @@ import "rxjs/add/operator/catch";
 import { User } from "../models/models";
 import { AngularFirestore } from "angularfire2/firestore";
 import { AngularFireDatabase } from "angularfire2/database";
-
 import { ReplaySubject } from "rxjs/ReplaySubject";
 //import { Camera } from 'ionic-native';
+import * as moment from "moment";
+
 
 @Injectable()
 export class UserService {
@@ -208,7 +209,7 @@ export class UserService {
 		let dbRef = this.afs.doc(`chatrooms/${roomId}`);
 		this.getUserById(toId).subscribe(user => {
 			let conversation: any = {
-				createdAt: new Date(),
+				createdAt:  moment().format("DD/MM/YYYY, hh:mm:ss"),
 				participants: [this.currentUser, user]
 			};
 			this.sendWelcomeConversationMessage(roomId);
@@ -218,7 +219,7 @@ export class UserService {
 	sendWelcomeConversationMessage(roomId) {
 		let defaultMessage = {
 			content: "you are now connected!",
-			createdAt: new Date(),
+			createdAt:  moment().format("DD/MM/YYYY, hh:mm:ss"),
 			senderId: 1111
 		};
 		this.db.list(`messages/${roomId}`).push(defaultMessage);

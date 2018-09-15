@@ -3,6 +3,8 @@ import { Component } from "@angular/core";
 import { NavController } from "ionic-angular";
 import { UserService, NotificationService } from "../../services/services";
 import { User, Notification } from "../../models/models";
+import * as moment from "moment";
+
 @Component({
 	selector: "page-notifications-list",
 	templateUrl: "notifications-list.html"
@@ -36,7 +38,7 @@ export class NotificationsListPage {
 						.getNotifications(user.id)
 						.subscribe(notifications => {
 							let res = notifications.sort((first, second) => {
-								return second.createdAt.getTime() - first.createdAt.getTime();
+								return moment(second.createdAt).diff(moment(first.createdAt));
 							});
 							for (let i = 0; i < res.length; i++) {
 								setTimeout(function() {

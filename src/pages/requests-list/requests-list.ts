@@ -5,6 +5,7 @@ import { UserService } from "../../services/services";
 import { RequestService } from "../../services/services";
 import { User, Request } from "../../models/models";
 import { AlertController } from "ionic-angular";
+import * as moment from "moment";
 
 @Component({
 	selector: "page-requests-list",
@@ -44,7 +45,7 @@ export class RequestsListPage {
 				.then(user => {
 					this.currentUser = user;
 					/*let res = this.navParams.get("requests").sort((first, second) => {
-						return second.createdAt.getTime() - first.date.getTime();
+						return moment(second.createdAt).diff(moment(first.createdAt));
 					});
 					for (let i = 0; i < res.length; i++) {
 						setTimeout(function() {

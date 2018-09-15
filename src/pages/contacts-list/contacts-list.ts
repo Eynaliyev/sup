@@ -9,6 +9,8 @@ import { ChatroomPage } from "../pages";
 import { RequestsListPage } from "../pages";
 import { User } from "../../models/models";
 import { Contact, Request } from "../../models/models";
+import * as moment from "moment";
+
 @Component({
 	selector: "page-contacts-list",
 	templateUrl: "contacts-list.html"
@@ -55,9 +57,8 @@ export class ContactsListPage {
 					});
 					// setting contacts
 					let contacts = this.contacts.sort((first, second) => {
-						return (
-							second.lastMessage.createdAt.getTime() -
-							first.lastMessage.createdAt.getTime()
+						return moment(second.lastMessage.createdAt).diff(
+							moment(first.lastMessage.createdAt)
 						);
 					});
 					for (let i = 0; i < contacts.length; i++) {

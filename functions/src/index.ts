@@ -26,6 +26,8 @@ exports.createRequest = functions.firestore
 			.firestore()
 			.collection("requests_received")
 			.doc(newValue.recipient.id)
+			.collection("senders")
+			.doc(newValue.sender.id)
 			.set(newValue);
 	});
 /*

@@ -1,4 +1,3 @@
-import { AuthService } from "./../../services/auth.service";
 import { Component } from "@angular/core";
 import { NavController, NavParams } from "ionic-angular";
 import { UserService } from "../../services/services";
@@ -30,7 +29,6 @@ export class RequestsListPage {
 		private navParams: NavParams,
 		private requestsSrvc: RequestService,
 		private userSrvc: UserService,
-		public authSrvc: AuthService,
 		public alertCtrl: AlertController
 	) {
 		console.log("RequestsListPage initialized");
@@ -40,9 +38,10 @@ export class RequestsListPage {
 	ngAfterViewInit() {
 		return new Promise(resolve => {
 			let env = this;
-			this.authSrvc
-				.getUserData()
-				.then(user => {
+			this.userSrvc
+				.getCurrentUser()
+				.take(2)
+				.subscribe(user => {
 					this.currentUser = user;
 					/*let res = this.navParams.get("requests").sort((first, second) => {
 						return moment(second.createdAt).diff(moment(first.createdAt));
@@ -65,9 +64,6 @@ export class RequestsListPage {
 							this.currentUser.id
 						);
 					}*/
-				})
-				.catch(err => {
-					console.log("Error:", err);
 				});
 		});
 	}

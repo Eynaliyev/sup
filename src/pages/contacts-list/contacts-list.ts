@@ -1,5 +1,5 @@
 import {
-	AuthService,
+	UserService,
 	ContactService,
 	RequestService
 } from "../../services/services";
@@ -26,7 +26,7 @@ export class ContactsListPage {
 
 	constructor(
 		private navCtrl: NavController,
-		public authSrvc: AuthService,
+		public userSrvc: UserService,
 		public contactSrvc: ContactService,
 		public requestSrvc: RequestService
 	) {
@@ -40,9 +40,10 @@ export class ContactsListPage {
 	ngAfterViewInit() {
 		return new Promise(resolve => {
 			let env = this;
-			this.authSrvc
-				.getUserData()
-				.then(user => {
+			this.userSrvc
+				.getCurrentUser()
+				.take(2)
+				.subscribe(user => {
 					this.currentUser = user;
 					this.contactSrvc.getContacts(user.id).subscribe(contacts => {
 						this.contacts = contacts;
@@ -75,9 +76,6 @@ export class ContactsListPage {
 							this.newRequests = true;
 						}
 					}
-				})
-				.catch(err => {
-					console.log("Error:", err);
 				});
 		});
 	}

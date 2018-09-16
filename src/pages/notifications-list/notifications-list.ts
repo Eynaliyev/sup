@@ -1,4 +1,3 @@
-import { AuthService } from "./../../services/auth.service";
 import { Component } from "@angular/core";
 import { NavController } from "ionic-angular";
 import { UserService, NotificationService } from "../../services/services";
@@ -17,7 +16,6 @@ export class NotificationsListPage {
 	constructor(
 		private navCtrl: NavController,
 		private userSrvc: UserService,
-		private authSrvc: AuthService,
 		private notificationSrvc: NotificationService
 	) {
 		console.log("NotificationsListPage initialized");
@@ -30,9 +28,10 @@ export class NotificationsListPage {
 	ngAfterViewInit() {
 		return new Promise(resolve => {
 			let env = this;
-			this.authSrvc
-				.getUserData()
-				.then(user => {
+			this.userSrvc
+				.getCurrentUser()
+				.take(2)
+				.subscribe(user => {
 					this.currentUser = user;
 					this.notificationSrvc
 						.getNotifications(user.id)

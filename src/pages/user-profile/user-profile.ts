@@ -1,4 +1,3 @@
-import { AuthService } from "./../../services/auth.service";
 import { Component } from "@angular/core";
 import { NavController, NavParams } from "ionic-angular";
 import {
@@ -46,7 +45,6 @@ export class UserProfilePage {
 		private navCtrl: NavController,
 		private navParams: NavParams,
 		private userSrvc: UserService,
-		public authSrvc: AuthService,
 		public contactSrvc: ContactService,
 		private requestSrvc: RequestService,
 		public alertCtrl: AlertController,
@@ -56,9 +54,10 @@ export class UserProfilePage {
 	}
 	ionViewDidLoad() {
 		//console.log(this.navParams.data);
-		this.authSrvc
-			.getUserData()
-			.then(curUsr => {
+		this.userSrvc
+			.getCurrentUser()
+			.take(2)
+			.subscribe(curUsr => {
 				let id = this.navParams.get("user");
 				this.currentUser = curUsr;
 				this.contactSrvc
@@ -79,8 +78,7 @@ export class UserProfilePage {
 						throw new Error("Error: " + error); // throw an Error
 					}
 				);
-			})
-			.catch(err => console.log(err));
+			});
 		console.log("ionViewDidLoad UserProfilePage");
 	}
 	changeImage(image) {

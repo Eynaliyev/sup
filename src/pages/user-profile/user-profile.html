@@ -1,19 +1,5 @@
 <ion-content *ngIf="user">
 	<back-button></back-button>
-	<ion-fab *ngIf="tab == 'vote'" left bottom>
-		<button ion-fab color="light" (click)="block(user.id)" class="menu-btn-border actn-btn">
-			<ion-icon name="md-close"></ion-icon>
-		</button>
-	</ion-fab>
-	<ion-fab *ngIf="user && tab == 'vote'" right bottom>
-		<button ion-fab (click)="like(user.id)" color="light" class="menu-btn-border actn-btn" *ngIf="!friend && !requested">
-			<ion-icon name="ios-heart-outline"></ion-icon>
-		</button>
-		<button ion-fab (click)="unlike(user.id)" color="light" class="menu-btn-border actn-btn" *ngIf="friend || requested">
-			<ion-icon name="ios-heart"></ion-icon>
-		</button>
-	</ion-fab>
-
 	<div *ngIf="user" class="venti-spacer">
 		<!--
 				<ion-slides pager>
@@ -26,6 +12,19 @@
 			<div class="card-title">{{user.firstName}} {{user.lastName}}</div>
 			<div class="card-subtitle">{{user.currentLocation}}</div>
 		</ion-card>
+		<ion-fab *ngIf="tab == 'vote'" left bottom>
+			<button ion-fab color="light" (click)="block(user.id)" class="menu-btn-border actn-btn">
+				<ion-icon name="md-close"></ion-icon>
+			</button>
+		</ion-fab>
+		<ion-fab *ngIf="user && tab == 'vote'" right bottom>
+			<button ion-fab (click)="like(user.id)" color="light" class="menu-btn-border actn-btn" *ngIf="!friend && !requested">
+				<ion-icon name="ios-heart-outline"></ion-icon>
+			</button>
+			<button ion-fab (click)="unlike(user.id)" color="light" class="menu-btn-border actn-btn" *ngIf="friend || requested">
+				<ion-icon name="ios-heart"></ion-icon>
+			</button>
+		</ion-fab>
 		<ion-list>
 			<ion-item id="myProfile-textarea1">
 				<ion-label>

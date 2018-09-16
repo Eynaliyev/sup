@@ -35,7 +35,7 @@ export class AuthService {
 		console.log("Hello AuthService");
 	}
 	// Get the userData from Firestore of the logged in user on Firebase.
-	public getUserData(): Promise<User> {
+	/*public getUserData(): Promise<User> {
 		this.http
 			.get("https://us-central1-huggable-9e981.cloudfunctions.net/test")
 			.subscribe(data => {
@@ -48,39 +48,7 @@ export class AuthService {
 				return this.getUser();
 			}
 		});
-	}
-	// Get the authenticated user on Firebase and update the userData variable.
-	public getUser(): Promise<firebase.User> {
-		return new Promise((resolve, reject) => {
-			if (this.fbSubscription) {
-				this.fbSubscription.unsubscribe();
-			}
-			this.fbSubscription = this._firebaseAuth.authState.subscribe(
-				(user: firebase.User) => {
-					// User is logged in on Firebase.
-					if (user) {
-						this.get("users/" + user.uid)
-							.then(ref => {
-								if (this.fsSubscription) {
-									this.fsSubscription.unsubscribe();
-								}
-								// Update userData variable from Firestore.
-								this.fsSubscription = ref
-									.valueChanges()
-									.subscribe((user: User) => {
-										this.user = user;
-									});
-							})
-							.catch(() => {
-								reject();
-							});
-					}
-					resolve(user);
-				}
-			);
-		});
-	}
-
+	}*/
 	// Change password of the logged in user on Firebase.
 	public changePassword(password: string): Promise<any> {
 		return new Promise((resolve, reject) => {
@@ -130,12 +98,16 @@ export class AuthService {
 			provider.addScope("email");
 			provider.addScope("public_profile");
 			provider.addScope("user_birthday");
-			if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+			if (
+				/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+					navigator.userAgent
+				)
+			) {
 				// some code..
-				console.log("we're on mobile")
+				console.log("we're on mobile");
 				return this._firebaseAuth.auth.signInWithRedirect(provider);
 			} else {
-				console.log("we're on desktop")
+				console.log("we're on desktop");
 				return this._firebaseAuth.auth.signInWithPopup(provider);
 			}
 		} else {

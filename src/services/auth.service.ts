@@ -34,62 +34,6 @@ export class AuthService {
 	) {
 		console.log("Hello AuthService");
 	}
-	// Get the userData from Firestore of the logged in user on Firebase.
-	/*public getUserData(): Promise<User> {
-		this.http
-			.get("https://us-central1-huggable-9e981.cloudfunctions.net/test")
-			.subscribe(data => {
-				console.log("data", data);
-			});
-		return new Promise(resolve => {
-			if (this.user) {
-				resolve(this.user);
-			} else {
-				return this.getUser();
-			}
-		});
-	}*/
-	// Change password of the logged in user on Firebase.
-	public changePassword(password: string): Promise<any> {
-		return new Promise((resolve, reject) => {
-			this._firebaseAuth.auth.currentUser
-				.updatePassword(password)
-				.then(res => {
-					resolve(res);
-				})
-				.catch(err => {
-					reject(err);
-				});
-		});
-	}
-
-	// Login to Firebase using email and password combination.
-	public loginWithEmail(email: string, password: string): Promise<any> {
-		return new Promise((resolve, reject) => {
-			this._firebaseAuth.auth
-				.signInWithEmailAndPassword(email, password)
-				.then(res => {
-					resolve(res);
-				})
-				.catch(err => {
-					reject(err);
-				});
-		});
-	}
-
-	// Register an account on Firebase with email and password combination.
-	public registerWithEmail(email: string, password: string): Promise<any> {
-		return new Promise((resolve, reject) => {
-			this._firebaseAuth.auth
-				.createUserWithEmailAndPassword(email, password)
-				.then(res => {
-					resolve(res);
-				})
-				.catch(err => {
-					reject(err);
-				});
-		});
-	}
 	signInWithFacebook(): Promise<User> {
 		//check for platform if web return a promise,
 		if (document.URL.includes("https://") || document.URL.includes("http://")) {
@@ -145,4 +89,62 @@ export class AuthService {
 			resolve(this.afs.doc(path));
 		});
 	}
+
+	// Get the userData from Firestore of the logged in user on Firebase.
+	/*public getUserData(): Promise<User> {
+		this.http
+			.get("https://us-central1-huggable-9e981.cloudfunctions.net/test")
+			.subscribe(data => {
+				console.log("data", data);
+			});
+		return new Promise(resolve => {
+			if (this.user) {
+				resolve(this.user);
+			} else {
+				return this.getUser();
+			}
+		});
+	}*/
+	/*
+	// Change password of the logged in user on Firebase.
+	public changePassword(password: string): Promise<any> {
+		return new Promise((resolve, reject) => {
+			this._firebaseAuth.auth.currentUser
+				.updatePassword(password)
+				.then(res => {
+					resolve(res);
+				})
+				.catch(err => {
+					reject(err);
+				});
+		});
+	}
+
+	// Login to Firebase using email and password combination.
+	public loginWithEmail(email: string, password: string): Promise<any> {
+		return new Promise((resolve, reject) => {
+			this._firebaseAuth.auth
+				.signInWithEmailAndPassword(email, password)
+				.then(res => {
+					resolve(res);
+				})
+				.catch(err => {
+					reject(err);
+				});
+		});
+	}
+
+	// Register an account on Firebase with email and password combination.
+	public registerWithEmail(email: string, password: string): Promise<any> {
+		return new Promise((resolve, reject) => {
+			this._firebaseAuth.auth
+				.createUserWithEmailAndPassword(email, password)
+				.then(res => {
+					resolve(res);
+				})
+				.catch(err => {
+					reject(err);
+				});
+		});
+	}*/
 }

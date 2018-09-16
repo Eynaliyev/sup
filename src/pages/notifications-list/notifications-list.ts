@@ -49,9 +49,6 @@ export class NotificationsListPage {
 								}, 100 * i);
 							}
 						});
-				})
-				.catch(err => {
-					console.log("Error:", err);
 				});
 		});
 	}

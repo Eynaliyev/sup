@@ -27,23 +27,21 @@ $app-direction: ltr;
 // colors so you can add, rename and remove colors as needed.
 // The "primary" color is the only required color in the map.
 
-$colors: (
-	primary: #3498db,
-	secondary: #32db64,
-	danger: #f53d3d,
-	light: #f4f4f4,
-	royal: gold,
-	dark: #222,
-	favorite: #69bb7b,
-	border-color: #e0e0e0,
-	gray: #f7f7f7,
-	fb-color: #3b5998,
-	white: #ffffff,
-	chat-bg: #edecec,
-	bee-gold: #ffcf00,
-	chat-bubble: #c4ebf7,
-	universal: #ffa731
-);
+$colors: (primary: #3498db,
+secondary: #32db64,
+danger: #f53d3d,
+light: #f4f4f4,
+royal: gold,
+dark: #222,
+favorite: #69bb7b,
+border-color: #e0e0e0,
+gray: #f7f7f7,
+fb-color: #3b5998,
+white: #ffffff,
+chat-bg: #edecec,
+bee-gold: #ffcf00,
+chat-bubble: #c4ebf7,
+universal: #ffa731);
 
 // App iOS Variables
 // --------------------------------------------------
@@ -78,22 +76,28 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
+
 ion-fab {
 	top: 21px !important;
 }
+
 .universal-btn {
 	color: white;
 }
+
 .user-photo-bckg {
 	background-size: cover;
 	position: relative;
 }
+
 .btn-top-align {
 	top: 10px;
 }
+
 .right {
 	right: 0;
 }
+
 .gallery-bckg {
 	margin: 0px 0px 0px 0px;
 	position: absolute;
@@ -101,7 +105,9 @@ ion-fab {
 	top: 0;
 	height: 100%;
 	background: none;
-} /*
+}
+
+/*
 .selected-img{
 	padding: 5px;
 	width: auto;
@@ -109,15 +115,11 @@ ion-fab {
 	padding-bottom: 90px;
 	height: 95%;
 }*/
-.actn-btn {
-	width: 76px;
-	height: 76px;
-	margin-bottom: 100px;
-}
 .notification {
 	max-width: 9px;
 	margin-left: 5px;
 }
+
 .usr-profile-age-label {
 	padding: 11px;
 	background: rgba(207, 83, 143, 0.61);
@@ -126,6 +128,7 @@ ion-fab {
 	right: 20px;
 	top: -10px;
 }
+
 .promo-text {
 	text-align: center;
 	margin: 0 auto;
@@ -133,21 +136,25 @@ ion-fab {
 	color: white;
 	font-family: sans-serif;
 }
+
 .menu-avatar {
 	margin: 0px 0px 0px 0px;
 	border: 2px solid color($colors, royal);
 	width: calc(100%);
 	border-radius: 50% !important;
 }
+
 .profile-info {
 	height: 50px;
 	background: rgba(0, 0, 0, 0.5);
 }
+
 .participant-col {
 	padding: 13px;
 	color: #6c6c6c;
 	text-align: center;
 }
+
 .participant-avatar {
 	text-align: center;
 	margin: 0px 0px 5px 0px;
@@ -158,9 +165,11 @@ ion-fab {
 	min-height: 90px;
 	border-radius: 50% !important;
 }
+
 img.avatar-border {
 	border: 2px solid color($colors, royal);
 }
+
 img.profile-picture {
 	padding: 2px;
 	border-radius: 50%;
@@ -169,44 +178,57 @@ img.profile-picture {
 	height: 40px;
 	position: absolute;
 	bottom: 10px;
+
 	&.left {
 		left: 10px;
 	}
+
 	&.right {
 		right: 10px;
 	}
 }
+
 .vert-center {
 	margin-top: 33%;
 }
+
 .venti-spacer {
 	margin-top: 63px !important;
 }
+
 .grande-spacer {
 	margin-top: 42px !important;
 }
+
 .tall-spacer {
 	margin-top: 21px !important;
 }
+
 .lower {
 	padding-top: 21px;
 }
+
 .light-text {
 	color: #d0d0d0;
 	background-color: transparent;
 }
+
 .venti {
 	font-size: 42px;
 }
+
 .grande {
 	font-size: 21px;
 }
+
 .tall {
 	font-size: 15px;
 }
+
 .short {
 	font-size: 11px;
 }
+
 /* the loader */
 .load {
 	margin: 150px auto;
@@ -220,6 +242,7 @@ img.profile-picture {
 	-webkit-animation: pulse 2000ms linear infinite;
 	-moz-animation: pulse 2000ms linear infinite;
 }
+
 .load i {
 	position: absolute;
 	top: 28px;
@@ -227,6 +250,7 @@ img.profile-picture {
 	color: white;
 	text-shadow: -1px -1px #333;
 }
+
 .load:after,
 .load:before {
 	display: inline-block;
@@ -238,18 +262,21 @@ img.profile-picture {
 	border-radius: 100px;
 	background-color: color($colors, royal);
 }
+
 .load:after {
 	z-index: -100;
 	-webkit-animation: outer-ripple 2000ms linear infinite;
 	-moz-animation: outer-ripple 2000ms linear infinite;
 	animation: outer-ripple 2000ms linear infinite;
 }
+
 .load:before {
 	z-index: -200;
 	-webkit-animation: inner-ripple 2000ms linear infinite;
 	-moz-animation: inner-ripple 2000ms linear infinite;
 	animation: inner-ripple 2000ms linear infinite;
 }
+
 /* outer ripple */
 
 @keyframes pulse {
@@ -258,16 +285,19 @@ img.profile-picture {
 		filter: alpha(opacity=50);
 		opacity: 0.5;
 	}
+
 	10% {
 		transform: scale(1.1);
 		filter: alpha(opacity=1);
 		opacity: 1;
 	}
+
 	20% {
 		transform: scale(0.9);
 		filter: alpha(opacity=1);
 		opacity: 1;
 	}
+
 	100% {
 		transform: scale(0.8);
 		filter: alpha(opacity=50);
@@ -281,16 +311,19 @@ img.profile-picture {
 		filter: alpha(opacity=50);
 		opacity: 0.5;
 	}
+
 	10% {
 		transform: scale(1.1);
 		filter: alpha(opacity=1);
 		opacity: 1;
 	}
+
 	20% {
 		transform: scale(0.9);
 		filter: alpha(opacity=1);
 		opacity: 1;
 	}
+
 	100% {
 		transform: scale(0.8);
 		filter: alpha(opacity=50);
@@ -304,16 +337,19 @@ img.profile-picture {
 		filter: alpha(opacity=50);
 		opacity: 0.5;
 	}
+
 	10% {
 		transform: scale(1.1);
 		filter: alpha(opacity=1);
 		opacity: 1;
 	}
+
 	20% {
 		transform: scale(0.9);
 		filter: alpha(opacity=1);
 		opacity: 1;
 	}
+
 	100% {
 		transform: scale(0.8);
 		filter: alpha(opacity=50);
@@ -327,11 +363,13 @@ img.profile-picture {
 		filter: alpha(opacity=50);
 		opacity: 0.5;
 	}
+
 	80% {
 		transform: scale(3.5);
 		filter: alpha(opacity=0);
 		opacity: 0;
 	}
+
 	100% {
 		transform: scale(3.5);
 		filter: alpha(opacity=0);
@@ -345,11 +383,13 @@ img.profile-picture {
 		filter: alpha(opacity=50);
 		opacity: 0.5;
 	}
+
 	80% {
 		transform: scale(3.5);
 		filter: alpha(opacity=0);
 		opacity: 0;
 	}
+
 	100% {
 		transform: scale(3.5);
 		filter: alpha(opacity=0);
@@ -363,17 +403,20 @@ img.profile-picture {
 		filter: alpha(opacity=50);
 		opacity: 0.5;
 	}
+
 	80% {
 		transform: scale(3.5);
 		filter: alpha(opacity=0);
 		opacity: 0;
 	}
+
 	100% {
 		transform: scale(3.5);
 		filter: alpha(opacity=0);
 		opacity: 0;
 	}
 }
+
 /* inner ripple */
 
 @keyframes inner-ripple {
@@ -382,11 +425,13 @@ img.profile-picture {
 		filter: alpha(opacity=50);
 		opacity: 0.5;
 	}
+
 	30% {
 		transform: scale(1);
 		filter: alpha(opacity=50);
 		opacity: 0.5;
 	}
+
 	100% {
 		transform: scale(2.5);
 		filter: alpha(opacity=0);
@@ -400,11 +445,13 @@ img.profile-picture {
 		filter: alpha(opacity=50);
 		opacity: 0.5;
 	}
+
 	30% {
 		transform: scale(1);
 		filter: alpha(opacity=50);
 		opacity: 0.5;
 	}
+
 	100% {
 		transform: scale(2.5);
 		filter: alpha(opacity=0);
@@ -418,11 +465,13 @@ img.profile-picture {
 		filter: alpha(opacity=50);
 		opacity: 0.5;
 	}
+
 	30% {
 		transform: scale(1);
 		filter: alpha(opacity=50);
 		opacity: 0.5;
 	}
+
 	100% {
 		transform: scale(2.5);
 		filter: alpha(opacity=0);

@@ -9,28 +9,38 @@
 				</ion-slides>-->
 		<ion-card>
 			<img [src]="user.profilePhoto.imgUrl" onError="this.src='assets/images/other-assets/profile.png';">
-			<div class="card-title">{{user.firstName}} {{user.lastName}}</div>
-			<div class="card-subtitle">{{user.currentLocation}}</div>
 		</ion-card>
-		<ion-fab *ngIf="tab == 'vote'" left bottom>
-			<button ion-fab color="light" (click)="block(user.id)" class="menu-btn-border actn-btn">
+		<ion-fab *ngIf="tab == 'vote'" class="action-btn block-btn">
+			<button ion-fab color="light" (click)="block(user.id)" class="menu-btn-border">
 				<ion-icon name="md-close"></ion-icon>
 			</button>
 		</ion-fab>
-		<ion-fab *ngIf="user && tab == 'vote'" right bottom>
-			<button ion-fab (click)="like(user.id)" color="light" class="menu-btn-border actn-btn" *ngIf="!friend && !requested">
+		<ion-fab *ngIf="user && tab == 'vote'" class="action-btn like-btn">
+			<button ion-fab (click)="like(user.id)" color="light" class="menu-btn-border" *ngIf="!friend && !requested">
 				<ion-icon name="ios-heart-outline"></ion-icon>
 			</button>
-			<button ion-fab (click)="unlike(user.id)" color="light" class="menu-btn-border actn-btn" *ngIf="friend || requested">
+			<button ion-fab (click)="unlike(user.id)" color="light" class="menu-btn-border" *ngIf="friend || requested">
 				<ion-icon name="ios-heart"></ion-icon>
 			</button>
 		</ion-fab>
 		<ion-list>
+			<ion-item>
+				<div class="card-title">{{user.firstName}} {{user.lastName}}</div>
+			</ion-item>
+			<ion-item>
+				<div class="card-subtitle">{{user.currentLocation}}</div>
+			</ion-item>
 			<ion-item id="myProfile-textarea1">
 				<ion-label>
 					About me...
 				</ion-label>
-				<ion-textarea [(ngModel)]="user.about" placeholder="{{user.about}}"></ion-textarea>
+				<div id="meetSomebody-markdown2" class="show-list-numbers-and-dots">
+					<p>
+						<strong>
+							{{user.about}}
+						</strong>
+					</p>
+				</div>
 			</ion-item>
 			<ion-item id="meetSomebody-list-item-container1" *ngIf="user.languages">
 				<div id="meetSomebody-markdown2" class="show-list-numbers-and-dots">

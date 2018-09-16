@@ -1,24 +1,62 @@
 page-user-profile {
-	ion-slides {
-		height: auto;
-		.vote-btn {
-			background: #df69a1;
-			color: white;
-			height: 60px;
-			padding-top: 10px;
-		}
-		.about-btn {
-			background: #8649c8;
-			color: white;
-			height: 60px;
-			padding-top: 10px;
-		}
-		.swiper-pagination {
-			top: 10px;
+	.vote-btn {
+		background: #df69a1;
+		color: white;
+		height: 60px;
+		padding-top: 10px;
+	}
 
-			.swiper-pagination-bullet {
-				background: color($colors, white);
-			}
+	ion-list {
+		margin-top: 100px !important;
+	}
+
+	ion-card {
+		margin: auto !important;
+		position: relative;
+		max-width: 256px;
+		text-align: center;
+	}
+
+	.card-title {
+		font-size: 2em;
+	}
+
+	.card-subtitle {
+		font-size: 1em;
+	}
+
+	.action-btn {
+		position: relative;
+		margin-top: -21px;
+
+		button {
+			width: 76px;
+			height: 76px;
+		}
+	}
+
+	.block-btn {
+		left: 21%;
+		float: left;
+	}
+
+	.like-btn {
+		right: 21%;
+		float: right;
+	}
+
+	.about-btn {
+		background: #8649c8;
+		color: white;
+		height: 60px;
+		padding-top: 10px;
+	}
+
+	.swiper-pagination {
+		top: 10px;
+
+		.swiper-pagination-bullet {
+			background: color($colors, white);
 		}
 	}
 }

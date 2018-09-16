@@ -20,10 +20,14 @@
 			</ion-slides>-->
 		<ion-card>
 			<img [src]="profilePhoto" onError="this.src='assets/images/other-assets/profile.png';">
-			<div class="card-title">{{currentUser.firstName}} {{currentUser.lastName}}</div>
-			<div class="card-subtitle">{{currentUser.currentLocation}}</div>
 		</ion-card>
 		<ion-list>
+			<ion-item>
+				<div class="card-title">{{currentUser.firstName}} {{currentUser.lastName}}</div>
+			</ion-item>
+			<ion-item>
+				<div class="card-subtitle">{{currentUser.currentLocation}}</div>
+			</ion-item>
 			<ion-item id="myProfile-textarea1">
 				<ion-label>
 					About me...

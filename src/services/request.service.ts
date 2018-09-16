@@ -165,7 +165,7 @@ export class RequestService {
 				lastName: from.lastName,
 				imgUrl: from.profilePhoto.imgUrl
 			},
-			recepient: {
+			recipient: {
 				id: to.id,
 				firstName: to.firstName,
 				lastName: to.lastName,
@@ -175,7 +175,7 @@ export class RequestService {
 		this.afs
 			.collection("requests_sent")
 			.doc(from.id)
-			.collection("to_id")
+			.collection("recipients")
 			.doc(to.id)
 			.set(newRequest);
 	}

@@ -66,7 +66,7 @@ export class UserProfilePage {
 				console.log("currentUser in userProfile: ", this.currentUser);
 				this.userSrvc.getUserById(id).subscribe(
 					userInfo => {
-						console.log("user, id from getUserByID()", userInfo, id);
+						console.log("user from getUserById: ", userInfo);
 						this.user = userInfo;
 						if (this.requestSrvc.hasLiked(this.currentUser.id, userInfo.id)) {
 							this.requested = true;

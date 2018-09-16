@@ -10,8 +10,6 @@ import { FilterPage } from "../pages";
 import { VIPPage } from "../pages";
 import { ChatroomPage } from "../pages";
 import { ChatroomService } from "../../services/services";
-import { Chatroom } from "../../models/models";
-import { User } from "@firebase/auth-types";
 @Component({
 	selector: "page-waitlist",
 	templateUrl: "waitlist.html"

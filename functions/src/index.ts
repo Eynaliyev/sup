@@ -22,7 +22,10 @@ exports.createRequest = functions.firestore
 	.document("requests_sent/{userId}")
 	.onCreate((snap, context) => {
 		const newValue = snap.data();
-		const doc = admin.firestore().collection("requests_received").add(newValue);
+		const doc = admin
+			.firestore()
+			.collection("requests_received")
+			.add(newValue);
 	});
 /*
 	// gathering of info

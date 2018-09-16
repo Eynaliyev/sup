@@ -107,7 +107,7 @@ export class UserProfilePage {
 						text: "Send Request",
 						handler: () => {
 							console.log("Send Request clicked");
-							this.requestSrvc.sendRequest(this.currentUser, id);
+							this.requestSrvc.sendRequest(this.currentUser, this.user);
 						}
 					}
 				]
@@ -115,7 +115,7 @@ export class UserProfilePage {
 			alert.present();
 			this.likeAlertPresented = true;
 		} else {
-			this.requestSrvc.sendRequest(this.currentUser, id);
+			this.requestSrvc.sendRequest(this.currentUser, this.user);
 		}
 	}
 	block(id: string) {

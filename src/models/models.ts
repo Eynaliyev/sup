@@ -5,3 +5,4 @@ export * from "./notification.model";
 export * from "./request.model";
 export * from "./contact.model";
 export * from "./sender.model";
+export * from "./recepient.model";

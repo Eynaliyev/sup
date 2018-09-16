@@ -19,7 +19,7 @@ exports.test = functions.https.onRequest((req, res) => {
 	res.send("Firebase Cloud Function test passed");
 });
 exports.createRequest = functions.firestore
-	.document("requests_sent/{userId}")
+	.document("requests_sent/{fromId}/to_id/{toId}")
 	.onCreate((snap, context) => {
 		const newValue = snap.data();
 		const doc = admin

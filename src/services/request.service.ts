@@ -155,7 +155,7 @@ export class RequestService {
 		});
 	}
 
-	sendRequest(from: User, toId: string) {
+	sendRequest(from: User, to: User) {
 		let newRequest: Request = {
 			createdAt: moment().format("DD/MM/YYYY, hh:mm:ss"),
 			seen: [],
@@ -164,13 +164,19 @@ export class RequestService {
 				firstName: from.firstName,
 				lastName: from.lastName,
 				imgUrl: from.profilePhoto.imgUrl
+			},
+			recepient: {
+				id: to.id,
+				firstName: to.firstName,
+				lastName: to.lastName,
+				imgUrl: to.profilePhoto.imgUrl
 			}
 		};
 		this.afs
 			.collection("requests_sent")
 			.doc(from.id)
 			.collection("to_id")
-			.doc(toId)
+			.doc(to.id)
 			.set(newRequest);
 	}
 	// Cancel a contact request given the sender and receiver userId.

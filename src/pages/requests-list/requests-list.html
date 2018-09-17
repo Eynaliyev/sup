@@ -12,12 +12,12 @@
 				</span>
 			</h2>
 			<ion-fab class="right btn-top-align">
-				<button ion-fab color="light" (click)="reject(request.sender.id)" class="menu-btn-border">
+				<button ion-fab color="light" (click)="reject(request)" class="menu-btn-border">
 					<ion-icon name="md-close"></ion-icon>
 				</button>
 			</ion-fab>
 			<ion-fab class="right btn-top-align">
-				<button ion-fab (click)="accept(request.sender.id)" color="light" class="menu-btn-border">
+				<button ion-fab (click)="accept(request)" color="light" class="menu-btn-border">
 					<ion-icon name="ios-heart-outline"></ion-icon>
 				</button>
 			</ion-fab>
@@ -31,7 +31,7 @@
 				<img [src]="sentUser.sender.imgUrl" class="profile-picture" onError="this.src='assets/images/other-assets/profile.png';">
 			</ion-thumbnail>
 			<ion-fab class="right btn-top-align">
-				<button ion-fab color="light" (click)="removeRequest(sentUser.sender.id)" class="menu-btn-border">
+				<button ion-fab color="light" (click)="removeRequest(sentUser)" class="menu-btn-border">
 					<ion-icon name="md-close"></ion-icon>
 				</button>
 			</ion-fab>
@@ -45,7 +45,7 @@
 				<img [src]="blockedUser.sender.imgUrl" class="profile-picture" onError="this.src='assets/images/other-assets/profile.png';">
 			</ion-thumbnail>
 			<ion-fab class="right btn-top-align">
-				<button ion-fab color="light" (click)="unblock(blockedUser.sender.id)" class="menu-btn-border">
+				<button ion-fab color="light" (click)="unblock(blockedUser)" class="menu-btn-border">
 					<ion-icon name="md-close"></ion-icon>
 				</button>
 			</ion-fab>

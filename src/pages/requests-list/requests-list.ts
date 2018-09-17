@@ -85,7 +85,7 @@ export class RequestsListPage {
 		console.log("toggled SentListVisibility: ", this.requestsSent);
 		this.sentListVisible != this.sentListVisible;
 	}
-	accept(id: string) {
+	accept(request: Request) {
 		if (!this.likeAlertPresented) {
 			// alert
 			const alert = this.alertCtrl.create({
@@ -103,7 +103,7 @@ export class RequestsListPage {
 						text: "Accept",
 						handler: () => {
 							console.log("Buy clicked");
-							this.requestsSrvc.acceptFriendRequest(this.currentUser.id, id);
+							this.requestsSrvc.acceptFriendRequest(this.currentUser, request);
 						}
 					}
 				]
@@ -111,11 +111,11 @@ export class RequestsListPage {
 			alert.present();
 			this.likeAlertPresented = true;
 		} else {
-			this.requestsSrvc.acceptFriendRequest(this.currentUser.id, id);
+			this.requestsSrvc.acceptFriendRequest(this.currentUser, request);
 		}
 	}
 	// should remove request from requests list, while keeping it as pending in the other person
-	reject(id: string) {
+	reject(request: Request) {
 		if (!this.unlikeAlertPresented) {
 			// alert
 			// check if it's just a request or a friendship
@@ -135,7 +135,7 @@ export class RequestsListPage {
 						text: "Remove",
 						handler: () => {
 							console.log("Request cancelled");
-							this.requestsSrvc.cancelRequest(this.currentUser.id, id);
+							this.requestsSrvc.rejectRequest(this.currentUser, request);
 						}
 					}
 				]
@@ -143,11 +143,11 @@ export class RequestsListPage {
 			alert.present();
 			this.unlikeAlertPresented = true;
 		} else {
-			this.requestsSrvc.cancelRequest(this.currentUser.id, id);
+			this.requestsSrvc.rejectRequest(this.currentUser, request);
 		}
 	}
-	removeRequest(id) {
-		this.requestsSrvc.cancelRequest(this.currentUser.id, id);
+	removeRequest(request: Request) {
+		this.requestsSrvc.cancelRequest(this.currentUser, request);
 	}
 	unblock(id: string) {
 		if (!this.unblockAlertPresented) {

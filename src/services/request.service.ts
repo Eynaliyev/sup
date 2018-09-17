@@ -45,7 +45,7 @@ export class RequestService {
 	updateRequestSeen(requestId: string, userId: string) {
 		//add the id to the seen in the backend
 	}
-	acceptFriendRequest(from: string, to: string): Promise<any> {
+	acceptFriendRequest(from: User, to: Request): Promise<any> {
 		// 1. create friendships from with this user id
 		// 2. the cloud function creates the second one
 		// 3. the cloud function removes the request
@@ -180,70 +180,12 @@ export class RequestService {
 			.set(newRequest);
 	}
 	// Cancel a contact request given the sender and receiver userId.
-	cancelRequest(from: string, to: string): Promise<any> {
-		return new Promise((resolve, reject) => {
-			/*this.get("users/" + from)
-				.then(ref => {
-					ref
-						.valueChanges()
-						.take(1)
-						.subscribe((user: User) => {
-							if (user.requestsSent) {
-								let indexTo = user.requestsSent.findIndex(
-									i => i.toUserId === to
-								);
-								user.requestsSent.splice(indexTo, 1);
-								if (user.requestsSent.length == 0) {
-									user.requestsSent = null;
-								}
-								ref
-									.update({
-										requestsSent: user.requestsSent
-									})
-									.then(() => {
-										this.get("users/" + to)
-											.then(ref => {
-												ref
-													.valueChanges()
-													.take(1)
-													.subscribe((user: User) => {
-														if (user.requestsReceived) {
-															let indexTo = user.requestsReceived.findIndex(
-																i => i.senderId === from
-															);
-															user.requestsReceived.splice(indexTo, 1);
-															if (user.requestsReceived.length == 0) {
-																user.requestsReceived = null;
-															}
-															ref
-																.update({
-																	requestsReceived: user.requestsReceived
-																})
-																.then(() => {
-																	resolve();
-																})
-																.catch(() => {
-																	reject();
-																});
-														}
-													});
-											})
-											.catch(() => {
-												reject();
-											});
-									})
-									.catch(() => {
-										reject();
-									});
-							} else {
-								reject();
-							}
-						});
-				})
-				.catch(() => {
-					reject();
-				});*/
-		});
+	rejectRequest(from: User, to: Request): Promise<any> {
+		return new Promise((resolve, reject) => {});
+	}
+	// Cancel a contact request given the sender and receiver userId.
+	cancelRequest(from: User, to: Request): Promise<any> {
+		return new Promise((resolve, reject) => {});
 	}
 	block(id: string) {
 		/*

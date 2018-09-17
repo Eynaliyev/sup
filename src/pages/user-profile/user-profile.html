@@ -19,7 +19,7 @@
 			<button ion-fab (click)="like(user.id)" color="light" class="menu-btn-border" *ngIf="!friend && !requested">
 				<ion-icon name="ios-heart-outline"></ion-icon>
 			</button>
-			<button ion-fab (click)="unlike(user.id)" color="light" class="menu-btn-border" *ngIf="friend || requested">
+			<button ion-fab color="light" class="menu-btn-border" *ngIf="friend || requested">
 				<ion-icon name="ios-heart"></ion-icon>
 			</button>
 		</ion-fab>

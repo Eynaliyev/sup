@@ -147,40 +147,4 @@ export class UserProfilePage {
 			this.requestSrvc.block(id);
 		}
 	}
-	unlike(id: string) {
-		if (!this.unlikeAlertPresented) {
-			// alert
-			let message = "Are you sure?";
-			if (this.contacts.forEach(contact => contact.id === this.user.id)) {
-				message = "Do you want to cancel your friend request?";
-			} else {
-				message = "Do you want to remove user from your contacts list?";
-			}
-			// check if it's just a request or a friendship
-			const alert = this.alertCtrl.create({
-				title: "Confirm Like",
-				message: message,
-				buttons: [
-					{
-						text: "Cancel",
-						role: "cancel",
-						handler: () => {
-							console.log("Cancel clicked");
-						}
-					},
-					{
-						text: "Remove",
-						handler: () => {
-							console.log("Remove clicked");
-							this.requestSrvc.cancelRequest(this.currentUser.id, id);
-						}
-					}
-				]
-			});
-			alert.present();
-			this.unlikeAlertPresented = true;
-		} else {
-			this.requestSrvc.cancelRequest(this.currentUser.id, id);
-		}
-	}
 }

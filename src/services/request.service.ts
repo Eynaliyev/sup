@@ -16,7 +16,7 @@ export class RequestService {
 			this.afs
 				.collection("requests_received")
 				.doc(`${id}`)
-				.collection("from_id")
+				.collection("senders")
 				.valueChanges()
 				.subscribe(requests => {
 					requests.forEach(request => {
@@ -30,9 +30,9 @@ export class RequestService {
 		let result = [];
 		return new Observable(observer => {
 			this.afs
-				.collection("sent")
+				.collection("requests_sent")
 				.doc(`${id}`)
-				.collection("to_id")
+				.collection("recipients")
 				.valueChanges()
 				.subscribe(requests => {
 					requests.forEach(request => {

@@ -3,6 +3,7 @@ import { Observable } from "rxjs/Observable";
 import { Request, User } from "../models/models";
 import { AngularFirestore } from "angularfire2/firestore";
 import * as moment from "moment";
+import { resolve } from "url";
 
 @Injectable()
 export class RequestService {
@@ -155,40 +156,64 @@ export class RequestService {
 		});
 	}
 
-	sendRequest(from: User, to: User) {
-		let newRequest: Request = {
-			createdAt: moment().format("DD/MM/YYYY, hh:mm:ss"),
-			seen: [],
-			sender: {
-				id: from.id,
-				firstName: from.firstName,
-				lastName: from.lastName,
-				imgUrl: from.profilePhoto.imgUrl
-			},
-			recipient: {
-				id: to.id,
-				firstName: to.firstName,
-				lastName: to.lastName,
-				imgUrl: to.profilePhoto.imgUrl
-			}
-		};
-		this.afs
-			.collection("requests_sent")
-			.doc(from.id)
-			.collection("recipients")
-			.doc(to.id)
-			.set(newRequest);
+	sendRequest(from: User, to: User): Promise<any> {
+		return new Promise((resolve, reject) => {
+			let newRequest: Request = {
+				createdAt: moment().format("DD/MM/YYYY, hh:mm:ss"),
+				seen: [],
+				sender: {
+					id: from.id,
+					firstName: from.firstName,
+					lastName: from.lastName,
+					imgUrl: from.profilePhoto.imgUrl
+				},
+				recipient: {
+					id: to.id,
+					firstName: to.firstName,
+					lastName: to.lastName,
+					imgUrl: to.profilePhoto.imgUrl
+				}
+			};
+			this.afs
+				.collection("requests_sent")
+				.doc(from.id)
+				.collection("recipients")
+				.doc(to.id)
+				.set(newRequest)
+				.then(() => resolve(true))
+				.catch(err => reject(err));
+		});
 	}
 	// Cancel a contact request given the sender and receiver userId.
-	rejectRequest(from: User, to: Request): Promise<any> {
-		return new Promise((resolve, reject) => {});
+	rejectRequest(curUsr: User, to: Request): Promise<any> {
+		return new Promise((resolve, reject) => {
+			// remove received request
+			this.afs
+				.collection("requests_received")
+				.doc(curUsr.id)
+				.collection("senders")
+				.doc(to.sender.id)
+				.delete()
+				.then(() => resolve(true))
+				.catch(err => reject(err));
+		});
 	}
 	// Cancel a contact request given the sender and receiver userId.
-	cancelRequest(from: User, to: Request): Promise<any> {
-		return new Promise((resolve, reject) => {});
+	cancelRequest(curUsr: User, to: Request): Promise<any> {
+		return new Promise((resolve, reject) => {
+			// remove sent request
+			this.afs
+				.collection("requests_sent")
+				.doc(curUsr.id)
+				.collection("recipients")
+				.doc(to.recipient.id)
+				.delete()
+				.then(() => resolve(true))
+				.catch(err => reject(err));
+		});
 	}
 	block(id: string) {
-		/*
+		/* TO BE IMPLEMENTED LATER
 		2. [ ] set the relations collection
 		3. [ ] remove from contacts if he’s there
 		4. [ ] kick the user out of the chatroom and tell him he was kicked out

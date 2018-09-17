@@ -9,8 +9,8 @@ export class AlertService {
 	// Show a pop up alert.
 	public showAlert(
 		title: string,
-		subTitle: string,
-		button: string
+		button: string,
+		subTitle?: string
 	): Promise<any> {
 		return new Promise(resolve => {
 			this.alert = this.alertCtrl.create({

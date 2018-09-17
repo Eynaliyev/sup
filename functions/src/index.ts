@@ -30,6 +30,30 @@ exports.createRequest = functions.firestore
 			.doc(newValue.sender.id)
 			.set(newValue);
 	});
+exports.rejectRequest = functions.firestore
+	.document("requests_received/{fromId}/senders/{toId}")
+	.onDelete((snap, context) => {
+		const newValue = snap.data();
+		const doc = admin
+			.firestore()
+			.collection("requests_sent")
+			.doc(newValue.sender.id)
+			.collection("recipients")
+			.doc(newValue.recipient.id)
+			.delete();
+	});
+exports.cancelRequest = functions.firestore
+	.document("requests_sent/{fromId}/recipients/{toId}")
+	.onDelete((snap, context) => {
+		const newValue = snap.data();
+		const doc = admin
+			.firestore()
+			.collection("requests_received")
+			.doc(newValue.recipient.id)
+			.collection("senders")
+			.doc(newValue.sender.id)
+			.delete();
+	});
 /*
 	// gathering of info
 	let relationshipsPromise = this.afs

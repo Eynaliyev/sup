@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { NavController, NavParams } from "ionic-angular";
 import { UserService } from "../../services/services";
-import { RequestService } from "../../services/services";
+import { RequestService, AlertService } from "../../services/services";
 import { User, Request } from "../../models/models";
 import { AlertController } from "ionic-angular";
 import * as moment from "moment";
@@ -29,6 +29,7 @@ export class RequestsListPage {
 		private navParams: NavParams,
 		private requestsSrvc: RequestService,
 		private userSrvc: UserService,
+		private alertSrvc: AlertService,
 		public alertCtrl: AlertController
 	) {
 		console.log("RequestsListPage initialized");
@@ -86,68 +87,59 @@ export class RequestsListPage {
 		this.sentListVisible != this.sentListVisible;
 	}
 	accept(request: Request) {
-		if (!this.likeAlertPresented) {
-			// alert
-			const alert = this.alertCtrl.create({
-				title: "Confirm Like",
-				message: "Do you want to add this person to contacts?",
-				buttons: [
-					{
-						text: "Cancel",
-						role: "cancel",
-						handler: () => {
-							console.log("Cancel clicked");
-						}
-					},
-					{
-						text: "Accept",
-						handler: () => {
-							console.log("Buy clicked");
-							this.requestsSrvc.acceptFriendRequest(this.currentUser, request);
-						}
+		// alert
+		const alert = this.alertCtrl.create({
+			title: "Confirm Like",
+			message: "Do you want to add this person to contacts?",
+			buttons: [
+				{
+					text: "Cancel",
+					role: "cancel",
+					handler: () => {
+						console.log("Cancel clicked");
 					}
-				]
-			});
-			alert.present();
-			this.likeAlertPresented = true;
-		} else {
-			this.requestsSrvc.acceptFriendRequest(this.currentUser, request);
-		}
+				},
+				{
+					text: "Accept",
+					handler: () => {
+						this.alertSrvc.showAlert("Friend request accepted", "OK");
+						this.requestsSrvc.acceptFriendRequest(this.currentUser, request);
+					}
+				}
+			]
+		});
+		alert.present();
 	}
 	// should remove request from requests list, while keeping it as pending in the other person
 	reject(request: Request) {
-		if (!this.unlikeAlertPresented) {
-			// alert
-			// check if it's just a request or a friendship
-			const alert = this.alertCtrl.create({
-				title: "Confirm Like",
-				message:
-					"Do you want to refuse friend request? Don't worry we won't tell.",
-				buttons: [
-					{
-						text: "Cancel",
-						role: "cancel",
-						handler: () => {
-							console.log("Cancel clicked");
-						}
-					},
-					{
-						text: "Remove",
-						handler: () => {
-							console.log("Request cancelled");
-							this.requestsSrvc.rejectRequest(this.currentUser, request);
-						}
+		// check if it's just a request or a friendship
+		const alert = this.alertCtrl.create({
+			title: "Confirm Like",
+			message:
+				"Do you want to refuse friend request? Don't worry we won't tell.",
+			buttons: [
+				{
+					text: "Cancel",
+					role: "cancel",
+					handler: () => {
+						console.log("Cancel clicked");
 					}
-				]
-			});
-			alert.present();
-			this.unlikeAlertPresented = true;
-		} else {
-			this.requestsSrvc.rejectRequest(this.currentUser, request);
-		}
+				},
+				{
+					text: "Remove",
+					handler: () => {
+						this.alertSrvc.showAlert("Friend request removed", "OK");
+						this.requestsSrvc.rejectRequest(this.currentUser, request);
+					}
+				}
+			]
+		});
+		alert.present();
 	}
 	removeRequest(request: Request) {
-		this.requestsSrvc.cancelRequest(this.currentUser, request);
+		this.requestsSrvc.cancelRequest(this.currentUser, request).then(() => {
+			this.alertSrvc.showAlert("Friend request removed", "OK");
+		});
 	}
 	unblock(id: string) {
 		if (!this.unblockAlertPresented) {
@@ -167,7 +159,7 @@ export class RequestsListPage {
 					{
 						text: "Unblock",
 						handler: () => {
-							console.log("Unblock clicked");
+							this.alertSrvc.showAlert("Unblocked", "OK");
 							this.requestsSrvc.unblock(id);
 						}
 					}

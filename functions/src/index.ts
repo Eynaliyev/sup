@@ -54,6 +54,24 @@ exports.cancelRequest = functions.firestore
 			.doc(newValue.sender.id)
 			.delete();
 	});
+exports.createFriendship = functions.firestore
+	.document("friendships/{fromId}/friends/{toId}")
+	.onCreate((snap, context) => {
+		const newValue = snap.data();
+		// 1. create friendships from with this user id
+		// 2. the cloud function creates the second one
+		// 3. the cloud function removes the request sent
+		// 3.5 the cloud function removes the request received
+		// 4. the cloud function creates the conversation
+		// 5. the cloud function creates the message with the default one
+		/*const doc = admin
+			.firestore()
+			.collection("requests_received")
+			.doc(newValue.recipient.id)
+			.collection("senders")
+			.doc(newValue.sender.id)
+			.set(newValue);*/
+	});
 /*
 	// gathering of info
 	let relationshipsPromise = this.afs

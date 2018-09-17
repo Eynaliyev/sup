@@ -1,14 +1,15 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
-import { Request, User } from "../models/models";
+import { Request, User, Contact } from "../models/models";
 import { AngularFirestore } from "angularfire2/firestore";
+import { UtilService } from "../services/services";
 import * as moment from "moment";
 import { resolve } from "url";
 
 @Injectable()
 export class RequestService {
 	private requests: Request[];
-	constructor(private afs: AngularFirestore) {
+	constructor(private afs: AngularFirestore, public utilSrvc: UtilService) {
 		this.requests = [];
 	}
 	getReceivedRequests(id: string): Observable<Request[]> {
@@ -46,113 +47,37 @@ export class RequestService {
 	updateRequestSeen(requestId: string, userId: string) {
 		//add the id to the seen in the backend
 	}
-	acceptFriendRequest(from: User, to: Request): Promise<any> {
-		// 1. create friendships from with this user id
-		// 2. the cloud function creates the second one
-		// 3. the cloud function removes the request
-		// 4. the cloud function creates the conversation
-		// 5. the cloud function creates the message with the default one
-
+	acceptFriendRequest(curUsr: User, request: Request): Promise<any> {
 		// Accept a contact request given the sender and receiver userId.
 		return new Promise((resolve, reject) => {
-			/*let newToContact: Contact = {
-				id: to,
-				createdAt:  moment().format("DD/MM/YYYY, hh:mm:ss"),
+			let newContact: Contact = {
+				id: request.sender.id,
+				createdAt: moment().format("DD/MM/YYYY, hh:mm:ss"),
+				imgUrl: request.sender.imgUrl,
 				lastMessage: {
-					content: "Wuf Wuf! We're friends now!",
-					createdAt:  moment().format("DD/MM/YYYY, hh:mm:ss"),
-					id: messageId,
-					roomId: roomId,
+					content: "You are now connected",
+					createdAt: moment().format("DD/MM/YYYY, hh:mm:ss"),
+					id: this.utilSrvc.guid(),
+					roomId: this.utilSrvc.uniqueRelId(curUsr.id, request.sender.id),
 					sender: {
-						id: "0",
-						name: "Wuf Wuf",
-						imageUrl: "assets/images/logo/logo.png"
+						id: curUsr.id,
+						firstName: curUsr.firstName,
+						lastName: curUsr.lastName,
+						imgUrl: curUsr.profilePhoto.imgUrl
 					},
 					seen: []
-				}
+				},
+				firstName: request.sender.firstName,
+				lastName: request.sender.lastName
 			};
-			let newFromContact: Contact = {
-				id: from,
-				createdAt:  moment().format("DD/MM/YYYY, hh:mm:ss"),
-				lastMessage: {
-					content: "Wuf Wuf! We're friends now!",
-					createdAt:  moment().format("DD/MM/YYYY, hh:mm:ss"),
-					id: messageId,
-					roomId: roomId,
-					sender: {
-						id: "0",
-						name: "Wuf Wuf",
-						imageUrl: "assets/images/logo/logo.png"
-					},
-					seen: []
-				}
-			};
-			this.cancelRequest(from, to)
-				.then(() => {
-					this.get("users/" + from)
-						.then(ref => {
-							ref
-								.valueChanges()
-								.take(1)
-								.subscribe((user: User) => {
-									if (!user.contacts) {
-										user.contacts = [newToContact];
-									} else {
-										if (this.finInstance(user.contacts, newToContact) == -1) {
-											user.contacts.push(newToContact);
-										}
-									}
-									ref
-										.update({
-											contacts: user.contacts
-										})
-										.then(() => {
-											this.get("users/" + to)
-												.then(ref => {
-													ref
-														.valueChanges()
-														.take(1)
-														.subscribe((user: User) => {
-															if (!user.contacts) {
-																user.contacts = [newFromContact];
-															} else {
-																if (
-																	this.finInstance(
-																		user.contacts,
-																		newFromContact
-																	) == -1
-																) {
-																	user.contacts.push(newFromContact);
-																}
-															}
-															ref
-																.update({
-																	contacts: user.contacts
-																})
-																.then(() => {
-																	resolve();
-																})
-																.catch(() => {
-																	reject();
-																});
-														});
-												})
-												.catch(() => {
-													reject();
-												});
-										})
-										.catch(() => {
-											reject();
-										});
-								});
-						})
-						.catch(() => {
-							reject();
-						});
-				})
-				.catch(() => {
-					reject();
-				});*/
+			this.afs
+				.collection("friendships")
+				.doc(curUsr.id)
+				.collection("friends")
+				.doc(request.sender.id)
+				.set(newContact)
+				.then(() => resolve(true))
+				.catch(err => reject(err));
 		});
 	}
 

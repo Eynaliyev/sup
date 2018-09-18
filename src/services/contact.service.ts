@@ -16,7 +16,7 @@ export class ContactService {
 			this.afs
 				.collection("friendships")
 				.doc(`${id}`)
-				.collection("user-id")
+				.collection("friends")
 				.valueChanges()
 				.subscribe(
 					relationships => {
@@ -39,7 +39,8 @@ export class ContactService {
 			createdAt: data.createdAt,
 			lastMessage: data.lastMessage,
 			imgUrl: data.imgUrl,
-			name: data.name
+			firstName: data.firstName,
+			lastName: data.lastName
 		};
 		return contact;
 	}

@@ -1,7 +1,10 @@
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
+import { Contact, Chatroom, Participant } from "../../src/models/models";
+import * as moment from "moment";
 
 admin.initializeApp();
+
 // // Start writing Firebase Functions
 // // https://firebase.google.com/docs/functions/typescript
 //
@@ -58,20 +61,137 @@ exports.createFriendship = functions.firestore
 	.document("friendships/{fromId}/friends/{toId}")
 	.onCreate((snap, context) => {
 		const newValue = snap.data();
-		// 1. create friendships from with this user id
+		// need to get the toId wildcard from the URL
+		const fromId = context.params.fromId;
+		const toId = context.params.toId;
+		const requestSenderId = context.params.toId;
+		const requestReceiverId = context.params.fromId;
+		const conversationId = uniqueRelId(fromId, toId);
+
+		let newContact: Contact = {
+			id: toId,
+			createdAt: newValue.createdAt,
+			imgUrl: newValue.imgUrl,
+			firstName: newValue.firstName,
+			lastName: newValue.lastName
+		};
 		// 2. the cloud function creates the second one
-		// 3. the cloud function removes the request sent
-		// 3.5 the cloud function removes the request received
-		// 4. the cloud function creates the conversation
-		// 5. the cloud function creates the message with the default one
-		/*const doc = admin
+		const doc = admin
+			.firestore()
+			.collection("friendships")
+			.doc(newValue.id)
+			.collection("senders")
+			.doc(toId)
+			.set(newContact);
+		// 3. delete the request sent
+		const sendRequestDoc = admin
+			.firestore()
+			.collection("requests_sent")
+			.doc(requestSenderId)
+			.collection("recipients")
+			.doc(requestReceiverId)
+			.delete();
+		// 3.5 delete the request received
+		const receivedRequestDoc = admin
 			.firestore()
 			.collection("requests_received")
-			.doc(newValue.recipient.id)
+			.doc(requestReceiverId)
 			.collection("senders")
-			.doc(newValue.sender.id)
-			.set(newValue);*/
+			.doc(requestSenderId)
+			.delete();
+		// 4. the cloud function creates the conversation
+		const senderUserRef = admin
+			.firestore()
+			.collection("users")
+			.doc(toId)
+			.get();
+		const recipientUserRef = admin
+			.firestore()
+			.collection("users")
+			.doc(fromId)
+			.get();
+		let senderUser;
+		let recipientUser;
+
+		senderUserRef
+			.then(snUsr => {
+				senderUser = snUsr;
+			})
+			.then(recUsr => {
+				recipientUser = recUsr;
+				const senderParticipant: Participant = {
+					id: senderUser.id,
+					firstName: senderUser.firstName,
+					lastName: senderUser.lastName,
+					imgUrl: senderUser.imgUrl
+				};
+				const recipientParticipant: Participant = {
+					id: recipientUser.id,
+					firstName: recipientUser.firstName,
+					lastName: recipientUser.lastName,
+					imgUrl: recipientUser.imgUrl
+				};
+				const participants = [senderParticipant, recipientParticipant];
+				const newChatroom: Chatroom = {
+					id: conversationId,
+					participants: participants,
+					messages: []
+				};
+				//creating the conversation in the firestore
+				const newConversationDoc = admin
+					.firestore()
+					.collection("conversations")
+					.doc(newChatroom.id)
+					.set(newChatroom);
+				// 5. the cloud function creates the message with the default one
+				const newMessage = {
+					content: "Woof, Woof, You are now connected!",
+					createdAt: moment().format("DD/MM/YYYY, hh:mm:ss"),
+					id: guid() + newChatroom.id + "001",
+					roomId: newChatroom.id,
+					sender: {
+						id: "001",
+						firstName: "Woof",
+						lastName: "Woof",
+						imgUrl: "assets/images/other-assets/profile.png"
+					},
+					seen: []
+				};
+				admin
+					.database()
+					.ref(`/messages${newMessage.roomId}`)
+					.push(newMessage);
+			});
 	});
+function guid() {
+	function s4() {
+		return Math.floor((1 + Math.random()) * 0x10000)
+			.toString(16)
+			.substring(1);
+	}
+	return (
+		s4() +
+		s4() +
+		"-" +
+		s4() +
+		"-" +
+		s4() +
+		"-" +
+		s4() +
+		"-" +
+		s4() +
+		s4() +
+		s4()
+	);
+}
+// generats a uniqueId for a relationship e.g. sent request and etc
+function uniqueRelId(from: string, to: string): string {
+	if (from <= to) {
+		return from.concat(to);
+	} else {
+		return to.concat(from);
+	}
+}
 /*
 	// gathering of info
 	let relationshipsPromise = this.afs

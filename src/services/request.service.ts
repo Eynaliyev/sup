@@ -49,24 +49,12 @@ export class RequestService {
 	}
 	acceptFriendRequest(curUsr: User, request: Request): Promise<any> {
 		// Accept a contact request given the sender and receiver userId.
+		// 1. create friendships from with this user id
 		return new Promise((resolve, reject) => {
 			let newContact: Contact = {
 				id: request.sender.id,
 				createdAt: moment().format("DD/MM/YYYY, hh:mm:ss"),
 				imgUrl: request.sender.imgUrl,
-				lastMessage: {
-					content: "You are now connected",
-					createdAt: moment().format("DD/MM/YYYY, hh:mm:ss"),
-					id: this.utilSrvc.guid(),
-					roomId: this.utilSrvc.uniqueRelId(curUsr.id, request.sender.id),
-					sender: {
-						id: curUsr.id,
-						firstName: curUsr.firstName,
-						lastName: curUsr.lastName,
-						imgUrl: curUsr.profilePhoto.imgUrl
-					},
-					seen: []
-				},
 				firstName: request.sender.firstName,
 				lastName: request.sender.lastName
 			};
@@ -158,45 +146,5 @@ export class RequestService {
 	}
 	hasLiked(fromId: string, toId: string) {
 		// check the relationship whether current user is set to true or not while the other is not
-	}
-	guid() {
-		function s4() {
-			return Math.floor((1 + Math.random()) * 0x10000)
-				.toString(16)
-				.substring(1);
-		}
-		return (
-			s4() +
-			s4() +
-			"-" +
-			s4() +
-			"-" +
-			s4() +
-			"-" +
-			s4() +
-			"-" +
-			s4() +
-			s4() +
-			s4()
-		);
-	}
-	// generats a uniqueId for a relationship e.g. sent request and etc
-	uniqueRelId(from: string, to: string): string {
-		if (from <= to) {
-			return from.concat(to);
-		} else {
-			return to.concat(from);
-		}
-	}
-	finInstance(array: Array<any>, object): number {
-		array.forEach((ins, index) => {
-			if (this.deepEqual(ins, object)) {
-				return index;
-			}
-		});
-		return -1;
-	}
-	deepEqual(obj1, obj2) {
-		JSON.stringify(obj1) === JSON.stringify(obj2);
 	}
 }

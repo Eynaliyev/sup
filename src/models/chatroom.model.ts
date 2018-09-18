@@ -3,8 +3,9 @@ import { Language } from "./models";
 
 export interface Participant {
 	id: string;
-	name: string;
-	profileImgUrl: string;
+	firstName: string;
+	lastName: string;
+	imgUrl: string;
 	votes?: number;
 }
 

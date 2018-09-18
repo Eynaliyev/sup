@@ -6,9 +6,9 @@
 		<ion-row>
 			<ion-col class="participant-col" [ngClass]="animateClass" col-4 *ngFor=" let user of participants">
 				<ion-card class="participant-avatar" (click)="goToUser(user.id)">
-					<img [src]="user.profileImgUrl" onError="this.src='assets/images/other-assets/profile.png';">
+					<img [src]="user.imgUrl" onError="this.src='assets/images/other-assets/profile.png';">
 				</ion-card>
-				<div class="user-name">{{user.name}}</div>
+				<div class="user-name">{{user.firstName}} {{user.lastName}}</div>
 			</ion-col>
 		</ion-row>
 	</ion-grid>

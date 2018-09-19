@@ -1,5 +1,3 @@
-import { AngularFirestoreCollection } from "angularfire2/firestore";
-import { Message, Request } from "./models";
 interface VipStatus {
 	vip: boolean;
 	expiryDate: Date;

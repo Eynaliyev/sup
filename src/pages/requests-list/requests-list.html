@@ -1,8 +1,8 @@
 <ion-content>
 	<back-button></back-button>
 	<span class="pageHeader">Friend Requests</span>
-	<div class="grande white">Friend Requests</div>
-	<ion-list class="venti-spacer" *ngIf="requestsReceived">
+	<div class="white grande reqs-received req-subheader">Requests Received</div>
+	<ion-list *ngIf="requestsReceived">
 		<ion-item [ngClass]="animateClass" class="" *ngFor="let request of requestsReceived">
 			<ion-thumbnail item-left *ngIf="request.sender.imgUrl">
 				<img [src]="request.sender.imgUrl" class="profile-picture" onError="this.src='assets/images/other-assets/profile.png';">
@@ -24,8 +24,8 @@
 			</ion-fab>
 		</ion-item>
 	</ion-list>
-	<div class="grande white" (click)="toggleSentListVisibility()">Requests sent</div>
-	<div *ngIf="requestsSent.length === 0" class="tall white">No sent requests</div>
+	<div class="grande white req-subheader" (click)="toggleSentListVisibility()">Requests sent</div>
+	<div *ngIf="requestsSent.length === 0" class="tall white req-subheader">No sent requests</div>
 	<ion-list class="venti-spacer" *ngIf="sentListVisible">
 		<ion-item [ngClass]="animateClass" *ngFor="let sentUser of requestsSent">
 			<ion-thumbnail item-left *ngIf="sentUser.sender.imgUrl">
@@ -38,8 +38,8 @@
 			</ion-fab>
 		</ion-item>
 	</ion-list>
-	<div class="grande white" (click)="toggleBlockListVisibility()">Blocked List</div>
-	<div *ngIf="blockedList.length == 0" class="tall white">No blocked contacts</div>
+	<div class="grande white req-subheader" (click)="toggleBlockListVisibility()">Blocked List</div>
+	<div *ngIf="blockedList.length == 0" class="tall white req-subheader">No blocked contacts</div>
 	<ion-list class="venti-spacer" *ngIf="blockedListVisible">
 		<ion-item *ngFor="let blockedUser of blockedList">
 			<ion-thumbnail item-left *ngIf="blockedUser.sender.imgUrl">

@@ -11,7 +11,6 @@ import * as moment from "moment";
 	templateUrl: "requests-list.html"
 })
 export class RequestsListPage {
-	requests: Request[] = [];
 	animateClass: any;
 	currentUser: User;
 	likeAlertPresented: boolean = false;
@@ -26,7 +25,6 @@ export class RequestsListPage {
 
 	constructor(
 		public navCtrl: NavController,
-		private navParams: NavParams,
 		private requestsSrvc: RequestService,
 		private userSrvc: UserService,
 		private alertSrvc: AlertService,
@@ -38,27 +36,22 @@ export class RequestsListPage {
 	ionViewWillEnter() {}
 	ngAfterViewInit() {
 		return new Promise(resolve => {
-			let env = this;
 			this.userSrvc
 				.getCurrentUser()
 				.take(2)
 				.subscribe(user => {
 					this.currentUser = user;
-					/*let res = this.navParams.get("requests").sort((first, second) => {
-						return moment(second.createdAt).diff(moment(first.createdAt));
-					});
-					for (let i = 0; i < res.length; i++) {
-						setTimeout(function() {
-							env.requests.push(res[i]);
-						}, 100 * i);
-					}
-					this.requestsSent = this.requests.filter(
-						el => el.requestType === "RequestSent"
-					);
-					this.requestsReceived = this.requests.filter(
-						el => el.requestType === "RequestReceived"
-					);
-					// make sure the requests are seen
+					this.requestsSrvc
+						.getReceivedRequests(this.currentUser.id)
+						.subscribe(reqs => {
+							this.requestsReceived = reqs;
+						});
+					this.requestsSrvc
+						.getSentRequests(this.currentUser.id)
+						.subscribe(reqs => {
+							this.requestsSent = reqs;
+						});
+					/*// make sure the requests are seen
 					for (let i = 0; i < this.requests.length; i++) {
 						this.requestsSrvc.updateRequestSeen(
 							this.requests[i].id,

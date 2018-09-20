@@ -1,30 +1,31 @@
 <ion-content>
 	<back-button></back-button>
 	<span class="pageHeader">Friend Requests</span>
+	<div class="grande white">Friend Requests</div>
 	<ion-list class="venti-spacer" *ngIf="requestsReceived">
 		<ion-item [ngClass]="animateClass" class="" *ngFor="let request of requestsReceived">
 			<ion-thumbnail item-left *ngIf="request.sender.imgUrl">
 				<img [src]="request.sender.imgUrl" class="profile-picture" onError="this.src='assets/images/other-assets/profile.png';">
 			</ion-thumbnail>
-			<h2>{{request.sender.firstName}} {{request.sender.lastName}}
+			<h2 class="req-sender-name">{{request.sender.firstName}} {{request.sender.lastName}}
 				<span>
 					<img *ngIf="request.seen.indexOf(currentUser.id) === -1" class="notification" src="http://www.clker.com/cliparts/r/M/L/o/R/i/green-dot.svg.med.png">
 				</span>
 			</h2>
-			<ion-fab class="right btn-top-align">
+			<ion-fab class="reject-btn btn-top-align">
 				<button ion-fab color="light" (click)="reject(request)" class="menu-btn-border">
 					<ion-icon name="md-close"></ion-icon>
 				</button>
 			</ion-fab>
-			<ion-fab class="right btn-top-align">
+			<ion-fab class="accept-btn btn-top-align">
 				<button ion-fab (click)="accept(request)" color="light" class="menu-btn-border">
 					<ion-icon name="ios-heart-outline"></ion-icon>
 				</button>
 			</ion-fab>
 		</ion-item>
 	</ion-list>
-	<div class="grande center-text vert-center white-centered" (click)="toggleSentListVisibility()">Sent Requests</div>
-	<div *ngIf="requestsSent.length === 0" class="tall center-text white-centered">No sent requests</div>
+	<div class="grande white" (click)="toggleSentListVisibility()">Requests sent</div>
+	<div *ngIf="requestsSent.length === 0" class="tall white">No sent requests</div>
 	<ion-list class="venti-spacer" *ngIf="sentListVisible">
 		<ion-item [ngClass]="animateClass" *ngFor="let sentUser of requestsSent">
 			<ion-thumbnail item-left *ngIf="sentUser.sender.imgUrl">
@@ -37,8 +38,8 @@
 			</ion-fab>
 		</ion-item>
 	</ion-list>
-	<div class="grande center-text vert-center white-centered" (click)="toggleBlockListVisibility()">Blocked List</div>
-	<div *ngIf="blockedList.length == 0" class="tall center-textwhite-centered">No blocked contacts</div>
+	<div class="grande white" (click)="toggleBlockListVisibility()">Blocked List</div>
+	<div *ngIf="blockedList.length == 0" class="tall white">No blocked contacts</div>
 	<ion-list class="venti-spacer" *ngIf="blockedListVisible">
 		<ion-item *ngFor="let blockedUser of blockedList">
 			<ion-thumbnail item-left *ngIf="blockedUser.sender.imgUrl">

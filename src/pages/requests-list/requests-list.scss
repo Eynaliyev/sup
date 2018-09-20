@@ -1,13 +1,15 @@
 page-contacts-list {
-	ion-thumbnail {
-		img {
-			padding: 2px;
-			border-radius: 50%;
-			border: 2px solid #683f99;
+	ion-item {
+		.req-sender-name {
+			display: inline;
+		}
+		.accept-btn {
+			right: 96px;
+		}
+		
+		.reject-btn {
+			right: 10px;
 		}
 	}
-	.white-centered {
-		color: white;
-		text-align: center;
-	}
+
 }

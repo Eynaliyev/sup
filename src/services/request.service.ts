@@ -2,14 +2,12 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 import { Request, User, Contact } from "../models/models";
 import { AngularFirestore } from "angularfire2/firestore";
-import { UtilService } from "../services/services";
 import * as moment from "moment";
-import { resolve } from "url";
 
 @Injectable()
 export class RequestService {
 	private requests: Request[];
-	constructor(private afs: AngularFirestore, public utilSrvc: UtilService) {
+	constructor(private afs: AngularFirestore) {
 		this.requests = [];
 	}
 	getReceivedRequests(id: string): Observable<Request[]> {

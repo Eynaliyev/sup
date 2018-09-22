@@ -11,7 +11,6 @@ export class ContactService {
 	}
 	// Get an object from Firestore by its path. For eg: firestore.get('users/' + userId) to get a user object.
 	getContacts(id: string): Observable<Contact[]> {
-		let result = [];
 		return new Observable(observer => {
 			this.afs
 				.collection("friendships")
@@ -20,10 +19,9 @@ export class ContactService {
 				.valueChanges()
 				.subscribe(
 					relationships => {
+						let result = [];
 						relationships.forEach(relationship => {
-							if (relationship["relationshipType"] === "Friendship") {
-								result.push(this.relationshipToContact(relationship));
-							}
+							result.push(this.relationshipToContact(relationship));
 						});
 						observer.next(result);
 					},

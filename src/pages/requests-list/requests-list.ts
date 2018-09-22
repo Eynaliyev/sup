@@ -45,6 +45,7 @@ export class RequestsListPage {
 						.getReceivedRequests(this.currentUser.id)
 						.subscribe(reqs => {
 							this.requestsReceived = reqs;
+							console.log(reqs);
 						});
 					this.requestsSrvc
 						.getSentRequests(this.currentUser.id)

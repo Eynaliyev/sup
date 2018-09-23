@@ -1,6 +1,11 @@
 import { UtilService } from "./../../shared/util.service";
-import { Component, ViewChild, ViewEncapsulation } from "@angular/core";
-import { NavController, NavParams, Content } from "ionic-angular";
+import {
+	Component,
+	ViewChild,
+	ViewEncapsulation,
+	ElementRef
+} from "@angular/core";
+import { NavController, NavParams, Content, List } from "ionic-angular";
 import { UserService } from "../../services/services";
 import { ChatroomService } from "../../services/services";
 import { User } from "../../models/user.model";
@@ -19,8 +24,11 @@ import "rxjs/add/operator/mergeMap";
 	encapsulation: ViewEncapsulation.None
 })
 export class ChatroomPage {
+	private mutationObserver: MutationObserver;
 	@ViewChild(Content)
-	content: Content;
+	contentArea: Content;
+	@ViewChild(List, { read: ElementRef })
+	chatList: ElementRef;
 	users: any[] = [];
 	messages: any[] = [];
 	chatroom: Chatroom;
@@ -55,6 +63,14 @@ export class ChatroomPage {
 		return this.authSrvc.isLoggedIn();
 	}*/
 	ionViewDidLoad() {
+		this.contentArea.scrollToBottom();
+		this.mutationObserver = new MutationObserver(mutations => {
+			this.contentArea.scrollToBottom();
+		});
+
+		this.mutationObserver.observe(this.chatList.nativeElement, {
+			childList: true
+		});
 		this.chatroomId = this.navParams.get("room");
 		let privateConversation = this.navParams.get("privateConversation");
 		this.newMessage.roomId = this.chatroomId;
@@ -89,7 +105,7 @@ export class ChatroomPage {
 					this.currentUser.id
 				);
 				this.messages = updatedMessages;
-				this.scrollToBottom(); // <- when the new item is pushed, scroll to the bottom to show it
+				setTimeout(this.scrollToBottom, 300); // <- when the new item is pushed, scroll to the bottom to show it
 			},
 			err => {
 				console.error(err);
@@ -156,8 +172,8 @@ export class ChatroomPage {
 			alert.present();
 		}
 	}
-	scrollToBottom(){
-		this.content.scrollToBottom(300);
+	scrollToBottom() {
+		window.scrollTo(0, document.querySelector(".end").scrollHeight);
 	}
 	sendMessage() {
 		this.chatroomService.sendMessage(this.chatroom.id, this.newMessage);

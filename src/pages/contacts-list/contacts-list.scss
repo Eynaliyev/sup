@@ -1,15 +1,21 @@
 page-contacts-list {
-	ion-thumbnail {
-		img {
-			padding: 2px;
-			border-radius: 50%;
-			border: 2px solid #683f99;
+	ion-list {
+		margin-top: 106px !important;
+
+		ion-item {
+			background-color: transparent;
+			color: #cfcfcf !important;
+
+			ion-thumbnail {
+				img {
+					padding: 2px;
+					border-radius: 50%;
+					border: 2px solid #683f99;
+				}
+			}
 		}
 	}
-	ion-item {
-		background-color: transparent;
-		color: #cfcfcf !important;
-	}
+
 	.no-contact-msg {
 		color: white;
 		position: fixed;

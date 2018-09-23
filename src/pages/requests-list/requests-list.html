@@ -8,9 +8,9 @@
 				<img [src]="request.sender.imgUrl" class="profile-picture" onError="this.src='assets/images/other-assets/profile.png';">
 			</ion-thumbnail>
 			<h2 class="req-sender-name">{{request.sender.firstName}} {{request.sender.lastName}}
-				<span>
+				<!--<span>
 					<img *ngIf="request.seen.indexOf(currentUser.id) === -1" class="notification" src="http://www.clker.com/cliparts/r/M/L/o/R/i/green-dot.svg.med.png">
-				</span>
+				</span>-->
 			</h2>
 			<ion-fab class="reject-btn btn-top-align">
 				<button ion-fab color="light" (click)="reject(request)" class="menu-btn-border">

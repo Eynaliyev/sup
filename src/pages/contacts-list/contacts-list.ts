@@ -69,13 +69,14 @@ export class ContactsListPage {
 						}, 100 * i);
 					}
 					// checking for new requests
+					/*
 					for (let i = 0; i < this.requestsReceived.length; i++) {
 						if (
 							this.requestsReceived[i].seen.indexOf(this.currentUser.id) === -1
 						) {
 							this.newRequests = true;
 						}
-					}
+					}*/
 				});
 		});
 	}

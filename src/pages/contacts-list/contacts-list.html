@@ -9,17 +9,17 @@
 	<span class="pageHeader">Messages</span>
 	<div *ngIf="contacts.length === 0" class="grande center-text vert-center no-contact-msg">No contacts yet, try meeting
 		some new people</div>
-	<ion-list class="venti-spacer" *ngIf="contacts">
-		<ion-item [ngClass]="animateClass" *ngFor=" let user of contacts " (click)="openChat(user)">
+	<ion-list *ngIf="contacts">
+		<ion-item [ngClass]="animateClass" *ngFor=" let user of contacts" (click)="openChat(user)">
 			<ion-thumbnail item-left>
 				<img [src]="user.imgUrl" class="profile-picture" onError="this.src='assets/images/other-assets/profile.png';">
 			</ion-thumbnail>
-			<h2>{{user.name}}
-				<span>
+			<h2>{{user.firstName}} {{user.lastName}}
+				<!--<span>
 					<img *ngIf="user.lastMessage.seen.indexOf(currentUser.id) === -1" class="notification" src="http://www.clker.com/cliparts/r/M/L/o/R/i/green-dot.svg.med.png">
-				</span>
+				</span>-->
 			</h2>
-			<p>{{user.lastMessage.content}}</p>
+			<p *ngIf="user.lastMessage">{{user.lastMessage.content}}</p>
 		</ion-item>
 	</ion-list>
 	<ion-infinite-scroll (ionInfinite)="doInfinite($event)">

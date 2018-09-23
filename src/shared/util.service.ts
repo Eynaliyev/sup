@@ -40,9 +40,9 @@ export class UtilService {
 	// generats a uniqueId for a relationship e.g. sent request and etc
 	uniqueRelId(from: string, to: string): string {
 		if (from <= to) {
-			return from.concat(to);
+			return from.concat("_" + to);
 		} else {
-			return to.concat(from);
+			return to.concat("_" + from);
 		}
 	}
 	// calculates how much tiem in human words has passed since a specific date

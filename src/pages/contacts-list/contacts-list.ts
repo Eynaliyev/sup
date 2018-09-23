@@ -1,14 +1,14 @@
 import {
 	UserService,
 	ContactService,
-	RequestService
+	RequestService,
+	UtilService
 } from "../../services/services";
+
 import { Component } from "@angular/core";
 import { NavController } from "ionic-angular";
-import { ChatroomPage } from "../pages";
-import { RequestsListPage } from "../pages";
-import { User } from "../../models/models";
-import { Contact, Request } from "../../models/models";
+import { ChatroomPage, RequestsListPage } from "../pages";
+import { Contact, Request, User } from "../../models/models";
 import * as moment from "moment";
 
 @Component({
@@ -28,7 +28,8 @@ export class ContactsListPage {
 		private navCtrl: NavController,
 		public userSrvc: UserService,
 		public contactSrvc: ContactService,
-		public requestSrvc: RequestService
+		public requestSrvc: RequestService,
+		public utilSrvc: UtilService
 	) {
 		console.log("ContactsListPage initialized");
 		this.animateClass = { "zoom-in": true };
@@ -94,6 +95,7 @@ export class ContactsListPage {
 		this.navCtrl.push(RequestsListPage, { requests: this.allRequests });
 	}
 	openChat(user) {
-		this.navCtrl.push(ChatroomPage, { room: user.roomId });
+		let roomId = this.utilSrvc.uniqueRelId(this.currentUser.id, user.id);
+		this.navCtrl.push(ChatroomPage, { room: roomId });
 	}
 }

@@ -1,13 +1,27 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
-import { Request, User, Contact } from "../models/models";
+import {
+	Request,
+	User,
+	Contact,
+	Participant,
+	Chatroom,
+	Message
+} from "../models/models";
+import { UtilService } from "../shared/util.service";
 import { AngularFirestore } from "angularfire2/firestore";
+import { AngularFireDatabase } from "angularfire2/database";
 import * as moment from "moment";
+import "rxjs/add/operator/mergeMap";
 
 @Injectable()
 export class RequestService {
 	private requests: Request[];
-	constructor(private afs: AngularFirestore) {
+	constructor(
+		private afs: AngularFirestore,
+		public adb: AngularFireDatabase,
+		public utilSrvc: UtilService
+	) {
 		this.requests = [];
 	}
 	getReceivedRequests(id: string): Observable<Request[]> {
@@ -151,8 +165,11 @@ export class RequestService {
 		// need to get the toId wildcard from the URL
 		const requestReceiverId = receiver.id; //context.params.fromId;
 		const requestSenderId = senderId; //context.params.toId;
-		const conversationId = this.uniqueRelId(requestReceiverId, requestSenderId);
-		const newContact = { 
+		const conversationId = this.utilSrvc.uniqueRelId(
+			requestReceiverId,
+			requestSenderId
+		);
+		const newContact = {
 			id: requestReceiverId,
 			createdAt: newValue.createdAt,
 			imgUrl: receiver.profilePhoto.imgUrl,
@@ -167,32 +184,28 @@ export class RequestService {
 			.doc(requestReceiverId)
 			.set(newContact);
 		// 3. delete the request sent
-		/*const sendRequestDoc = admin
-			.firestore()
+		this.afs
 			.collection("requests_sent")
 			.doc(requestSenderId)
 			.collection("recipients")
 			.doc(requestReceiverId)
 			.delete();
 		// 3.5 delete the request received
-		const receivedRequestDoc = admin
-			.firestore()
+		this.afs
 			.collection("requests_received")
 			.doc(requestReceiverId)
 			.collection("senders")
 			.doc(requestSenderId)
 			.delete();
 		// 4. the cloud function creates the conversation
-		const senderUserRef = admin
-			.firestore()
+		const senderUserRef = this.afs
 			.collection("users")
 			.doc(requestSenderId)
-			.get();
-		const recipientUserRef = admin
-			.firestore()
+			.valueChanges();
+		const recipientUserRef = this.afs
 			.collection("users")
 			.doc(requestReceiverId)
-			.get();
+			.valueChanges();
 		let senderUser;
 		let recipientUser;
 		let senderParticipant: Participant;
@@ -202,23 +215,23 @@ export class RequestService {
 		let newConversationDoc;
 		let newMessage: Message;
 		senderUserRef
-			.then(snUsr => {
+			.flatMap(snUsr => {
 				senderUser = snUsr;
 				senderParticipant = {
 					id: senderUser.id,
 					firstName: senderUser.firstName,
 					lastName: senderUser.lastName,
-					imgUrl: senderUser.imgUrl
+					imgUrl: senderUser.profilePhoto.imgUrl
 				};
 				return recipientUserRef;
 			})
-			.then(recUsr => {
+			.subscribe(recUsr => {
 				recipientUser = recUsr;
 				recipientParticipant = {
 					id: recipientUser.id,
 					firstName: recipientUser.firstName,
 					lastName: recipientUser.lastName,
-					imgUrl: recipientUser.imgUrl
+					imgUrl: recipientUser.profilePhoto.imgUrl
 				};
 				participants = [senderParticipant, recipientParticipant];
 				newChatroom = {
@@ -239,8 +252,7 @@ export class RequestService {
 					participants
 				);
 				//creating the conversation in the firestore
-				newConversationDoc = admin
-					.firestore()
+				this.afs
 					.collection("conversations")
 					.doc(newChatroom.id)
 					.set(newChatroom);
@@ -248,7 +260,7 @@ export class RequestService {
 				newMessage = {
 					content: "Woof, Woof, You are now connected!",
 					createdAt: moment().format("DD/MM/YYYY, hh:mm:ss"),
-					id: guid() + newChatroom.id + "001",
+					id: this.utilSrvc.guid() + newChatroom.id + "001",
 					roomId: newChatroom.id,
 					sender: {
 						id: "001",
@@ -258,17 +270,9 @@ export class RequestService {
 					},
 					seen: []
 				};
-				admin
-					.database()
-					.ref(`/messages${newMessage.roomId}`)
-					.push(newMessage);
-			});*/
-	}
-	uniqueRelId(from: string, to: string): string {
-		if (from <= to) {
-			return from.concat(to);
-		} else {
-			return to.concat(from);
-		}
+				this.adb
+					.object(`/messages/${newMessage.roomId}/${newMessage.id}`)
+					.set(newMessage);
+			});
 	}
 }

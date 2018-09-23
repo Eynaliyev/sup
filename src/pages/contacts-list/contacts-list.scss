@@ -6,6 +6,10 @@ page-contacts-list {
 			background-color: transparent;
 			color: #cfcfcf !important;
 
+			.item-inner {
+				color: black;
+			}
+
 			ion-thumbnail {
 				img {
 					padding: 2px;

@@ -12,7 +12,7 @@ import { AngularFireDatabase } from "angularfire2/database";
 import { ReplaySubject } from "rxjs/ReplaySubject";
 //import { Camera } from 'ionic-native';
 import * as moment from "moment";
-
+import { UtilService } from "../shared/util.service";
 
 @Injectable()
 export class UserService {
@@ -22,7 +22,8 @@ export class UserService {
 	constructor(
 		public http: Http,
 		private afs: AngularFirestore,
-		private db: AngularFireDatabase
+		private db: AngularFireDatabase,
+		public utilSrvc: UtilService
 	) {}
 	// get a specific User by id - that conforms to the user model
 	getUserById(id: string): Observable<any> {
@@ -205,11 +206,11 @@ export class UserService {
 	}
 	//creates an individual room for the two users
 	createConversation(fromId: string, toId: string) {
-		let roomId = this.uniqueRelId(fromId, toId);
+		let roomId = this.utilSrvc.uniqueRelId(fromId, toId);
 		let dbRef = this.afs.doc(`chatrooms/${roomId}`);
 		this.getUserById(toId).subscribe(user => {
 			let conversation: any = {
-				createdAt:  moment().format("DD/MM/YYYY, hh:mm:ss"),
+				createdAt: moment().format("DD/MM/YYYY, hh:mm:ss"),
 				participants: [this.currentUser, user]
 			};
 			this.sendWelcomeConversationMessage(roomId);
@@ -219,7 +220,7 @@ export class UserService {
 	sendWelcomeConversationMessage(roomId) {
 		let defaultMessage = {
 			content: "you are now connected!",
-			createdAt:  moment().format("DD/MM/YYYY, hh:mm:ss"),
+			createdAt: moment().format("DD/MM/YYYY, hh:mm:ss"),
 			senderId: 1111
 		};
 		this.db.list(`messages/${roomId}`).push(defaultMessage);
@@ -227,35 +228,6 @@ export class UserService {
 	removeConversation(id) {
 		let dbRef = this.afs.doc(`chatrooms/${id}`);
 		return dbRef.delete();
-	}
-	guid() {
-		function s4() {
-			return Math.floor((1 + Math.random()) * 0x10000)
-				.toString(16)
-				.substring(1);
-		}
-		return (
-			s4() +
-			s4() +
-			"-" +
-			s4() +
-			"-" +
-			s4() +
-			"-" +
-			s4() +
-			"-" +
-			s4() +
-			s4() +
-			s4()
-		);
-	}
-	// generats a uniqueId for a relationship e.g. sent request and etc
-	uniqueRelId(from: string, to: string): string {
-		if (from <= to) {
-			return from.concat(to);
-		} else {
-			return to.concat(from);
-		}
 	}
 	/*
   getPicture(){

@@ -204,11 +204,11 @@ function guid() {
 	);
 }
 // generats a uniqueId for a relationship e.g. sent request and etc
-function uniqueRelId(from: string, to: string): string {
+uniqueRelId(from: string, to: string): string {
 	if (from <= to) {
-		return from.concat(to);
+		return from.concat("_" + to);
 	} else {
-		return to.concat(from);
+		return to.concat("_" + from);
 	}
 }
 exports.test = functions.https.onRequest((req, res) => {

@@ -1,14 +1,14 @@
+<div class="message-detail light-text">
+	<span>
+		<b>{{message.sender.firstName}} {{message.sender.lastName}}</b>
+	</span>
+</div>
+<div class="message-detail message-date light-text">
+	<span>{{message.createdAt}}</span>
+</div>
 <div class="chatBubble">
-	<div class="message-detail light-text {{message.position}}">
-		<span>
-			<b>{{message.sender.name}}</b>
-		</span>
-		<span>{{message.date | date}}</span>
-	</div>
 	<img class="profile-picture {{message.position}}" [src]="message.sender.imgUrl" onError="this.src='assets/images/other-assets/profile.png';"
-	  (click)="goToUser(message.sender.id)">
-	<div class="light-text {{message.position}}">
-	</div>
+	 (click)="goToUser(message.sender.id)">
 	<div class="chat-bubble {{message.position}}">
 		<div class="message">
 			<img *ngIf="message.image" [src]="message.image.imgUrl" class="block" alt="">

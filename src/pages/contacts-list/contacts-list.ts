@@ -37,7 +37,6 @@ export class ContactsListPage {
 	ionViewCanEnter() {
 		return this.authSrvc.isLoggedIn();
 	}*/
-	ionViewWillEnter() {}
 	ngAfterViewInit() {
 		return new Promise(resolve => {
 			let env = this;
@@ -96,6 +95,9 @@ export class ContactsListPage {
 	}
 	openChat(user) {
 		let roomId = this.utilSrvc.uniqueRelId(this.currentUser.id, user.id);
-		this.navCtrl.push(ChatroomPage, { room: roomId });
+		this.navCtrl.push(ChatroomPage, {
+			room: roomId,
+			privateConversation: true
+		});
 	}
 }

@@ -1,3 +1,12 @@
+.message-detail {
+	white-space: nowrap;
+	text-align: center;
+}
+
+.message-date {
+	margin-bottom: 21px;
+}
+
 .chatBubble {
 	img.profile-picture {
 		width: 40px;
@@ -17,19 +26,6 @@
 	.message {
 		word-wrap: break-word;
 		white-space: pre-wrap;
-	}
-
-	.message-detail {
-		white-space: nowrap;
-
-		&.left {
-			float: left;
-		}
-
-		&.right {
-			float: right;
-			margin-right: 10px;
-		}
 	}
 
 	.chat-bubble {

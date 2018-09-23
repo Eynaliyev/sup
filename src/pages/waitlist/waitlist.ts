@@ -55,7 +55,10 @@ export class WaitlistPage {
 		this.app.getRootNav().push(FilterPage);
 	}
 	goToChatroom(chatroomId: string) {
-		this.navCtrl.push(ChatroomPage, { room: `${chatroomId}` });
+		this.navCtrl.push(ChatroomPage, {
+			room: `${chatroomId}`,
+			privateConversation: false
+		});
 	}
 	back() {
 		this.navCtrl.pop();

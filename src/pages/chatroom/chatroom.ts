@@ -11,6 +11,7 @@ import { MeetSomebodyPage } from "../pages";
 import { ParticipantsListPage } from "../pages";
 import { AlertController } from "ionic-angular";
 import * as moment from "moment";
+import "rxjs/add/operator/mergeMap";
 
 @Component({
 	selector: "page-chatroom",
@@ -55,18 +56,23 @@ export class ChatroomPage {
 	}*/
 	ionViewDidLoad() {
 		this.chatroomId = this.navParams.get("room");
+		let privateConversation = this.navParams.get("privateConversation");
 		this.newMessage.roomId = this.chatroomId;
 		this.userService
 			.getCurrentUser()
 			.take(2)
-			.switchMap(user => {
+			.flatMap(user => {
 				this.currentUser = user;
 				this.newMessage.sender.id = this.currentUser.id;
 				this.newMessage.sender.firstName = this.currentUser.firstName;
 				this.newMessage.sender.lastName = this.currentUser.lastName;
 				this.newMessage.sender.imgUrl = this.currentUser.profilePhoto.imgUrl;
 				this.newMessage.seen.push(this.currentUser.id);
-				return this.chatroomService.getChatroomById(this.chatroomId);
+				if (privateConversation) {
+					return this.chatroomService.getConversationById(this.chatroomId);
+				} else {
+					return this.chatroomService.getChatroomById(this.chatroomId);
+				}
 			})
 			.subscribe(chatroom => {
 				this.chatroom = chatroom;
@@ -89,12 +95,6 @@ export class ChatroomPage {
 				console.error(err);
 			}
 		);
-	}
-	scrollToBottom() {
-		// use the content's dimension to obtain the current height of the scroll
-		let dimension = this.content.getContentDimensions();
-		// scroll to it (you can also set the duration in ms by passing a third parameter to the scrollTo(x,y,duration) method.
-		this.content.scrollTo(0, dimension.scrollHeight);
 	}
 	exit() {
 		localStorage.removeItem("currentChatroomId");
@@ -155,6 +155,9 @@ export class ChatroomPage {
 			});
 			alert.present();
 		}
+	}
+	scrollToBottom(){
+		this.content.scrollToBottom(300);
 	}
 	sendMessage() {
 		this.chatroomService.sendMessage(this.chatroom.id, this.newMessage);

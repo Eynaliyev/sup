@@ -12,6 +12,14 @@ import { Message, Chatroom, Language } from "../models/models";
 @Injectable()
 export class ChatroomService {
 	constructor(private afs: AngularFirestore, private db: AngularFireDatabase) {}
+	getConversationById(id: string): Observable<Chatroom> {
+		// get full detailed data of the required chatroom
+		return this.afs
+			.collection("conversations")
+			.doc(`${id}`)
+			.valueChanges()
+			.map(chatroom => this.toChatroom(chatroom));
+	}
 
 	getChatroomById(id: string): Observable<Chatroom> {
 		// get full detailed data of the required chatroom

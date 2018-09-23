@@ -204,7 +204,7 @@ function guid() {
 	);
 }
 // generats a uniqueId for a relationship e.g. sent request and etc
-uniqueRelId(from: string, to: string): string {
+function uniqueRelId(from: string, to: string): string {
 	if (from <= to) {
 		return from.concat("_" + to);
 	} else {

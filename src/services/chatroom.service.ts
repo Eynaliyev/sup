@@ -67,7 +67,7 @@ export class ChatroomService {
 				.then(() => {
 					resolve(true);
 				})
-				.catch(err => console.log(err));
+				.catch(err => console.error(err));
 		});
 
 		// publish a 'left the room  type of message' - a cloud function?
@@ -90,9 +90,9 @@ export class ChatroomService {
 		messageRef.push(message);
 	}
 	// TO DO: implement actual paginated message getter function
-	getMessages(chatroomId: string,  offset?, startKey?): Observable<any[]> {
+	getMessages(chatroomId: string, offset?, startKey?): Observable<any[]> {
 		return this.db.list(`messages/${chatroomId}`).valueChanges();
-					/* TO DO - pagination
+		/* TO DO - pagination
 		return this.db
 			.list(`messages/${chatroomId}`, ref =>
 				ref

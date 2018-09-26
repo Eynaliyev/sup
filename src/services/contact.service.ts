@@ -42,12 +42,41 @@ export class ContactService {
 		};
 		return contact;
 	}
-	isFriend(otherUsr) {
-		this.contacts.forEach(contact => {
-			if (contact.id === otherUsr.id) {
-				return true;
-			}
-			return false;
+	isFriend(curUsrId, toId): Promise<boolean> {
+		return new Promise((resolve, reject) => {
+			this.afs
+				.collection("friendships")
+				.doc(curUsrId)
+				.collection("friends")
+				.doc(toId)
+				.snapshotChanges()
+				.subscribe(
+					res => {
+						console.log("this user is friend already: ", res.payload.exists);
+						resolve(res.payload.exists);
+					},
+					err => reject(err)
+				);
 		});
+	}
+	removeFriend(curUsrId, otherId): Promise<any> {
+		//this user friendship
+		let thisUserRef = this.afs
+			.collection("friendships")
+			.doc(curUsrId)
+			.collection("friends")
+			.doc(otherId)
+			.delete()
+			.catch(err => console.error(err));
+
+		//other user friendsgip
+		let otherUserRef = this.afs
+			.collection("friendships")
+			.doc(otherId)
+			.collection("friends")
+			.doc(curUsrId)
+			.delete()
+			.catch(err => console.error(err));
+		return Promise.all([thisUserRef, otherUserRef]);
 	}
 }

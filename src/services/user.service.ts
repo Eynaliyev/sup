@@ -180,22 +180,6 @@ export class UserService {
 		};
 		return user;
 	}
-
-	/*
-	setProfilePicture(uid: string): Promise<any> {
-		console.log("setProfilePicture called");
-		// set picture to the larger one
-		return this.facebook
-			.api(`${uid}/picture?type=large`, [])
-			.then(photo => {
-				// set the returned user in the backend
-				this.afs
-					.doc(`/users/${uid}/photoUrl`)
-					.set(photo.data.url + "?type=large")
-					.catch(error => this.handleError(error));
-			})
-			.catch(error => this.handleError(error));
-	}*/
 	addImage(userId: string, image): Promise<any> {
 		let photos = this.afs.collection(`users/${userId}/photos`);
 		return photos.add(image).catch(error => this.handleError(error));
@@ -228,6 +212,10 @@ export class UserService {
 	removeConversation(id) {
 		let dbRef = this.afs.doc(`chatrooms/${id}`);
 		return dbRef.delete();
+	}
+	private handleError(error: any): Promise<any> {
+		console.error("Error: ", error); // for demo purposes only
+		return Promise.reject(error.message || error);
 	}
 	/*
   getPicture(){
@@ -482,8 +470,19 @@ export class UserService {
     }).catch(error => this.handleError(error));
   }
   */
-	private handleError(error: any): Promise<any> {
-		console.error("Error: ", error); // for demo purposes only
-		return Promise.reject(error.message || error);
-	}
+ 	/*
+	setProfilePicture(uid: string): Promise<any> {
+		console.log("setProfilePicture called");
+		// set picture to the larger one
+		return this.facebook
+			.api(`${uid}/picture?type=large`, [])
+			.then(photo => {
+				// set the returned user in the backend
+				this.afs
+					.doc(`/users/${uid}/photoUrl`)
+					.set(photo.data.url + "?type=large")
+					.catch(error => this.handleError(error));
+			})
+			.catch(error => this.handleError(error));
+	}*/
 }

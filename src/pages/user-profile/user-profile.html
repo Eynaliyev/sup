@@ -10,16 +10,16 @@
 		<ion-card>
 			<img [src]="user.profilePhoto.imgUrl" onError="this.src='assets/images/other-assets/profile.png';">
 		</ion-card>
-		<ion-fab *ngIf="tab == 'vote'" class="action-btn block-btn">
+		<ion-fab *ngIf="user && tab == 'vote' && !friend" class="action-btn block-btn">
 			<button ion-fab color="light" (click)="block(user.id)" class="menu-btn-border">
 				<ion-icon name="md-close"></ion-icon>
 			</button>
 		</ion-fab>
-		<ion-fab *ngIf="user && tab == 'vote'" class="action-btn like-btn">
+		<ion-fab *ngIf="user && tab == 'vote' && !friend" class="action-btn like-btn">
 			<button ion-fab (click)="like(user.id)" color="light" class="menu-btn-border" *ngIf="!friend && !requested">
 				<ion-icon name="ios-heart-outline"></ion-icon>
 			</button>
-			<button ion-fab color="light" class="menu-btn-border" *ngIf="friend || requested">
+			<button ion-fab (click)="unlike(user.id)" color="light" class="menu-btn-border" *ngIf="requested">
 				<ion-icon name="ios-heart"></ion-icon>
 			</button>
 		</ion-fab>
@@ -79,5 +79,6 @@
 				</button>-->
 			</ion-row>
 		</ion-list>
+		<button *ngIf="friend" ion-button class="meet-btn center-text" color="danger" (click)="removeFriend()" block>Unfriend</button>
 	</div>
 </ion-content>

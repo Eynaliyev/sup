@@ -125,28 +125,60 @@ export class RequestService {
 		});
 	}
 	// Cancel a contact request given the sender and receiver userId.
-	cancelRequest(curUsr: User, to: Request): Promise<any> {
+	cancelRequest(curUsrId: string, toId: string): Promise<any> {
 		return new Promise((resolve, reject) => {
 			// remove sent request
 			this.afs
 				.collection("requests_sent")
-				.doc(curUsr.id)
+				.doc(curUsrId)
 				.collection("recipients")
-				.doc(to.recipient.id)
+				.doc(toId)
 				.delete()
 				.then(() => resolve(true))
 				.catch(err => reject(err));
 		});
 	}
-	block(id: string) {
-		/* TO BE IMPLEMENTED LATER
-		2. [ ] set the relations collection
-		3. [ ] remove from contacts if he’s there
-		4. [ ] kick the user out of the chatroom and tell him he was kicked out
-		*/
-		console.error(
-			"block method in user service called, but has not been implemented yet"
-		);
+	block(from: User, to: User): Promise<any> {
+		let newRequest: Request = {
+			createdAt: moment().format("DD/MM/YYYY, hh:mm:ss"),
+			seen: [],
+			sender: {
+				id: from.id,
+				firstName: from.firstName,
+				lastName: from.lastName,
+				imgUrl: from.profilePhoto.imgUrl
+			},
+			recipient: {
+				id: to.id,
+				firstName: to.firstName,
+				lastName: to.lastName,
+				imgUrl: to.profilePhoto.imgUrl
+			}
+		};
+		// 2. [ ] set the relations collection
+		let blockReqRef = this.afs
+			.collection("blocks_sent")
+			.doc(from.id)
+			.collection("recipients")
+			.doc(to.id)
+			.set(newRequest);
+		//3. [ ] remove from contacts if he’s there
+		// this user contact
+		let removeFriendRelRef = this.afs
+			.collection("friendships")
+			.doc(from.id)
+			.collection("friends")
+			.doc(to.id)
+			.delete();
+		// other user contact
+		let removeOtherFriendRelRef = this.afs
+			.collection("friendships")
+			.doc(to.id)
+			.collection("friends")
+			.doc(from.id)
+			.delete();
+
+			return Promise.all([blockReqRef, removeFriendRelRef, removeOtherFriendRelRef]);
 	}
 	unblock(id: string) {
 		/*
@@ -157,10 +189,26 @@ export class RequestService {
 			"unblock method in user service called, but has not been implemented yet"
 		);
 	}
-	hasLiked(fromId: string, toId: string) {
+	hasLiked(fromId: string, toId: string): Promise<boolean> {
 		// check the relationship whether current user is set to true or not while the other is not
+		return new Promise((resolve, reject) => {
+			this.afs
+				.collection("requests_sent")
+				.doc(fromId)
+				.collection("recipients")
+				.doc(toId)
+				.snapshotChanges()
+				.subscribe(
+					res => {
+						console.log("this user was liked already: ", res.payload.exists);
+						resolve(res.payload.exists);
+					},
+					err => reject(err)
+				);
+		});
 	}
 	createFriendship(newVal, receiver: User, senderId) {
+		// other user's relationship and request logic
 		const newValue = newVal;
 		// need to get the toId wildcard from the URL
 		const requestReceiverId = receiver.id; //context.params.fromId;

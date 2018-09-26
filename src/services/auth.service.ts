@@ -65,7 +65,7 @@ export class AuthService {
 				//just to see what data is usully returned - for mocking purposes
 				console.log('response: ', response, 'credential: ', facebookCredential);
 				return firebase.auth().signInWithCredential(facebookCredential);
-			}).catch((error) => { console.log(error) });*/
+			}).catch((error) => { console.error(error) });*/
 		}
 	}
 	signInWithGoogle() {

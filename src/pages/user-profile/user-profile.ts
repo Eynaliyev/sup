@@ -8,25 +8,9 @@ import {
 import { User, Contact } from "../../models/models";
 import { UtilService } from "../../shared/util.service";
 import { AlertController } from "ionic-angular";
-import {
-	flyInTopSlow1,
-	flyInTopSlow2,
-	flyInTopSlow3,
-	flyInTopSlow4,
-	flyInTopSlow5,
-	heroState
-} from "./user-profile.animations";
 @Component({
 	selector: "page-user-profile",
-	templateUrl: "user-profile.html",
-	animations: [
-		flyInTopSlow1,
-		flyInTopSlow2,
-		flyInTopSlow3,
-		flyInTopSlow4,
-		flyInTopSlow5,
-		heroState
-	]
+	templateUrl: "user-profile.html"
 })
 export class UserProfilePage {
 	user: User;
@@ -60,26 +44,25 @@ export class UserProfilePage {
 			.subscribe(curUsr => {
 				let id = this.navParams.get("user");
 				this.currentUser = curUsr;
-				this.contactSrvc
-					.getContacts(id)
-					.subscribe(contacts => (this.contacts = contacts));
-				console.log("currentUser in userProfile: ", this.currentUser);
+				this.contactSrvc.getContacts(id).subscribe(contacts => {
+					this.contacts = contacts;
+					let id = this.navParams.get("user");
+				});
 				this.userSrvc.getUserById(id).subscribe(
 					userInfo => {
-						console.log("user from getUserById: ", userInfo);
 						this.user = userInfo;
-						if (this.requestSrvc.hasLiked(this.currentUser.id, userInfo.id)) {
-							this.requested = true;
-						} else if (this.contactSrvc.isFriend(userInfo.id)) {
-							this.friend = true;
-						}
 					},
 					error => {
 						throw new Error("Error: " + error); // throw an Error
 					}
 				);
+				this.requestSrvc
+					.hasLiked(this.currentUser.id, id)
+					.then(val => (this.requested = val));
+				this.contactSrvc
+					.isFriend(this.currentUser.id, id)
+					.then(val => (this.friend = val));
 			});
-		console.log("ionViewDidLoad UserProfilePage");
 	}
 	changeImage(image) {
 		console.log("changeImage called, but needs to be implements");
@@ -88,6 +71,12 @@ export class UserProfilePage {
 		var height = "";
 		if (tab == "vote") height = "hidden";
 		return height;
+	}
+	removeFriend() {
+		this.contactSrvc
+			.removeFriend(this.currentUser.id, this.user.id)
+			.then(() => this.navCtrl.pop())
+			.catch(err => console.error(err));
 	}
 	like(id: string) {
 		if (!this.likeAlertPresented) {
@@ -118,7 +107,13 @@ export class UserProfilePage {
 			this.requestSrvc.sendRequest(this.currentUser, this.user);
 		}
 	}
-	block(id: string) {
+	unlike() {
+		this.requestSrvc
+			.cancelRequest(this.currentUser.id, this.user.id)
+			.then(() => (this.requested = false))
+			.catch(err => console.error(err));
+	}
+	block() {
 		if (!this.blockAlertPresented) {
 			const alert = this.alertCtrl.create({
 				title: "Confirm Like",
@@ -136,7 +131,12 @@ export class UserProfilePage {
 						text: "Block",
 						handler: () => {
 							console.log("Block clicked");
-							this.requestSrvc.block(id);
+							this.requestSrvc
+							.block(this.currentUser, this.user)
+							.then(() => {
+								// TO DO - kick the user out and tell him he has been
+							})
+							.catch(err => console.error(err));
 						}
 					}
 				]
@@ -144,7 +144,12 @@ export class UserProfilePage {
 			alert.present();
 			this.blockAlertPresented = true;
 		} else {
-			this.requestSrvc.block(id);
+			this.requestSrvc
+			.block(this.currentUser, this.user)
+			.then(() => {
+				// TO DO - kick the user out and tell him he has been
+			})
+			.catch(err => console.error(err));
 		}
 	}
 }

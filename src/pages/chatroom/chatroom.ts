@@ -92,7 +92,9 @@ export class ChatroomPage {
 			})
 			.subscribe(chatroom => {
 				this.chatroom = chatroom;
-				localStorage.setItem("currentChatroomId", JSON.stringify(chatroom.id));
+				if (!privateConversation) {
+					localStorage.setItem("currentChatroomId", JSON.stringify(chatroom.id));
+				}
 				this.users = this.chatroom.participants; // TO DO: get all participants' info
 			});
 		this.chatroomService.getMessages(this.chatroomId).subscribe(

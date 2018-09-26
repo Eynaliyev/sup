@@ -155,14 +155,14 @@ export class RequestService {
 				imgUrl: to.profilePhoto.imgUrl
 			}
 		};
-		// 2. [ ] set the relations collection
+		// 2. set the relations collection
 		let blockReqRef = this.afs
 			.collection("blocks_sent")
 			.doc(from.id)
 			.collection("recipients")
 			.doc(to.id)
 			.set(newRequest);
-		//3. [ ] remove from contacts if he’s there
+		//3. remove from contacts if he’s there
 		// this user contact
 		let removeFriendRelRef = this.afs
 			.collection("friendships")
@@ -177,17 +177,22 @@ export class RequestService {
 			.collection("friends")
 			.doc(from.id)
 			.delete();
-
-			return Promise.all([blockReqRef, removeFriendRelRef, removeOtherFriendRelRef]);
+		return Promise.all([
+			blockReqRef,
+			removeFriendRelRef,
+			removeOtherFriendRelRef
+		]);
 	}
-	unblock(id: string) {
+	unblock(from: User, to: User): Promise<any> {
 		/*
-			1. [ ] set it back to null, without adding the false
-			2. [ ] remove from blocked list
+			1 remove from blocked list
 		*/
-		console.error(
-			"unblock method in user service called, but has not been implemented yet"
-		);
+		return this.afs
+			.collection("blocks_sent")
+			.doc(from.id)
+			.collection("recipients")
+			.doc(to.id)
+			.delete();
 	}
 	hasLiked(fromId: string, toId: string): Promise<boolean> {
 		// check the relationship whether current user is set to true or not while the other is not

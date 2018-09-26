@@ -31,7 +31,7 @@ export class RequestService {
 			.collection("senders")
 			.valueChanges();
 	}
-	getSentRequests(id: string): Observable<Request[]> {
+	getSentRequests(id: string): Observable<any[]> {
 		return this.afs
 			.collection("requests_sent")
 			.doc(`${id}`)
@@ -51,13 +51,13 @@ export class RequestService {
 			firstName: request.sender.firstName,
 			lastName: request.sender.lastName
 		};
+		this.createFriendship(newContact, curUsr, request.sender.id);
 		return this.afs
 			.collection("friendships")
 			.doc(curUsr.id)
 			.collection("friends")
 			.doc(request.sender.id)
 			.set(newContact);
-		this.createFriendship(newContact, curUsr, request.sender.id);
 	}
 
 	sendRequest(from: User, to: User): Promise<any> {

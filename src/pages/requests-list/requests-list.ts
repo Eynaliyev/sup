@@ -123,7 +123,10 @@ export class RequestsListPage {
 					text: "Remove",
 					handler: () => {
 						this.alertSrvc.showAlert("Friend request removed", "OK");
-						this.requestsSrvc.rejectRequest(this.currentUser, request);
+						this.requestsSrvc.rejectRequest(
+							this.currentUser.id,
+							request.sender.id
+						);
 					}
 				}
 			]
@@ -131,9 +134,11 @@ export class RequestsListPage {
 		alert.present();
 	}
 	removeRequest(request: Request) {
-		this.requestsSrvc.cancelRequest(this.currentUser, request).then(() => {
-			this.alertSrvc.showAlert("Friend request removed", "OK");
-		});
+		this.requestsSrvc
+			.cancelRequest(this.currentUser.id, request.recipient.id)
+			.then(() => {
+				this.alertSrvc.showAlert("Friend request removed", "OK");
+			});
 	}
 	unblock(id: string) {
 		if (!this.unblockAlertPresented) {

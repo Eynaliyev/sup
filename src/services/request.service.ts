@@ -62,81 +62,83 @@ export class RequestService {
 	acceptFriendRequest(curUsr: User, request: Request): Promise<any> {
 		// Accept a contact request given the sender and receiver userId.
 		// 1. create friendships from with this user id
-		return new Promise((resolve, reject) => {
-			var newContact: Contact = {
-				id: request.sender.id,
-				createdAt: moment().format("DD/MM/YYYY, hh:mm:ss"),
-				imgUrl: request.sender.imgUrl,
-				firstName: request.sender.firstName,
-				lastName: request.sender.lastName
-			};
-			this.afs
-				.collection("friendships")
-				.doc(curUsr.id)
-				.collection("friends")
-				.doc(request.sender.id)
-				.set(newContact)
-				.then(() => resolve(true))
-				.catch(err => reject(err));
-			this.createFriendship(newContact, curUsr, request.sender.id);
-		});
+		var newContact: Contact = {
+			id: request.sender.id,
+			createdAt: moment().format("DD/MM/YYYY, hh:mm:ss"),
+			imgUrl: request.sender.imgUrl,
+			firstName: request.sender.firstName,
+			lastName: request.sender.lastName
+		};
+		return this.afs
+			.collection("friendships")
+			.doc(curUsr.id)
+			.collection("friends")
+			.doc(request.sender.id)
+			.set(newContact);
+		this.createFriendship(newContact, curUsr, request.sender.id);
 	}
 
 	sendRequest(from: User, to: User): Promise<any> {
-		return new Promise((resolve, reject) => {
-			let newRequest: Request = {
-				createdAt: moment().format("DD/MM/YYYY, hh:mm:ss"),
-				seen: [],
-				sender: {
-					id: from.id,
-					firstName: from.firstName,
-					lastName: from.lastName,
-					imgUrl: from.profilePhoto.imgUrl
-				},
-				recipient: {
-					id: to.id,
-					firstName: to.firstName,
-					lastName: to.lastName,
-					imgUrl: to.profilePhoto.imgUrl
-				}
-			};
-			this.afs
-				.collection("requests_sent")
-				.doc(from.id)
-				.collection("recipients")
-				.doc(to.id)
-				.set(newRequest)
-				.then(() => resolve(true))
-				.catch(err => reject(err));
-		});
+		let newRequest: Request = {
+			createdAt: moment().format("DD/MM/YYYY, hh:mm:ss"),
+			seen: [],
+			sender: {
+				id: from.id,
+				firstName: from.firstName,
+				lastName: from.lastName,
+				imgUrl: from.profilePhoto.imgUrl
+			},
+			recipient: {
+				id: to.id,
+				firstName: to.firstName,
+				lastName: to.lastName,
+				imgUrl: to.profilePhoto.imgUrl
+			}
+		};
+		return this.afs
+			.collection("requests_sent")
+			.doc(from.id)
+			.collection("recipients")
+			.doc(to.id)
+			.set(newRequest);
 	}
 	// Cancel a contact request given the sender and receiver userId.
-	rejectRequest(curUsr: User, to: Request): Promise<any> {
-		return new Promise((resolve, reject) => {
-			// remove received request
-			this.afs
-				.collection("requests_received")
-				.doc(curUsr.id)
-				.collection("senders")
-				.doc(to.sender.id)
-				.delete()
-				.then(() => resolve(true))
-				.catch(err => reject(err));
-		});
+	rejectRequest(curUsrId: string, senderId: string): Promise<any> {
+		// remove received request
+		let receivedReqRef = this.afs
+			.collection("requests_received")
+			.doc(curUsrId)
+			.collection("senders")
+			.doc(senderId)
+			.delete();
+		//should be done on the server
+		let sentReqRef = this.afs
+			.collection("requests_sent")
+			.doc(senderId)
+			.collection("recipients")
+			.doc(curUsrId)
+			.delete();
+
+		return Promise.all([receivedReqRef, sentReqRef]);
 	}
 	// Cancel a contact request given the sender and receiver userId.
-	cancelRequest(curUsrId: string, toId: string): Promise<any> {
-		return new Promise((resolve, reject) => {
-			// remove sent request
-			this.afs
-				.collection("requests_sent")
-				.doc(curUsrId)
-				.collection("recipients")
-				.doc(toId)
-				.delete()
-				.then(() => resolve(true))
-				.catch(err => reject(err));
-		});
+	cancelRequest(curUsrId: string, recepientId: string): Promise<any> {
+		// remove sent request
+		let sentReqRef = this.afs
+			.collection("requests_sent")
+			.doc(curUsrId)
+			.collection("recipients")
+			.doc(recepientId)
+			.delete();
+		// should be done on the server
+		let receivedReqRef = this.afs
+			.collection("requests_received")
+			.doc(recepientId)
+			.collection("senders")
+			.doc(curUsrId)
+			.delete();
+
+		return Promise.all([receivedReqRef, sentReqRef]);
 	}
 	block(from: User, to: User): Promise<any> {
 		let newRequest: Request = {

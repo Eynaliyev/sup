@@ -24,37 +24,19 @@ export class RequestService {
 	) {
 		this.requests = [];
 	}
-	getReceivedRequests(id: string): Observable<Request[]> {
-		let result = [];
-		return new Observable(observer => {
-			this.afs
-				.collection("requests_received")
-				.doc(`${id}`)
-				.collection("senders")
-				.valueChanges()
-				.subscribe(requests => {
-					requests.forEach(request => {
-						result.push(request);
-					});
-					observer.next(result);
-				});
-		});
+	getReceivedRequests(id: string): Observable<any[]> {
+		return this.afs
+			.collection("requests_received")
+			.doc(`${id}`)
+			.collection("senders")
+			.valueChanges();
 	}
 	getSentRequests(id: string): Observable<Request[]> {
-		let result = [];
-		return new Observable(observer => {
-			this.afs
-				.collection("requests_sent")
-				.doc(`${id}`)
-				.collection("recipients")
-				.valueChanges()
-				.subscribe(requests => {
-					requests.forEach(request => {
-						result.push(request);
-					});
-					observer.next(result);
-				});
-		});
+		return this.afs
+			.collection("requests_sent")
+			.doc(`${id}`)
+			.collection("recipients")
+			.valueChanges();
 	}
 	updateRequestSeen(requestId: string, userId: string) {
 		//add the id to the seen in the backend

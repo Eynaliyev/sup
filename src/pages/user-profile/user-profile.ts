@@ -8,6 +8,7 @@ import {
 import { User, Contact } from "../../models/models";
 import { UtilService } from "../../shared/util.service";
 import { AlertController } from "ionic-angular";
+import { ContactsListPage } from "../contacts-list/contacts-list";
 @Component({
 	selector: "page-user-profile",
 	templateUrl: "user-profile.html"
@@ -75,7 +76,7 @@ export class UserProfilePage {
 	removeFriend() {
 		this.contactSrvc
 			.removeFriend(this.currentUser.id, this.user.id)
-			.then(() => this.navCtrl.pop())
+			.then(() => this.navCtrl.setRoot(ContactsListPage))
 			.catch(err => console.error(err));
 	}
 	like(id: string) {
@@ -132,11 +133,11 @@ export class UserProfilePage {
 						handler: () => {
 							console.log("Block clicked");
 							this.requestSrvc
-							.block(this.currentUser, this.user)
-							.then(() => {
-								// TO DO - kick the user out and tell him he has been
-							})
-							.catch(err => console.error(err));
+								.block(this.currentUser, this.user)
+								.then(() => {
+									// TO DO - kick the user out and tell him he has been
+								})
+								.catch(err => console.error(err));
 						}
 					}
 				]
@@ -145,11 +146,11 @@ export class UserProfilePage {
 			this.blockAlertPresented = true;
 		} else {
 			this.requestSrvc
-			.block(this.currentUser, this.user)
-			.then(() => {
-				// TO DO - kick the user out and tell him he has been
-			})
-			.catch(err => console.error(err));
+				.block(this.currentUser, this.user)
+				.then(() => {
+					// TO DO - kick the user out and tell him he has been
+				})
+				.catch(err => console.error(err));
 		}
 	}
 }

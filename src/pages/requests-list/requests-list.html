@@ -24,13 +24,14 @@
 			</ion-fab>
 		</ion-item>
 	</ion-list>
-	<div class="grande white req-subheader" (click)="toggleSentListVisibility()">Requests sent</div>
+	<div class="grande white req-subheader">Requests sent</div>
 	<div *ngIf="requestsSent.length === 0" class="tall white req-subheader">No sent requests</div>
-	<ion-list class="venti-spacer" *ngIf="sentListVisible">
+	<ion-list class="venti-spacer">
 		<ion-item [ngClass]="animateClass" *ngFor="let sentUser of requestsSent">
-			<ion-thumbnail item-left *ngIf="sentUser.sender.imgUrl">
+			<ion-thumbnail item-left>
 				<img [src]="sentUser.sender.imgUrl" class="profile-picture" onError="this.src='assets/images/other-assets/profile.png';">
 			</ion-thumbnail>
+			<h2 class="req-sender-name">{{sentUser.sender.firstName}} {{sentUser.sender.lastName}}</h2>
 			<ion-fab class="right btn-top-align">
 				<button ion-fab color="light" (click)="removeRequest(sentUser)" class="menu-btn-border">
 					<ion-icon name="md-close"></ion-icon>
@@ -40,11 +41,12 @@
 	</ion-list>
 	<div class="grande white req-subheader" (click)="toggleBlockListVisibility()">Blocked List</div>
 	<div *ngIf="blockedList.length == 0" class="tall white req-subheader">No blocked contacts</div>
-	<ion-list class="venti-spacer" *ngIf="blockedListVisible">
+	<ion-list class="venti-spacer">
 		<ion-item *ngFor="let blockedUser of blockedList">
-			<ion-thumbnail item-left *ngIf="blockedUser.sender.imgUrl">
+			<ion-thumbnail item-left>
 				<img [src]="blockedUser.sender.imgUrl" class="profile-picture" onError="this.src='assets/images/other-assets/profile.png';">
 			</ion-thumbnail>
+			<h2 class="req-sender-name">{{blockedUser.sender.firstName}} {{blockedUser.sender.lastName}}</h2>
 			<ion-fab class="right btn-top-align">
 				<button ion-fab color="light" (click)="unblock(blockedUser)" class="menu-btn-border">
 					<ion-icon name="md-close"></ion-icon>

@@ -45,12 +45,15 @@ export class RequestsListPage {
 						.getReceivedRequests(this.currentUser.id)
 						.subscribe(reqs => {
 							this.requestsReceived = reqs;
-							console.log(reqs);
+						}, err => {
+							console.error(err)
 						});
 					this.requestsSrvc
 						.getSentRequests(this.currentUser.id)
 						.subscribe(reqs => {
 							this.requestsSent = reqs;
+						}, err => {
+							console.error(err)
 						});
 					/*// make sure the requests are seen
 					for (let i = 0; i < this.requests.length; i++) {
@@ -140,7 +143,8 @@ export class RequestsListPage {
 				this.alertSrvc.showAlert("Friend request removed", "OK");
 			});
 	}
-	unblock(id: string) {
+	unblock(request: Request) {
+		let id = request.sender.id;
 		if (!this.unblockAlertPresented) {
 			// alert
 			// check if it's just a request or a friendship

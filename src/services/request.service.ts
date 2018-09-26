@@ -185,15 +185,15 @@ export class RequestService {
 			removeOtherFriendRelRef
 		]);
 	}
-	unblock(from: User, to: User): Promise<any> {
+	unblock(fromId: string, toId: string): Promise<any> {
 		/*
 			1 remove from blocked list
 		*/
 		return this.afs
 			.collection("blocks_sent")
-			.doc(from.id)
+			.doc(fromId)
 			.collection("recipients")
-			.doc(to.id)
+			.doc(toId)
 			.delete();
 	}
 	hasLiked(fromId: string, toId: string): Promise<boolean> {

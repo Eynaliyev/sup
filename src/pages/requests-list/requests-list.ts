@@ -159,7 +159,7 @@ export class RequestsListPage {
 						text: "Unblock",
 						handler: () => {
 							this.alertSrvc.showAlert("Unblocked", "OK");
-							this.requestsSrvc.unblock(id);
+							this.requestsSrvc.unblock(this.currentUser.id, id);
 						}
 					}
 				]
@@ -167,7 +167,7 @@ export class RequestsListPage {
 			alert.present();
 			this.unlikeAlertPresented = true;
 		} else {
-			this.requestsSrvc.unblock(id);
+			this.requestsSrvc.unblock(this.currentUser.id, id);
 		}
 	}
 }

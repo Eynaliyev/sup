@@ -140,12 +140,32 @@ export class RequestService {
 			}
 		};
 		// 2. set the relations collection
-		return this.afs
+		let blockReqRef = this.afs
 			.collection("blocks_sent")
 			.doc(from.id)
 			.collection("recipients")
 			.doc(to.id)
 			.set(newRequest);
+		//3. remove from requests if he’s there
+		// this user's friend request
+		let removeFriendRelRef = this.afs
+			.collection("requests_sent")
+			.doc(from.id)
+			.collection("recipients")
+			.doc(to.id)
+			.delete();
+		// other user request if it exists
+		let removeOtherFriendRelRef = this.afs
+			.collection("requests_sent")
+			.doc(to.id)
+			.collection("recipients")
+			.doc(from.id)
+			.delete();
+		return Promise.all([
+			blockReqRef,
+			removeFriendRelRef,
+			removeOtherFriendRelRef
+		]);
 	}
 	unblock(fromId: string, toId: string): Promise<any> {
 		/*

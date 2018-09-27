@@ -38,6 +38,13 @@ export class RequestService {
 			.collection("recipients")
 			.valueChanges();
 	}
+	getBlockedRequests(id: string): Observable<any[]> {
+		return this.afs
+			.collection("blocks_sent")
+			.doc(id)
+			.collection("recipients")
+			.valueChanges();
+	}
 	updateRequestSeen(requestId: string, userId: string) {
 		//add the id to the seen in the backend
 	}

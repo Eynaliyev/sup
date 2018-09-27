@@ -58,6 +58,14 @@ export class RequestsListPage {
 							console.error(err);
 						}
 					);
+					this.requestsSrvc.getBlockedRequests(this.currentUser.id).subscribe(
+						reqs => {
+							this.blockedList = reqs;
+						},
+						err => {
+							console.error(err);
+						}
+					);
 					/*// make sure the requests are seen
 					for (let i = 0; i < this.requests.length; i++) {
 						this.requestsSrvc.updateRequestSeen(

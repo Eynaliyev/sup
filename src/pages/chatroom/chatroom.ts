@@ -6,14 +6,9 @@ import {
 	ElementRef
 } from "@angular/core";
 import { NavController, NavParams, Content, List } from "ionic-angular";
-import { UserService } from "../../services/services";
-import { ChatroomService } from "../../services/services";
-import { User } from "../../models/user.model";
-import { Message } from "../../models/message.model";
-import { Chatroom } from "../../models/chatroom.model";
-import { UserProfilePage } from "../pages";
-import { MeetSomebodyPage } from "../pages";
-import { ParticipantsListPage } from "../pages";
+import { UserService, ChatroomService } from "../../services/services";
+import { Chatroom, User, Message } from "../../models/models";
+import { UserProfilePage, MeetSomebodyPage, ParticipantsListPage } from "../pages";
 import { AlertController } from "ionic-angular";
 import * as moment from "moment";
 import "rxjs/add/operator/mergeMap";

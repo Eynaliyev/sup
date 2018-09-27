@@ -4,7 +4,7 @@
 	<div class="white grande reqs-received req-subheader">Requests Received</div>
 	<ion-list *ngIf="requestsReceived">
 		<ion-item [ngClass]="animateClass" class="" *ngFor="let request of requestsReceived">
-			<ion-thumbnail item-left *ngIf="request.sender.imgUrl">
+			<ion-thumbnail (click)="goToUser(request.sender.id)" item-left *ngIf="request.sender.imgUrl">
 				<img [src]="request.sender.imgUrl" class="profile-picture" onError="this.src='assets/images/other-assets/profile.png';">
 			</ion-thumbnail>
 			<h2 class="req-sender-name">{{request.sender.firstName}} {{request.sender.lastName}}
@@ -28,7 +28,7 @@
 	<div *ngIf="requestsSent.length === 0" class="tall white req-subheader">No sent requests</div>
 	<ion-list class="venti-spacer">
 		<ion-item [ngClass]="animateClass" *ngFor="let sentUser of requestsSent">
-			<ion-thumbnail item-left>
+			<ion-thumbnail item-left (click)="goToUser(sentUser.recipient.id)">
 				<img [src]="sentUser.sender.imgUrl" class="profile-picture" onError="this.src='assets/images/other-assets/profile.png';">
 			</ion-thumbnail>
 			<h2 class="req-sender-name">{{sentUser.sender.firstName}} {{sentUser.sender.lastName}}</h2>
@@ -43,7 +43,7 @@
 	<div *ngIf="blockedList.length == 0" class="tall white req-subheader">No blocked contacts</div>
 	<ion-list class="venti-spacer">
 		<ion-item *ngFor="let blockedUser of blockedList">
-			<ion-thumbnail item-left>
+			<ion-thumbnail item-left (click)="goToUser(blockedUser.recipient.id)">
 				<img [src]="blockedUser.sender.imgUrl" class="profile-picture" onError="this.src='assets/images/other-assets/profile.png';">
 			</ion-thumbnail>
 			<h2 class="req-sender-name">{{blockedUser.sender.firstName}} {{blockedUser.sender.lastName}}</h2>

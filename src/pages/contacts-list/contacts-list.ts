@@ -7,7 +7,7 @@ import {
 
 import { Component } from "@angular/core";
 import { NavController } from "ionic-angular";
-import { ChatroomPage, RequestsListPage } from "../pages";
+import { ChatroomPage, RequestsListPage, UserProfilePage } from "../pages";
 import { Contact, Request, User } from "../../models/models";
 import * as moment from "moment";
 
@@ -79,6 +79,9 @@ export class ContactsListPage {
 					}*/
 				});
 		});
+	}
+	goToUser(id) {
+		this.navCtrl.push(UserProfilePage, { user: id });
 	}
 	doInfinite(infiniteScroll) {
 		//Begin async operation

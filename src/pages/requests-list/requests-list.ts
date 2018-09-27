@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { NavController, NavParams } from "ionic-angular";
 import { UserService } from "../../services/services";
+import { UserProfilePage } from "../pages";
 import { RequestService, AlertService } from "../../services/services";
 import { User, Request } from "../../models/models";
 import { AlertController } from "ionic-angular";
@@ -41,20 +42,22 @@ export class RequestsListPage {
 				.take(2)
 				.subscribe(user => {
 					this.currentUser = user;
-					this.requestsSrvc
-						.getReceivedRequests(this.currentUser.id)
-						.subscribe(reqs => {
+					this.requestsSrvc.getReceivedRequests(this.currentUser.id).subscribe(
+						reqs => {
 							this.requestsReceived = reqs;
-						}, err => {
-							console.error(err)
-						});
-					this.requestsSrvc
-						.getSentRequests(this.currentUser.id)
-						.subscribe(reqs => {
+						},
+						err => {
+							console.error(err);
+						}
+					);
+					this.requestsSrvc.getSentRequests(this.currentUser.id).subscribe(
+						reqs => {
 							this.requestsSent = reqs;
-						}, err => {
-							console.error(err)
-						});
+						},
+						err => {
+							console.error(err);
+						}
+					);
 					/*// make sure the requests are seen
 					for (let i = 0; i < this.requests.length; i++) {
 						this.requestsSrvc.updateRequestSeen(
@@ -82,6 +85,9 @@ export class RequestsListPage {
 	toggleSentListVisibility() {
 		console.log("toggled SentListVisibility: ", this.requestsSent);
 		this.sentListVisible != this.sentListVisible;
+	}
+	goToUser(id) {
+		this.navCtrl.push(UserProfilePage, { user: id });
 	}
 	accept(request: Request) {
 		// alert

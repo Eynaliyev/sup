@@ -84,12 +84,21 @@ export class RequestService {
 				imgUrl: to.profilePhoto.imgUrl
 			}
 		};
-		return this.afs
+		let requestRef = this.afs
 			.collection("requests_sent")
 			.doc(from.id)
 			.collection("recipients")
 			.doc(to.id)
 			.set(newRequest);
+
+			let blockReqRef = this.afs
+			.collection("blocks_sent")
+			.doc(from.id)
+			.collection("recipients")
+			.doc(to.id)
+			.delete();
+			
+			return Promise.all([requestRef, blockReqRef]);
 	}
 	// Cancel a contact request given the sender and receiver userId.
 	rejectRequest(curUsrId: string, senderId: string): Promise<any> {

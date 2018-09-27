@@ -97,7 +97,9 @@ export class UserProfilePage {
 						text: "Send Request",
 						handler: () => {
 							console.log("Send Request clicked");
-							this.requestSrvc.sendRequest(this.currentUser, this.user);
+							this.requestSrvc.sendRequest(this.currentUser, this.user)
+							.then(() => this.requested = true)
+							.catch(err => console.error(err));
 						}
 					}
 				]

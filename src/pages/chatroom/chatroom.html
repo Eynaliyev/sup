@@ -1,10 +1,11 @@
-<menu-button></menu-button>
-<ion-fab top center>
+<back-button *ngIf="privateConversation"></back-button>
+<menu-button *ngIf="!privateConversation"></menu-button>
+<ion-fab top center *ngIf="!privateConversation">
 	<button ion-fab (click)="openParticipantsList()" color="primary" class="menu-btn-border">
 		<ion-icon name="people"></ion-icon>
 	</button>
 </ion-fab>
-<ion-fab right top>
+<ion-fab right top *ngIf="!privateConversation">
 	<button ion-fab (click)="exit()" color="primary" class="menu-btn-border">
 		<ion-icon name="exit"></ion-icon>
 	</button>

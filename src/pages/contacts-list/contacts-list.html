@@ -11,7 +11,7 @@
 		some new people</div>
 	<ion-list *ngIf="contacts">
 		<ion-item [ngClass]="animateClass" *ngFor=" let user of contacts" (click)="openChat(user)">
-			<ion-thumbnail item-left (click)="goToUser(user.id)">
+			<ion-thumbnail item-left>
 				<img [src]="user.imgUrl" class="profile-picture" onError="this.src='assets/images/other-assets/profile.png';">
 			</ion-thumbnail>
 			<h2>{{user.firstName}} {{user.lastName}}

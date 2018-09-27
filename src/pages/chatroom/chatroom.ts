@@ -8,7 +8,11 @@ import {
 import { NavController, NavParams, Content, List } from "ionic-angular";
 import { UserService, ChatroomService } from "../../services/services";
 import { Chatroom, User, Message } from "../../models/models";
-import { UserProfilePage, MeetSomebodyPage, ParticipantsListPage } from "../pages";
+import {
+	UserProfilePage,
+	MeetSomebodyPage,
+	ParticipantsListPage
+} from "../pages";
 import { AlertController } from "ionic-angular";
 import * as moment from "moment";
 import "rxjs/add/operator/mergeMap";
@@ -31,6 +35,7 @@ export class ChatroomPage {
 	currentUser: User;
 	bckgImgNum = Math.floor(Math.random() * 50);
 	uniqueId = this.utilSrvc.guid();
+	privateConversation: boolean = false;
 
 	newMessage: Message = {
 		content: "",
@@ -66,8 +71,8 @@ export class ChatroomPage {
 		this.mutationObserver.observe(this.chatList.nativeElement, {
 			childList: true
 		});
-		this.chatroomId = this.navParams.get("room");
-		let privateConversation = this.navParams.get("privateConversation");
+		this.chatroomId = this.navParams.data["room"];
+		this.privateConversation = this.navParams.data["privateConversation"];
 		this.newMessage.roomId = this.chatroomId;
 		this.userService
 			.getCurrentUser()
@@ -79,7 +84,7 @@ export class ChatroomPage {
 				this.newMessage.sender.lastName = this.currentUser.lastName;
 				this.newMessage.sender.imgUrl = this.currentUser.profilePhoto.imgUrl;
 				this.newMessage.seen.push(this.currentUser.id);
-				if (privateConversation) {
+				if (this.privateConversation) {
 					return this.chatroomService.getConversationById(this.chatroomId);
 				} else {
 					return this.chatroomService.getChatroomById(this.chatroomId);
@@ -87,8 +92,11 @@ export class ChatroomPage {
 			})
 			.subscribe(chatroom => {
 				this.chatroom = chatroom;
-				if (!privateConversation) {
-					localStorage.setItem("currentChatroomId", JSON.stringify(chatroom.id));
+				if (!this.privateConversation) {
+					localStorage.setItem(
+						"currentChatroomId",
+						JSON.stringify(chatroom.id)
+					);
 				}
 				this.users = this.chatroom.participants; // TO DO: get all participants' info
 			});

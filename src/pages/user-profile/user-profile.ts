@@ -117,7 +117,7 @@ export class UserProfilePage {
 	block() {
 		if (!this.blockAlertPresented) {
 			const alert = this.alertCtrl.create({
-				title: "Confirm Like",
+				title: "Confirm Block",
 				message:
 					"Do you want to block this contact? You won't be placed in the same room with them again.",
 				buttons: [
@@ -135,6 +135,7 @@ export class UserProfilePage {
 							this.requestSrvc
 								.block(this.currentUser, this.user)
 								.then(() => {
+									this.navCtrl.pop()
 									// TO DO - kick the user out and tell him he has been - should be done on backend
 								})
 								.catch(err => console.error(err));

@@ -80,9 +80,6 @@ export class ContactsListPage {
 				});
 		});
 	}
-	goToUser(id) {
-		this.navCtrl.push(UserProfilePage, { user: id });
-	}
 	doInfinite(infiniteScroll) {
 		//Begin async operation
 		this.ngAfterViewInit()

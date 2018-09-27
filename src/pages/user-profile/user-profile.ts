@@ -135,7 +135,7 @@ export class UserProfilePage {
 							this.requestSrvc
 								.block(this.currentUser, this.user)
 								.then(() => {
-									// TO DO - kick the user out and tell him he has been
+									// TO DO - kick the user out and tell him he has been - should be done on backend
 								})
 								.catch(err => console.error(err));
 						}

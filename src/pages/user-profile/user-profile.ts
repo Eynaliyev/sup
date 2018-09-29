@@ -47,7 +47,6 @@ export class UserProfilePage {
 				this.currentUser = curUsr;
 				this.contactSrvc.getContacts(id).subscribe(contacts => {
 					this.contacts = contacts;
-					let id = this.navParams.get("user");
 				});
 				this.userSrvc.getUserById(id).subscribe(
 					userInfo => {
@@ -97,9 +96,10 @@ export class UserProfilePage {
 						text: "Send Request",
 						handler: () => {
 							console.log("Send Request clicked");
-							this.requestSrvc.sendRequest(this.currentUser, this.user)
-							.then(() => this.requested = true)
-							.catch(err => console.error(err));
+							this.requestSrvc
+								.sendRequest(this.currentUser, this.user)
+								.then(() => (this.requested = true))
+								.catch(err => console.error(err));
 						}
 					}
 				]
@@ -137,7 +137,7 @@ export class UserProfilePage {
 							this.requestSrvc
 								.block(this.currentUser, this.user)
 								.then(() => {
-									this.navCtrl.pop()
+									this.navCtrl.pop();
 									// TO DO - kick the user out and tell him he has been - should be done on backend
 								})
 								.catch(err => console.error(err));

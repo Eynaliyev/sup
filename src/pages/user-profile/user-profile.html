@@ -27,7 +27,7 @@
 			<ion-item>
 				<div class="card-title">{{user.firstName}} {{user.lastName}}</div>
 			</ion-item>
-			<ion-item>
+			<!--<ion-item>
 				<div class="card-subtitle">{{user.currentLocation}}</div>
 			</ion-item>
 			<ion-item id="myProfile-textarea1">
@@ -51,7 +51,7 @@
 					</p>
 				</div>
 			</ion-item>
-			<!--<ion-item>
+			<ion-item>
 						<ion-label *ngIf="!user.languages">Languages I speak:</ion-label>
 						<ion-label *ngIf="user.languages" class="alert">Change Languages:</ion-label>
 							<ion-select [(ngModel)]="user.languages" multiple="true">
@@ -62,7 +62,7 @@
 							<ion-option value="Italian">Italian</ion-option>
 							<ion-option value="Mandarin">Mandarin</ion-option>
 						</ion-select>
-					</ion-item>-->
+					</ion-item>
 			<ion-item color="none" id="myProfile-list-item43">
 				<ion-icon name="pin" item-left></ion-icon>
 				{{user.currentLocation}}
@@ -72,7 +72,7 @@
 			</ion-item>
 			<ion-item color="none" id="myProfile-list-item45">
 				University: {{user.universityName}}
-			</ion-item>
+			</ion-item>-->
 			<ion-row class="tall-spacer">
 				<!--<button ion-button color="royal" block (click)="updateProfile()">
 					Update Profile

@@ -5,141 +5,142 @@ const admin = require("firebase-admin");
 admin.initializeApp();
 // // Start writing Firebase Functions
 // // https://firebase.google.com/docs/functions/typescript
+/*
 exports.createFriendship = functions.firestore
     .document("friendships/{fromId}/friends/{toId}")
     .onCreate((snap, context) => {
-    const newValue = snap.data();
-    // need to get the toId wildcard from the URL
-    const requestReceiverId = "01"; //context.params.fromId;
-    const requestSenderId = "02"; //context.params.toId;
-    const conversationId = uniqueRelId(requestReceiverId, requestSenderId);
-    const newContact = { test: "test" };
-    /*const newContact: Contact = {
-        id: requestReceiverId,
-        createdAt: newValue.createdAt,
-        imgUrl: newValue.imgUrl,
-        firstName: newValue.firstName,
-        lastName: newValue.lastName
-    };
-    console.log(
-        "requestReceiverId: ",
-        requestReceiverId,
-        "requestReceiverId: ",
-        requestReceiverId,
-        "newContact: ",
-        newContact,
-        "requestSenderId: ",
-        requestSenderId,
-        "requestReceiverId: ",
-        requestReceiverId
-    );
-    // 2. the cloud function creates the second one
-    const doc = admin
-        .firestore()
-        .collection("friendships")
-        .doc(requestSenderId)
-        .collection("friends")
-        .doc(requestReceiverId)
-        .set(newContact);
-    return doc;
-    // 3. delete the request sent
-    /*const sendRequestDoc = admin
-        .firestore()
-        .collection("requests_sent")
-        .doc(requestSenderId)
-        .collection("recipients")
-        .doc(requestReceiverId)
-        .delete();
-    // 3.5 delete the request received
-    const receivedRequestDoc = admin
-        .firestore()
-        .collection("requests_received")
-        .doc(requestReceiverId)
-        .collection("senders")
-        .doc(requestSenderId)
-        .delete();
-    // 4. the cloud function creates the conversation
-    const senderUserRef = admin
-        .firestore()
-        .collection("users")
-        .doc(requestSenderId)
-        .get();
-    const recipientUserRef = admin
-        .firestore()
-        .collection("users")
-        .doc(requestReceiverId)
-        .get();
-    let senderUser;
-    let recipientUser;
-    let senderParticipant: Participant;
-    let recipientParticipant: Participant;
-    let participants: Participant[];
-    let newChatroom: Chatroom;
-    let newConversationDoc;
-    let newMessage: Message;
-    senderUserRef
-        .then(snUsr => {
-            senderUser = snUsr;
-            senderParticipant = {
-                id: senderUser.id,
-                firstName: senderUser.firstName,
-                lastName: senderUser.lastName,
-                imgUrl: senderUser.imgUrl
-            };
-            return recipientUserRef;
-        })
-        .then(recUsr => {
-            recipientUser = recUsr;
-            recipientParticipant = {
-                id: recipientUser.id,
-                firstName: recipientUser.firstName,
-                lastName: recipientUser.lastName,
-                imgUrl: recipientUser.imgUrl
-            };
-            participants = [senderParticipant, recipientParticipant];
-            newChatroom = {
-                id: conversationId,
-                participants: participants,
-                messages: []
-            };
-            console.log(
-                "recUsr: ",
-                recUsr,
-                "senderParticipant: ",
-                senderParticipant,
-                "recipientParticipant: ",
-                recipientParticipant,
-                "newChatroom: ",
-                newChatroom,
-                "participants: ",
-                participants
-            );
-            //creating the conversation in the firestore
-            newConversationDoc = admin
-                .firestore()
-                .collection("conversations")
-                .doc(newChatroom.id)
-                .set(newChatroom);
-            // 5. the cloud function creates the message with the default one
-            newMessage = {
-                content: "Woof, Woof, You are now connected!",
-                createdAt: moment().format("DD/MM/YYYY, hh:mm:ss"),
-                id: guid() + newChatroom.id + "001",
-                roomId: newChatroom.id,
-                sender: {
-                    id: "001",
-                    firstName: "Woof",
-                    lastName: "Woof",
-                    imgUrl: "assets/images/other-assets/profile.png"
-                },
-                seen: []
-            };
-            admin
-                .database()
-                .ref(`/messages${newMessage.roomId}`)
-                .push(newMessage);
-        });*/
-});
+        const newValue = snap.data();
+        // need to get the toId wildcard from the URL
+        const requestReceiverId = "01"; //context.params.fromId;
+        const requestSenderId = "02"; //context.params.toId;
+        const conversationId = uniqueRelId(requestReceiverId, requestSenderId);
+        const newContact = { test: "test" };
+        const newContact: Contact = {
+            id: requestReceiverId,
+            createdAt: newValue.createdAt,
+            imgUrl: newValue.imgUrl,
+            firstName: newValue.firstName,
+            lastName: newValue.lastName
+        };
+        console.log(
+            "requestReceiverId: ",
+            requestReceiverId,
+            "requestReceiverId: ",
+            requestReceiverId,
+            "newContact: ",
+            newContact,
+            "requestSenderId: ",
+            requestSenderId,
+            "requestReceiverId: ",
+            requestReceiverId
+        );
+        // 2. the cloud function creates the second one
+        const doc = admin
+            .firestore()
+            .collection("friendships")
+            .doc(requestSenderId)
+            .collection("friends")
+            .doc(requestReceiverId)
+            .set(newContact);
+        return doc;
+        // 3. delete the request sent
+        /*const sendRequestDoc = admin
+            .firestore()
+            .collection("requests_sent")
+            .doc(requestSenderId)
+            .collection("recipients")
+            .doc(requestReceiverId)
+            .delete();
+        // 3.5 delete the request received
+        const receivedRequestDoc = admin
+            .firestore()
+            .collection("requests_received")
+            .doc(requestReceiverId)
+            .collection("senders")
+            .doc(requestSenderId)
+            .delete();
+        // 4. the cloud function creates the conversation
+        const senderUserRef = admin
+            .firestore()
+            .collection("users")
+            .doc(requestSenderId)
+            .get();
+        const recipientUserRef = admin
+            .firestore()
+            .collection("users")
+            .doc(requestReceiverId)
+            .get();
+        let senderUser;
+        let recipientUser;
+        let senderParticipant: Participant;
+        let recipientParticipant: Participant;
+        let participants: Participant[];
+        let newChatroom: Chatroom;
+        let newConversationDoc;
+        let newMessage: Message;
+        senderUserRef
+            .then(snUsr => {
+                senderUser = snUsr;
+                senderParticipant = {
+                    id: senderUser.id,
+                    firstName: senderUser.firstName,
+                    lastName: senderUser.lastName,
+                    imgUrl: senderUser.imgUrl
+                };
+                return recipientUserRef;
+            })
+            .then(recUsr => {
+                recipientUser = recUsr;
+                recipientParticipant = {
+                    id: recipientUser.id,
+                    firstName: recipientUser.firstName,
+                    lastName: recipientUser.lastName,
+                    imgUrl: recipientUser.imgUrl
+                };
+                participants = [senderParticipant, recipientParticipant];
+                newChatroom = {
+                    id: conversationId,
+                    participants: participants,
+                    messages: []
+                };
+                console.log(
+                    "recUsr: ",
+                    recUsr,
+                    "senderParticipant: ",
+                    senderParticipant,
+                    "recipientParticipant: ",
+                    recipientParticipant,
+                    "newChatroom: ",
+                    newChatroom,
+                    "participants: ",
+                    participants
+                );
+                //creating the conversation in the firestore
+                newConversationDoc = admin
+                    .firestore()
+                    .collection("conversations")
+                    .doc(newChatroom.id)
+                    .set(newChatroom);
+                // 5. the cloud function creates the message with the default one
+                newMessage = {
+                    content: "Woof, Woof, You are now connected!",
+                    createdAt: moment().format("DD/MM/YYYY, hh:mm:ss"),
+                    id: guid() + newChatroom.id + "001",
+                    roomId: newChatroom.id,
+                    sender: {
+                        id: "001",
+                        firstName: "Woof",
+                        lastName: "Woof",
+                        imgUrl: "assets/images/other-assets/profile.png"
+                    },
+                    seen: []
+                };
+                admin
+                    .database()
+                    .ref(`/messages${newMessage.roomId}`)
+                    .push(newMessage);
+            });
+    });*/
 //i need to store latitudes and
 // longitudes of user and chatroom locations
 // when the user is logged in / or looking to join a room -
@@ -194,10 +195,10 @@ function guid() {
 // generats a uniqueId for a relationship e.g. sent request and etc
 function uniqueRelId(from, to) {
     if (from <= to) {
-        return from.concat(to);
+        return from.concat("_" + to);
     }
     else {
-        return to.concat(from);
+        return to.concat("_" + from);
     }
 }
 exports.test = functions.https.onRequest((req, res) => {

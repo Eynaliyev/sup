@@ -41,7 +41,6 @@ export class AuthService {
 			let provider = new firebase.auth.FacebookAuthProvider();
 			provider.addScope("email");
 			provider.addScope("public_profile");
-			provider.addScope("user_birthday");
 			if (
 				/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
 					navigator.userAgent

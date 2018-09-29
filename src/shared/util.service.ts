@@ -121,6 +121,7 @@ export class UtilService {
 			]
 		});
 		alert.present();
+		console.log('fake door presented for: ', action);
 	}
 	finInstance(array: Array<any>, object): number {
 		array.forEach((ins, index) => {

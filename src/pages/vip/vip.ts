@@ -16,6 +16,8 @@ import { AlertController } from "ionic-angular";
 	templateUrl: "vip.html"
 })
 export class VIPPage {
+	purchaseSelected: boolean = false;
+
 	constructor(
 		public navCtrl: NavController,
 		public vipSrvc: VipService,
@@ -25,6 +27,9 @@ export class VIPPage {
 
 	ionViewDidLoad() {
 		console.log("ionViewDidLoad VIPPage");
+	}
+	select(option: string) {
+		console.log("select clicked withthe option:", option);
 	}
 	watchAd() {
 		this.utilSrvc.presentFakedoorAlert("watchAd");

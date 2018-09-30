@@ -23,7 +23,6 @@ import "rxjs/add/operator/mergeMap";
 	encapsulation: ViewEncapsulation.None
 })
 export class ChatroomPage {
-	private mutationObserver: MutationObserver;
 	@ViewChild(Content)
 	contentArea: Content;
 	@ViewChild(List, { read: ElementRef })
@@ -37,6 +36,8 @@ export class ChatroomPage {
 	uniqueId = this.utilSrvc.guid();
 	privateConversation: boolean = false;
 	currentKey: string;
+	lastPage: boolean = false;
+	messagesPerPage: number = 10;
 
 	newMessage: Message = {
 		content: "",
@@ -59,19 +60,7 @@ export class ChatroomPage {
 		private alertCtrl: AlertController,
 		private utilSrvc: UtilService
 	) {}
-	/*
-	ionViewCanEnter() {
-		return this.authSrvc.isLoggedIn();
-	}*/
 	ionViewDidLoad() {
-		this.contentArea.scrollToBottom();
-		this.mutationObserver = new MutationObserver(mutations => {
-			this.contentArea.scrollToBottom();
-		});
-
-		this.mutationObserver.observe(this.chatList.nativeElement, {
-			childList: true
-		});
 		this.chatroomId = this.navParams.data["room"];
 		this.privateConversation = this.navParams.data["privateConversation"];
 		this.newMessage.roomId = this.chatroomId;
@@ -103,18 +92,13 @@ export class ChatroomPage {
 			});
 		this.chatroomSrvc.getMessages(this.chatroomId).subscribe(
 			messages => {
-				let newMessages = messages;
-				console.log("newMessages: ", newMessages);
-				// add position property
-				let updatedMessages = this.utilSrvc.addMessagePosition(
-					newMessages,
-					this.currentUser.id
-				);
-				this.messages = updatedMessages;
-				setTimeout(this.scrollToBottom, 300); // <- when the new item is pushed, scroll to the bottom to show it
+				this.loadMessagesIntoPage(messages);
 			},
 			err => {
 				console.error(err);
+			},
+			() => {
+				this.scrollToBottom();
 			}
 		);
 	}
@@ -136,27 +120,24 @@ export class ChatroomPage {
 		});
 		return result;
 	}
-	getMessages() {
+	loadMoreMessages(infiniteScroll) {
 		let env = this;
-		this.chatroomSrvc.getMessages(this.chatroom.id).subscribe(
-			newMessages => {
-				// add position property
-				let updatedMessages = this.utilSrvc.addMessagePosition(
-					newMessages,
-					this.currentUser.id
+		if (!this.lastPage) {
+			this.chatroomSrvc
+				.getMessages(this.chatroom.id, this.currentKey)
+				.subscribe(
+					newMessages => {
+						env.loadMessagesIntoPage(newMessages);
+						infiniteScroll.complete();
+					},
+					err => {
+						console.error(err);
+						infiniteScroll.complete();
+					}
 				);
-				// set the seen property
-				let res = this.updateSeen(updatedMessages, this.currentUser.id);
-				for (let i = 0; i < res.length; i++) {
-					setTimeout(function() {
-						env.messages.push(res[i]);
-					}, 100 * i);
-				}
-			},
-			err => {
-				console.error(err);
-			}
-		);
+		} else {
+			infiniteScroll.complete();
+		}
 	}
 	openParticipantsList() {
 		if (this.users) {
@@ -178,14 +159,34 @@ export class ChatroomPage {
 			alert.present();
 		}
 	}
-	scrollToBottom() {
-		window.scrollTo(0, document.querySelector(".end").scrollHeight);
-	}
-	loadMore() {
-		this.chatroomSrvc.getMessages(this.chatroom.id, this.currentKey);
-	}
 	sendMessage() {
 		this.chatroomSrvc.sendMessage(this.chatroom.id, this.newMessage);
 		this.newMessage.content = "";
+	}
+	loadMessagesIntoPage(snapshot: any[]) {
+		if (snapshot.length < this.messagesPerPage) {
+			this.lastPage = true;
+		}
+		snapshot.shift();
+		// add position roperty
+		let newMessages = this.snapshotToMessages(snapshot);
+		this.currentKey = snapshot[0]["key"];
+
+		// add position property
+		let updatedMessages = this.utilSrvc.addMessagePosition(
+			newMessages,
+			this.currentUser.id
+		);
+		this.messages = updatedMessages.concat(this.messages);
+	}
+	scrollToBottom() {
+		//let env = this;
+		//setTimeout(env.contentArea.scrollToBottom, 300);
+		window.scrollTo(0, document.querySelector(".end").scrollHeight);
+	}
+	snapshotToMessages(snapshot: any[]): Message[] {
+		let messages = [];
+		snapshot.forEach(obj => messages.push(obj.payload.val()));
+		return messages;
 	}
 }

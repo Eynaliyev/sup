@@ -90,22 +90,22 @@ export class ChatroomService {
 		messageRef.push(message);
 	}
 	// TO DO: implement actual paginated message getter function
-	getMessages(
-		chatroomId: string,
-		startKey?: string
-	): Observable<any[]> {
+	getMessages(chatroomId: string, startKey?: string): Observable<any[]> {
 		if (!startKey) {
 			return this.db
 				.list(`messages/${chatroomId}`, ref => {
 					return ref.orderByKey().limitToLast(10);
 				})
-				.valueChanges();
+				.snapshotChanges();
 		} else {
 			return this.db
-			.list(`messages/${chatroomId}`, ref => {
-				return ref.orderByKey().limitToLast(10).startAt(startKey);
-			})
-			.valueChanges();
+				.list(`messages/${chatroomId}`, ref => {
+					return ref
+						.orderByKey()
+						.endAt(startKey)
+						.limitToLast(10);
+				})
+				.snapshotChanges();
 		}
 		/* TO DO - pagination
 		return this.db

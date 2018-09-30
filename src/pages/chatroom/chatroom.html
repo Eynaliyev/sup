@@ -16,6 +16,12 @@
 			<chat-bubble [message]="msg" (select)="goToUser($event)"></chat-bubble>
 		</ion-item>
 	</ion-list>
+	<ion-infinite-scroll (ionInfinite)="loadMoreMessages($event)" [position]="'top'">
+		<ion-infinite-scroll-content>
+			loadingSpinner="bubbles"
+			loadingText="Loading more messages...">
+		</ion-infinite-scroll-content>
+	</ion-infinite-scroll>
 	<div class="end"></div>
 </ion-content>
 <ion-footer keyboard-attach>

@@ -36,6 +36,7 @@ export class ChatroomPage {
 	bckgImgNum = Math.floor(Math.random() * 50);
 	uniqueId = this.utilSrvc.guid();
 	privateConversation: boolean = false;
+	currentKey: string;
 
 	newMessage: Message = {
 		content: "",
@@ -54,7 +55,7 @@ export class ChatroomPage {
 		private navCtrl: NavController,
 		private navParams: NavParams,
 		private userService: UserService,
-		private chatroomService: ChatroomService,
+		private chatroomSrvc: ChatroomService,
 		private alertCtrl: AlertController,
 		private utilSrvc: UtilService
 	) {}
@@ -85,9 +86,9 @@ export class ChatroomPage {
 				this.newMessage.sender.imgUrl = this.currentUser.profilePhoto.imgUrl;
 				this.newMessage.seen.push(this.currentUser.id);
 				if (this.privateConversation) {
-					return this.chatroomService.getConversationById(this.chatroomId);
+					return this.chatroomSrvc.getConversationById(this.chatroomId);
 				} else {
-					return this.chatroomService.getChatroomById(this.chatroomId);
+					return this.chatroomSrvc.getChatroomById(this.chatroomId);
 				}
 			})
 			.subscribe(chatroom => {
@@ -100,7 +101,7 @@ export class ChatroomPage {
 				}
 				this.users = this.chatroom.participants; // TO DO: get all participants' info
 			});
-		this.chatroomService.getMessages(this.chatroomId).subscribe(
+		this.chatroomSrvc.getMessages(this.chatroomId).subscribe(
 			messages => {
 				let newMessages = messages;
 				console.log("newMessages: ", newMessages);
@@ -119,7 +120,7 @@ export class ChatroomPage {
 	}
 	exit() {
 		localStorage.removeItem("currentChatroomId");
-		this.chatroomService.leaveChatroom(this.chatroomId, this.currentUser.id);
+		this.chatroomSrvc.leaveChatroom(this.chatroomId, this.currentUser.id);
 		this.navCtrl.setRoot(MeetSomebodyPage);
 	}
 	goToUser(id) {
@@ -129,7 +130,7 @@ export class ChatroomPage {
 		let result = [];
 		messages.forEach(message => {
 			if (message.seen.indexOf(id) === -1) {
-				this.chatroomService.updateSeen(this.chatroomId, message.id, id);
+				this.chatroomSrvc.updateSeen(this.chatroomId, message.id, id);
 			}
 			result.push(message);
 		});
@@ -137,7 +138,7 @@ export class ChatroomPage {
 	}
 	getMessages() {
 		let env = this;
-		this.chatroomService.getMessages(this.chatroom.id, 10).subscribe(
+		this.chatroomSrvc.getMessages(this.chatroom.id).subscribe(
 			newMessages => {
 				// add position property
 				let updatedMessages = this.utilSrvc.addMessagePosition(
@@ -180,8 +181,11 @@ export class ChatroomPage {
 	scrollToBottom() {
 		window.scrollTo(0, document.querySelector(".end").scrollHeight);
 	}
+	loadMore() {
+		this.chatroomSrvc.getMessages(this.chatroom.id, this.currentKey);
+	}
 	sendMessage() {
-		this.chatroomService.sendMessage(this.chatroom.id, this.newMessage);
+		this.chatroomSrvc.sendMessage(this.chatroom.id, this.newMessage);
 		this.newMessage.content = "";
 	}
 }

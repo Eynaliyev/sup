@@ -14,6 +14,7 @@ import { UserService } from "../services/services";
 import { AuthService } from "../services/services";
 // models
 import { User } from "../models/models";
+import firebase from "firebase";
 
 @Component({
 	templateUrl: "app.component.html"
@@ -71,26 +72,46 @@ export class MyApp {
 			});
 	}
 	ngOnInit() {
-		this.userSrvc
-			.getCurrentUser()
-			.take(2)
-			.subscribe(
-				result => {
-					//getCurrentUser returns a subject so we need to check if there's actual value in it
-					if (result) {
-						this.currentUser = result;
-						console.log("current user :", this.currentUser);
-						this.rootPage = MeetSomebodyPage;
-					} else {
-						this.rootPage = LoginPage;
-						//this.storage.set('introShown', true);
-					}
-				},
-				err => {
-					console.error(err);
-					//this.loader.dismiss();
+		firebase.auth().onAuthStateChanged(
+			user => {
+				if (user) {
+					//should be after the user has been set
+					this.userSrvc
+						.setCurrentUser(user["providerData"][0])
+						.then(() => {
+							return this.userSrvc
+								.getCurrentUser()
+								.take(2)
+								.subscribe(
+									result => {
+										//getCurrentUser returns a subject so we need to check if there's actual value in it
+										if (result) {
+											this.currentUser = result;
+											console.log("current user :", this.currentUser);
+											this.rootPage = MeetSomebodyPage;
+										} else {
+											this.rootPage = LoginPage;
+											//this.storage.set('introShown', true);
+										}
+									},
+									err => {
+										console.error(err);
+										//this.loader.dismiss();
+									}
+								);
+						})
+						.catch(err => {
+							console.log("Error:", err);
+						});
+					this.rootPage = MeetSomebodyPage;
+				} else {
+					this.rootPage = LoginPage;
 				}
-			);
+			},
+			err => {
+				console.error(err);
+			}
+		);
 	}
 	openPage(page) {
 		// close the menu when clicking a link from the menu

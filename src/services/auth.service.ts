@@ -48,7 +48,7 @@ export class AuthService {
 			) {
 				// some code..
 				console.log("we're on mobile");
-				return this._firebaseAuth.auth.signInWithRedirect(provider);
+				return this._firebaseAuth.auth.signInWithPopup(provider);
 			} else {
 				console.log("we're on desktop");
 				return this._firebaseAuth.auth.signInWithPopup(provider);

@@ -5,7 +5,7 @@ import {
 	ViewEncapsulation,
 	ElementRef
 } from "@angular/core";
-import { NavController, NavParams, Content, List } from "ionic-angular";
+import { NavController, NavParams, Content } from "ionic-angular";
 import { UserService, ChatroomService } from "../../services/services";
 import { Chatroom, User, Message } from "../../models/models";
 import {
@@ -25,8 +25,6 @@ import "rxjs/add/operator/mergeMap";
 export class ChatroomPage {
 	@ViewChild(Content)
 	contentArea: Content;
-	@ViewChild(List, { read: ElementRef })
-	chatList: ElementRef;
 	users: any[] = [];
 	messages: any[] = [];
 	chatroom: Chatroom;
@@ -38,6 +36,8 @@ export class ChatroomPage {
 	currentKey: string;
 	lastPage: boolean = false;
 	messagesPerPage: number = 10;
+	// checking if it was loaded the first time
+	initLoaded = false;
 
 	newMessage: Message = {
 		content: "",
@@ -59,8 +59,7 @@ export class ChatroomPage {
 		private chatroomSrvc: ChatroomService,
 		private alertCtrl: AlertController,
 		private utilSrvc: UtilService
-	) {}
-	ionViewDidLoad() {
+	) {
 		this.chatroomId = this.navParams.data["room"];
 		this.privateConversation = this.navParams.data["privateConversation"];
 		this.newMessage.roomId = this.chatroomId;
@@ -92,7 +91,10 @@ export class ChatroomPage {
 			});
 		this.chatroomSrvc.getMessages(this.chatroomId).subscribe(
 			messages => {
-				this.loadMessagesIntoPage(messages);
+				if (!this.initLoaded) {
+					this.initLoaded = true;
+					this.loadMessagesIntoPage(messages);
+				}
 			},
 			err => {
 				console.error(err);
@@ -102,6 +104,7 @@ export class ChatroomPage {
 			}
 		);
 	}
+	ionViewDidLoad() {}
 	exit() {
 		localStorage.removeItem("currentChatroomId");
 		this.chatroomSrvc.leaveChatroom(this.chatroomId, this.currentUser.id);
@@ -121,14 +124,19 @@ export class ChatroomPage {
 		return result;
 	}
 	loadMoreMessages(infiniteScroll) {
+		this.initLoaded = false;
 		let env = this;
 		if (!this.lastPage) {
 			this.chatroomSrvc
 				.getMessages(this.chatroom.id, this.currentKey)
 				.subscribe(
 					newMessages => {
-						env.loadMessagesIntoPage(newMessages);
-						infiniteScroll.complete();
+						if (!env.initLoaded) {
+							newMessages.pop();
+							env.loadMessagesIntoPage(newMessages);
+							infiniteScroll.complete();
+							env.initLoaded = true;
+						}
 					},
 					err => {
 						console.error(err);
@@ -167,7 +175,6 @@ export class ChatroomPage {
 		if (snapshot.length < this.messagesPerPage) {
 			this.lastPage = true;
 		}
-		snapshot.shift();
 		// add position roperty
 		let newMessages = this.snapshotToMessages(snapshot);
 		this.currentKey = snapshot[0]["key"];
@@ -180,8 +187,6 @@ export class ChatroomPage {
 		this.messages = updatedMessages.concat(this.messages);
 	}
 	scrollToBottom() {
-		//let env = this;
-		//setTimeout(env.contentArea.scrollToBottom, 300);
 		window.scrollTo(0, document.querySelector(".end").scrollHeight);
 	}
 	snapshotToMessages(snapshot: any[]): Message[] {

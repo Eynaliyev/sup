@@ -103,7 +103,7 @@ export class ChatroomService {
 					return ref
 						.orderByKey()
 						.endAt(startKey)
-						.limitToLast(10);
+						.limitToLast(11); // because the first one will be a duplicate
 				})
 				.snapshotChanges();
 		}

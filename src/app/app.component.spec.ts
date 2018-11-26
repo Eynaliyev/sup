@@ -1,4 +1,4 @@
-/*import { Injectable, Injector } from "@angular/core";
+import { Injectable, Injector } from "@angular/core";
 import { async, fakeAsync, tick, TestBed, inject } from "@angular/core/testing";
 import {
 	BaseRequestOptions,
@@ -6,10 +6,8 @@ import {
 	Http,
 	RequestOptions
 } from "@angular/http";
-import { Response, ResponseOptions } from "@angular/http";
-import { MockBackend, MockConnection } from "@angular/http/testing";
 import { IonicModule, Platform } from "ionic-angular";
-import { UserService, AuthService } from "../services/services";
+import { UserService, AuthService, UtilService } from "../services/services";
 import { MenuController } from "ionic-angular";
 import { Storage } from "@ionic/storage";
 import { LoadingController } from "ionic-angular";
@@ -27,6 +25,8 @@ import { AngularFirestoreModule } from "angularfire2/firestore";
 import { AngularFireAuthModule } from "angularfire2/auth";
 // Other imports
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import firebase from "firebase";
+import { Environment } from "../environment/environment";
 
 describe("MyApp Component", () => {
 	let fixture, component, mockBackend, service;
@@ -38,34 +38,34 @@ describe("MyApp Component", () => {
 			declarations: [MyApp],
 			imports: [
 				AngularFireAuthModule,
-				AngularFireModule,
+				AngularFireModule.initializeApp(Environment.firebase),
 				AngularFireDatabaseModule,
 				AngularFirestoreModule,
 				HttpClientTestingModule,
-				IonicModule.forRoot(MyApp)
+				IonicModule.forRoot(MyApp, Environment.config)
 			],
 			providers: [
 				UserService,
 				MenuController,
+				UtilService,
 				AuthService,
 				{ provide: Http, useClass: HttpClient },
 				LoadingController,
 				{ provide: Platform, useClass: PlatformMock }
 			]
-		});
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {
-		fixture = TestBed.createComponent(MyApp);
-		component = fixture.componentInstance;
+		const fixture = TestBed.createComponent(MyApp);
+		const app = fixture.debugElement.componentInstance;
 	});
 
 	it("should be created", () => {
-		expect(component instanceof MyApp).toBe(true);
+		expect(this.app instanceof MyApp).toBe(true);
 	});
-
+	/*
 	it("should have three pages", () => {
 		expect(component.pages.length).toBe(3);
-	});
+	});*/
 });
-*/

@@ -29,7 +29,7 @@ import firebase from "firebase";
 import { Environment } from "../environment/environment";
 
 describe("MyApp Component", () => {
-	let fixture, component, mockBackend, service;
+	let app, fixture, originalTimeout, component, mockBackend, service;
 	let httpClient: HttpClient;
 	let httpTestingController: HttpTestingController;
 
@@ -57,15 +57,21 @@ describe("MyApp Component", () => {
 	}));
 
 	beforeEach(() => {
-		const fixture = TestBed.createComponent(MyApp);
-		const app = fixture.debugElement.componentInstance;
+		fixture = TestBed.createComponent(MyApp);
+		app = fixture.debugElement.componentInstance;
+		originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
+		jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000000;
+	});
+
+	afterEach(() => {
+		jasmine.DEFAULT_TIMEOUT_INTERVAL = this.originalTimeout;
 	});
 
 	it("should be created", () => {
-		expect(this.app instanceof MyApp).toBe(true);
+		expect(app instanceof MyApp).toBe(true);
 	});
-	/*
-	it("should have three pages", () => {
-		expect(component.pages.length).toBe(3);
+
+	/*it("should have three pages", () => {
+		expect(app.pages.length).toBe(3);
 	});*/
 });

@@ -102,7 +102,7 @@ export class UtilService {
 		return res;
 	}
 	//a dummy method for ocming up with different dates
-	createDate(n) {
+	createDate(n): string {
 		let date = moment().format("DD/MM/YYYY, hh:mm:ss");
 		return date;
 	}
@@ -121,7 +121,7 @@ export class UtilService {
 			]
 		});
 		alert.present();
-		console.log('fake door presented for: ', action);
+		console.log("fake door presented for: ", action);
 	}
 	finInstance(array: Array<any>, object): number {
 		array.forEach((ins, index) => {
@@ -131,7 +131,7 @@ export class UtilService {
 		});
 		return -1;
 	}
-	deepEqual(obj1, obj2) {
-		JSON.stringify(obj1) === JSON.stringify(obj2);
+	deepEqual(obj1, obj2): boolean {
+		return JSON.stringify(obj1) === JSON.stringify(obj2);
 	}
 }

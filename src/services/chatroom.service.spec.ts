@@ -41,7 +41,7 @@ describe("ChatroomService", () => {
 
 		fixture.detectChanges();*/
 	});
-
+	/*
 	xit("should call getAvailableChatrooms one time and update the view", () => {
 		expect(spy).toHaveBeenCalled();
 		expect(spy.calls.all().length).toEqual(1);
@@ -49,5 +49,5 @@ describe("ChatroomService", () => {
 		expect(de.query(By.css(".message-body")).nativeElement.innerText).toContain(
 			"warn"
 		);
-	});
+	});*/
 });

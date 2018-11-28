@@ -1,19 +1,29 @@
-/*import * as UtilService from "./util.service";
-import { beforeEachProviders, inject, beforeEach, it } from "angular2/testing";
+import { UtilService } from "./util.service";
+import { TestBed } from "@angular/core/testing";
+import { AngularFireDatabase } from "angularfire2/database";
+import { AngularFirestore } from "angularfire2/firestore";
+import {
+	BrowserDynamicTestingModule,
+	platformBrowserDynamicTesting
+} from "@angular/platform-browser-dynamic/testing";
 
-describe("Service: UtilService", () => {
-	let service;
-	beforeEachProviders(() => {
-		UtilService;
+let httpClientSpy: { get: jasmine.Spy };
+let service;
+
+describe("UtilService", () => {
+	beforeEach(() => {
+		TestBed.configureTestingModule({
+			providers: [AngularFirestore, AngularFireDatabase]
+		});
+		service = TestBed.get(UtilService);
 	});
-	beforeEach(
-		inject([UtilService], s => {
-			service = s;
-		})
-	);
+
+	it("should be created", () => {
+		expect(service).toBeTruthy();
+	});
+
 	it("should return a date", () => {
 		let date = service.createDate();
 		expect(date).toBeDefined();
 	});
 });
-*/

@@ -19,7 +19,7 @@ describe("UtilService", () => {
 		});
 		service = TestBed.get(UtilService);
 		originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-		jasmine.DEFAULT_TIMEOUT_INTERVAL = 9000000;
+		jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
 	});
 
 	afterEach(() => {

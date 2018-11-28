@@ -101,15 +101,16 @@ export class MyApp {
 								);
 						})
 						.catch(err => {
-							console.log("Error:", err);
+							console.error("Error:", err);
+							this.rootPage = LoginPage;
 						});
-					this.rootPage = MeetSomebodyPage;
 				} else {
 					this.rootPage = LoginPage;
 				}
 			},
 			err => {
 				console.error(err);
+				this.rootPage = LoginPage;
 			}
 		);
 	}

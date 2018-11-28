@@ -80,6 +80,7 @@ universal: #ffa731);
 ion-fab {
 	top: 21px !important;
 }
+
 .white {
 	color: white;
 }
@@ -106,7 +107,7 @@ ion-fab {
 }
 
 .gallery-bckg {
-	margin: 0px 0px 0px 0px;
+	margin: 0px;
 	position: absolute;
 	width: 100%;
 	top: 0;
@@ -145,7 +146,7 @@ ion-fab {
 }
 
 .menu-avatar {
-	margin: 0px 0px 0px 0px;
+	margin: 0px;
 	border: 2px solid color($colors, royal);
 	width: calc(100%);
 	border-radius: 50% !important;

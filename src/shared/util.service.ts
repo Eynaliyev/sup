@@ -5,11 +5,6 @@ import { AlertController } from "ionic-angular";
 import { Message } from "../models/models";
 import * as moment from "moment";
 
-/*
-  Generated class for the UtilService provider.
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
 @Injectable()
 export class UtilService {
 	constructor(public http: Http, public alertCtrl: AlertController) {

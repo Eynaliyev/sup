@@ -6,6 +6,7 @@ export class CalculateDistancePipe implements PipeTransform {
     transform(userCoords: number[], currentUserCoords: number[]) {
         return this.calculate(currentUserCoords[0], currentUserCoords[1], userCoords[0], userCoords[1]);
     }
+    
     calculate(lat1: number, lon1: number, lat2: number, lon2: number) {
       var p = 0.017453292519943295;    // Math.PI / 180
       var c = Math.cos;

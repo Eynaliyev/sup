@@ -14,6 +14,7 @@ export class DefaultImageDirective {
 	public updateUrl() {
 		return this.default;
 	}
+	
 	public checkPath(src) {
 		return src ? src : this.default;
 	}

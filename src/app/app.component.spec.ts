@@ -1,14 +1,18 @@
-import { VIPPage } from "../pages/pages";
-import { MeetSomebodyPage } from "../pages/pages";
-import { MyProfilePage } from "../pages/pages";
-import { LoginPage } from "../pages/pages";
+import { Injectable, Injector } from "@angular/core";
 import { async, fakeAsync, tick, TestBed, inject } from "@angular/core/testing";
-import { Http } from "@angular/http";
+import {
+	BaseRequestOptions,
+	ConnectionBackend,
+	Http,
+	RequestOptions
+} from "@angular/http";
 import { IonicModule, Platform } from "ionic-angular";
 import { UserService, AuthService, UtilService } from "../services/services";
 import { MenuController } from "ionic-angular";
+import { Storage } from "@ionic/storage";
 import { LoadingController } from "ionic-angular";
 import { MyApp } from "./app.component";
+import { exec } from "child_process";
 import { PlatformMock } from "../../test-config/mocks-ionic";
 // Http testing module and mocking controller
 import {
@@ -20,7 +24,7 @@ import { AngularFireDatabaseModule } from "angularfire2/database";
 import { AngularFirestoreModule } from "angularfire2/firestore";
 import { AngularFireAuthModule } from "angularfire2/auth";
 // Other imports
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import firebase from "firebase";
 import { Environment } from "../environment/environment";
 
@@ -31,13 +35,7 @@ describe("MyApp Component", () => {
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
-			declarations: [
-				MyApp,
-				LoginPage,
-				MeetSomebodyPage,
-				MyProfilePage,
-				VIPPage
-			],
+			declarations: [MyApp],
 			imports: [
 				AngularFireAuthModule,
 				AngularFireModule.initializeApp(Environment.firebase),
@@ -62,20 +60,18 @@ describe("MyApp Component", () => {
 		fixture = TestBed.createComponent(MyApp);
 		app = fixture.debugElement.componentInstance;
 		originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-		jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
-		fixture.detectChanges();
+		jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000000;
 	});
 
-	afterEach(done => {
-		jasmine.DEFAULT_TIMEOUT_INTERVAL = this.originalTimeout;
+	afterEach(() => {
+		jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
 	});
 
 	it("should be created", () => {
 		expect(app instanceof MyApp).toBe(true);
 	});
 
-	xit("should have three pages", done => {
+	it("should have three pages", () => {
 		expect(app.pages.length).toBe(3);
-		done();
 	});
 });

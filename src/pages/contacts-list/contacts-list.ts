@@ -33,10 +33,7 @@ export class ContactsListPage {
 	) {
 		console.log("ContactsListPage initialized");
 		this.animateClass = { "zoom-in": true };
-	} /*
-	ionViewCanEnter() {
-		return this.authSrvc.isLoggedIn();
-	}*/
+	} 
 	ngAfterViewInit() {
 		return new Promise(resolve => {
 			let env = this;
@@ -68,15 +65,6 @@ export class ContactsListPage {
 							console.log("contacts in contactsList: ", env.contacts);
 						}, 100 * i);
 					}
-					// checking for new requests
-					/*
-					for (let i = 0; i < this.requestsReceived.length; i++) {
-						if (
-							this.requestsReceived[i].seen.indexOf(this.currentUser.id) === -1
-						) {
-							this.newRequests = true;
-						}
-					}*/
 				});
 		});
 	}

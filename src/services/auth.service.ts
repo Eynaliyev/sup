@@ -13,11 +13,6 @@ import {
 	AngularFirestoreDocument,
 	AngularFirestoreCollection
 } from "angularfire2/firestore";
-/*
-  Generated class for the AuthService provider.
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
 
 @Injectable()
 export class AuthService {
@@ -57,14 +52,7 @@ export class AuthService {
 			// code for handling fb login when deployed to device with cordova
 			console.log(
 				"we're on the device natively"
-			); /*
-			return this.facebook.login(['email', 'public_profile']).then( (response) => {
-				const facebookCredential = firebase.auth.FacebookAuthProvider
-				.credential(response.authResponse.accessToken);
-				//just to see what data is usully returned - for mocking purposes
-				console.log('response: ', response, 'credential: ', facebookCredential);
-				return firebase.auth().signInWithCredential(facebookCredential);
-			}).catch((error) => { console.error(error) });*/
+			); 
 		}
 	}
 	signInWithGoogle() {

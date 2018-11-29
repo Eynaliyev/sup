@@ -1,14 +1,11 @@
 import { Component, ViewChild } from "@angular/core";
 import { Platform, MenuController, Nav } from "ionic-angular";
-//import { Storage } from '@ionic/storage';
 // pages
 import { MyProfilePage } from "../pages/pages";
 import { ContactsListPage } from "../pages/pages";
-// import { NotificationsListPage } from "../pages/pages";
 import { VIPPage } from "../pages/pages";
 import { MeetSomebodyPage } from "../pages/pages";
 import { LoginPage } from "../pages/pages";
-//import { SettingsPage } from '../pages/pages';
 // providers
 import { UserService } from "../services/services";
 import { AuthService } from "../services/services";
@@ -37,7 +34,6 @@ export class MyApp {
 		private platform: Platform,
 		private menu: MenuController,
 		private authSrvc: AuthService,
-		//private storage: Storage,
 		private userSrvc: UserService
 	) {
 		this.pages = [
@@ -51,15 +47,11 @@ export class MyApp {
 				component: ContactsListPage,
 				icon: "ios-chatboxes-outline"
 			},
-			//{ title: 'Notifications', component: NotificationsListPage, icon: 'ios-notifications-outline' },
 			{
 				title: "Edit Profile",
 				component: MyProfilePage,
 				icon: "ios-contacts-outline"
 			}
-			/*
-      { title: 'Settings', component: SettingsPage, icon: 'ios-settings-outline' }
-      */
 		];
 		platform
 			.ready()
@@ -91,12 +83,10 @@ export class MyApp {
 											this.rootPage = MeetSomebodyPage;
 										} else {
 											this.rootPage = LoginPage;
-											//this.storage.set('introShown', true);
 										}
 									},
 									err => {
 										console.error(err);
-										//this.loader.dismiss();
 									}
 								);
 						})

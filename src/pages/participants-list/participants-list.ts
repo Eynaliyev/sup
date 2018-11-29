@@ -21,12 +21,7 @@ export class ParticipantsListPage {
 	) {
 		this.animateClass = { "zoom-in": true };
 	}
-	/*
-	ionViewCanEnter() {
-		return this.authSrvc.isLoggedIn();
-	}*/
 	ionViewDidLoad() {
-		//this.navParams.data - get users from navparams instead of loading from backend
 		var env = this;
 		this.users = this.navParams.get("participants");
 		console.log("users: ", this.users);

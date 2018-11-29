@@ -43,14 +43,6 @@ describe("LoginPage", () => {
 
 		authService = de.injector.get(AuthService);
 		userService = de.injector.get(UserService);
-		/*
-		spy = spyOn(chatroomService, "facebookLogin").and.returnValue(
-			of("You have been warned")
-		);
-		spy = spyOn(userService, "getContent").and.returnValue(
-			of("You have been warned")
-		);*/
-
 		fixture.detectChanges();
 	});
 

@@ -43,13 +43,6 @@ describe("ChatroomPage", () => {
 
 		chatroomService = de.injector.get(ChatroomService);
 		userService = de.injector.get(UserService);
-		/*
-		spy = spyOn(chatroomService, "ionViewDidLoad").and.returnValue(
-			of("You have been warned")
-		);
-		spy = spyOn(userService, "getContent").and.returnValue(
-			of("You have been warned")
-		);*/
 
 		fixture.detectChanges();
 	});

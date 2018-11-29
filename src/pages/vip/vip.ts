@@ -5,12 +5,6 @@ import { VipService } from "../../services/services";
 import { UtilService } from "../../shared/util.service";
 import { AlertController } from "ionic-angular";
 
-/**
- * Generated class for the VIP page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 @Component({
 	selector: "page-vip",
 	templateUrl: "vip.html"

@@ -39,20 +39,15 @@ export class MyProfilePage {
 			);
 		console.log("current user in myProfilePage: ", this.currentUser);
 		this.profilePhoto = this.currentUser.profilePhoto.imgUrl;
-	} /*
-	ionViewCanEnter() {
-		return this.authSrvc.isLoggedIn();
-	}*/
+	} 
 	ionViewDidLoad() {
 		console.log("ionViewDidLoad MyProfilePage");
 	}
 	updateProfile() {
-		//console.log('update profile with: ', this.currentUser);
 		this.userSrvc.updateUser(this.currentUser);
 	}
 	changeTab(tab) {
 		this.currentTab = tab;
-		//console.log('currentTab in my-profile: ', this.currentTab);
 	}
 	addImage() {
 		this.userSrvc.addImage(this.currentUser.id, this.image);

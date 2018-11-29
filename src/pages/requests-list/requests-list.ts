@@ -66,13 +66,7 @@ export class RequestsListPage {
 							console.error(err);
 						}
 					);
-					/*// make sure the requests are seen
-					for (let i = 0; i < this.requests.length; i++) {
-						this.requestsSrvc.updateRequestSeen(
-							this.requests[i].id,
-							this.currentUser.id
-						);
-					}*/
+
 				});
 		});
 	}

@@ -23,10 +23,10 @@ describe("UtilService", () => {
 	});
 
 	afterEach(() => {
-		jasmine.DEFAULT_TIMEOUT_INTERVAL = this.originalTimeout;
+		jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
 	});
 
-	xit("should be created", () => {
+	it("should be created", () => {
 		expect(service).toBeTruthy();
 	});
 

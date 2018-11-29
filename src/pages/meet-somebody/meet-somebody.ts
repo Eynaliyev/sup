@@ -59,8 +59,4 @@ export class MeetSomebodyPage {
 	goToChatroom(chatroomId: string) {
 		this.navCtrl.push(ChatroomPage, { room: `${chatroomId}` });
 	}
-	/*
-  viewFilter(){
-    this.navCtrl.push(FilterPage);
-  }*/
 }

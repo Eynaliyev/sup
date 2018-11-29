@@ -184,9 +184,6 @@ export class RequestService {
 		]);
 	}
 	unblock(fromId: string, toId: string): Promise<any> {
-		/*
-			1 remove from blocked list
-		*/
 		return this.afs
 			.collection("blocks_sent")
 			.doc(fromId)

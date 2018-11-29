@@ -40,9 +40,6 @@ describe("ChatroomPage", () => {
 		component = fixture.componentInstance;
 
 		service = de.injector.get(ChatroomService);
-		/*spy = spyOn(service, "ngAfterViewInit").and.returnValue(
-			of("You have been warned")
-		);*/
 
 		fixture.detectChanges();
 	});

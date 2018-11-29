@@ -16,7 +16,7 @@ import { Environment } from "../environment/environment";
 
 describe("ChatroomService", () => {
 	let de: DebugElement;
-
+	let fixture, component;
 	let service: ChatroomService;
 	let spy: jasmine.Spy;
 
@@ -31,23 +31,10 @@ describe("ChatroomService", () => {
 	}));
 
 	beforeEach(() => {
-		/*fixture = TestBed.createComponent(AlertButtonComponent);
-		component = fixture.componentInstance;
 
-		service = de.injector.get(ChatroomService);
-		spy = spyOn(service, "getAvailableChatrooms").and.returnValue(
-			of("You have been warned")
-		);
-
-		fixture.detectChanges();*/
 	});
-	/*
+	
 	xit("should call getAvailableChatrooms one time and update the view", () => {
-		expect(spy).toHaveBeenCalled();
-		expect(spy.calls.all().length).toEqual(1);
 
-		expect(de.query(By.css(".message-body")).nativeElement.innerText).toContain(
-			"warn"
-		);
-	});*/
+	});
 });

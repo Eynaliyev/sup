@@ -40,14 +40,11 @@ describe("LoginPage", () => {
 		}).compileComponents();
 	}));		
 
-
 	beforeEach(() => {
 		fixture = TestBed.createComponent(LoginPage);
 		component = fixture.debugElement.componentInstance;
-		/*spy = spyOn(component, "ionViewDidLoad").and.returnValue(
-			of("ionViewDidLoad LoginPage")
-		);*/
 	});
+
 	xit("should be created", () => {
 		expect(component instanceof LoginPage).toBe(true);
 	});

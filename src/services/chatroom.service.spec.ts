@@ -31,10 +31,8 @@ describe("ChatroomService", () => {
 	}));
 
 	beforeEach(() => {
-
 	});
 	
 	xit("should call getAvailableChatrooms one time and update the view", () => {
-
 	});
 });

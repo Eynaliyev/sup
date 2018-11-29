@@ -7,12 +7,14 @@ import { Http } from "@angular/http";
 
 let service, originalTimeout;
 
+class AlertMock {}
+
 describe("UtilService", () => {
 	beforeEach(() => {
 		TestBed.configureTestingModule({
 			imports: [HttpClientModule],
 			providers: [
-				AlertController,
+				{provide: AlertController, useClass: AlertMock},
 				{ provide: Http, useClass: HttpClient },
 				UtilService
 			]
@@ -30,7 +32,7 @@ describe("UtilService", () => {
 		expect(service).toBeTruthy();
 	});
 
-	xit("should return a date", () => {
+	it("should return a date", () => {
 		let date = service.createDate();
 		expect(date).toBeDefined();
 	});

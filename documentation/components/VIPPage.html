@@ -1,0 +1,815 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>fly documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">fly documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>VIPPage</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/pages/vip/vip.ts</code>
+</p>
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Generated class for the VIP page.</p>
+<p>See <a href="http://ionicframework.com/docs/components/#navigation">http://ionicframework.com/docs/components/#navigation</a> for more info
+on Ionic pages and navigation.</p>
+
+    </p>
+
+
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>page-vip</code></td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>vip.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#navCtrl">navCtrl</a>
+                            </li>
+                            <li>
+                                <a href="#purchaseSelected">purchaseSelected</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#vipSrvc">vipSrvc</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#invite">invite</a>
+                            </li>
+                            <li>
+                                <a href="#ionViewDidLoad">ionViewDidLoad</a>
+                            </li>
+                            <li>
+                                <a href="#select">select</a>
+                            </li>
+                            <li>
+                                <a href="#viewPurchasePage">viewPurchasePage</a>
+                            </li>
+                            <li>
+                                <a href="#watchAd">watchAd</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(navCtrl: NavController, vipSrvc: <a href="../injectables/VipService.html">VipService</a>, alertCtrl: AlertController, utilSrvc: <a href="../injectables/UtilService.html">UtilService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/pages/vip/vip.ts:19</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>navCtrl</td>
+                                                  
+                                                        <td>
+                                                                    <code>NavController</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>vipSrvc</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../injectables/VipService.html" target="_self" >VipService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>alertCtrl</td>
+                                                  
+                                                        <td>
+                                                                    <code>AlertController</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>utilSrvc</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../injectables/UtilService.html" target="_self" >UtilService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+        <h3 id="methods">
+            Methods
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="invite"></a>
+                        <span class="name">
+                            <b>
+                            invite
+                            </b>
+                            <a href="#invite"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>invite()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/pages/vip/vip.ts:38</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ionViewDidLoad"></a>
+                        <span class="name">
+                            <b>
+                            ionViewDidLoad
+                            </b>
+                            <a href="#ionViewDidLoad"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>ionViewDidLoad()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/pages/vip/vip.ts:28</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="select"></a>
+                        <span class="name">
+                            <b>
+                            select
+                            </b>
+                            <a href="#select"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>select(option: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/pages/vip/vip.ts:31</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>option</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="viewPurchasePage"></a>
+                        <span class="name">
+                            <b>
+                            viewPurchasePage
+                            </b>
+                            <a href="#viewPurchasePage"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>viewPurchasePage()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/pages/vip/vip.ts:43</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="watchAd"></a>
+                        <span class="name">
+                            <b>
+                            watchAd
+                            </b>
+                            <a href="#watchAd"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>watchAd()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/pages/vip/vip.ts:34</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="navCtrl"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            navCtrl
+                            </b>
+                            <a href="#navCtrl"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>navCtrl:     <code>NavController</code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>NavController</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/pages/vip/vip.ts:22</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="purchaseSelected"></a>
+                        <span class="name">
+                            <b>
+                            purchaseSelected
+                            </b>
+                            <a href="#purchaseSelected"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>purchaseSelected:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>false</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/pages/vip/vip.ts:19</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="vipSrvc"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            vipSrvc
+                            </b>
+                            <a href="#vipSrvc"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>vipSrvc:     <code><a href="../injectables/VipService.html" target="_self" >VipService</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../injectables/VipService.html" target="_self" >VipService</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/pages/vip/vip.ts:23</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &quot;@angular/core&quot;;
+import { NavController } from &quot;ionic-angular&quot;;
+import { PurchasePage } from &quot;../purchase/purchase&quot;;
+import { VipService } from &quot;../../services/services&quot;;
+import { UtilService } from &quot;../../shared/util.service&quot;;
+import { AlertController } from &quot;ionic-angular&quot;;
+
+/**
+ * Generated class for the VIP page.
+ *
+ * See http://ionicframework.com/docs/components/#navigation for more info
+ * on Ionic pages and navigation.
+ */
+@Component({
+	selector: &quot;page-vip&quot;,
+	templateUrl: &quot;vip.html&quot;
+})
+export class VIPPage {
+	purchaseSelected: boolean &#x3D; false;
+
+	constructor(
+		public navCtrl: NavController,
+		public vipSrvc: VipService,
+		private alertCtrl: AlertController,
+		private utilSrvc: UtilService
+	) {}
+
+	ionViewDidLoad() {
+		console.log(&quot;ionViewDidLoad VIPPage&quot;);
+	}
+	select(option: string) {
+		console.log(&quot;select clicked withthe option:&quot;, option);
+	}
+	watchAd() {
+		this.utilSrvc.presentFakedoorAlert(&quot;watchAd&quot;);
+		//this.vipSrvc.presentAd();
+	}
+	invite() {
+		this.utilSrvc.presentFakedoorAlert(&quot;invite&quot;);
+		//this.vipSrvc.inviteFriend();
+		//this.facebook.appInvite({applink, photoUrl});
+	}
+	viewPurchasePage() {
+		this.utilSrvc.presentFakedoorAlert(&quot;viewPurchasePage&quot;);
+		//this.navCtrl.push(PurchasePage);
+	}
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;!--
+  Generated template for the VIP page.
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+--&gt;
+&lt;ion-content no-bounce padding id&#x3D;&quot;page3&quot;&gt;
+	&lt;back-button&gt;&lt;/back-button&gt;
+	&lt;span class&#x3D;&quot;pageHeader&quot;&gt;VIP&lt;/span&gt;
+	&lt;div&gt;
+		&lt;h2 class&#x3D;&quot;grande white&quot; text-center&gt;Skip the line!&lt;/h2&gt;
+		&lt;p class&#x3D;&quot;tall light-text&quot; text-center&gt;three ways to skip the line&lt;/p&gt;
+		&lt;p class&#x3D;&quot;short light-text&quot; text-center&gt;2. watch an add and skip ahead 1 time&lt;/p&gt;
+		&lt;button ion-button block margin-bottom color&#x3D;&quot;royal&quot; class&#x3D;&quot;watch-ad&quot; (click)&#x3D;&quot;watchAd()&quot;&gt;Watch Ad&lt;/button&gt;
+		&lt;p class&#x3D;&quot;short light-text&quot; text-center&gt;2. invite a friend - and you both become VIP for a week for FREE&lt;/p&gt;
+		&lt;button ion-button block margin-bottom (click)&#x3D;&quot;invite()&quot;&gt;Invite a friend&lt;/button&gt;
+		&lt;p class&#x3D;&quot;short light-text&quot; text-center&gt;3. - purchase VIP - starting from $0.99 a month&lt;/p&gt;
+		&lt;button ion-button block color&#x3D;&quot;favorite&quot; (click)&#x3D;&quot;viewPurchasePage()&quot;&gt;Purchase VIP&lt;/button&gt;
+
+		&lt;div *ngIf&#x3D;&quot;purchaseSelected&quot;&gt;
+			&lt;div class&#x3D;&quot;header-img&quot;&gt;
+				&lt;p class&#x3D;&quot;grande&quot;&gt;Skip the waitlist
+					&lt;br&gt; get placed into a room 10x faster&lt;/p&gt;
+			&lt;/div&gt;
+			&lt;ion-grid class&#x3D;&quot;action-btn&quot;&gt;
+				&lt;ion-row&gt;
+					&lt;ion-col text-center&gt;
+						&lt;div class&#x3D;&quot;plan&quot; (click)&#x3D;&quot;select(&#x27;yearly&#x27;)&quot; [class.active]&#x3D;&quot;selected &#x3D;&#x3D; &#x27;yearly&#x27;&quot;&gt;
+							&lt;h1&gt;12&lt;/h1&gt;
+							&lt;p class&#x3D;&quot;tall light-text&quot;&gt;months&lt;/p&gt;
+							&lt;p class&#x3D;&quot;tall light-text&quot;&gt;$4.58/mo&lt;/p&gt;
+						&lt;/div&gt;
+					&lt;/ion-col&gt;
+					&lt;ion-col text-center&gt;
+						&lt;div class&#x3D;&quot;plan&quot; (click)&#x3D;&quot;select(&#x27;half-year&#x27;)&quot; [class.active]&#x3D;&quot;selected &#x3D;&#x3D; &#x27;half-year&#x27;&quot;&gt;
+							&lt;h1&gt;6&lt;/h1&gt;
+							&lt;p class&#x3D;&quot;tall light-text&quot;&gt;months&lt;/p&gt;
+							&lt;p class&#x3D;&quot;tall light-text&quot;&gt;$5.83/mo&lt;/p&gt;
+						&lt;/div&gt;
+					&lt;/ion-col&gt;
+					&lt;ion-col text-center&gt;
+						&lt;div class&#x3D;&quot;plan&quot; (click)&#x3D;&quot;select(&#x27;monthly&#x27;)&quot; [class.active]&#x3D;&quot;selected &#x3D;&#x3D; &#x27;monthly&#x27;&quot;&gt;
+							&lt;h1&gt;12&lt;/h1&gt;
+							&lt;p class&#x3D;&quot;tall light-text&quot;&gt;months&lt;/p&gt;
+							&lt;p class&#x3D;&quot;tall light-text&quot;&gt;$9.99/mo&lt;/p&gt;
+						&lt;/div&gt;
+					&lt;/ion-col&gt;
+				&lt;/ion-row&gt;
+			&lt;/ion-grid&gt;
+			&lt;button ion-button block color&#x3D;&quot;gold&quot; (click)&#x3D;&quot;buyVIP()&quot;&gt;Purchase VIP&lt;/button&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/ion-content&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><!--  Generated template for the VIP page.  See http://ionicframework.com/docs/components/#navigation for more info on  Ionic pages and navigation.--><ion-content no-bounce padding id="page3">	<back-button></back-button>	<span class="pageHeader">VIP</span>	<div>		<h2 class="grande white" text-center>Skip the line!</h2>		<p class="tall light-text" text-center>three ways to skip the line</p>		<p class="short light-text" text-center>2. watch an add and skip ahead 1 time</p>		<button ion-button block margin-bottom color="royal" class="watch-ad" (click)="watchAd()">Watch Ad</button>		<p class="short light-text" text-center>2. invite a friend - and you both become VIP for a week for FREE</p>		<button ion-button block margin-bottom (click)="invite()">Invite a friend</button>		<p class="short light-text" text-center>3. - purchase VIP - starting from $0.99 a month</p>		<button ion-button block color="favorite" (click)="viewPurchasePage()">Purchase VIP</button>		<div *ngIf="purchaseSelected">			<div class="header-img">				<p class="grande">Skip the waitlist					<br> get placed into a room 10x faster</p>			</div>			<ion-grid class="action-btn">				<ion-row>					<ion-col text-center>						<div class="plan" (click)="select(\'yearly\')" [class.active]="selected == \'yearly\'">							<h1>12</h1>							<p class="tall light-text">months</p>							<p class="tall light-text">$4.58/mo</p>						</div>					</ion-col>					<ion-col text-center>						<div class="plan" (click)="select(\'half-year\')" [class.active]="selected == \'half-year\'">							<h1>6</h1>							<p class="tall light-text">months</p>							<p class="tall light-text">$5.83/mo</p>						</div>					</ion-col>					<ion-col text-center>						<div class="plan" (click)="select(\'monthly\')" [class.active]="selected == \'monthly\'">							<h1>12</h1>							<p class="tall light-text">months</p>							<p class="tall light-text">$9.99/mo</p>						</div>					</ion-col>				</ion-row>			</ion-grid>			<button ion-button block color="gold" (click)="buyVIP()">Purchase VIP</button>		</div>	</div></ion-content></div>'
+    var COMPONENTS = [{'name': 'BackButtonComponent', 'selector': 'back-button'},{'name': 'ChatBubbleComponent', 'selector': 'chat-bubble'},{'name': 'ChatroomPage', 'selector': 'page-chatroom'},{'name': 'ContactsListPage', 'selector': 'page-contacts-list'},{'name': 'FilterPage', 'selector': 'page-filter'},{'name': 'GalleryComponent', 'selector': 'gallery'},{'name': 'LoginPage', 'selector': 'page-login'},{'name': 'MeetSomebodyPage', 'selector': 'page-meet-somebody'},{'name': 'MenuButtonComponent', 'selector': 'menu-button'},{'name': 'MyApp', 'selector': ''},{'name': 'MyProfilePage', 'selector': 'page-my-profile'},{'name': 'NotificationsListPage', 'selector': 'page-notifications-list'},{'name': 'ParticipantsListPage', 'selector': 'page-participants-list'},{'name': 'PrelaunchPage', 'selector': 'page-prelaunch'},{'name': 'ProfilePostsComponent', 'selector': 'profile-posts'},{'name': 'ProfileTimelineComponent', 'selector': 'profile-timeline'},{'name': 'PurchasePage', 'selector': 'page-purchase'},{'name': 'RequestsListPage', 'selector': 'page-requests-list'},{'name': 'SettingsPage', 'selector': 'page-settings'},{'name': 'UserProfilePage', 'selector': 'page-user-profile'},{'name': 'VIPPage', 'selector': 'page-vip'},{'name': 'WaitlistPage', 'selector': 'page-waitlist'}];
+    var DIRECTIVES = [{'name': 'DefaultImageDirective', 'selector': 'img[default]'}];
+    var ACTUAL_COMPONENT = {'name': 'VIPPage'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'VIPPage.html';
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

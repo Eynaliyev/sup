@@ -1,0 +1,1942 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>fly documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">fly documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Injectables</li>
+  <li>UserService</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/services/user.service.ts</code>
+        </p>
+
+
+
+            <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#access_token">access_token</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#currentUser">currentUser</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#http">http</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#utilSrvc">utilSrvc</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#addImage">addImage</a>
+                            </li>
+                            <li>
+                                <a href="#createConversation">createConversation</a>
+                            </li>
+                            <li>
+                                <a href="#createUser">createUser</a>
+                            </li>
+                            <li>
+                                <a href="#deleteImage">deleteImage</a>
+                            </li>
+                            <li>
+                                <a href="#fetchGraphData">fetchGraphData</a>
+                            </li>
+                            <li>
+                                <a href="#getCurrentUser">getCurrentUser</a>
+                            </li>
+                            <li>
+                                <a href="#getUserById">getUserById</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#handleError">handleError</a>
+                            </li>
+                            <li>
+                                <a href="#mapFbtoModel">mapFbtoModel</a>
+                            </li>
+                            <li>
+                                <a href="#removeConversation">removeConversation</a>
+                            </li>
+                            <li>
+                                <a href="#sendWelcomeConversationMessage">sendWelcomeConversationMessage</a>
+                            </li>
+                            <li>
+                                <a href="#setAccessToken">setAccessToken</a>
+                            </li>
+                            <li>
+                                <a href="#setCurrentUser">setCurrentUser</a>
+                            </li>
+                            <li>
+                                <a href="#toUser">toUser</a>
+                            </li>
+                            <li>
+                                <a href="#updateUser">updateUser</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(http: <a href="https://angular.io/api/http/Http" target="_blank">Http</a>, afs: AngularFirestore, db: AngularFireDatabase, utilSrvc: <a href="../injectables/UtilService.html">UtilService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/services/user.service.ts:20</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>http</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="https://angular.io/api/http/Http" target="_blank" >Http</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>afs</td>
+                                                  
+                                                        <td>
+                                                                    <code>AngularFirestore</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>db</td>
+                                                  
+                                                        <td>
+                                                                    <code>AngularFireDatabase</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>utilSrvc</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../injectables/UtilService.html" target="_self" >UtilService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section>
+    
+        <h3 id="methods">
+            Methods
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="addImage"></a>
+                        <span class="name">
+                            <b>
+                            addImage
+                            </b>
+                            <a href="#addImage"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>addImage(userId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, image)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="183" class="link-to-prism">src/services/user.service.ts:183</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>userId</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                                <tr>
+                                                        <td>image</td>
+                                                        <td>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code>Promise&lt;any&gt;</code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="createConversation"></a>
+                        <span class="name">
+                            <b>
+                            createConversation
+                            </b>
+                            <a href="#createConversation"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>createConversation(fromId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, toId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="192" class="link-to-prism">src/services/user.service.ts:192</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>fromId</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                                <tr>
+                                                        <td>toId</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="createUser"></a>
+                        <span class="name">
+                            <b>
+                            createUser
+                            </b>
+                            <a href="#createUser"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>createUser(userCredentials)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="125" class="link-to-prism">src/services/user.service.ts:125</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>userCredentials</td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code>Promise&lt;any&gt;</code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="deleteImage"></a>
+                        <span class="name">
+                            <b>
+                            deleteImage
+                            </b>
+                            <a href="#deleteImage"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>deleteImage(userId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, imageUrl: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="187" class="link-to-prism">src/services/user.service.ts:187</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>userId</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                                <tr>
+                                                        <td>imageUrl</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code>Promise&lt;any&gt;</code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="fetchGraphData"></a>
+                        <span class="name">
+                            <b>
+                            fetchGraphData
+                            </b>
+                            <a href="#fetchGraphData"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>fetchGraphData()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/services/user.service.ts:70</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code>Promise&lt;any&gt;</code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getCurrentUser"></a>
+                        <span class="name">
+                            <b>
+                            getCurrentUser
+                            </b>
+                            <a href="#getCurrentUser"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>getCurrentUser()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/services/user.service.ts:34</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="../classes/User.html" target="_self" >ReplaySubject&lt;User&gt;</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getUserById"></a>
+                        <span class="name">
+                            <b>
+                            getUserById
+                            </b>
+                            <a href="#getUserById"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>getUserById(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/services/user.service.ts:29</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>id</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code>Observable&lt;any&gt;</code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="handleError"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            handleError
+                            </b>
+                            <a href="#handleError"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>handleError(error: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="216" class="link-to-prism">src/services/user.service.ts:216</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>error</td>
+                                                        <td>
+                                                                    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code>Promise&lt;any&gt;</code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="mapFbtoModel"></a>
+                        <span class="name">
+                            <b>
+                            mapFbtoModel
+                            </b>
+                            <a href="#mapFbtoModel"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>mapFbtoModel(data)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="87" class="link-to-prism">src/services/user.service.ts:87</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>data</td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code>{ about: any; birthday: any; currentCoords: any; email: any; firstName: any; gender: any; id: any...</code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="removeConversation"></a>
+                        <span class="name">
+                            <b>
+                            removeConversation
+                            </b>
+                            <a href="#removeConversation"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>removeConversation(id)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="212" class="link-to-prism">src/services/user.service.ts:212</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>id</td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="sendWelcomeConversationMessage"></a>
+                        <span class="name">
+                            <b>
+                            sendWelcomeConversationMessage
+                            </b>
+                            <a href="#sendWelcomeConversationMessage"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>sendWelcomeConversationMessage(roomId)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="204" class="link-to-prism">src/services/user.service.ts:204</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>roomId</td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="setAccessToken"></a>
+                        <span class="name">
+                            <b>
+                            setAccessToken
+                            </b>
+                            <a href="#setAccessToken"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>setAccessToken(token)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/services/user.service.ts:37</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>token</td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="setCurrentUser"></a>
+                        <span class="name">
+                            <b>
+                            setCurrentUser
+                            </b>
+                            <a href="#setCurrentUser"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>setCurrentUser(usr)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/services/user.service.ts:41</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>usr</td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code>Promise&lt;any&gt;</code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="toUser"></a>
+                        <span class="name">
+                            <b>
+                            toUser
+                            </b>
+                            <a href="#toUser"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>toUser(data)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="146" class="link-to-prism">src/services/user.service.ts:146</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>data</td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="../classes/User.html" target="_self" >User</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="updateUser"></a>
+                        <span class="name">
+                            <b>
+                            updateUser
+                            </b>
+                            <a href="#updateUser"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>updateUser(userData: <a href="../classes/User.html">User</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="136" class="link-to-prism">src/services/user.service.ts:136</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>userData</td>
+                                                        <td>
+                                                                    <code><a href="../classes/User.html" target="_self" >User</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code>Promise&lt;any&gt;</code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="access_token"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            access_token
+                            </b>
+                            <a href="#access_token"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>access_token:     <code></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>&#x60;&#x60;</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/services/user.service.ts:20</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="currentUser"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            currentUser
+                            </b>
+                            <a href="#currentUser"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>currentUser:     <code><a href="../classes/User.html" target="_self" >ReplaySubject&lt;User&gt;</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../classes/User.html" target="_self" >ReplaySubject&lt;User&gt;</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>new ReplaySubject&lt;User&gt;()</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/services/user.service.ts:19</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="http"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            http
+                            </b>
+                            <a href="#http"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>http:     <code><a href="https://angular.io/api/http/Http" target="_blank" >Http</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://angular.io/api/http/Http" target="_blank" >Http</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/services/user.service.ts:23</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="utilSrvc"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            utilSrvc
+                            </b>
+                            <a href="#utilSrvc"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>utilSrvc:     <code><a href="../injectables/UtilService.html" target="_self" >UtilService</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../injectables/UtilService.html" target="_self" >UtilService</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/services/user.service.ts:26</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &quot;@angular/core&quot;;
+import { Http } from &quot;@angular/http&quot;;
+import &quot;rxjs/add/operator/toPromise&quot;;
+import { Observable } from &quot;rxjs/Observable&quot;;
+import &quot;rxjs/add/operator/toPromise&quot;;
+import &quot;rxjs/add/observable/forkJoin&quot;;
+import &quot;rxjs/add/operator/map&quot;;
+import &quot;rxjs/add/operator/catch&quot;;
+import { User } from &quot;../models/models&quot;;
+import { AngularFirestore } from &quot;angularfire2/firestore&quot;;
+import { AngularFireDatabase } from &quot;angularfire2/database&quot;;
+import { ReplaySubject } from &quot;rxjs/ReplaySubject&quot;;
+//import { Camera } from &#x27;ionic-native&#x27;;
+import * as moment from &quot;moment&quot;;
+import { UtilService } from &quot;../shared/util.service&quot;;
+
+@Injectable()
+export class UserService {
+	public currentUser: ReplaySubject&lt;User&gt; &#x3D; new ReplaySubject&lt;User&gt;();
+	private access_token &#x3D; &#x60;&#x60;;
+
+	constructor(
+		public http: Http,
+		private afs: AngularFirestore,
+		private db: AngularFireDatabase,
+		public utilSrvc: UtilService
+	) {}
+	// get a specific User by id - that conforms to the user model
+	getUserById(id: string): Observable&lt;any&gt; {
+		//Observable&lt;User&gt; {
+		// gathering of info
+		return this.afs.doc(&#x60;/users/${id}&#x60;).valueChanges();
+	}
+	getCurrentUser(): ReplaySubject&lt;User&gt; {
+		return this.currentUser;
+	}
+	setAccessToken(token): void {
+		this.access_token &#x3D; token;
+	}
+	//should return promise that resolves once the data can be returned
+	setCurrentUser(usr): Promise&lt;any&gt; {
+		return new Promise&lt;any&gt;(resolve &#x3D;&gt; {
+			let uid &#x3D; usr[&quot;uid&quot;];
+			this.getUserById(uid).subscribe(
+				user &#x3D;&gt; {
+					if (user) {
+						let parsedUser &#x3D; this.toUser(user);
+						this.currentUser.next(parsedUser);
+						localStorage.setItem(&quot;currentUser&quot;, JSON.stringify(user));
+						resolve(true);
+					} else {
+						//graph request, create new user with the return
+						this.fetchGraphData()
+							.then(parsedData &#x3D;&gt; {
+								this.createUser(parsedData)
+									.then(() &#x3D;&gt; resolve(true))
+									.catch(error &#x3D;&gt; this.handleError(error));
+							})
+							.catch(err &#x3D;&gt; {
+								console.log(&quot;Error:&quot;, err);
+							});
+					}
+				},
+				error &#x3D;&gt; {
+					this.handleError(error);
+				}
+			);
+		});
+	}
+	fetchGraphData(): Promise&lt;any&gt; {
+		let url &#x3D; &#x60;https://graph.facebook.com/v2.12/me?access_token&#x3D;${
+			this.access_token
+		}&amp;fields&#x3D;id,name,gender,locale,picture.type(large),email,first_name,last_name,birthday&#x60;;
+		return new Promise&lt;any&gt;(resolve &#x3D;&gt; {
+			this.http.get(url).subscribe(
+				userInfo &#x3D;&gt; {
+					console.log(&quot;user info from fb api: &quot;, JSON.stringify(userInfo));
+					let parsedData &#x3D; JSON.parse(userInfo[&quot;_body&quot;]);
+					resolve(parsedData);
+				},
+				err &#x3D;&gt; {
+					this.handleError(err);
+				}
+			);
+		});
+	}
+	mapFbtoModel(data) {
+		let res &#x3D; {
+			about: data.about ? data.about : &quot;&quot;,
+			birthday: data.birthday ? data.birthday : &quot;&quot;,
+			currentCoords: data.currentCoords ? data.currentCoords : [],
+			email: data.email ? data.email : &quot;&quot;,
+			firstName: data.first_name ? data.first_name : &quot;&quot;,
+			gender: data.gender ? data.gender : &quot;&quot;,
+			id: data.id ? data.id : &quot;&quot;,
+			languages: data.locale ? [data.locale] : [],
+			lastName: data.last_name ? data.last_name : &quot;&quot;,
+			company: data.company ? data.company : &quot;&quot;,
+			currentLocation: data.currentLocation ? data.currentLocation : [],
+			interests: data.interests ? data.interests : [],
+			photos: data.photos
+				? data.photos.forEach(photo &#x3D;&gt; {
+						photo &#x3D; {
+							imgUrl: photo.imgUrl
+						};
+				  })
+				: [{ imgUrl: &quot;&quot; }],
+			profilePhoto: data.picture.data.url
+				? {
+						imgUrl: data.picture.data.url
+				  }
+				: { imgUrl: &quot;&quot; },
+			relationshipStatus: data.relationshipStatus
+				? data.relationshipStatus
+				: [],
+			reputationScore: data.reputationScore ? data.reputationScore : 0,
+			socialProfiles: data.socialProfiles ? data.socialProfiles : [],
+			universityName: data.universityName ? data.universityName : &quot;&quot;,
+			vipStatus: data.vipStatus ? data.vipStatus : {},
+			warning: data.warning ? data.warning : &quot;&quot;
+		};
+		return res;
+	}
+	// create user in firebase
+	createUser(userCredentials): Promise&lt;any&gt; {
+		// convert info to our model
+		let user &#x3D; this.mapFbtoModel(userCredentials);
+		// set it in the backend
+		console.log(&quot;creating user: &quot;, user);
+		return this.afs
+			.doc(&#x60;/users/${user.id}&#x60;)
+			.set(user)
+			.then(() &#x3D;&gt; console.log(&quot;user set: &quot;, user))
+			.catch(error &#x3D;&gt; this.handleError(error));
+	}
+	updateUser(userData: User): Promise&lt;any&gt; {
+		localStorage.setItem(&quot;currentUser&quot;, JSON.stringify(userData));
+		this.currentUser.next(userData);
+		return this.afs
+			.doc(&#x60;users/${userData.id}&#x60;)
+			.set(userData, { merge: true })
+			.then(() &#x3D;&gt; console.log(&quot;updating info: &quot;, userData.id))
+			.catch(error &#x3D;&gt; this.handleError(error));
+	}
+	// converts the backend user into the viewmodel of the user
+	toUser(data): User {
+		let user &#x3D; {
+			about: data.about ? data.about : &quot;&quot;,
+			birthday: data.birthday ? data.birthday : &quot;&quot;,
+			currentCoords: data.currentCoords ? data.currentCoords : [],
+			email: data.email ? data.email : &quot;&quot;,
+			firstName: data.firstName ? data.firstName : &quot;&quot;,
+			gender: data.gender ? data.gender : &quot;&quot;,
+			id: data.id ? data.id : &quot;&quot;,
+			languages: data.languages ? data.languages : [],
+			lastName: data.lastName ? data.lastName : &quot;&quot;,
+			company: data.company ? data.company : &quot;&quot;,
+			currentLocation: data.currentLocation ? data.currentLocation : [],
+			interests: data.interests ? data.interests : [],
+			photos: data.photos
+				? data.photos.forEach(photo &#x3D;&gt; {
+						photo &#x3D; {
+							imgUrl: photo.imgUrl
+						};
+				  })
+				: [{ imgUrl: &quot;&quot; }],
+			profilePhoto: data.profilePhoto
+				? {
+						imgUrl: data.profilePhoto.imgUrl
+				  }
+				: { imgUrl: &quot;&quot; },
+			relationshipStatus: data.relationshipStatus
+				? data.relationshipStatus
+				: [],
+			reputationScore: data.reputationScore ? data.reputationScore : 0,
+			socialProfiles: data.socialProfiles ? data.socialProfiles : [],
+			universityName: data.universityName ? data.universityName : &quot;&quot;,
+			vipStatus: data.vipStatus ? data.vipStatus : {},
+			warning: data.warning ? data.warning : &quot;&quot;
+		};
+		return user;
+	}
+	addImage(userId: string, image): Promise&lt;any&gt; {
+		let photos &#x3D; this.afs.collection(&#x60;users/${userId}/photos&#x60;);
+		return photos.add(image).catch(error &#x3D;&gt; this.handleError(error));
+	}
+	deleteImage(userId: string, imageUrl: string): Promise&lt;any&gt; {
+		let image &#x3D; this.afs.doc(&#x60;users/${userId}/photos/${imageUrl}&#x60;);
+		return image.delete().catch(error &#x3D;&gt; this.handleError(error));
+	}
+	//creates an individual room for the two users
+	createConversation(fromId: string, toId: string) {
+		let roomId &#x3D; this.utilSrvc.uniqueRelId(fromId, toId);
+		let dbRef &#x3D; this.afs.doc(&#x60;chatrooms/${roomId}&#x60;);
+		this.getUserById(toId).subscribe(user &#x3D;&gt; {
+			let conversation: any &#x3D; {
+				createdAt: moment().format(&quot;DD/MM/YYYY, hh:mm:ss&quot;),
+				participants: [this.currentUser, user]
+			};
+			this.sendWelcomeConversationMessage(roomId);
+			return dbRef.set(conversation);
+		});
+	}
+	sendWelcomeConversationMessage(roomId) {
+		let defaultMessage &#x3D; {
+			content: &quot;you are now connected!&quot;,
+			createdAt: moment().format(&quot;DD/MM/YYYY, hh:mm:ss&quot;),
+			senderId: 1111
+		};
+		this.db.list(&#x60;messages/${roomId}&#x60;).push(defaultMessage);
+	}
+	removeConversation(id) {
+		let dbRef &#x3D; this.afs.doc(&#x60;chatrooms/${id}&#x60;);
+		return dbRef.delete();
+	}
+	private handleError(error: any): Promise&lt;any&gt; {
+		console.error(&quot;Error: &quot;, error); // for demo purposes only
+		return Promise.reject(error.message || error);
+	}
+	/*
+  getPicture(){
+    let base64Picture;
+    let options &#x3D; {
+      destinationType: 0,
+      sourceType: 0,
+      encodingType: 0
+    };
+    let promise &#x3D; new Promise((resolve, reject) &#x3D;&gt; {
+      Camera.getPicture(options).then(imageData &#x3D;&gt; {
+        base64Picture &#x3D; &quot;data:image/jpeg;base64,&quot; + imageData;
+        resolve(base64Picture);
+        }, (error) &#x3D;&gt; {
+          reject(error);
+      }).catch(error &#x3D;&gt; this.handleError(error));
+    });
+    return promise;
+  }
+  // Update Profile Picture
+  updatePicture() {
+    this.getUid().then(uid &#x3D;&gt; {
+      let pictureRef &#x3D; this.db.object(&#x60;/users/${uid}/picture&#x60;);
+      this.getPicture().then(image &#x3D;&gt; {
+        pictureRef.set(image);
+      }).catch(error &#x3D;&gt; this.handleError(error));
+    }).catch(error &#x3D;&gt; this.handleError(error));
+  }
+  updateProfile(user){
+  }
+  // Tests to see if /users/&lt;userId&gt; has any data.
+  checkIfUserExists(id: string): void {
+    var usersRef &#x3D; firebase.database().ref(&#x27;/users&#x27;);
+    usersRef.child(id).once(&#x27;value&#x27;, snapshot &#x3D;&gt; {
+      var exists &#x3D; (snapshot.val() !&#x3D;&#x3D; null);
+      this.userExistsCallback(id, exists);
+    });
+  }
+  // if user exists, do nothing, if not, create a new user
+  userExistsCallback(userId: string, exists: boolean): void {
+    if (exists) {
+      console.log(&#x27;user &#x27; + userId + &#x27; exists!&#x27;);
+    } else {
+      console.log(&#x27;saving new user to the database&#x27;);
+      this.createUser(this.currentUser);
+    }
+  }
+  // Get Info of a Single User
+  getUserProfile(id: string): FirebaseObjectObservable&lt;User&gt; {
+    return this.db.object(&#x60;/users/${id}&#x60;);
+  }
+  //deleting a user from the database
+  removeUser(id: string): void {
+    let usersRef &#x3D; this.db.list(&#x60;/users&#x60;)
+    usersRef.remove(id);
+  }
+      /*
+  //logic for contacts list page
+  // get list of contacts of the current user
+  getUserContacts(uid): FirebaseListObservable&lt;any[]&gt; {
+    let contacts &#x3D; this.db.list(&#x60;/users/${uid}/contacts&#x60;);
+    return contacts;
+  }
+  // TO DO ADD LIKING&lt; CREATING AND CHECKING FOR THEM
+  // create a contact - add chat references to both users
+  addContact(uid: string, otherId: string): void {
+    let thisRef &#x3D; this.db.list(&#x60;/users/${uid}/contacts&#x60;);
+    //tgetting user data to set in contacts user
+    this.getUserProfile(otherId).subscribe(user &#x3D;&gt; {
+      // mapping the data to the contact interface
+      let otherUser &#x3D; {
+        id: otherId,
+        name: user.name,
+        photoUrl: user.photoUrl,
+        age: user.age,
+        lastText: &quot;You successfully connected, time to say Hi! :)&quot;
+      }
+      // seting the contact in this users&#x27; contacts list
+      thisRef.push(otherUser);
+      //the other user
+      let otherRef &#x3D; this.db.list(&#x60;/users/${otherId}/contacts&#x60;);
+      let thisUser &#x3D; {
+        id: this.user.uid,
+        name: this.user.name,
+        photoUrl: this.user.photoUrl,
+        age: this.user.age,
+        lastText: &quot;You successfully connected, time to say Hi! :)&quot;
+      };
+      otherRef.push(thisUser);
+      //push it to the chats list
+      this.getUid().then(uid &#x3D;&gt; {
+        let chatsRef &#x3D; this.db.list(&#x60;/chats/${uid},${otherId}&#x60;);
+        chatsRef.push({
+          text: &quot;You successfully connected, time to say Hi! :)&quot;,
+          type: &quot;system-message&quot;,
+          picture: &#x27;&#x27;,
+          time: firebase.database.ServerValue.TIMESTAMP
+        })
+      }).catch(error &#x3D;&gt; this.handleError(error));
+    });
+  }
+  // remove a chat from the list
+  removeContact(id: string): void {
+    //this user
+    this.contacts.remove(id);
+    //other user
+    let otherRef &#x3D; this.db.list(&#x60;/users/${id}/contacts&#x60;);
+    this.getUid().then(uid &#x3D;&gt; {
+      otherRef.remove(uid);
+      //chats list
+      this.db.list(&#x60;/chats/${uid},${id}&#x60;).remove();
+    }).catch(error &#x3D;&gt; this.handleError(error));
+  }
+  /*
+    getUid(): Promise&lt;string&gt;{
+    let res &#x3D; new Promise&lt;any&gt;((resolve, reject) &#x3D;&gt; {
+        console.log(&#x27;uid in getUid(): &#x27;, JSON.parse(localStorage.getItem(&#x27;currentUser&#x27;)).uid);
+        resolve(JSON.parse(localStorage.getItem(&#x27;currentUser&#x27;)).uid);
+    });
+    return res;
+  }
+  getCurrentUser(): Promise&lt;User&gt;{
+    let res &#x3D; new Promise&lt;any&gt;((resolve, reject) &#x3D;&gt; {
+        resolve(JSON.parse(localStorage.getItem(&#x27;currentUser&#x27;)));
+    });
+    return res;
+  }
+  getPicture(){
+    let base64Picture;
+    let options &#x3D; {
+      destinationType: 0,
+      sourceType: 0,
+      encodingType: 0
+    };
+    let promise &#x3D; new Promise((resolve, reject) &#x3D;&gt; {
+      Camera.getPicture(options).then(imageData &#x3D;&gt; {
+        base64Picture &#x3D; &quot;data:image/jpeg;base64,&quot; + imageData;
+        resolve(base64Picture);
+        }, (error) &#x3D;&gt; {
+          reject(error);
+      }).catch(error &#x3D;&gt; this.handleError(error));
+    });
+    return promise;
+  }
+  // Update Profile Picture
+  updatePicture() {
+    this.getUid().then(uid &#x3D;&gt; {
+      let pictureRef &#x3D; this.db.object(&#x60;/users/${uid}/picture&#x60;);
+      this.getPicture().then(image &#x3D;&gt; {
+        pictureRef.set(image);
+      }).catch(error &#x3D;&gt; this.handleError(error));
+    }).catch(error &#x3D;&gt; this.handleError(error));
+  }
+  updateProfile(user){
+  }
+  // Tests to see if /users/&lt;userId&gt; has any data.
+  checkIfUserExists(id: string): void {
+    var usersRef &#x3D; firebase.database().ref(&#x27;/users&#x27;);
+    usersRef.child(id).once(&#x27;value&#x27;, snapshot &#x3D;&gt; {
+      var exists &#x3D; (snapshot.val() !&#x3D;&#x3D; null);
+      this.userExistsCallback(id, exists);
+    });
+  }
+  // if user exists, do nothing, if not, create a new user
+  userExistsCallback(userId: string, exists: boolean): void {
+    if (exists) {
+      console.log(&#x27;user &#x27; + userId + &#x27; exists!&#x27;);
+    } else {
+      console.log(&#x27;saving new user to the database&#x27;);
+      this.createUser(this.currentUser);
+    }
+  }
+  // Get Info of a Single User
+  getUserProfile(id: string): FirebaseObjectObservable&lt;User&gt; {
+    return this.db.object(&#x60;/users/${id}&#x60;);
+  }
+  // create user in firebase
+  createUser(userCredentials): void {
+    const userObservable &#x3D; this.db.object(&#x60;/users/${userCredentials.uid}&#x60;);
+    console.log(&#x27;creating a new user in the back-end: &#x27;, userCredentials.uid);
+    userObservable.set(this.toUser(this.currentUser));
+  }
+  toUser(data): User{
+    let user &#x3D; {
+      uid: data.uid,
+      name: data.displayName,
+      email: data.email,
+      photoUrl: data.photoURL,
+      provider: data.providerId
+    }
+    return user;
+  }
+  //deleting a user from the database
+  removeUser(id: string): void {
+    let usersRef &#x3D; this.db.list(&#x60;/users&#x60;)
+    usersRef.remove(id);
+  }
+  //logic for contacts list page
+  // get list of contacts of the current user
+  getUserContacts(uid): FirebaseListObservable&lt;any[]&gt; {
+    let contacts &#x3D; this.db.list(&#x60;/users/${uid}/contacts&#x60;);
+    return contacts;
+  }
+  // TO DO ADD LIKING&lt; CREATING AND CHECKING FOR THEM
+  // create a contact - add chat references to both users
+  addContact(uid: string, otherId: string): void {
+    let thisRef &#x3D; this.db.list(&#x60;/users/${uid}/contacts&#x60;);
+    //tgetting user data to set in contacts user
+    this.getUserProfile(otherId).subscribe(user &#x3D;&gt; {
+      // mapping the data to the contact interface
+      let otherUser &#x3D; {
+        id: otherId,
+        name: user.name,
+        photoUrl: user.photoUrl,
+        age: user.age,
+        lastText: &quot;You successfully connected, time to say Hi! :)&quot;
+      }
+      // seting the contact in this users&#x27; contacts list
+      thisRef.push(otherUser);
+      //the other user
+      let otherRef &#x3D; this.db.list(&#x60;/users/${otherId}/contacts&#x60;);
+      let thisUser &#x3D; {
+        id: this.user.uid,
+        name: this.user.name,
+        photoUrl: this.user.photoUrl,
+        age: this.user.age,
+        lastText: &quot;You successfully connected, time to say Hi! :)&quot;
+      };
+      otherRef.push(thisUser);
+      //push it to the chats list
+      this.getUid().then(uid &#x3D;&gt; {
+        let chatsRef &#x3D; this.db.list(&#x60;/chats/${uid},${otherId}&#x60;);
+        chatsRef.push({
+          text: &quot;You successfully connected, time to say Hi! :)&quot;,
+          type: &quot;system-message&quot;,
+          picture: &#x27;&#x27;,
+          time: firebase.database.ServerValue.TIMESTAMP
+        })
+      }).catch(error &#x3D;&gt; this.handleError(error));
+    });
+  }
+  // remove a chat from the list
+  removeContact(id: string): void {
+    //this user
+    this.contacts.remove(id);
+    //other user
+    let otherRef &#x3D; this.db.list(&#x60;/users/${id}/contacts&#x60;);
+    this.getUid().then(uid &#x3D;&gt; {
+      otherRef.remove(uid);
+      //chats list
+      this.db.list(&#x60;/chats/${uid},${id}&#x60;).remove();
+    }).catch(error &#x3D;&gt; this.handleError(error));
+  }
+  */
+ 	/*
+	setProfilePicture(uid: string): Promise&lt;any&gt; {
+		console.log(&quot;setProfilePicture called&quot;);
+		// set picture to the larger one
+		return this.facebook
+			.api(&#x60;${uid}/picture?type&#x3D;large&#x60;, [])
+			.then(photo &#x3D;&gt; {
+				// set the returned user in the backend
+				this.afs
+					.doc(&#x60;/users/${uid}/photoUrl&#x60;)
+					.set(photo.data.url + &quot;?type&#x3D;large&quot;)
+					.catch(error &#x3D;&gt; this.handleError(error));
+			})
+			.catch(error &#x3D;&gt; this.handleError(error));
+	}*/
+}
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'UserService.html';
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

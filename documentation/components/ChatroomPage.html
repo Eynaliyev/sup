@@ -1,0 +1,1757 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>fly documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">fly documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>ChatroomPage</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/pages/chatroom/chatroom.ts</code>
+</p>
+
+
+
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+            <tr>
+                <td class="col-md-3">encapsulation</td>
+                <td class="col-md-9"><code>ViewEncapsulation.None</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>page-chatroom</code></td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>chatroom.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#bckgImgNum">bckgImgNum</a>
+                            </li>
+                            <li>
+                                <a href="#chatroom">chatroom</a>
+                            </li>
+                            <li>
+                                <a href="#chatroomId">chatroomId</a>
+                            </li>
+                            <li>
+                                <a href="#contentArea">contentArea</a>
+                            </li>
+                            <li>
+                                <a href="#currentKey">currentKey</a>
+                            </li>
+                            <li>
+                                <a href="#currentUser">currentUser</a>
+                            </li>
+                            <li>
+                                <a href="#initLoaded">initLoaded</a>
+                            </li>
+                            <li>
+                                <a href="#lastPage">lastPage</a>
+                            </li>
+                            <li>
+                                <a href="#messages">messages</a>
+                            </li>
+                            <li>
+                                <a href="#messagesPerPage">messagesPerPage</a>
+                            </li>
+                            <li>
+                                <a href="#newMessage">newMessage</a>
+                            </li>
+                            <li>
+                                <a href="#privateConversation">privateConversation</a>
+                            </li>
+                            <li>
+                                <a href="#uniqueId">uniqueId</a>
+                            </li>
+                            <li>
+                                <a href="#users">users</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#exit">exit</a>
+                            </li>
+                            <li>
+                                <a href="#goToUser">goToUser</a>
+                            </li>
+                            <li>
+                                <a href="#ionViewDidLoad">ionViewDidLoad</a>
+                            </li>
+                            <li>
+                                <a href="#loadMessagesIntoPage">loadMessagesIntoPage</a>
+                            </li>
+                            <li>
+                                <a href="#loadMoreMessages">loadMoreMessages</a>
+                            </li>
+                            <li>
+                                <a href="#openParticipantsList">openParticipantsList</a>
+                            </li>
+                            <li>
+                                <a href="#scrollToBottom">scrollToBottom</a>
+                            </li>
+                            <li>
+                                <a href="#sendMessage">sendMessage</a>
+                            </li>
+                            <li>
+                                <a href="#snapshotToMessages">snapshotToMessages</a>
+                            </li>
+                            <li>
+                                <a href="#updateSeen">updateSeen</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(navCtrl: NavController, navParams: NavParams, userService: <a href="../injectables/UserService.html">UserService</a>, chatroomSrvc: <a href="../injectables/ChatroomService.html">ChatroomService</a>, alertCtrl: AlertController, utilSrvc: <a href="../injectables/UtilService.html">UtilService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/pages/chatroom/chatroom.ts:54</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>navCtrl</td>
+                                                  
+                                                        <td>
+                                                                    <code>NavController</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>navParams</td>
+                                                  
+                                                        <td>
+                                                                    <code>NavParams</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>userService</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>chatroomSrvc</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../injectables/ChatroomService.html" target="_self" >ChatroomService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>alertCtrl</td>
+                                                  
+                                                        <td>
+                                                                    <code>AlertController</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>utilSrvc</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../injectables/UtilService.html" target="_self" >UtilService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+        <h3 id="methods">
+            Methods
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="exit"></a>
+                        <span class="name">
+                            <b>
+                            exit
+                            </b>
+                            <a href="#exit"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>exit()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="108" class="link-to-prism">src/pages/chatroom/chatroom.ts:108</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="goToUser"></a>
+                        <span class="name">
+                            <b>
+                            goToUser
+                            </b>
+                            <a href="#goToUser"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>goToUser(id)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="113" class="link-to-prism">src/pages/chatroom/chatroom.ts:113</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>id</td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ionViewDidLoad"></a>
+                        <span class="name">
+                            <b>
+                            ionViewDidLoad
+                            </b>
+                            <a href="#ionViewDidLoad"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>ionViewDidLoad()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="107" class="link-to-prism">src/pages/chatroom/chatroom.ts:107</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="loadMessagesIntoPage"></a>
+                        <span class="name">
+                            <b>
+                            loadMessagesIntoPage
+                            </b>
+                            <a href="#loadMessagesIntoPage"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>loadMessagesIntoPage(snapshot: any[])</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="174" class="link-to-prism">src/pages/chatroom/chatroom.ts:174</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>snapshot</td>
+                                                        <td>
+                                                                    <code>any[]</code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="loadMoreMessages"></a>
+                        <span class="name">
+                            <b>
+                            loadMoreMessages
+                            </b>
+                            <a href="#loadMoreMessages"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>loadMoreMessages(infiniteScroll)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="126" class="link-to-prism">src/pages/chatroom/chatroom.ts:126</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>infiniteScroll</td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="openParticipantsList"></a>
+                        <span class="name">
+                            <b>
+                            openParticipantsList
+                            </b>
+                            <a href="#openParticipantsList"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>openParticipantsList()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="150" class="link-to-prism">src/pages/chatroom/chatroom.ts:150</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="scrollToBottom"></a>
+                        <span class="name">
+                            <b>
+                            scrollToBottom
+                            </b>
+                            <a href="#scrollToBottom"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>scrollToBottom()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="189" class="link-to-prism">src/pages/chatroom/chatroom.ts:189</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="sendMessage"></a>
+                        <span class="name">
+                            <b>
+                            sendMessage
+                            </b>
+                            <a href="#sendMessage"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>sendMessage()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="170" class="link-to-prism">src/pages/chatroom/chatroom.ts:170</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="snapshotToMessages"></a>
+                        <span class="name">
+                            <b>
+                            snapshotToMessages
+                            </b>
+                            <a href="#snapshotToMessages"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>snapshotToMessages(snapshot: any[])</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="192" class="link-to-prism">src/pages/chatroom/chatroom.ts:192</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>snapshot</td>
+                                                        <td>
+                                                                    <code>any[]</code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="../classes/Message.html" target="_self" >Message[]</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="updateSeen"></a>
+                        <span class="name">
+                            <b>
+                            updateSeen
+                            </b>
+                            <a href="#updateSeen"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>updateSeen(messages: <a href="../classes/Message.html">Message[]</a>, id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="116" class="link-to-prism">src/pages/chatroom/chatroom.ts:116</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>messages</td>
+                                                        <td>
+                                                                    <code><a href="../classes/Message.html" target="_self" >Message[]</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                                <tr>
+                                                        <td>id</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="../classes/Message.html" target="_self" >Message[]</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="bckgImgNum"></a>
+                        <span class="name">
+                            <b>
+                            bckgImgNum
+                            </b>
+                            <a href="#bckgImgNum"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>bckgImgNum:     <code></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>Math.floor(Math.random() * 50)</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/pages/chatroom/chatroom.ts:33</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="chatroom"></a>
+                        <span class="name">
+                            <b>
+                            chatroom
+                            </b>
+                            <a href="#chatroom"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>chatroom:     <code><a href="../classes/Chatroom.html" target="_self" >Chatroom</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../classes/Chatroom.html" target="_self" >Chatroom</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/pages/chatroom/chatroom.ts:30</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="chatroomId"></a>
+                        <span class="name">
+                            <b>
+                            chatroomId
+                            </b>
+                            <a href="#chatroomId"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>chatroomId:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>&quot;&quot;</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/pages/chatroom/chatroom.ts:31</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="contentArea"></a>
+                        <span class="name">
+                            <b>
+                            contentArea
+                            </b>
+                            <a href="#contentArea"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>contentArea:     <code>Content</code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>Content</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Decorators : </b>
+                            <br />
+                            <code>
+                                @ViewChild(Content)<br />
+                            </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/pages/chatroom/chatroom.ts:27</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="currentKey"></a>
+                        <span class="name">
+                            <b>
+                            currentKey
+                            </b>
+                            <a href="#currentKey"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>currentKey:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/pages/chatroom/chatroom.ts:36</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="currentUser"></a>
+                        <span class="name">
+                            <b>
+                            currentUser
+                            </b>
+                            <a href="#currentUser"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>currentUser:     <code><a href="../classes/User.html" target="_self" >User</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../classes/User.html" target="_self" >User</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/pages/chatroom/chatroom.ts:32</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="initLoaded"></a>
+                        <span class="name">
+                            <b>
+                            initLoaded
+                            </b>
+                            <a href="#initLoaded"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>initLoaded:     <code></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>false</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/pages/chatroom/chatroom.ts:40</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="lastPage"></a>
+                        <span class="name">
+                            <b>
+                            lastPage
+                            </b>
+                            <a href="#lastPage"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>lastPage:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>false</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/pages/chatroom/chatroom.ts:37</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="messages"></a>
+                        <span class="name">
+                            <b>
+                            messages
+                            </b>
+                            <a href="#messages"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>messages:     <code>any[]</code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>any[]</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[]</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/pages/chatroom/chatroom.ts:29</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="messagesPerPage"></a>
+                        <span class="name">
+                            <b>
+                            messagesPerPage
+                            </b>
+                            <a href="#messagesPerPage"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>messagesPerPage:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>10</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/pages/chatroom/chatroom.ts:38</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="newMessage"></a>
+                        <span class="name">
+                            <b>
+                            newMessage
+                            </b>
+                            <a href="#newMessage"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>newMessage:     <code><a href="../classes/Message.html" target="_self" >Message</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../classes/Message.html" target="_self" >Message</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>{
+		content: &quot;&quot;,
+		createdAt: moment().format(&quot;DD/MM/YYYY, hh:mm:ss&quot;),
+		id: this.uniqueId,
+		roomId: &quot;&quot;,
+		sender: {
+			id: &quot;&quot;,
+			firstName: &quot;&quot;,
+			lastName: &quot;&quot;,
+			imgUrl: &quot;&quot;
+		},
+		seen: []
+	}</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/pages/chatroom/chatroom.ts:42</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="privateConversation"></a>
+                        <span class="name">
+                            <b>
+                            privateConversation
+                            </b>
+                            <a href="#privateConversation"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>privateConversation:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>false</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/pages/chatroom/chatroom.ts:35</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="uniqueId"></a>
+                        <span class="name">
+                            <b>
+                            uniqueId
+                            </b>
+                            <a href="#uniqueId"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>uniqueId:     <code></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>this.utilSrvc.guid()</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/pages/chatroom/chatroom.ts:34</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="users"></a>
+                        <span class="name">
+                            <b>
+                            users
+                            </b>
+                            <a href="#users"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>users:     <code>any[]</code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>any[]</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[]</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/pages/chatroom/chatroom.ts:28</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { UtilService } from &quot;./../../shared/util.service&quot;;
+import {
+	Component,
+	ViewChild,
+	ViewEncapsulation,
+	ElementRef
+} from &quot;@angular/core&quot;;
+import { NavController, NavParams, Content } from &quot;ionic-angular&quot;;
+import { UserService, ChatroomService } from &quot;../../services/services&quot;;
+import { Chatroom, User, Message } from &quot;../../models/models&quot;;
+import {
+	UserProfilePage,
+	MeetSomebodyPage,
+	ParticipantsListPage
+} from &quot;../pages&quot;;
+import { AlertController } from &quot;ionic-angular&quot;;
+import * as moment from &quot;moment&quot;;
+import &quot;rxjs/add/operator/mergeMap&quot;;
+
+@Component({
+	selector: &quot;page-chatroom&quot;,
+	templateUrl: &quot;chatroom.html&quot;,
+	encapsulation: ViewEncapsulation.None
+})
+export class ChatroomPage {
+	@ViewChild(Content)
+	contentArea: Content;
+	users: any[] &#x3D; [];
+	messages: any[] &#x3D; [];
+	chatroom: Chatroom;
+	chatroomId: string &#x3D; &quot;&quot;;
+	currentUser: User;
+	bckgImgNum &#x3D; Math.floor(Math.random() * 50);
+	uniqueId &#x3D; this.utilSrvc.guid();
+	privateConversation: boolean &#x3D; false;
+	currentKey: string;
+	lastPage: boolean &#x3D; false;
+	messagesPerPage: number &#x3D; 10;
+	// checking if it was loaded the first time
+	initLoaded &#x3D; false;
+
+	newMessage: Message &#x3D; {
+		content: &quot;&quot;,
+		createdAt: moment().format(&quot;DD/MM/YYYY, hh:mm:ss&quot;),
+		id: this.uniqueId,
+		roomId: &quot;&quot;,
+		sender: {
+			id: &quot;&quot;,
+			firstName: &quot;&quot;,
+			lastName: &quot;&quot;,
+			imgUrl: &quot;&quot;
+		},
+		seen: []
+	};
+	constructor(
+		private navCtrl: NavController,
+		private navParams: NavParams,
+		private userService: UserService,
+		private chatroomSrvc: ChatroomService,
+		private alertCtrl: AlertController,
+		private utilSrvc: UtilService
+	) {
+		this.chatroomId &#x3D; this.navParams.data[&quot;room&quot;];
+		this.privateConversation &#x3D; this.navParams.data[&quot;privateConversation&quot;];
+		this.newMessage.roomId &#x3D; this.chatroomId;
+		this.userService
+			.getCurrentUser()
+			.take(2)
+			.flatMap(user &#x3D;&gt; {
+				this.currentUser &#x3D; user;
+				this.newMessage.sender.id &#x3D; this.currentUser.id;
+				this.newMessage.sender.firstName &#x3D; this.currentUser.firstName;
+				this.newMessage.sender.lastName &#x3D; this.currentUser.lastName;
+				this.newMessage.sender.imgUrl &#x3D; this.currentUser.profilePhoto.imgUrl;
+				this.newMessage.seen.push(this.currentUser.id);
+				if (this.privateConversation) {
+					return this.chatroomSrvc.getConversationById(this.chatroomId);
+				} else {
+					return this.chatroomSrvc.getChatroomById(this.chatroomId);
+				}
+			})
+			.subscribe(chatroom &#x3D;&gt; {
+				this.chatroom &#x3D; chatroom;
+				if (!this.privateConversation) {
+					localStorage.setItem(
+						&quot;currentChatroomId&quot;,
+						JSON.stringify(chatroom.id)
+					);
+				}
+				this.users &#x3D; this.chatroom.participants; // TO DO: get all participants&#x27; info
+			});
+		this.chatroomSrvc.getMessages(this.chatroomId).subscribe(
+			messages &#x3D;&gt; {
+				if (!this.initLoaded) {
+					this.initLoaded &#x3D; true;
+					this.loadMessagesIntoPage(messages);
+				}
+			},
+			err &#x3D;&gt; {
+				console.error(err);
+			},
+			() &#x3D;&gt; {
+				this.scrollToBottom();
+			}
+		);
+	}
+	ionViewDidLoad() {}
+	exit() {
+		localStorage.removeItem(&quot;currentChatroomId&quot;);
+		this.chatroomSrvc.leaveChatroom(this.chatroomId, this.currentUser.id);
+		this.navCtrl.setRoot(MeetSomebodyPage);
+	}
+	goToUser(id) {
+		this.navCtrl.push(UserProfilePage, { user: id });
+	}
+	updateSeen(messages: Message[], id: string): Message[] {
+		let result &#x3D; [];
+		messages.forEach(message &#x3D;&gt; {
+			if (message.seen.indexOf(id) &#x3D;&#x3D;&#x3D; -1) {
+				this.chatroomSrvc.updateSeen(this.chatroomId, message.id, id);
+			}
+			result.push(message);
+		});
+		return result;
+	}
+	loadMoreMessages(infiniteScroll) {
+		this.initLoaded &#x3D; false;
+		let env &#x3D; this;
+		if (!this.lastPage) {
+			this.chatroomSrvc
+				.getMessages(this.chatroom.id, this.currentKey)
+				.subscribe(
+					newMessages &#x3D;&gt; {
+						if (!env.initLoaded) {
+							newMessages.pop();
+							env.loadMessagesIntoPage(newMessages);
+							infiniteScroll.complete();
+							env.initLoaded &#x3D; true;
+						}
+					},
+					err &#x3D;&gt; {
+						console.error(err);
+						infiniteScroll.complete();
+					}
+				);
+		} else {
+			infiniteScroll.complete();
+		}
+	}
+	openParticipantsList() {
+		if (this.users) {
+			this.navCtrl.push(ParticipantsListPage, { participants: this.users });
+		} else {
+			const alert &#x3D; this.alertCtrl.create({
+				title: &quot;Wuf Wuf! Sorry Wuf&quot;,
+				message: &quot;Can&#x27;t access the particiapnts list.&quot;,
+				buttons: [
+					{
+						text: &quot;Ok&quot;,
+						role: &quot;Ok&quot;,
+						handler: () &#x3D;&gt; {
+							console.log(&quot;Ok clicked&quot;);
+						}
+					}
+				]
+			});
+			alert.present();
+		}
+	}
+	sendMessage() {
+		this.chatroomSrvc.sendMessage(this.chatroom.id, this.newMessage);
+		this.newMessage.content &#x3D; &quot;&quot;;
+	}
+	loadMessagesIntoPage(snapshot: any[]) {
+		if (snapshot.length &lt; this.messagesPerPage) {
+			this.lastPage &#x3D; true;
+		}
+		// add position roperty
+		let newMessages &#x3D; this.snapshotToMessages(snapshot);
+		this.currentKey &#x3D; snapshot[0][&quot;key&quot;];
+
+		// add position property
+		let updatedMessages &#x3D; this.utilSrvc.addMessagePosition(
+			newMessages,
+			this.currentUser.id
+		);
+		this.messages &#x3D; updatedMessages.concat(this.messages);
+	}
+	scrollToBottom() {
+		window.scrollTo(0, document.querySelector(&quot;.end&quot;).scrollHeight);
+	}
+	snapshotToMessages(snapshot: any[]): Message[] {
+		let messages &#x3D; [];
+		snapshot.forEach(obj &#x3D;&gt; messages.push(obj.payload.val()));
+		return messages;
+	}
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;back-button *ngIf&#x3D;&quot;privateConversation&quot;&gt;&lt;/back-button&gt;
+&lt;menu-button *ngIf&#x3D;&quot;!privateConversation&quot;&gt;&lt;/menu-button&gt;
+&lt;ion-fab top center *ngIf&#x3D;&quot;!privateConversation&quot;&gt;
+	&lt;button ion-fab (click)&#x3D;&quot;openParticipantsList()&quot; color&#x3D;&quot;primary&quot; class&#x3D;&quot;menu-btn-border&quot;&gt;
+		&lt;ion-icon name&#x3D;&quot;people&quot;&gt;&lt;/ion-icon&gt;
+	&lt;/button&gt;
+&lt;/ion-fab&gt;
+&lt;ion-fab right top *ngIf&#x3D;&quot;!privateConversation&quot;&gt;
+	&lt;button ion-fab (click)&#x3D;&quot;exit()&quot; color&#x3D;&quot;primary&quot; class&#x3D;&quot;menu-btn-border&quot;&gt;
+		&lt;ion-icon name&#x3D;&quot;exit&quot;&gt;&lt;/ion-icon&gt;
+	&lt;/button&gt;
+&lt;/ion-fab&gt;
+&lt;ion-content scrollY&#x3D;&quot;true&quot; class&#x3D;&quot;messages&quot;&gt;
+	&lt;ion-list no-lines&gt;
+		&lt;ion-item *ngFor&#x3D;&quot;let msg of messages&quot;&gt;
+			&lt;chat-bubble [message]&#x3D;&quot;msg&quot; (select)&#x3D;&quot;goToUser($event)&quot;&gt;&lt;/chat-bubble&gt;
+		&lt;/ion-item&gt;
+	&lt;/ion-list&gt;
+	&lt;ion-infinite-scroll (ionInfinite)&#x3D;&quot;loadMoreMessages($event)&quot; [position]&#x3D;&quot;&#x27;top&#x27;&quot;&gt;
+		&lt;ion-infinite-scroll-content&gt;
+			loadingSpinner&#x3D;&quot;bubbles&quot;
+			loadingText&#x3D;&quot;Loading more messages...&quot;&gt;
+		&lt;/ion-infinite-scroll-content&gt;
+	&lt;/ion-infinite-scroll&gt;
+	&lt;div class&#x3D;&quot;end&quot;&gt;&lt;/div&gt;
+&lt;/ion-content&gt;
+&lt;ion-footer keyboard-attach&gt;
+	&lt;ion-toolbar class&#x3D;&quot;no-border&quot; color&#x3D;&quot;white&quot;&gt;
+		&lt;ion-buttons start&gt;
+			&lt;button ion-button&gt;
+				&lt;ion-icon name&#x3D;&quot;camera&quot; color&#x3D;&quot;primary&quot;&gt;&lt;/ion-icon&gt;
+			&lt;/button&gt;
+		&lt;/ion-buttons&gt;
+		&lt;ion-input [(ngModel)]&#x3D;&quot;newMessage.content&quot; placeholder&#x3D;&quot;Write your message&quot;&gt;&lt;/ion-input&gt;
+		&lt;ion-buttons end&gt;
+			&lt;button ion-button (click)&#x3D;&quot;sendMessage()&quot;&gt;
+				&lt;ion-icon name&#x3D;&quot;send&quot; color&#x3D;&quot;primary&quot;&gt;&lt;/ion-icon&gt;
+			&lt;/button&gt;
+		&lt;/ion-buttons&gt;
+	&lt;/ion-toolbar&gt;
+&lt;/ion-footer&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><back-button *ngIf="privateConversation"></back-button><menu-button *ngIf="!privateConversation"></menu-button><ion-fab top center *ngIf="!privateConversation">	<button ion-fab (click)="openParticipantsList()" color="primary" class="menu-btn-border">		<ion-icon name="people"></ion-icon>	</button></ion-fab><ion-fab right top *ngIf="!privateConversation">	<button ion-fab (click)="exit()" color="primary" class="menu-btn-border">		<ion-icon name="exit"></ion-icon>	</button></ion-fab><ion-content scrollY="true" class="messages">	<ion-list no-lines>		<ion-item *ngFor="let msg of messages">			<chat-bubble [message]="msg" (select)="goToUser($event)"></chat-bubble>		</ion-item>	</ion-list>	<ion-infinite-scroll (ionInfinite)="loadMoreMessages($event)" [position]="\'top\'">		<ion-infinite-scroll-content>			loadingSpinner="bubbles"			loadingText="Loading more messages...">		</ion-infinite-scroll-content>	</ion-infinite-scroll>	<div class="end"></div></ion-content><ion-footer keyboard-attach>	<ion-toolbar class="no-border" color="white">		<ion-buttons start>			<button ion-button>				<ion-icon name="camera" color="primary"></ion-icon>			</button>		</ion-buttons>		<ion-input [(ngModel)]="newMessage.content" placeholder="Write your message"></ion-input>		<ion-buttons end>			<button ion-button (click)="sendMessage()">				<ion-icon name="send" color="primary"></ion-icon>			</button>		</ion-buttons>	</ion-toolbar></ion-footer></div>'
+    var COMPONENTS = [{'name': 'BackButtonComponent', 'selector': 'back-button'},{'name': 'ChatBubbleComponent', 'selector': 'chat-bubble'},{'name': 'ChatroomPage', 'selector': 'page-chatroom'},{'name': 'ContactsListPage', 'selector': 'page-contacts-list'},{'name': 'FilterPage', 'selector': 'page-filter'},{'name': 'GalleryComponent', 'selector': 'gallery'},{'name': 'LoginPage', 'selector': 'page-login'},{'name': 'MeetSomebodyPage', 'selector': 'page-meet-somebody'},{'name': 'MenuButtonComponent', 'selector': 'menu-button'},{'name': 'MyApp', 'selector': ''},{'name': 'MyProfilePage', 'selector': 'page-my-profile'},{'name': 'NotificationsListPage', 'selector': 'page-notifications-list'},{'name': 'ParticipantsListPage', 'selector': 'page-participants-list'},{'name': 'PrelaunchPage', 'selector': 'page-prelaunch'},{'name': 'ProfilePostsComponent', 'selector': 'profile-posts'},{'name': 'ProfileTimelineComponent', 'selector': 'profile-timeline'},{'name': 'PurchasePage', 'selector': 'page-purchase'},{'name': 'RequestsListPage', 'selector': 'page-requests-list'},{'name': 'SettingsPage', 'selector': 'page-settings'},{'name': 'UserProfilePage', 'selector': 'page-user-profile'},{'name': 'VIPPage', 'selector': 'page-vip'},{'name': 'WaitlistPage', 'selector': 'page-waitlist'}];
+    var DIRECTIVES = [{'name': 'DefaultImageDirective', 'selector': 'img[default]'}];
+    var ACTUAL_COMPONENT = {'name': 'ChatroomPage'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ChatroomPage.html';
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

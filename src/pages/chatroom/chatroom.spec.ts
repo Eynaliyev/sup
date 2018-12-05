@@ -44,6 +44,10 @@ describe("ChatroomPage", () => {
 		fixture.detectChanges();
 	});
 
+	it("should be created", () => {
+		expect(component).toBeTruthy();
+	});
+
 	xit("should call ngAfterViewInit one time and update the view", () => {
 		expect(spy).toHaveBeenCalled();
 		expect(spy.calls.all().length).toEqual(1);

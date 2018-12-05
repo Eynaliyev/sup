@@ -1,17 +1,13 @@
-import {
-	async,
-	fakeAsync,
-	tick,
-	TestBed,
-	inject,
-	ComponentFixture
-} from "@angular/core/testing";
+import { async, TestBed, ComponentFixture } from "@angular/core/testing";
 import { AngularFireModule } from "angularfire2";
 import { AngularFireDatabaseModule } from "angularfire2/database";
 import { DebugElement } from "@angular/core";
 import { By } from "@angular/platform-browser";
-import { of } from "rxjs/observable/of";
-import { ChatroomService } from "../../services/services";
+import {
+	ChatroomService,
+	UserService,
+	UtilService
+} from "../../services/services";
 import { Environment } from "../../environment/environment";
 import { ChatroomPage } from "./chatroom";
 
@@ -19,27 +15,21 @@ describe("ChatroomPage", () => {
 	let de: DebugElement;
 	let component: ChatroomPage;
 	let fixture: ComponentFixture<ChatroomPage>;
-	let service: ChatroomService;
 	let spy: jasmine.Spy;
-	let serviceStub: any;
 
 	beforeEach(async(() => {
-		serviceStub = {};
-
 		TestBed.configureTestingModule({
 			imports: [
 				AngularFireModule.initializeApp(Environment.firebase),
 				AngularFireDatabaseModule
 			],
-			providers: [ChatroomService]
+			providers: [ChatroomService, UserService, UtilService]
 		}).compileComponents();
 	}));
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(ChatroomPage);
 		component = fixture.componentInstance;
-
-		service = de.injector.get(ChatroomService);
 
 		fixture.detectChanges();
 	});

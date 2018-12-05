@@ -202,7 +202,7 @@
 	},
 	"devDependencies": {
 		"@angular/tsc-wrapped": "^4.4.6",
-		"@ionic/app-scripts": "^3.2.1",
+		"@ionic/app-scripts": "3.2.1",
 		"@ngtools/webpack": "^6.0.0-beta.2",
 		"@types/jasmine": "2.8.0",
 		"@types/node": "8.9.0",

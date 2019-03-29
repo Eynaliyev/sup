@@ -1,16 +1,16 @@
-import { LANGUAGES } from "./../../services/languages-list";
-import { Component } from "@angular/core";
-import { NavController, LoadingController, App } from "ionic-angular";
-import { WaitlistPage, ChatroomPage } from "../pages";
-import { Language } from "../../models/models";
-import { User } from "../../models/models";
-import { ChatroomService } from "../../services/services";
-import { UserService } from "../../services/services";
-import { Geolocation } from "@ionic-native/geolocation";
+import { LANGUAGES } from './../../services/languages-list';
+import { Component } from '@angular/core';
+import { NavController, LoadingController, App } from 'ionic-angular';
+import { WaitlistPage, ChatroomPage } from '../pages';
+import { Language } from '../../models/models';
+import { User } from '../../models/models';
+import { ChatroomService } from '../../services/services';
+import { UserService } from '../../services/services';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @Component({
-	selector: "page-meet-somebody",
-	templateUrl: "meet-somebody.html"
+	selector: 'page-meet-somebody',
+	templateUrl: 'meet-somebody.html'
 })
 export class MeetSomebodyPage {
 	languages: Language[];
@@ -27,7 +27,7 @@ export class MeetSomebodyPage {
 		public app: App
 	) {}
 	ionViewDidLoad() {
-		let chatroomId = JSON.parse(localStorage.getItem("currentChatroomId"));
+		let chatroomId = JSON.parse(localStorage.getItem('currentChatroomId'));
 		if (chatroomId) {
 			this.goToChatroom(chatroomId);
 		} else {
@@ -43,10 +43,10 @@ export class MeetSomebodyPage {
 					console.log("user's locations: ", location);
 				})
 				.catch(err => {
-					console.log("Error:", err);
+					console.log('Error:', err);
 				});
 		}
-		console.log("ionViewDidLoad MeetSomebodyPage");
+		console.log('ionViewDidLoad MeetSomebodyPage');
 	}
 	goToWaitlist() {
 		// then, go to waitlist - perhaps waitlist should be a modal that can be dismissed as necessary?

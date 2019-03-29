@@ -176,6 +176,10 @@ export class ChatroomPage {
 		this.newMessage.content = '';
 	}
 	loadMessagesIntoPage(snapshot: any[]) {
+		if (snapshot.length == 0) {
+			this.lastPage = true;
+			return;
+		}
 		if (snapshot.length < this.messagesPerPage) {
 			this.lastPage = true;
 		}

@@ -39,7 +39,7 @@ import { PipeModule } from '../shared/pipe.module';
 // import services
 import { ErrorHandler } from '@angular/core';
 import { IonicErrorHandler } from 'ionic-angular';
-import { Geolocation } from '@ionic-native/geolocation';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { UtilService } from './../shared/util.service';
 //import { Camera } from '@ionic-native/camera';
 import { Facebook } from '@ionic-native/facebook';
@@ -115,6 +115,7 @@ import { Environment } from '../environment/environment';
 		//Camera,
 		AuthService,
 		ContactService,
+		Geolocation,
 		UserService,
 		ChatroomService,
 		AngularFireDatabase,

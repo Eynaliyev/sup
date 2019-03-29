@@ -1,25 +1,25 @@
-import { UtilService } from "./../../shared/util.service";
+import { UtilService } from './../../shared/util.service';
 import {
 	Component,
 	ViewChild,
 	ViewEncapsulation,
 	ElementRef
-} from "@angular/core";
-import { NavController, NavParams, Content } from "ionic-angular";
-import { UserService, ChatroomService } from "../../services/services";
-import { Chatroom, User, Message } from "../../models/models";
+} from '@angular/core';
+import { NavController, NavParams, Content } from 'ionic-angular';
+import { UserService, ChatroomService } from '../../services/services';
+import { Chatroom, User, Message } from '../../models/models';
 import {
 	UserProfilePage,
 	MeetSomebodyPage,
 	ParticipantsListPage
-} from "../pages";
-import { AlertController } from "ionic-angular";
-import * as moment from "moment";
-import "rxjs/add/operator/mergeMap";
+} from '../pages';
+import { AlertController } from 'ionic-angular';
+import * as moment from 'moment';
+import 'rxjs/add/operator/mergeMap';
 
 @Component({
-	selector: "page-chatroom",
-	templateUrl: "chatroom.html",
+	selector: 'page-chatroom',
+	templateUrl: 'chatroom.html',
 	encapsulation: ViewEncapsulation.None
 })
 export class ChatroomPage {
@@ -28,7 +28,7 @@ export class ChatroomPage {
 	users: any[] = [];
 	messages: any[] = [];
 	chatroom: Chatroom;
-	chatroomId: string = "";
+	chatroomId: string = '';
 	currentUser: User;
 	bckgImgNum = Math.floor(Math.random() * 50);
 	uniqueId = this.utilSrvc.guid();
@@ -40,15 +40,15 @@ export class ChatroomPage {
 	initLoaded = false;
 
 	newMessage: Message = {
-		content: "",
-		createdAt: moment().format("DD/MM/YYYY, hh:mm:ss"),
+		content: '',
+		createdAt: moment().format('DD/MM/YYYY, hh:mm:ss'),
 		id: this.uniqueId,
-		roomId: "",
+		roomId: '',
 		sender: {
-			id: "",
-			firstName: "",
-			lastName: "",
-			imgUrl: ""
+			id: '',
+			firstName: '',
+			lastName: '',
+			imgUrl: ''
 		},
 		seen: []
 	};
@@ -60,8 +60,8 @@ export class ChatroomPage {
 		private alertCtrl: AlertController,
 		private utilSrvc: UtilService
 	) {
-		this.chatroomId = this.navParams.data["room"];
-		this.privateConversation = this.navParams.data["privateConversation"];
+		this.chatroomId = this.navParams.data['room'];
+		this.privateConversation = this.navParams.data['privateConversation'];
 		this.newMessage.roomId = this.chatroomId;
 		this.userService
 			.getCurrentUser()
@@ -83,7 +83,7 @@ export class ChatroomPage {
 				this.chatroom = chatroom;
 				if (!this.privateConversation) {
 					localStorage.setItem(
-						"currentChatroomId",
+						'currentChatroomId',
 						JSON.stringify(chatroom.id)
 					);
 				}
@@ -104,9 +104,12 @@ export class ChatroomPage {
 			}
 		);
 	}
-	ionViewDidLoad() {}
+	ionViewDidLoad() {
+		var objDiv = document.getElementsByClassName('scroll-content')[0];
+		objDiv.scrollTop = objDiv.scrollHeight;
+	}
 	exit() {
-		localStorage.removeItem("currentChatroomId");
+		localStorage.removeItem('currentChatroomId');
 		this.chatroomSrvc.leaveChatroom(this.chatroomId, this.currentUser.id);
 		this.navCtrl.setRoot(MeetSomebodyPage);
 	}
@@ -133,6 +136,7 @@ export class ChatroomPage {
 					newMessages => {
 						if (!env.initLoaded) {
 							newMessages.pop();
+							console.log(this.messages);
 							env.loadMessagesIntoPage(newMessages);
 							infiniteScroll.complete();
 							env.initLoaded = true;
@@ -152,14 +156,14 @@ export class ChatroomPage {
 			this.navCtrl.push(ParticipantsListPage, { participants: this.users });
 		} else {
 			const alert = this.alertCtrl.create({
-				title: "Wuf Wuf! Sorry Wuf",
+				title: 'Wuf Wuf! Sorry Wuf',
 				message: "Can't access the particiapnts list.",
 				buttons: [
 					{
-						text: "Ok",
-						role: "Ok",
+						text: 'Ok',
+						role: 'Ok',
 						handler: () => {
-							console.log("Ok clicked");
+							console.log('Ok clicked');
 						}
 					}
 				]
@@ -169,7 +173,7 @@ export class ChatroomPage {
 	}
 	sendMessage() {
 		this.chatroomSrvc.sendMessage(this.chatroom.id, this.newMessage);
-		this.newMessage.content = "";
+		this.newMessage.content = '';
 	}
 	loadMessagesIntoPage(snapshot: any[]) {
 		if (snapshot.length < this.messagesPerPage) {
@@ -177,7 +181,7 @@ export class ChatroomPage {
 		}
 		// add position roperty
 		let newMessages = this.snapshotToMessages(snapshot);
-		this.currentKey = snapshot[0]["key"];
+		this.currentKey = snapshot[0]['key'];
 
 		// add position property
 		let updatedMessages = this.utilSrvc.addMessagePosition(
@@ -187,7 +191,7 @@ export class ChatroomPage {
 		this.messages = updatedMessages.concat(this.messages);
 	}
 	scrollToBottom() {
-		window.scrollTo(0, document.querySelector(".end").scrollHeight);
+		window.scrollTo(0, document.querySelector('.end').scrollHeight);
 	}
 	snapshotToMessages(snapshot: any[]): Message[] {
 		let messages = [];

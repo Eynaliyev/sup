@@ -4,11 +4,19 @@
 	<div class="venti-spacer"></div>
 	<ion-grid>
 		<ion-row>
-			<ion-col class="participant-col" [ngClass]="animateClass" col-4 *ngFor=" let user of participants">
+			<ion-col
+				class="participant-col"
+				[ngClass]="animateClass"
+				col-4
+				*ngFor="let user of users"
+			>
 				<ion-card class="participant-avatar" (click)="goToUser(user.id)">
-					<img [src]="user.imgUrl" onError="this.src='assets/images/other-assets/profile.png';">
+					<img
+						[src]="user.imgUrl"
+						onError="this.src='assets/images/other-assets/profile.png';"
+					/>
 				</ion-card>
-				<div class="user-name">{{user.firstName}} {{user.lastName}}</div>
+				<div class="user-name">{{ user.firstName }} {{ user.lastName }}</div>
 			</ion-col>
 		</ion-row>
 	</ion-grid>

@@ -1,15 +1,124 @@
-import * as functions from "firebase-functions";
-import * as admin from "firebase-admin";
+import * as functions from 'firebase-functions';
+import * as admin from 'firebase-admin';
 import {
 	Contact,
 	Chatroom,
 	Participant,
-	Message
-} from "../../src/models/models";
-import * as moment from "moment";
+	Message,
+	User
+} from '../../src/models/models';
+import * as moment from 'moment';
 
 admin.initializeApp();
 
+exports.joinChatroom = (req, res) => {
+	const user = req.user;
+	const userId = user.id;
+	if (exports.userIsInRoom(userId)) {
+		const currentRoomId = exports.getUserProfile(userId).currentRoom;
+		exports.leaveRoom(userId, currentRoomId);
+	}
+	if (exports.userIsInWaitlist(userId)) {
+		res.send(`User already in waitlist`);
+		return;
+	}
+	const closestRooms = exports.findClosestRooms(userId);
+	const availableRoom = exports.chooseAvailableRoom(closestRooms);
+	if (availableRoom) {
+		exports.addToRoom(user, availableRoom.id);
+		res.send(availableRoom.id);
+	} else {
+		exports.addUserToWaitlists(userId, closestRooms);
+		const tooManyUsersInLocation = exports.checkTooManyUsers(closestRooms);
+		if (tooManyUsersInLocation) {
+			exports.createNewRoom(closestRooms);
+		}
+	}
+};
+exports.leaveRoom = (userId: string, chatroomId: string) => {
+	// TO DO - implement -
+};
+exports.createNewRoom = (rooms: Chatroom[]) => {
+	// TO DO - implement -
+};
+exports.userIsInRoom = (id: string): boolean => {
+	// check user value whether is in waitlist or not
+	const usr = exports.getUserProfile(id);
+	return usr.currentRoom;
+};
+exports.addUserToWaitlists = (userId, chatroomId) => {
+	// TO DO - implement -
+	// add user to each room's waitlist array - with timestamp
+	// set isInWaitlist property on the user
+	//
+};
+exports.userIsInWaitlist = (id: string): boolean => {
+	// check user value whether is in waitlist or not
+	const usr = exports.getUserProfile(id);
+	return usr.isInWaitlist;
+};
+exports.findClosestRooms = (id: string) => {
+	// TO DO - implement
+	// a geoquery to find 5 closest rooms
+	return;
+};
+exports.chooseAvailableRoom = (rooms: Chatroom) => {
+	// TO DO - implement
+	// go through each room, if the number of participants of your gender is less than 3 return chatroom, else return null or 'not found'
+	return;
+};
+exports.addToRoom = (user: User, chatroomId: string) => {
+	const userId = user.id;
+	exports.addUserToChatroomParticipantsList(userId, chatroomId);
+	exports.setCurrentChatroomOnTheUser(userId, chatroomId);
+};
+
+exports.getUserProfile = (id: string) => {
+	// TO DO - implement - return user by Id
+};
+
+exports.addUserToChatroomParticipantsList = (userId, chatroomId) => {
+	// TO DO - implement - adds the user or throws error
+};
+
+exports.setCurrentChatroomOnTheUser = (userId, chatroomId) => {
+	// TO DO - implement
+};
+
+exports.checkTooManyUsers = closestRooms => {
+	// TO DO - implement - goes through the chatrooms array and checks if all of them have full waitlists
+	// waitlist is full if
+	// there's more than two people of each gender
+};
+
+exports.onParticipantsListChange = (prevState, newState) => {
+	// TO DO - implement
+	// on number of participants changing in the room
+	// recalculate the geolocation of the room
+	// create the message that the user has been added or has left from the system
+	let chatroomId; // the chatroom that the change is happening in
+	let user; // the user that either joined or left
+	let userJoined;
+	let userLeft;
+	let message;
+	if (userJoined) {
+		message = exports.createDefaultJoinChatroomMessage(user);
+		exports.addMessageToChatroom(message, chatroomId);
+	} else if (userLeft) {
+		message = exports.createDefaultLeaveChatroomMessage(user);
+		exports.addMessageToChatroom(message, chatroomId);
+	}
+};
+
+exports.createDefaultJoinChatroomMessage = () => {
+	// TO DO - implement
+};
+exports.createDefaultLeaveChatroomMessage = () => {
+	// TO DO - implement
+};
+exports.addMessageToChatroom = (message, chatroomId) => {
+	// TO DO - implement
+};
 // // Start writing Firebase Functions
 // // https://firebase.google.com/docs/functions/typescript
 /*
@@ -156,27 +265,27 @@ exports.createFriendship = functions.firestore
 // when creating chatroom save in the separate list in firestore
 // test function to tst that firebase functions are set up properly
 exports.rejectRequest = functions.firestore
-	.document("requests_received/{fromId}/senders/{toId}")
+	.document('requests_received/{fromId}/senders/{toId}')
 	.onDelete((snap, context) => {
 		const newValue = snap.data();
 		const doc = admin
 			.firestore()
-			.collection("requests_sent")
+			.collection('requests_sent')
 			.doc(newValue.sender.id)
-			.collection("recipients")
+			.collection('recipients')
 			.doc(newValue.recipient.id)
 			.delete();
 		return doc;
 	});
 exports.cancelRequest = functions.firestore
-	.document("requests_sent/{fromId}/recipients/{toId}")
+	.document('requests_sent/{fromId}/recipients/{toId}')
 	.onDelete((snap, context) => {
 		const newValue = snap.data();
 		const doc = admin
 			.firestore()
-			.collection("requests_received")
+			.collection('requests_received')
 			.doc(newValue.recipient.id)
-			.collection("senders")
+			.collection('senders')
 			.doc(newValue.sender.id)
 			.delete();
 		return doc;
@@ -191,13 +300,13 @@ function guid() {
 	return (
 		s4() +
 		s4() +
-		"-" +
+		'-' +
 		s4() +
-		"-" +
+		'-' +
 		s4() +
-		"-" +
+		'-' +
 		s4() +
-		"-" +
+		'-' +
 		s4() +
 		s4() +
 		s4()
@@ -206,23 +315,23 @@ function guid() {
 // generats a uniqueId for a relationship e.g. sent request and etc
 function uniqueRelId(from: string, to: string): string {
 	if (from <= to) {
-		return from.concat("_" + to);
+		return from.concat('_' + to);
 	} else {
-		return to.concat("_" + from);
+		return to.concat('_' + from);
 	}
 }
 exports.test = functions.https.onRequest((req, res) => {
-	res.send("Firebase Cloud Function test passed");
+	res.send('Firebase Cloud Function test passed');
 });
 exports.createRequest = functions.firestore
-	.document("requests_sent/{fromId}/recipients/{toId}")
+	.document('requests_sent/{fromId}/recipients/{toId}')
 	.onCreate((snap, context) => {
 		const newValue = snap.data();
 		const doc = admin
 			.firestore()
-			.collection("requests_received")
+			.collection('requests_received')
 			.doc(newValue.recipient.id)
-			.collection("senders")
+			.collection('senders')
 			.doc(newValue.sender.id)
 			.set(newValue);
 		return doc;
